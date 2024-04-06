@@ -37,6 +37,8 @@ namespace GeneMatrix
                 string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of GenBank files", "");
                 if (System.IO.Directory.Exists(folder) == false) { return; }
 
+                resetState();
+
                 lblDataSource.Text = folder.Substring(folder.LastIndexOf("\\") + 1);
                 Application.DoEvents();
 
@@ -57,8 +59,10 @@ namespace GeneMatrix
             }
             else
             {
-                string fileNmae = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb:*.genbank)|*.gb:*.genbank");
+                string fileNmae = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb;*.genbank)|*.gb;*.genbank");
                 if (System.IO.File.Exists(fileNmae) == false) { return; }
+
+                resetState();
 
                 lblDataSource.Text = fileNmae.Substring(fileNmae.LastIndexOf("\\") + 1);
                 Application.DoEvents();
@@ -67,8 +71,110 @@ namespace GeneMatrix
             }
         }
 
+        private void resetState()
+        {
+            data = new Dictionary<string, Dictionary<string, Dictionary<string, feature>>>();
+        }
+
         private void readFile(string fileName)
         {
+            System.IO.StreamReader fs = null;
+            try
+            {
+                int startOfSequence = 0;
+                List<string> lines = new List<string>();
+                fs = new System.IO.StreamReader(fileName);
+
+                while (fs.Peek()>0)
+                {
+                    string line = fs.ReadLine();
+                    if (line.StartsWith("//") == true)
+                    {
+                        processData(lines, startOfSequence);
+                        lines = new List<string>();
+                    }
+                    else if (line.StartsWith("ORIGIN") == true)
+                    {
+                        lines.Add(line);
+                        startOfSequence = lines.Count;
+                    }
+                    else { lines.Add(line); }
+                }
+
+                if (lines.Count > 0)
+                {
+                    processData(lines, startOfSequence);
+                    lines = new List<string>();
+                }
+            
+            }
+            finally
+            {
+                if (fs != null) { fs.Close(); }
+            }
+        }
+
+        private void processData(List<string> lines, int startOfSequence)
+        {
+            string sequence = getSequence(lines, startOfSequence);
+            string accession = getAccession(lines);
+        }
+
+        private string getAccession(List<string> lines)
+        {
+            for (int index =0; index < 6;index++)
+            {
+                if (lines[index].StartsWith("VERSION") == true)
+                {
+                    string rawName=lines[index].Substring(12).Trim();
+                   
+                    return rawName;
+                }
+            }
+            return "";
+        }
+
+        private string getSequence(List<string> lines, int startPoint)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int index = startPoint; index < lines.Count;index++)
+            {
+                string sequenceRaw = lines[index].Substring(10).Trim().Replace(" ", "");
+                
+                sb.Append(sequenceRaw);
+            }
+
+            return sb.ToString();
+        }
+
+        private string reverseComplement(string sequence)
+        {            
+            StringBuilder sb = new StringBuilder();
+
+            for (int index = sequence.Length -1; index > -1; index--)
+            {
+                switch (sequence[index])
+                {
+                    case 'A':
+                        sb.Append("T");
+                        break;
+                    case 'C':
+                        sb.Append("G");
+                        break;
+                    case 'G':
+                        sb.Append("C");
+                        break;
+                    case 'T':
+                        sb.Append("A");
+                        break;
+                    default:
+                        sb.Append("N");
+                        break;
+                }
+            }
+
+            return sb.ToString();
 
         }
     }
