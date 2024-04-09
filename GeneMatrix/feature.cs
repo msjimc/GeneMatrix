@@ -17,7 +17,7 @@ namespace GeneMatrix
         private string locus_tag = "";
         private string featureType = "";
         private string DNA = "";
-        private string protien = "";
+        private string protein = "";
         public feature(List<string> lines, int index, int endIndex, string FeatureType, string sequence, int count)
         {
             featureType = FeatureType;
@@ -78,7 +78,7 @@ namespace GeneMatrix
                 }
             }
 
-            protien = sb.ToString();
+            protein = sb.ToString();
 
         }
 
@@ -138,19 +138,23 @@ namespace GeneMatrix
                 switch (sequence[index])
                 {
                     case 'A':
-                        sb.Append("T");
+                    case 'a':
+                        sb.Append("t");
                         break;
                     case 'C':
-                        sb.Append("G");
+                    case 'c':
+                        sb.Append("g");
                         break;
                     case 'G':
-                        sb.Append("C");
+                    case 'g':
+                        sb.Append("c");
                         break;
                     case 'T':
-                        sb.Append("A");
+                    case 't':
+                        sb.Append("a");
                         break;
                     default:
-                        sb.Append("N");
+                        sb.Append("n");
                         break;
                 }
             }
@@ -160,6 +164,12 @@ namespace GeneMatrix
 
         public string WorkingName
         { get { return workingName; } }
+
+        public string getDNASequence
+        { get { return DNA; } }
+
+        public string getProteinSequence
+        { get { return protein; } }
 
     }
 }

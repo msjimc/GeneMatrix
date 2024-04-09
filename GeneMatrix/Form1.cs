@@ -17,9 +17,10 @@ namespace GeneMatrix
         private List<string> CDS = null;
         private List<string> tRNA = null;
         private List<string> rRNA = null;
-
+        private int rightButton = 1;
         private bool quitAnalysis = false;
-        public Form1()
+        
+       public Form1()
         {
             InitializeComponent();
         }
@@ -177,24 +178,22 @@ namespace GeneMatrix
             int featureStart = -1;
             string featureType = "";
 
-            while (index < startOfSequence && index < lines.Count)
+            while (index < startOfSequence + 1 && index < lines.Count)
             {
-                if (lines[index].StartsWith("     ") == true && lines[index][6] != ' ')
+                if ((lines[index].StartsWith("     ") == true && lines[index][6] != ' ') || lines[index].StartsWith("ORIGIN") == true)
                 {
-                    if (featureStart > -1 && (featureType == "CDS" || featureType == "tRNA" || featureType == "rRNA"))
+                    if (featureStart > -1 && (featureType == "CDS" || featureType == "tRNA" || featureType == "rRNA" || lines[index] == "ORIGIN"))
                     {
                         if (data[accession].ContainsKey(featureType) == false)
                         { data[accession].Add(featureType, new Dictionary<string, feature>()); }
                         int count = data[accession][featureType].Count;
                         feature f = new feature(lines, featureStart, index, featureType, sequence, count);
                         if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
-                        { data[accession][featureType].Add(f.WorkingName, f); }
-                                               
+                        { data[accession][featureType].Add(f.WorkingName, f); }                                                                       
                     }
                     featureType = lines[index].Substring(5, lines[index].IndexOf(" ",6) - 5);
-                    featureStart = index;
+                    featureStart = index;                    
                 }
-
                 index++;
             }
         }
@@ -229,6 +228,9 @@ namespace GeneMatrix
 
         private void populateLists()
         {
+            tv1.Nodes.Clear();
+            tv2.Nodes.Clear();
+
             foreach (string name in data.Keys)
             {
                 foreach (string featureType in data[name].Keys)
@@ -327,10 +329,30 @@ namespace GeneMatrix
                 if (pN.Text == featureType)
                 { 
                     n.Parent.Nodes.Remove(n);
-                    pN.Nodes.Add(n); 
+                    pN.Nodes.Add(n);
+                    if (n.Nodes.Count > 0)
+                    {
+                        List<TreeNode> children = new List<TreeNode>();
+                        foreach (TreeNode cN in n.Nodes)
+                        { children.Add(cN); }
+
+                        foreach(TreeNode cN in children)
+                        {
+                            n.Nodes.Remove(cN);
+                            pN.Nodes.Add(cN);
+                        }
+                    }
                 }
             }
             tv2.SelectedNode = tv2.Nodes[0];
+
+            btnSave.Enabled = false;
+            foreach (TreeNode fN in tv2.Nodes[0].Nodes)
+            {
+                if (fN.Nodes.Count >0)
+                { btnSave.Enabled = true; }
+            }
+
         }
 
         private void moveTooRight()
@@ -368,10 +390,10 @@ namespace GeneMatrix
 
                 }
             }
-            tv2.SelectedNode = tv2.Nodes[0]; 
+            tv2.SelectedNode = tv2.Nodes[0];
+            btnSave.Enabled = true;
         }
-
-        private int rightButton = 1;
+               
         private void tv2_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -393,6 +415,163 @@ namespace GeneMatrix
         private void btnReset_Click(object sender, EventArgs e)
         {
             populateLists();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder to save sequences too", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+            Dictionary<string, int> lengths = new Dictionary<string, int>();
+
+            foreach (TreeNode fN in tv2.Nodes[0].Nodes)
+            {
+                string featureType = fN.Text;
+                foreach (TreeNode nN in fN.Nodes)
+                {
+                    List<string> names = new List<string>();
+                    names.Add(nN.Text);
+                    foreach (TreeNode nnN in nN.Nodes)
+                    { names.Add(nnN.Text); }
+                    
+                    foreach (string name in sequenceName)
+                    {
+                        foreach (string featureName in names)
+                        {
+                            if (data[name][featureType].ContainsKey(featureName) == true)
+                            {
+                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                {
+                                    int length = data[name][featureType][featureName].getDNASequence.Length;
+                                    string key = featureType + "|" + names[0] + "|" + "D";
+                                    if (lengths.ContainsKey(key) == true)
+                                    {
+                                        if (lengths[key] < length)
+                                        { lengths[key] = length; }
+                                    }
+                                    else
+                                    { lengths.Add(key, length); }
+                                }
+                                if (rboBoth.Checked==true || rboProtein.Checked == true)
+                                {
+                                    int length = data[name][featureType][featureName].getProteinSequence.Length;
+                                    string key = featureType + "|" + names[0] + "|" + "P";
+                                    if (lengths.ContainsKey(key) == true)
+                                    {
+                                        if (lengths[key] < length)
+                                        { lengths[key] = length; }
+                                    }
+                                    else
+                                    { lengths.Add(key, length); }
+                                }
+                            }                            
+                        }
+                    }
+                }
+            }
+
+
+            foreach (TreeNode fN in tv2.Nodes[0].Nodes)
+            {
+                string featureType = fN.Text;
+                foreach (TreeNode nN in fN.Nodes)
+                {
+                    List<string> names = new List<string>();
+                    names.Add(nN.Text);
+                    foreach (TreeNode nnN in nN.Nodes)
+                    { names.Add(nnN.Text); }
+
+                    foreach (string name in sequenceName)
+                    {
+                        string DNA = "";
+                        string protein = "";
+                        foreach (string featureName in names)
+                        {
+                            if (data[name][featureType].ContainsKey(featureName) == true)
+                            {
+                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                {
+                                    if (string.IsNullOrEmpty(DNA) == true)
+                                    {
+                                        DNA = data[name][featureType][featureName].getDNASequence;
+                                        DNA = DNA + new string('-', lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
+                                    }
+                                }
+                                if (rboBoth.Checked == true || rboProtein.Checked == true)
+                                {
+                                    if (string.IsNullOrEmpty(protein) == true)
+                                    {
+                                        protein = data[name][featureType][featureName].getProteinSequence;
+                                        protein = protein + new string('-', lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
+                                    }
+                                }
+                            }
+                        }
+
+                        if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D")==true)
+                        {
+                            if (string.IsNullOrEmpty(DNA) == true)
+                            { DNA = new string('-', lengths[featureType + "|" + names[0] + "|" + "D"]); }
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta", true);
+                            fw.Write(">" + name + "\n" + DNA + "\n");
+                            fw.Close();
+                        }
+                        if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "p") == true)
+                        {
+                            if (string.IsNullOrEmpty(protein) == true)
+                            { protein = new string('-', lengths[featureType + "|" + names[0] + "|" + "p"]); }
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta", true);
+                            fw.Write(">" + name + "\n" + protein + "\n");
+                            fw.Close();
+                        }
+                    }                    
+                }
+            }
+
+        }
+
+        private void btnClustalW_Click(object sender, EventArgs e)
+        {
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder to save sequences too", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            if (files.Length >0)
+            {
+                foreach (string file in files)
+                {
+                    string answer = file.Substring(0, file.Length - 6) + "_answer.fasta";
+                    string dnd = file.Substring(0, file.Length - 6) + "_answer.dnd";
+                    System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\cmd.txt");
+                    fw.WriteLine("\"C:\\Program Files (x86)\\ClustalW2\\clustalw2.exe\"");
+                    fw.WriteLine("1");
+                    fw.WriteLine(file);
+                    fw.WriteLine("2");
+                    fw.WriteLine("9");
+                    fw.WriteLine("F");
+                    fw.WriteLine("1");
+                    fw.WriteLine("");
+                    fw.WriteLine("1");
+                    fw.WriteLine(answer);
+                    fw.WriteLine(dnd);
+                    fw.WriteLine("X");
+                    fw.WriteLine("X");
+                    fw.WriteLine("X");
+                    fw.Close();
+
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + folder + "\\cmd.txt");
+                    info.UseShellExecute = true;
+                    info.CreateNoWindow = true;
+                    
+                    process.StartInfo = info;
+                    process.Start();
+                    process.WaitForExit();
+
+                    System.IO.File.Delete(folder + "\\cmd.bat");
+                }
+            }
+
+
         }
     }
 }

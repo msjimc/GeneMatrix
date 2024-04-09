@@ -1,0 +1,31 @@
+"C:\Program Files (x86)\ClustalW2\clustalw2.exe"
+1
+C:\Users\User\Desktop\test\CDS-ATP6_DNA.fasta
+2
+9
+F
+1
+
+1
+C:\Users\User\Desktop\test\answer_CDS-ATP6_DNA.fa
+C:\Users\User\Desktop\test\answer_CDS-ATP6_DNA.dnd
+X
+X
+X
+
+
+(
+echo 1
+echo C:\Users\User\Desktop\test\CDS-ATP6_DNA.fasta
+echo 2
+echo 9
+echo F
+echo 1
+echo 0
+echo 1
+echo C:\Users\User\Desktop\test\CDS-ATP6_DNA_answer.fasta
+echo C:\Users\User\Desktop\test\CDS-ATP6_DNA_answer.dnd
+echo X
+echo X
+echo X
+) | "C:\Program Files (x86)\ClustalW2\clustalw2.exe"
