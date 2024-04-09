@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace GeneMatrix
@@ -423,6 +424,8 @@ namespace GeneMatrix
             if (System.IO.Directory.Exists(folder) == false) { return; }
             Dictionary<string, int> lengths = new Dictionary<string, int>();
 
+            List<string> listOfFilesToDelete = new List<string>();
+
             foreach (TreeNode fN in tv2.Nodes[0].Nodes)
             {
                 string featureType = fN.Text;
@@ -449,7 +452,11 @@ namespace GeneMatrix
                                         { lengths[key] = length; }
                                     }
                                     else
-                                    { lengths.Add(key, length); }
+                                    { 
+                                        lengths.Add(key, length);
+                                        if (listOfFilesToDelete.Contains(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta") == false)
+                                        { listOfFilesToDelete.Add(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta"); }
+                                    }
                                 }
                                 if (rboBoth.Checked==true || rboProtein.Checked == true)
                                 {
@@ -461,7 +468,11 @@ namespace GeneMatrix
                                         { lengths[key] = length; }
                                     }
                                     else
-                                    { lengths.Add(key, length); }
+                                    { 
+                                        lengths.Add(key, length);
+                                        if (listOfFilesToDelete.Contains(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta") == false)
+                                        { listOfFilesToDelete.Add(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta"); }
+                                    }
                                 }
                             }                            
                         }
@@ -469,6 +480,14 @@ namespace GeneMatrix
                 }
             }
 
+            foreach (string file in listOfFilesToDelete)
+            {
+                if (System.IO.File.Exists(file) == true)
+                { System.IO.File.Delete(file); }
+            }
+
+            char padding = ' ';
+            if (false) { padding = '-'; }
 
             foreach (TreeNode fN in tv2.Nodes[0].Nodes)
             {
@@ -493,7 +512,7 @@ namespace GeneMatrix
                                     if (string.IsNullOrEmpty(DNA) == true)
                                     {
                                         DNA = data[name][featureType][featureName].getDNASequence;
-                                        DNA = DNA + new string('-', lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
+                                        DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
                                     }
                                 }
                                 if (rboBoth.Checked == true || rboProtein.Checked == true)
@@ -501,7 +520,7 @@ namespace GeneMatrix
                                     if (string.IsNullOrEmpty(protein) == true)
                                     {
                                         protein = data[name][featureType][featureName].getProteinSequence;
-                                        protein = protein + new string('-', lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
+                                        protein = protein + new string(padding, lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
                                     }
                                 }
                             }
@@ -510,15 +529,15 @@ namespace GeneMatrix
                         if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D")==true)
                         {
                             if (string.IsNullOrEmpty(DNA) == true)
-                            { DNA = new string('-', lengths[featureType + "|" + names[0] + "|" + "D"]); }
+                            { DNA = new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta", true);
                             fw.Write(">" + name + "\n" + DNA + "\n");
                             fw.Close();
                         }
-                        if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "p") == true)
+                        if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
                         {
                             if (string.IsNullOrEmpty(protein) == true)
-                            { protein = new string('-', lengths[featureType + "|" + names[0] + "|" + "p"]); }
+                            { protein = new string(padding, lengths[featureType + "|" + names[0] + "|" + "p"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta", true);
                             fw.Write(">" + name + "\n" + protein + "\n");
                             fw.Close();
@@ -529,49 +548,287 @@ namespace GeneMatrix
 
         }
 
-        private void btnClustalW_Click(object sender, EventArgs e)
+        private string getClustalWFileName()
         {
-            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder to save sequences too", "");
-            if (System.IO.Directory.Exists(folder) == false) { return; }
-
-            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
-            if (files.Length >0)
+            if (chkResetPrograms.Checked == false)
             {
-                foreach (string file in files)
+                string ClustalW = Properties.Settings.Default.ClustalW;
+                if (System.IO.File.Exists(ClustalW) == true)
+                { return ClustalW; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\clustalw2.exe";
+
+                if (System.IO.File.Exists(program) == true)
                 {
-                    string answer = file.Substring(0, file.Length - 6) + "_answer.fasta";
-                    string dnd = file.Substring(0, file.Length - 6) + "_answer.dnd";
-                    System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\cmd.txt");
-                    fw.WriteLine("\"C:\\Program Files (x86)\\ClustalW2\\clustalw2.exe\"");
-                    fw.WriteLine("1");
-                    fw.WriteLine(file);
-                    fw.WriteLine("2");
-                    fw.WriteLine("9");
-                    fw.WriteLine("F");
-                    fw.WriteLine("1");
-                    fw.WriteLine("");
-                    fw.WriteLine("1");
-                    fw.WriteLine(answer);
-                    fw.WriteLine(dnd);
-                    fw.WriteLine("X");
-                    fw.WriteLine("X");
-                    fw.WriteLine("X");
-                    fw.Close();
-
-                    System.Diagnostics.Process process = new System.Diagnostics.Process();
-                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + folder + "\\cmd.txt");
-                    info.UseShellExecute = true;
-                    info.CreateNoWindow = true;
-                    
-                    process.StartInfo = info;
-                    process.Start();
-                    process.WaitForExit();
-
-                    System.IO.File.Delete(folder + "\\cmd.bat");
+                    Properties.Settings.Default.ClustalW = program;
+                    Properties.Settings.Default.Save();
+                    return program;
                 }
             }
 
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the ClustalW2.exe executable file", "program (*.exe)|*.exe");
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                Properties.Settings.Default.Muscle = fileName;
+                Properties.Settings.Default.Save();
+                return fileName;
+            }
+            else
+            {
+                MessageBox.Show("The ClustalW2.exe executable is required for this function, see user guide for more information", "No external aligner");
+                return null;
+            }
+        }
 
+        private void btnClustalW_Click(object sender, EventArgs e)
+        {
+            string program = getClustalWFileName();
+            if (program == null) { return; }
+
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            if (files.Length > 0)
+            { runClustalw(program, folder, files, "DNA"); }
+
+            files = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+            if (files.Length > 0)
+            { runClustalw(program, folder, files, "PROTEIN"); }
+        }
+
+        private void runClustalw(string program, string folder, string[] files, string sequenceType)
+        {
+            System.IO.StreamWriter fw = null;
+            string fileName = folder + "\\cmd_ClustalW.bat";
+            try
+            {               
+                if (files.Length > 0)
+                {
+                    foreach (string file in files)
+                    {
+                        fw = new System.IO.StreamWriter(fileName);
+                        string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
+                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE="+ sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
+                        fw.Close();
+
+                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                        Application.DoEvents();
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                        info.UseShellExecute = false;
+                        info.CreateNoWindow = ! chkShowCMD.Checked;
+
+                        process.StartInfo = info;
+
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
+
+               
+                if (chkAggregate.Checked == true)
+                {
+                    lblStatus.Text = "Status: Combining alignments";
+                    Application.DoEvents();
+                    CombineAlignments(folder, files, "clustalw"); 
+                }
+
+                lblStatus.Text = "Status: Done";
+                Application.DoEvents();
+
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (fw != null) { fw.Close(); }
+            }
+
+            if (System.IO.File.Exists(fileName) == true)
+            { System.IO.File.Delete(fileName); }
+
+        }
+
+        private string getMuscleFileName()
+        {
+            if (chkResetPrograms.Checked == false)
+            {
+                string Muscle = Properties.Settings.Default.Muscle;
+                if (System.IO.File.Exists(Muscle) == true)
+                { return Muscle; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\muscle5.1.win64.exe";
+
+                if (System.IO.File.Exists(program) == true)
+                {
+                    Properties.Settings.Default.Muscle = program;
+                    Properties.Settings.Default.Save();
+                    return program;
+                }
+            }
+
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the Muscle executable file", "program (*.exe)|*.exe");
+            if (System.IO.File.Exists (fileName) == true)
+            {
+                Properties.Settings.Default.Muscle = fileName;
+                Properties.Settings.Default.Save();
+                return fileName; 
+            }
+            else 
+            {
+                MessageBox.Show("The Muscle executable is required for this function, see user guide for more information", "No external aligner");
+                return null; 
+            }
+        }
+
+        private void btnMuscle_Click(object sender, EventArgs e)
+        {            
+            string program = getMuscleFileName();
+            if (program == null) { return; }
+
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            if (files.Length > 0)
+            { runMuscle(program, folder, files); }
+
+            files = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+            if (files.Length > 0)
+            { runMuscle(program, folder, files); }
+        }
+
+        private void runMuscle(string program, string folder, string[] files)
+        {
+            System.IO.StreamWriter fw = null;
+            string fileName = folder + "\\cmd_Muscle.bat";
+            try
+            {
+                if (files.Length > 0)
+                {
+                    foreach (string file in files)
+                    {
+                        fw = new System.IO.StreamWriter(fileName);
+                        string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
+                        fw.WriteLine("\"" + program + "\" -align \"" + file + "\" -output \"" + answer + "\"");
+                        fw.Close();
+
+                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                        Application.DoEvents();
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                        info.UseShellExecute = false;
+                        info.CreateNoWindow = !chkShowCMD.Checked;
+
+                        process.StartInfo = info;
+
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
+
+               if (chkAggregate.Checked == true)
+                {
+                    lblStatus.Text = "Status: Combining alignments";
+                    Application.DoEvents();
+                    CombineAlignments(folder, files, "muscle"); 
+                }
+
+                lblStatus.Text = "Status: Done";
+                Application.DoEvents();
+                
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (fw != null) { fw.Close(); }
+            }
+
+            if (System.IO.File.Exists(fileName) == true)
+            { System.IO.File.Delete(fileName); }
+
+        }
+
+        private void CombineAlignments(string folder, string[] files, string program)
+        {
+            System.IO.StreamReader fs = null;
+            System.IO.StreamWriter fw = null;
+
+            try
+            {
+                Dictionary<string, string> sequences = new Dictionary<string, string>();
+
+                foreach (string file in files)
+                {
+                    string alignedFile = "";
+                    if (program == "muscle")
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_Muscle.fasta"; }
+                    else if (program == "clustalw")
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_ClustalW.fasta"; }
+                    
+                    fs = new System.IO.StreamReader(alignedFile);
+                    string line = "";
+
+                    string accession = "";
+                    while (fs.Peek() > 0)
+                    {
+                        line=fs.ReadLine();
+                        if (line.StartsWith(">") == true)
+                        {
+                            accession = line.Substring(1).Trim();
+                            if (sequences.ContainsKey(accession) == false)
+                            { sequences.Add(accession,""); }
+                        }
+                        else if (accession != "")
+                        {
+                            sequences[accession] += line.Trim();
+                        }
+                    }
+                    fs.Close();
+
+                    int length = 0;
+                    foreach (string v in sequences.Values)
+                    { 
+                        if (length < v.Length) 
+                        { length = v.Length;}
+                    }
+                    foreach (string key in sequences.Keys)
+                    {
+                        if (length < sequences[key].Length)
+                        { sequences[key] +=  new string('-', length - sequences[key].Length); }
+                    }
+                }
+
+                string exportName = folder + "\\";
+                if (program == "muscle")
+                { exportName += "Muscle.fasta"; }
+                else if (program == "clustalw")
+                { exportName += "ClustalW.fasta"; }
+
+                fw = new System.IO.StreamWriter(exportName);
+                foreach (string key in sequences.Keys)
+                {
+                    fw.Write(">" + key + "\n" + sequences[key] + "\n");
+                }
+
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (fs != null) { fs.Close(); }
+                if (fw != null) { fw.Close(); }
+            }
         }
     }
 }

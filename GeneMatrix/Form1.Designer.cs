@@ -41,13 +41,19 @@
             this.tv1 = new System.Windows.Forms.TreeView();
             this.tv2 = new System.Windows.Forms.TreeView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.rboDNA = new System.Windows.Forms.RadioButton();
-            this.rboProtein = new System.Windows.Forms.RadioButton();
             this.rboBoth = new System.Windows.Forms.RadioButton();
+            this.rboProtein = new System.Windows.Forms.RadioButton();
+            this.rboDNA = new System.Windows.Forms.RadioButton();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnClustalW = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.chkShowCMD = new System.Windows.Forms.CheckBox();
+            this.btnMuscle = new System.Windows.Forms.Button();
+            this.chkResetPrograms = new System.Windows.Forms.CheckBox();
+            this.chkAggregate = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -119,7 +125,7 @@
             // btnQuit
             // 
             this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnQuit.Location = new System.Drawing.Point(12, 511);
+            this.btnQuit.Location = new System.Drawing.Point(12, 529);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
             this.btnQuit.TabIndex = 1;
@@ -136,7 +142,7 @@
             this.groupBox2.Controls.Add(this.splitContainer1);
             this.groupBox2.Location = new System.Drawing.Point(12, 110);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 240);
+            this.groupBox2.Size = new System.Drawing.Size(674, 229);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
@@ -144,7 +150,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(593, 208);
+            this.btnReset.Location = new System.Drawing.Point(593, 197);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 1;
@@ -167,7 +173,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tv2);
-            this.splitContainer1.Size = new System.Drawing.Size(668, 186);
+            this.splitContainer1.Size = new System.Drawing.Size(668, 175);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -177,7 +183,7 @@
             this.tv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv1.Location = new System.Drawing.Point(0, 0);
             this.tv1.Name = "tv1";
-            this.tv1.Size = new System.Drawing.Size(322, 186);
+            this.tv1.Size = new System.Drawing.Size(322, 175);
             this.tv1.TabIndex = 0;
             this.tv1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv1_AfterSelect);
             // 
@@ -186,7 +192,7 @@
             this.tv2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv2.Location = new System.Drawing.Point(0, 0);
             this.tv2.Name = "tv2";
-            this.tv2.Size = new System.Drawing.Size(342, 186);
+            this.tv2.Size = new System.Drawing.Size(342, 175);
             this.tv2.TabIndex = 0;
             this.tv2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv2_AfterSelect);
             this.tv2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv2_NodeMouseClick);
@@ -208,15 +214,37 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Save sequences";
             // 
-            // label2
+            // rboBoth
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(566, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "To save the sequences, select whether you which to save DNA, protein or both type" +
-    "s and then press the Save button.";
+            this.rboBoth.AutoSize = true;
+            this.rboBoth.Location = new System.Drawing.Point(280, 46);
+            this.rboBoth.Name = "rboBoth";
+            this.rboBoth.Size = new System.Drawing.Size(137, 17);
+            this.rboBoth.TabIndex = 4;
+            this.rboBoth.Text = "Both types of sequence";
+            this.rboBoth.UseVisualStyleBackColor = true;
+            // 
+            // rboProtein
+            // 
+            this.rboProtein.AutoSize = true;
+            this.rboProtein.Location = new System.Drawing.Point(140, 46);
+            this.rboProtein.Name = "rboProtein";
+            this.rboProtein.Size = new System.Drawing.Size(134, 17);
+            this.rboProtein.TabIndex = 3;
+            this.rboProtein.Text = "Just protein sequences";
+            this.rboProtein.UseVisualStyleBackColor = true;
+            // 
+            // rboDNA
+            // 
+            this.rboDNA.AutoSize = true;
+            this.rboDNA.Checked = true;
+            this.rboDNA.Location = new System.Drawing.Point(9, 46);
+            this.rboDNA.Name = "rboDNA";
+            this.rboDNA.Size = new System.Drawing.Size(125, 17);
+            this.rboDNA.TabIndex = 2;
+            this.rboDNA.TabStop = true;
+            this.rboDNA.Text = "Just DNA sequences";
+            this.rboDNA.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -230,54 +258,35 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // rboDNA
+            // label2
             // 
-            this.rboDNA.AutoSize = true;
-            this.rboDNA.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rboDNA.Checked = true;
-            this.rboDNA.Location = new System.Drawing.Point(9, 46);
-            this.rboDNA.Name = "rboDNA";
-            this.rboDNA.Size = new System.Drawing.Size(125, 17);
-            this.rboDNA.TabIndex = 2;
-            this.rboDNA.TabStop = true;
-            this.rboDNA.Text = "Just DNA sequences";
-            this.rboDNA.UseVisualStyleBackColor = true;
-            // 
-            // rboProtein
-            // 
-            this.rboProtein.AutoSize = true;
-            this.rboProtein.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rboProtein.Location = new System.Drawing.Point(140, 46);
-            this.rboProtein.Name = "rboProtein";
-            this.rboProtein.Size = new System.Drawing.Size(134, 17);
-            this.rboProtein.TabIndex = 3;
-            this.rboProtein.Text = "Just protein sequences";
-            this.rboProtein.UseVisualStyleBackColor = true;
-            // 
-            // rboBoth
-            // 
-            this.rboBoth.AutoSize = true;
-            this.rboBoth.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rboBoth.Location = new System.Drawing.Point(280, 46);
-            this.rboBoth.Name = "rboBoth";
-            this.rboBoth.Size = new System.Drawing.Size(137, 17);
-            this.rboBoth.TabIndex = 4;
-            this.rboBoth.Text = "Both types of sequence";
-            this.rboBoth.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(566, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "To save the sequences, select whether you which to save DNA, protein or both type" +
+    "s and then press the Save button.";
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.chkAggregate);
+            this.groupBox4.Controls.Add(this.chkResetPrograms);
+            this.groupBox4.Controls.Add(this.btnMuscle);
+            this.groupBox4.Controls.Add(this.chkShowCMD);
+            this.groupBox4.Controls.Add(this.lblStatus);
+            this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.btnClustalW);
             this.groupBox4.Location = new System.Drawing.Point(12, 434);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(674, 71);
+            this.groupBox4.Size = new System.Drawing.Size(674, 89);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Align individual features";
             // 
             // btnClustalW
             // 
-            this.btnClustalW.Location = new System.Drawing.Point(593, 42);
+            this.btnClustalW.Location = new System.Drawing.Point(593, 60);
             this.btnClustalW.Name = "btnClustalW";
             this.btnClustalW.Size = new System.Drawing.Size(75, 23);
             this.btnClustalW.TabIndex = 0;
@@ -285,17 +294,75 @@
             this.btnClustalW.UseVisualStyleBackColor = true;
             this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
             // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(6, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(662, 26);
+            this.label3.TabIndex = 1;
+            this.label3.Text = resources.GetString("label3.Text");
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(351, 42);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 2;
+            this.lblStatus.Text = "Status";
+            // 
+            // chkShowCMD
+            // 
+            this.chkShowCMD.AutoSize = true;
+            this.chkShowCMD.Location = new System.Drawing.Point(177, 64);
+            this.chkShowCMD.Name = "chkShowCMD";
+            this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
+            this.chkShowCMD.TabIndex = 3;
+            this.chkShowCMD.Text = "Show command window";
+            this.chkShowCMD.UseVisualStyleBackColor = true;
+            // 
+            // btnMuscle
+            // 
+            this.btnMuscle.Location = new System.Drawing.Point(513, 60);
+            this.btnMuscle.Name = "btnMuscle";
+            this.btnMuscle.Size = new System.Drawing.Size(75, 23);
+            this.btnMuscle.TabIndex = 4;
+            this.btnMuscle.Text = "Muscle";
+            this.btnMuscle.UseVisualStyleBackColor = true;
+            this.btnMuscle.Click += new System.EventHandler(this.btnMuscle_Click);
+            // 
+            // chkResetPrograms
+            // 
+            this.chkResetPrograms.AutoSize = true;
+            this.chkResetPrograms.Location = new System.Drawing.Point(9, 64);
+            this.chkResetPrograms.Name = "chkResetPrograms";
+            this.chkResetPrograms.Size = new System.Drawing.Size(162, 17);
+            this.chkResetPrograms.TabIndex = 5;
+            this.chkResetPrograms.Text = "Reselect alignment programs";
+            this.chkResetPrograms.UseVisualStyleBackColor = true;
+            // 
+            // chkAggregate
+            // 
+            this.chkAggregate.AutoSize = true;
+            this.chkAggregate.Location = new System.Drawing.Point(374, 64);
+            this.chkAggregate.Name = "chkAggregate";
+            this.chkAggregate.Size = new System.Drawing.Size(133, 17);
+            this.chkAggregate.TabIndex = 6;
+            this.chkAggregate.Text = "Combine all alignments";
+            this.chkAggregate.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 546);
+            this.ClientSize = new System.Drawing.Size(698, 564);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(714, 603);
             this.Name = "Form1";
             this.Text = "Gene matrix";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -309,6 +376,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -334,6 +402,12 @@
         private System.Windows.Forms.RadioButton rboDNA;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnClustalW;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chkShowCMD;
+        private System.Windows.Forms.Button btnMuscle;
+        private System.Windows.Forms.CheckBox chkAggregate;
+        private System.Windows.Forms.CheckBox chkResetPrograms;
     }
 }
 
