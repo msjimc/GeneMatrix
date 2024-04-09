@@ -40,6 +40,8 @@ namespace GeneMatrix
 
         private void btnImport_Click(object sender, EventArgs e)
         {
+            btnReset.Enabled = false;
+
             if (chkFolder.Checked==true)
             {
                 string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of GenBank files", "");
@@ -149,6 +151,7 @@ namespace GeneMatrix
                 else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
 
                 populateLists();
+                btnReset.Enabled = true;
 
             }
             finally
@@ -262,23 +265,31 @@ namespace GeneMatrix
                     }
                 }
             }
-            CDS.Sort();
-            tRNA.Sort();
-            rRNA.Sort();
-
 
             TreeNode cds = new TreeNode("CDS");
             TreeNode trna = new TreeNode("tRNA");
             TreeNode rrna = new TreeNode("rRNA");
 
-            foreach (string name in CDS)
-            { cds.Nodes.Add(new TreeNode(name)); }
-
-            foreach (string name in tRNA)
+            if (CDS != null)
+            {
+                CDS.Sort();
+                foreach (string name in CDS)
+                { cds.Nodes.Add(new TreeNode(name)); }
+            }
+            
+            if (tRNA != null) 
+            { 
+                tRNA.Sort(); 
+             foreach (string name in tRNA)
             { trna.Nodes.Add(new TreeNode(name)); }
+            }
 
-            foreach (string name in rRNA)
-            { rrna.Nodes.Add(new TreeNode(name)); }
+            if (rRNA != null)
+            {
+                rRNA.Sort();
+                foreach (string name in rRNA)
+                { rrna.Nodes.Add(new TreeNode(name)); }
+            }
 
             TreeNode tv1parent = new TreeNode("Sequences");
             tv1.Nodes.Add(tv1parent);
