@@ -164,6 +164,7 @@ namespace GeneMatrix
         {
             string sequence = getSequence(lines, startOfSequence);
             string accession = getAccession(lines);
+            string organism = getOrganism(lines);
 
             if (data.ContainsKey(accession) == false)
             { data.Add(accession, new Dictionary<string, Dictionary<string, feature>>()); }
@@ -191,7 +192,7 @@ namespace GeneMatrix
                         if (data[accession].ContainsKey(featureType) == false)
                         { data[accession].Add(featureType, new Dictionary<string, feature>()); }
                         int count = data[accession][featureType].Count;
-                        feature f = new feature(lines, featureStart, index, featureType, sequence, count);
+                        feature f = new feature(lines, featureStart, index, featureType, organism, sequence, count);
                         if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
                         { data[accession][featureType].Add(f.WorkingName, f); }                                                                       
                     }
@@ -206,14 +207,35 @@ namespace GeneMatrix
         {
             for (int index = 0; index < 10;index++)
             {
-                if (lines[index].StartsWith("VERSION") == true)
+                if (index < lines.Count)
                 {
-                    string rawName=lines[index].Substring(12).Trim();
-                   
-                    return rawName;
+                    if (lines[index].StartsWith("VERSION") == true)
+                    {
+                        string rawName = lines[index].Substring(12).Trim();
+
+                        return rawName;
+                    }
                 }
             }
             return "";
+        }
+
+        private string getOrganism(List<string> lines)
+        {
+            for (int index = 0; index < 15; index++)
+            {
+                if (index < lines.Count)
+                {
+                    if (lines[index].StartsWith("  ORGANISM") == true)
+                    {
+                        string rawName = lines[index].Substring(12).Trim();
+
+                        return rawName;
+                    }
+                }
+            }
+            return "";
+
         }
 
         private string getSequence(List<string> lines, int startPoint)
@@ -512,12 +534,14 @@ namespace GeneMatrix
 
                     foreach (string name in sequenceName)
                     {
+                        string species = "";
                         string DNA = "";
                         string protein = "";
                         foreach (string featureName in names)
-                        {
+                        {                            
                             if (data[name][featureType].ContainsKey(featureName) == true)
                             {
+                                species = data[name][featureType][featureName].getOrganism;
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
                                 {
                                     if (string.IsNullOrEmpty(DNA) == true)
@@ -542,7 +566,7 @@ namespace GeneMatrix
                             if (string.IsNullOrEmpty(DNA) == true)
                             { DNA = new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta", true);
-                            fw.Write(">" + name + "\n" + DNA + "\n");
+                            fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
                             fw.Close();
                         }
                         if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
@@ -550,7 +574,7 @@ namespace GeneMatrix
                             if (string.IsNullOrEmpty(protein) == true)
                             { protein = new string(padding, lengths[featureType + "|" + names[0] + "|" + "p"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta", true);
-                            fw.Write(">" + name + "\n" + protein + "\n");
+                            fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
                             fw.Close();
                         }
                     }                    
@@ -584,7 +608,7 @@ namespace GeneMatrix
             string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the ClustalW2.exe executable file", "program (*.exe)|*.exe");
             if (System.IO.File.Exists(fileName) == true)
             {
-                Properties.Settings.Default.Muscle = fileName;
+                Properties.Settings.Default.ClustalW = fileName;
                 Properties.Settings.Default.Save();
                 return fileName;
             }

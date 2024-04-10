@@ -15,11 +15,13 @@ namespace GeneMatrix
         private string product = "";
         private string protein_id = "";
         private string locus_tag = "";
+        private string organism = "";
         private string featureType = "";
         private string DNA = "";
         private string protein = "";
-        public feature(List<string> lines, int index, int endIndex, string FeatureType, string sequence, int count)
+        public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count)
         {
+            organism=Organism;
             featureType = FeatureType;
             setcoordinates(lines, index, sequence);
 
@@ -170,6 +172,9 @@ namespace GeneMatrix
 
         public string getProteinSequence
         { get { return protein; } }
+
+        public string getOrganism
+        { get { return organism;  } }
 
     }
 }
