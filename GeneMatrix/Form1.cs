@@ -31,7 +31,33 @@ namespace GeneMatrix
             splitContainer1.SplitterDistance = splitContainer1.Width / 2;
             tv1.Sort();
             tv2.Sort();
+
+            SetTreeviewImages();
         }
+        private void SetTreeviewImages()
+        {
+            Bitmap NotSelected = new Bitmap(10, 10, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(NotSelected);
+            g.Clear(tv1.BackColor);
+            g.FillEllipse(Brushes.LightGray, 0, 0, 10, 10);
+            g = null;
+
+            Bitmap Selected = new Bitmap(10, 10, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            g = Graphics.FromImage(Selected);
+            g.Clear(tv1.BackColor);
+            g.FillEllipse(Brushes.Green, 0, 0, 10, 10);
+            g = null;
+                       
+
+            ImageList myImageList = new ImageList();
+
+            myImageList.Images.Add(NotSelected);
+            myImageList.Images.Add(Selected);
+            tv1.ImageList = myImageList;
+            tv1.ImageIndex = 0;
+
+        }
+
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
@@ -292,32 +318,32 @@ namespace GeneMatrix
                 }
             }
 
-            TreeNode cds = new TreeNode("CDS");
-            TreeNode trna = new TreeNode("tRNA");
-            TreeNode rrna = new TreeNode("rRNA");
-                      
+            TreeNode cds = new TreeNode("CDS", -1, -1);
+            TreeNode trna = new TreeNode("tRNA", -1, -1);
+           TreeNode rrna = new TreeNode("rRNA", -1, -1);
+            
             if (CDS != null)
             {
                 CDS.Sort();
                 foreach (string name in CDS)
-                { cds.Nodes.Add(new TreeNode(name)); }
+                { cds.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
             
             if (tRNA != null) 
             { 
                 tRNA.Sort(); 
              foreach (string name in tRNA)
-            { trna.Nodes.Add(new TreeNode(name)); }
+            { trna.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
 
             if (rRNA != null)
             {
                 rRNA.Sort();
                 foreach (string name in rRNA)
-                { rrna.Nodes.Add(new TreeNode(name)); }
+                { rrna.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
 
-            TreeNode tv1parent = new TreeNode("Sequences");
+            TreeNode tv1parent = new TreeNode("Sequences", -1, -1);
             tv1.Nodes.Add(tv1parent);
 
             TreeNode tv2parent = new TreeNode("Sequences");
@@ -345,10 +371,21 @@ namespace GeneMatrix
             tv2parent.Expand();
         }
 
-        private void tv1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void tv1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (tv1.SelectedNode.Parent == null || tv1.SelectedNode.Parent.Text == "Sequences") { return; }
-            tv1.SelectedNode.Checked = !tv1.SelectedNode.Checked;
+            if (e.Node.Parent == null || e.Node.Parent.Text == "Sequences") { return; }
+            TreeNode n = e.Node;
+            n.Checked = !n.Checked;
+            if (n.Checked == true)
+            {
+                n.ImageIndex = 1;
+                n.SelectedImageIndex = 1;
+            }
+            else
+            {
+                n.ImageIndex = 0;
+                n.SelectedImageIndex = 0;
+            }
         }
 
         private void tv2_AfterSelect(object sender, TreeViewEventArgs e)
@@ -417,11 +454,16 @@ namespace GeneMatrix
                     {
                         donor.Tag = featureType;
                         if (donor.Checked == true)
-                        { names.Add(donor); }
+                        {
+                            donor.ImageIndex = 0;
+                            donor.SelectedImageIndex = 0;
+                            names.Add(donor);
+                        }
                     }
                     foreach (TreeNode name in names)
                     {  
                         n.Nodes.Remove(name);
+                        name.ImageIndex = -1;
                         tv2.SelectedNode.Nodes.Add(name);
                         name.Checked = false;
                     }                   
@@ -887,5 +929,6 @@ namespace GeneMatrix
                 if (fw != null) { fw.Close(); }
             }
         }
+
     }
 }

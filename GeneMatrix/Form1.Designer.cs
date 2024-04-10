@@ -47,13 +47,13 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnClustalW = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.chkShowCMD = new System.Windows.Forms.CheckBox();
-            this.btnMuscle = new System.Windows.Forms.Button();
-            this.chkResetPrograms = new System.Windows.Forms.CheckBox();
             this.chkAggregate = new System.Windows.Forms.CheckBox();
+            this.chkResetPrograms = new System.Windows.Forms.CheckBox();
+            this.btnMuscle = new System.Windows.Forms.Button();
+            this.chkShowCMD = new System.Windows.Forms.CheckBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnClustalW = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -180,13 +180,12 @@
             // 
             // tv1
             // 
-            this.tv1.CheckBoxes = true;
             this.tv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv1.Location = new System.Drawing.Point(0, 0);
             this.tv1.Name = "tv1";
             this.tv1.Size = new System.Drawing.Size(322, 175);
             this.tv1.TabIndex = 3;
-            this.tv1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv1_AfterSelect);
+            this.tv1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv1_NodeMouseClick);
             // 
             // tv2
             // 
@@ -287,55 +286,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Align individual features";
             // 
-            // btnClustalW
+            // chkAggregate
             // 
-            this.btnClustalW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClustalW.Location = new System.Drawing.Point(593, 60);
-            this.btnClustalW.Name = "btnClustalW";
-            this.btnClustalW.Size = new System.Drawing.Size(75, 23);
-            this.btnClustalW.TabIndex = 14;
-            this.btnClustalW.Text = "ClustalW";
-            this.btnClustalW.UseVisualStyleBackColor = true;
-            this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(6, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(607, 26);
-            this.label3.TabIndex = 1;
-            this.label3.Text = resources.GetString("label3.Text");
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(371, 42);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 13);
-            this.lblStatus.TabIndex = 2;
-            this.lblStatus.Text = "Status";
-            // 
-            // chkShowCMD
-            // 
-            this.chkShowCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkShowCMD.AutoSize = true;
-            this.chkShowCMD.Location = new System.Drawing.Point(177, 64);
-            this.chkShowCMD.Name = "chkShowCMD";
-            this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
-            this.chkShowCMD.TabIndex = 11;
-            this.chkShowCMD.Text = "Show command window";
-            this.chkShowCMD.UseVisualStyleBackColor = true;
-            // 
-            // btnMuscle
-            // 
-            this.btnMuscle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMuscle.Location = new System.Drawing.Point(513, 60);
-            this.btnMuscle.Name = "btnMuscle";
-            this.btnMuscle.Size = new System.Drawing.Size(75, 23);
-            this.btnMuscle.TabIndex = 13;
-            this.btnMuscle.Text = "Muscle";
-            this.btnMuscle.UseVisualStyleBackColor = true;
-            this.btnMuscle.Click += new System.EventHandler(this.btnMuscle_Click);
+            this.chkAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkAggregate.AutoSize = true;
+            this.chkAggregate.Location = new System.Drawing.Point(374, 64);
+            this.chkAggregate.Name = "chkAggregate";
+            this.chkAggregate.Size = new System.Drawing.Size(133, 17);
+            this.chkAggregate.TabIndex = 12;
+            this.chkAggregate.Text = "Combine all alignments";
+            this.chkAggregate.UseVisualStyleBackColor = true;
             // 
             // chkResetPrograms
             // 
@@ -348,16 +308,55 @@
             this.chkResetPrograms.Text = "Reselect alignment programs";
             this.chkResetPrograms.UseVisualStyleBackColor = true;
             // 
-            // chkAggregate
+            // btnMuscle
             // 
-            this.chkAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkAggregate.AutoSize = true;
-            this.chkAggregate.Location = new System.Drawing.Point(374, 64);
-            this.chkAggregate.Name = "chkAggregate";
-            this.chkAggregate.Size = new System.Drawing.Size(133, 17);
-            this.chkAggregate.TabIndex = 12;
-            this.chkAggregate.Text = "Combine all alignments";
-            this.chkAggregate.UseVisualStyleBackColor = true;
+            this.btnMuscle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMuscle.Location = new System.Drawing.Point(513, 60);
+            this.btnMuscle.Name = "btnMuscle";
+            this.btnMuscle.Size = new System.Drawing.Size(75, 23);
+            this.btnMuscle.TabIndex = 13;
+            this.btnMuscle.Text = "Muscle";
+            this.btnMuscle.UseVisualStyleBackColor = true;
+            this.btnMuscle.Click += new System.EventHandler(this.btnMuscle_Click);
+            // 
+            // chkShowCMD
+            // 
+            this.chkShowCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkShowCMD.AutoSize = true;
+            this.chkShowCMD.Location = new System.Drawing.Point(177, 64);
+            this.chkShowCMD.Name = "chkShowCMD";
+            this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
+            this.chkShowCMD.TabIndex = 11;
+            this.chkShowCMD.Text = "Show command window";
+            this.chkShowCMD.UseVisualStyleBackColor = true;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(371, 42);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 2;
+            this.lblStatus.Text = "Status";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(6, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(607, 26);
+            this.label3.TabIndex = 1;
+            this.label3.Text = resources.GetString("label3.Text");
+            // 
+            // btnClustalW
+            // 
+            this.btnClustalW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClustalW.Location = new System.Drawing.Point(593, 60);
+            this.btnClustalW.Name = "btnClustalW";
+            this.btnClustalW.Size = new System.Drawing.Size(75, 23);
+            this.btnClustalW.TabIndex = 14;
+            this.btnClustalW.Text = "ClustalW";
+            this.btnClustalW.UseVisualStyleBackColor = true;
+            this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
             // 
             // Form1
             // 
@@ -369,7 +368,7 @@
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(714, 603);
             this.Name = "Form1";
             this.Text = "Gene matrix";

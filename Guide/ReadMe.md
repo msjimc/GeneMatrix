@@ -57,7 +57,7 @@ When reading an entry, ```GeneMatrix``` identifies the entry's accession number,
 * The species name is taken from the line starting with two spaces and then ___ORGANISM___.  
 * The sequence is considered as any text after the line starting with ___ORIGIN___ and before the starting with ___\\\\___. When all the features from an entry have been stored the sequence data is discarded. 
  
-### Feature selection
+### Selection of sequences to be retained
 
 The level of annotation in GenBank entries is very variable, some entries only have the sequence and genome level annotation such as accession ID, species taxonomy and submitter details, while other are extensively annotated. For instance in the sequence.gb file downloaded in the [Obtaining the sequence files](obtainingFiles.md), 18 contain no relevant annotation. Not all of the features are relevant to the production of sequence alignments for phylogenetic studies consequently, ```GeneMatrix``` limits the features retain to those tagged with the CDS, tRNA or rRNA. These were selected as they have very well defined starting and ending points, with their sequence consistent between species, whereas features such as  those linked to the ___variation___, ___gene___ and ___misc_feature___ are not for example:
 
@@ -65,13 +65,13 @@ The level of annotation in GenBank entries is very variable, some entries only h
 * ___gene___: poorly defined start and end points with interesting sequences present in the ___CDS___ features
 * ___misc_feature___: poorly defined feature with variable meaning between entries
 
-### Feature's Names
+#### Feature's Names
 Due to variation in the annotation of different GenBank entries, when extracting data for a specific feature ```GeneMatrix``` looks for lines containing the tags: ___/gene=___, ___/product=___,  ___/protein_id=___ and ___/locus_tag=___.  When more than one tag is present, the feature's name is taken as the first tag to be given a value in the order of ___/gene=___ then ___/product=___ then  ___/protein_id=___ and finally ___/locus_tag=___.
 
-### Protein sequence
+#### Protein sequence
 Typically a ___CDS___ feature is linked to a protein sequence which is found by searching for the ___/translation=___ tag and retaining the subsequence text until a __&rdquo;__ is found.  Obviously ___tRNA___ and ___rRNAs___ never linked to a protein sequence.  
 
-### Sequence coordinates
+#### Sequence coordinates
 For a short, simple sequence such as a tRNA or mitochondrial CDS, the sequence is present as a single run of nucleotides. In these situations the coordinates simply follow the feature's tag (___CDS___, ___rRNA___ or ___tRNA___) with the start and end points separated by two periods (Table 1). In these cases the coordinates of feature is extracted from the GenBank entry's sequence and stored.  
 However, the sequence of a ___CDS___ feature may be contained in a number of exons or in the case of a circular genome a feature may span the beginning and the end of the sequence. In these cases the feature's tag is followed by a series of start/end coordinates separated by commas with the whole series placed in brackets following the word ___join___ (Table 1). In these case the sequence identified each pair of coordinates is extracted and concatenated to form one sequence.  
 
@@ -86,24 +86,24 @@ Table 1: Feature coordinates
 
 If the feature is encoded on the reverse strand, the coordinates are places in brackets following the complement key word. In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. Table 2 gives the conversion table including the ambiguous codes.  
 
-|From|To|
-|-|-|
-|A, a| t|
-|C, c| g|
-|G, g| c|
-|T, t| a|
-|R, r| y|
-|Y, y| r|
-|K, k| m|
-|M, m| k|
-|W, w| w|
-|S, s| s|
-|B, b| v|
-|D, d| h|
-|H, h| d|
-|V, v| b|
-|White space or 0 to 9|Ignored|
-|N or any other character|N|  
+|Base in Genbank sequence|Represents|Base after reverse complementing |Represents|
+|-|-|-|-|
+|A||t||
+|C||g||
+|G||c||
+|T||a||
+|R|A + G|Y|C + T|
+|Y|C + T|R|A + G|
+|K|T + G|M|A + C|
+|M|A + C|K|T + G|
+|W|A + T|W| A + T
+|S| C + G|S| C + G|
+|B |T + C + G|V|A + C + G|
+|D|A + T + G|H|A + T + C|
+|H|A + T + G|D|A + T + G|
+|V|A + C + G| B|T + C + G|
+|White space or 0 to 9|(Formatting)|Ignored|NA|
+|N or any other character|A + C + G + T|N|A + C + G + T|  
 
 Table 2: Sequence substitution when reverse complementing a sequence 
 
@@ -111,17 +111,65 @@ Occasionally, the exact coordinates for a sequence are not know, in these cases 
 In the data file downloaded in the [Obtaining the sequence files](obtainingFiles.md) section, sequence MG912796.1 contains the sequence for a tRNA-Leu as located at ***complement(<13358)***, in this case with so little information the tRNA is ignored.
 
 
-# Working with the retained data
-While ```GeneMatrix``` is designed for the collection of orthologue sequences, it does this based on the features name rather then its sequence. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situation where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames which give rise to a number of different proteins though different mechanisms such as RNA editing, ribosome stalling or protein cleavage. How these features are annotated is typically obvious from the feature's name, but may not be that obvious from the sequence as note below: 
-In the  [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file contains 229 CDV genomes     
+## Working with the retained data
 
+Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view with the data arranged as nodes in a tree like structure. The root of the trees is the ___Sequence___ node, which contains up to three child nodes (___CDS___, ___rRNA___ and ___tRNA___). The panel on the left represents  unselected data, while the panel on the right represents the selected features. Consequently, the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4).
+
+<hr />
+
+![Figure 4](images/figure4.jpg)
+
+Figure 4
+
+<hr />
+
+```GeneMatrix``` is designed for the collation of orthologue sequences, which is done with user interaction by selecting features with the required names rather than its sequence. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situation where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames which give rise to a number of different proteins though different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features are represent is typically obvious from the feature's name, but may not be that obvious from the sequence, for example:  
+* The CDV virus genome contains a PVC or PCV open reading frame that generates the P, V and C proteins which have overlapping sequences. Some CDV genomes in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file contains a PVC/PCV feature, while other have one or more of the P, V, and C sequences. Trying group these features base on sequence homology could result in situations where some species have the whole PVC/PCV sequence included while others had the overlapping P, V and C sequences with or without the PVC/PCV sequence, which could ultimately result in erroneous results.  
+  
 ## Selecting sequences based on their names
 
+Ideally, ```GeneMatrix``` would automate the selection of the features based on their name, this step requires user interaction as the same orthologue may have multiple names. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, different GenBank entries have eight different names for the Haemagglutinin protein H sequence. 
 
+<hr >
+
+![Figure 5](images/figure5.jpg)
+
+Figure 5: 
+
+<hr />
+
+Multiple features can be selected at once as long as they all are the same type (i.e. they are all ___CDS___ features.) To select an orthologue for inclusion in the exported data set, left mouse click on the relevant node's name in the left hand panel, this should change the node's icon from a light grey to a a green disc. Clicking on the node a second time will deselect it as indicated by the light grey icon. (If an orthologue has multiple names, initially select the node which has the preferred name and then include the other sequences as outlined in the next section). Once you have selected all the features, left mouse click on the relevant node in the right hand panel. This will remove the features from the left hand tree and add them to the right hand tree (Figure 6).  
+
+<hr />
+
+![Figure 6](images/figure6.jpg)
+
+Figure 6: In Figure 6 a, all the features in the ___CDS___ set except ***cytb*** have been selected. Figure 6 b shows the movement of the selected nodes to the right hand tree after left mouse clicking on the CDS node in the right hand panel.
 
 ### Combining sequences with different names
 
+In Figure 6 a, it can be seen that one or more GenBank entries contain a feature called ***cytb***, while the rest contain a ***CYTB*** feature. Since these probably refer to the same probably refer to the same orthologue, its possible to combine them as one entity by first moving the ***CYTB*** node to the right hand tree and then selecting the ***cytb*** node  (Figure 7 a)and then left mouse clicking on the ***CYTB*** node in the right hand panel. This will then remove the ***cytb*** node from the left hand tree and add it as a child of the ***CYTB*** node in the right hand tree (Figure 7 b).
+
+<hr />
+
+![Figure 7](images/figure7.jpg)
+
+Figure 7
+
+<hr />
+
 ### Deselecting sequences
+
+Removing a feature from the right hand is achieved by right mouse clicking on the node. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). 
+
+<hr />
+
+![Figure 8](images/figure8.jpg)
+
+Figure 8: Right mouse clicking on the ***CYTB*** node in the right hand panel (Figure 8 a), returns bore the the ***CYTB*** node and its child ***cytb*** to the ***CDS*** node on the left hand panel.
+
+<hr />
+
 
 ### Resetting the selection
 
