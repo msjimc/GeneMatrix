@@ -192,9 +192,13 @@ namespace GeneMatrix
                         if (data[accession].ContainsKey(featureType) == false)
                         { data[accession].Add(featureType, new Dictionary<string, feature>()); }
                         int count = data[accession][featureType].Count;
-                        feature f = new feature(lines, featureStart, index, featureType, organism, sequence, count);
-                        if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
-                        { data[accession][featureType].Add(f.WorkingName, f); }                                                                       
+                        try
+                        {
+                            feature f = new feature(lines, featureStart, index, featureType, organism, sequence, count);
+                            if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
+                            { data[accession][featureType].Add(f.WorkingName, f); }
+                        }
+                        catch(Exception ex) { }
                     }
                     featureType = lines[index].Substring(5, lines[index].IndexOf(" ",6) - 5);
                     featureStart = index;                    
@@ -291,7 +295,7 @@ namespace GeneMatrix
             TreeNode cds = new TreeNode("CDS");
             TreeNode trna = new TreeNode("tRNA");
             TreeNode rrna = new TreeNode("rRNA");
-
+                      
             if (CDS != null)
             {
                 CDS.Sort();
@@ -487,8 +491,8 @@ namespace GeneMatrix
                                     else
                                     { 
                                         lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta") == false)
-                                        { listOfFilesToDelete.Add(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta"); }
+                                        if (listOfFilesToDelete.Contains(cleanFileNames( folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
+                                        { listOfFilesToDelete.Add(cleanFileNames(folder , featureType + "-" + names[0] + "_DNA.fasta")); }
                                     }
                                 }
                                 if (rboBoth.Checked==true || rboProtein.Checked == true)
@@ -503,8 +507,8 @@ namespace GeneMatrix
                                     else
                                     { 
                                         lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta") == false)
-                                        { listOfFilesToDelete.Add(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta"); }
+                                        if (listOfFilesToDelete.Contains(cleanFileNames( folder , featureType + "-" + names[0] + "_protein.fasta")) == false)
+                                        { listOfFilesToDelete.Add(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta")); }
                                     }
                                 }
                             }                            
@@ -564,16 +568,16 @@ namespace GeneMatrix
                         if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D")==true)
                         {
                             if (string.IsNullOrEmpty(DNA) == true)
-                            { DNA = new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_DNA.fasta", true);
+                            { DNA = new string('n', lengths[featureType + "|" + names[0] + "|" + "D"]); }
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_DNA.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
                             fw.Close();
                         }
                         if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
                         {
                             if (string.IsNullOrEmpty(protein) == true)
-                            { protein = new string(padding, lengths[featureType + "|" + names[0] + "|" + "p"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(folder + "\\" + featureType + "-" + names[0] + "_protein.fasta", true);
+                            { protein = new string('n', lengths[featureType + "|" + names[0] + "|" + "p"]); }
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
                             fw.Close();
                         }
@@ -582,6 +586,24 @@ namespace GeneMatrix
             }
 
         }
+
+        private string cleanFileNames(string folder, string fileName)
+        {
+            StringBuilder sb = new StringBuilder(fileName.Length);
+
+            foreach (char c in fileName)
+            {
+                if (char.IsLetterOrDigit(c))
+                { sb.Append(c); }
+                else if (c == '_' || c == '-' || c == ' ' || c == '.')
+                { sb.Append(c); }
+                else { sb.Append('_'); }
+            }
+            fileName = sb.ToString().Replace("__", "_");
+
+            return folder + "\\" + fileName;
+        }
+
 
         private string getClustalWFileName()
         {

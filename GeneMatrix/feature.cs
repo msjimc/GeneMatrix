@@ -155,6 +155,46 @@ namespace GeneMatrix
                     case 't':
                         sb.Append("a");
                         break;
+                    case 'R':
+                    case 'r':
+                        sb.Append("y");
+                        break;
+                    case 'Y':
+                    case 'y':
+                        sb.Append("r");
+                        break;
+                    case 'K':
+                    case 'k':
+                        sb.Append("m");
+                        break;
+                    case 'M':
+                    case 'm':
+                        sb.Append("k");
+                        break;
+                    case 'W':
+                    case 'w':
+                        sb.Append("w");
+                        break;
+                    case 'S':
+                    case 's':
+                        sb.Append("s");
+                        break;
+                    case 'B':
+                    case 'b':
+                        sb.Append("v");
+                        break;
+                    case 'D':
+                    case 'd':
+                        sb.Append("h");
+                        break;
+                    case 'H':
+                    case 'h':
+                        sb.Append("d");
+                        break;
+                    case 'V':
+                    case 'v':
+                        sb.Append("b");
+                        break;
                     default:
                         sb.Append("n");
                         break;
