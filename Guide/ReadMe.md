@@ -86,7 +86,7 @@ Table 1: Feature coordinates
 
 If the feature is encoded on the reverse strand, the coordinates are places in brackets following the complement key word. In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. Table 2 gives the conversion table including the ambiguous codes.  
 
-|Base in Genbank sequence|Represents|Base after reverse complementing |Represents|
+|Base in Genbank<br />sequence|Represents|Base after reverse<br />complementing |Represents|
 |-|-|-|-|
 |A||t||
 |C||g||
