@@ -14,12 +14,11 @@ Figure 1
 
 ## Obtaining the sequence files
 
-```GeneMatrix``` is designed to work with files downloaded from the NCBI web site that consist of a cohort of related sequences such as mitochondrial genomes from species in the same genus or viruses from the same family. For this guide I downloaded 144 mitochondrial genome sequences for the genus Chelonoidis. A fuller description of the data selection and downloading is [here](obtainingFiles.md). 
+```GeneMatrix``` is designed to work with files downloaded from the NCBI web site that consist of a cohort of related sequences such as mitochondrial genomes from species in the same genus or viruses from the same family. For this guide I downloaded 144 mitochondrial genome sequences for the genus Chelonoidis. A fuller description of the data selection and downloading is [here](obtainingFiles.md) and the data [file](../ExampleData/sequence.gb) is in the [ExampleData folder](../ExampleData/). 
 
 ## Importing sequence data
 
 The  ***Import data*** section consists of two controls, to import data press the ```Import``` button in the lower right of the panel (blue box Figure 2 a). If the ```Folder``` tick box is unchecked, pressing the ```Import data``` button will result in a file selection dialogue box appearing that will accept files with a *.gb or *.genbank file extension (Figure 2 b), while if checked a folder selection dialogue box shown (Figure 2 c). When importing data from a folder, ```GeneMatrix``` will process any file in the folder with either the *.gb or *.genbank file extension.  
-
 
 <hr />
 
@@ -84,34 +83,13 @@ However, the sequence of a ___CDS___ feature may be contained in a number of exo
 
 Table 1: Feature coordinates
 
-If the feature is encoded on the reverse strand, the coordinates are places in brackets following the complement key word. In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. Table 2 gives the conversion table including the ambiguous codes.  
-
-|Base in Genbank<br />sequence|Represents|Base after reverse<br />complementing |Represents|
-|-|-|-|-|
-|A||t||
-|C||g||
-|G||c||
-|T||a||
-|R|A + G|Y|C + T|
-|Y|C + T|R|A + G|
-|K|T + G|M|A + C|
-|M|A + C|K|T + G|
-|W|A + T|W| A + T
-|S| C + G|S| C + G|
-|B |T + C + G|V|A + C + G|
-|D|A + T + G|H|A + T + C|
-|H|A + T + G|D|A + T + G|
-|V|A + C + G| B|T + C + G|
-|White space or 0 to 9|(Formatting)|Ignored|NA|
-|N or any other character|A + C + G + T|N|A + C + G + T|  
-
-Table 2: Sequence substitution when reverse complementing a sequence 
+If the feature is encoded on the reverse strand, the coordinates are places in brackets following the complement key word. In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. This [page](revesreComplement.md) gives the conversion table including the ambiguous codes.  
 
 Occasionally, the exact coordinates for a sequence are not know, in these cases the coordinates may contain one or both < > characters suggesting the sequences starts or end beyond the region suggested. In these situations ```GeneMatrix``` just uses the coordinates supplied i.e. the entry: <1..532 would be treated as: 1..532.   
 In the data file downloaded in the [Obtaining the sequence files](obtainingFiles.md) section, sequence MG912796.1 contains the sequence for a tRNA-Leu as located at ***complement(<13358)***, in this case with so little information the tRNA is ignored.
 
 
-## Working with the retained data
+## Working with the imported sequences
 
 Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view with the data arranged as nodes in a tree like structure. The root of the trees is the ___Sequence___ node, which contains up to three child nodes (___CDS___, ___rRNA___ and ___tRNA___). The panel on the left represents  unselected data, while the panel on the right represents the selected features. Consequently, the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4).
 
@@ -126,9 +104,9 @@ Figure 4
 ```GeneMatrix``` is designed for the collation of orthologue sequences, which is done with user interaction by selecting features with the required names rather than its sequence. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situation where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames which give rise to a number of different proteins though different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features are represent is typically obvious from the feature's name, but may not be that obvious from the sequence, for example:  
 * The CDV virus genome contains a PVC or PCV open reading frame that generates the P, V and C proteins which have overlapping sequences. Some CDV genomes in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file contains a PVC/PCV feature, while other have one or more of the P, V, and C sequences. Trying group these features base on sequence homology could result in situations where some species have the whole PVC/PCV sequence included while others had the overlapping P, V and C sequences with or without the PVC/PCV sequence, which could ultimately result in erroneous results.  
   
-## Selecting sequences based on their names
+## Selecting sequences for export based on their names
 
-Ideally, ```GeneMatrix``` would automate the selection of the features based on their name, this step requires user interaction as the same orthologue may have multiple names. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, different GenBank entries have eight different names for the Haemagglutinin protein H sequence. 
+Ideally, ```GeneMatrix``` would automate the selection of the features based on their name, however, because features are not named in a consistent, systematic manner in this step requires user interaction. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, different GenBank entries have eight different names for the Haemagglutinin protein H sequence. 
 
 <hr >
 
@@ -138,17 +116,18 @@ Figure 5:
 
 <hr />
 
-Multiple features can be selected at once as long as they all are the same type (i.e. they are all ___CDS___ features.) To select an orthologue for inclusion in the exported data set, left mouse click on the relevant node's name in the left hand panel, this should change the node's icon from a light grey to a a green disc. Clicking on the node a second time will deselect it as indicated by the light grey icon. (If an orthologue has multiple names, initially select the node which has the preferred name and then include the other sequences as outlined in the next section). Once you have selected all the features, left mouse click on the relevant node in the right hand panel. This will remove the features from the left hand tree and add them to the right hand tree (Figure 6).  
+Multiple features can be selected at once as long as they all are the same type (i.e. they are all ___CDS___ features.) To select an orthologue for inclusion in the exported data set, click on the feature's name in the left hand panel using the left mouse button. This should change the features's icon from a light grey to a green. Clicking on the node a second time will deselect it as indicated by the now light grey icon. If an orthologue has multiple names, initially select the node which has the preferred name and then include the other sequences as outlined in the next section. Once you have selected all the features, click on the relevant node in the right hand panel using the mouse's left hand button. This will move the features from the left hand tree to the right hand tree (Figure 6).  
 
 <hr />
 
 ![Figure 6](images/figure6.jpg)
 
-Figure 6: In Figure 6 a, all the features in the ___CDS___ set except ***cytb*** have been selected. Figure 6 b shows the movement of the selected nodes to the right hand tree after left mouse clicking on the CDS node in the right hand panel.
+Figure 6: In Figure 6 a, all the features in the ___CDS___ set except ***cytb***, ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** have been selected. Figure 6 b shows the movement of the selected nodes to the right hand tree after left mouse clicking on the CDS node in the right hand panel.
 
-### Combining sequences with different names
+### Amalgamating sequences with different names
 
-In Figure 6 a, it can be seen that one or more GenBank entries contain a feature called ***cytb***, while the rest contain a ***CYTB*** feature. Since these probably refer to the same probably refer to the same orthologue, its possible to combine them as one entity by first moving the ***CYTB*** node to the right hand tree and then selecting the ***cytb*** node  (Figure 7 a)and then left mouse clicking on the ***CYTB*** node in the right hand panel. This will then remove the ***cytb*** node from the left hand tree and add it as a child of the ***CYTB*** node in the right hand tree (Figure 7 b).
+In Figure 7 a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes respectively. As a result features with the ***NADH dehydrogenase subunit 1*** name will be combined with those called ***ND1*** in to a data set called ***ND1***. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
+To combine the unselected ***cytb*** features with the selected  ***CYTB*** features, left mouse click the ***cytb*** feature in the left hand panel and then click the ***CYTB*** text using the left mouse button (Figure 7 b). 
 
 <hr />
 
@@ -158,9 +137,9 @@ Figure 7
 
 <hr />
 
-### Deselecting sequences
+### Deselecting sequences for export
 
-Removing a feature from the right hand is achieved by right mouse clicking on the node. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). 
+Deselecting a feature for export is achieved by clicking on the node using the right hand mouse button. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). 
 
 <hr />
 
@@ -171,14 +150,109 @@ Figure 8: Right mouse clicking on the ***CYTB*** node in the right hand panel (F
 <hr />
 
 
-### Resetting the selection
+### Resetting the selection of sequences for export
+
+The Reset button in the lower right hand corner of the ```Combine features with different names``` section allows you to discard the current selection of sequences for export. Pressing it will remove all child nodes of the ___CDS___, ___rRNA___ and ___tRNA___ nodes in the right hand panel adding them to the appropriate node in the left hand panel. 
+
 
 ### Saving the selected gene sequences
 
-## Aligning the sequences in the exported files
+Once at least one feature has been selected for export the the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 9). Pressing this button will prompt you to select a folder to save the data too. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 10).
 
-### Using Muscle
+<hr />
 
-### Using Clustal
+![Figure 9](images/figure9.jpg)
+
+Figure 9
+
+<hr />
+
+![Figure 10](images/figure10.jpg)
+
+Figure 10
+
+<hr />
+
+The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (red box in Figure 9). These options select whether DNA, protein or both types of sequence data is exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another term. For instance in Figure 8 a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the parent's file which is called ***CDS-ND1_DNA.fasta***. 
+
+Not all names can be used in file names as some contain characters that are not allowed such as '\\', '?' or ":". Consequently, characters that are letters, numbers, '-', '_', ' ' or '.' are replaced by '_'.
+
+#### Sequence names
+
+The name of the files denotes the which feature it contains, while each individual sequence in the file is named after the GenBank's accession ID and the species name:
+
+    <Accession ID>-<Species name>
+
+To make the names compatible with various multiple alignment programs, any ' ' characters are replaced by '_', otherwise the names may be truncated in an alignment file generated by programs such as Muscle (see [below](#using-muscle)). 
+
+#### Absent data
+
+Sequences that are shorter than the longest sequence are padded with ' ' characters to make all sequences the same length. If a GenBank entry doesn't contain any sequence data for a particular feature, its sequence in the exported file will be a series of 'n' (DNA) or 'x' (protein) characters that is the same length as the longest sequence in that set. However, if no entries have data (i.e. no tRNA or rRNA feature will have a protein sequence) no file will be produced.
+
+## Automating the alignment of the the exported sequences
+
+The exported files can then be aligned by a third party alignment program and then if required combined to create a single alignment file that may be used by an application that determines the level of similarity or relatedness between the different species. 
+
+Two commonly used applications for the creation of multiple alignments are ClustalW and Muscle. Their stand alone executable files are available from their web sites (see below) as well as in this pages [Program folder](../Program/). The lower section of ```GeneMatrix``` contains two buttons (```Muscle``` and ```ClustalW```) that will automate the alignment of the exported files using Muscle or Clustal (if the executable is on your computer) (Figure 11).
+
+<hr />
+
+![Figure 11](images/figure11.jpg)
+
+Figure 11
+
+<hr />
+
+When automating the use of either of these programs ```GeneMatrix``` will check if it has used the program before and if so attempt to use the same program file, otherwise it will look in the same folder as the ```GeneMatrix``` executable for the executable. Finally, if no program file was found it will ask you for its location. 
+
+Once GeneMatrix as found the executable (currently: clustalw2.exe and muscle5.1.win64.exe), it will prompt you to select the folder of files to be aligned. It will then search this folder for files ending _DNA.fasta or _Protein.fasta, if any are found it will process each in turn by creating a batch file which it will then attempt to run in the cmd.exe shell window. cmd.exe is an integral of Windows that provides a simple method to automate commands written as text. cmd.exe as a very simple interface that just displays text written by you are any programs you have asked it to run (Figure 12)  
+
+<hr />
+
+![Figure 12](images/figure12.jpg)
+
+Figure 12
+
+<hr />
+
+By default, the cmd.exe interface is hidden and the only feed back is given by the ```Status``` label is updated as the ```GeneMatrix``` works through the list of files. During this time, the ```GeneMatrix``` will be lock and will not respond to any user input. To see if Muscle or Clustal is running you may need to either open Task Manger (type Task Manager in the box at the bottom left of your primary monitor) and see if it is shown in the application list (Figure 13). When using Muscle, it will use all the computers processes and may limit the computers ability to do other things,  Clustal will typically use less processors. 
+
+If the Show command window option is checked (black line in Figure 11), the cmd.exe window will not be hidden and you'll be able to see the output generated by the alignment program. Closing this window will halt the alignment and ```GeneMatrix``` will start the next one. Once started, the only way to stop it may be to kill ```GeneMatrix``` and then the aligner in the Task Manager window or change the data folders name and then kill the aligner in Task Manager. 
+
+If the ```Combine all the alignments``` option is checked, when all the alignments have been made ```GeneMatrix``` will collate all the sequences in to a single fasta file such that all the exported sequences for an GenBank entry will be concatenated in to one line in the resultant fasta file, such that the file can then be used as the input for a program that creates phylogenic trees for example.
+
+
+<hr />
+
+![Figure 13](images/figure%2013.jpg)
+
+Figure 13
+
+<hr />
+
+***Note:*** If you want to change the version of the executable, either swap the file or check the ```Reselect alignment program``` option on the lower left of the ```Align individual features``` section (yellow line in Figure 11) before press the ```Muscle``` or ```ClustalW``` buttons: this will force ```GeneMatrix``` to ask for the executable's location.
+
+### Aligning the sequences using Muscle
+
+The Muscle aligner  
+
+### Aligning the sequences using ClustalW
+
+
+
+#### About Clustal 
+The Clustal algorithm first published in 1988 with the last version released in 17th, Oct 2010. It is available as a desktop, console and web server application, with a number of sites hosting the web server.  
+
+##### Website
+http://www.clustal.org/clustal2/
+
+##### References
+
+First publication: 
+> Higgins,D.G. and Sharp,P.M. (1988). CLUSTAL: a package for performing multiple sequence alignment on a microcomputer. Gene, 73, 237-244.
+
+Last publication:
+> Larkin MA, Blackshields G, Brown NP, Chenna R, McGettigan PA, McWilliam H, Valentin F, Wallace IM, Wilm A, Lopez R, Thompson JD, Gibson TJ, Higgins DG.
+(2007). Clustal W and Clustal X version 2.0. Bioinformatics, 23, 2947-2948.
 
 ### Combining the individual alignments 
