@@ -587,7 +587,7 @@ namespace GeneMatrix
                         {                            
                             if (data[name][featureType].ContainsKey(featureName) == true)
                             {
-                                species = data[name][featureType][featureName].getOrganism;
+                                species = data[name][featureType][featureName].getOrganism.Replace(" ","_");
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
                                 {
                                     if (string.IsNullOrEmpty(DNA) == true)
@@ -618,7 +618,7 @@ namespace GeneMatrix
                         if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
                         {
                             if (string.IsNullOrEmpty(protein) == true)
-                            { protein = new string('n', lengths[featureType + "|" + names[0] + "|" + "p"]); }
+                            { protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "p"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
                             fw.Close();
