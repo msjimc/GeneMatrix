@@ -712,7 +712,7 @@ namespace GeneMatrix
                     {
                         fw = new System.IO.StreamWriter(fileName);
                         string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
-                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE="+ sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
+                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
                         fw.Close();
 
                         lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
@@ -862,7 +862,7 @@ namespace GeneMatrix
         {
             System.IO.StreamReader fs = null;
             System.IO.StreamWriter fw = null;
-
+            make it protein and DNA specific
             try
             {
                 Dictionary<string, string> sequences = new Dictionary<string, string>();
