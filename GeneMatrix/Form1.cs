@@ -711,7 +711,7 @@ namespace GeneMatrix
                     foreach (string file in files)
                     {
                         fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
+                        string answer = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_ClustalW.fasta";
                         fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
                         fw.Close();
 
@@ -734,7 +734,7 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "clustalw"); 
+                    CombineAlignments(folder, files, "clustalw", sequenceType); 
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -799,14 +799,14 @@ namespace GeneMatrix
 
             string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
             if (files.Length > 0)
-            { runMuscle(program, folder, files); }
+            { runMuscle(program, folder, files, "DNA"); }
 
             files = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
             if (files.Length > 0)
-            { runMuscle(program, folder, files); }
+            { runMuscle(program, folder, files, "Protein"); }
         }
 
-        private void runMuscle(string program, string folder, string[] files)
+        private void runMuscle(string program, string folder, string[] files, string SequenceType)
         {
             System.IO.StreamWriter fw = null;
             string fileName = folder + "\\cmd_Muscle.bat";
@@ -817,7 +817,7 @@ namespace GeneMatrix
                     foreach (string file in files)
                     {
                         fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
+                        string answer = file.Substring(0, file.Length - 6) + "_" + SequenceType + "_Muscle.fasta";
                         fw.WriteLine("\"" + program + "\" -align \"" + file + "\" -output \"" + answer + "\"");
                         fw.Close();
 
@@ -839,7 +839,7 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "muscle"); 
+                    CombineAlignments(folder, files, "muscle", SequenceType); 
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -858,11 +858,10 @@ namespace GeneMatrix
 
         }
 
-        private void CombineAlignments(string folder, string[] files, string program)
+        private void CombineAlignments(string folder, string[] files, string program, string sequenceType)
         {
             System.IO.StreamReader fs = null;
-            System.IO.StreamWriter fw = null;
-            make it protein and DNA specific
+            System.IO.StreamWriter fw = null;            
             try
             {
                 Dictionary<string, string> sequences = new Dictionary<string, string>();
@@ -871,9 +870,9 @@ namespace GeneMatrix
                 {
                     string alignedFile = "";
                     if (program == "muscle")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_Muscle.fasta"; }
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_Muscle.fasta"; }
                     else if (program == "clustalw")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_ClustalW.fasta"; }
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_ClustalW.fasta"; }
                     
                     fs = new System.IO.StreamReader(alignedFile);
                     string line = "";
@@ -910,9 +909,9 @@ namespace GeneMatrix
 
                 string exportName = folder + "\\";
                 if (program == "muscle")
-                { exportName += "Muscle.fasta"; }
+                { exportName += "Muscle_" + sequenceType + ".fasta"; }
                 else if (program == "clustalw")
-                { exportName += "ClustalW.fasta"; }
+                { exportName += "ClustalW_" + sequenceType + ".fasta"; }
 
                 fw = new System.IO.StreamWriter(exportName);
                 foreach (string key in sequences.Keys)
