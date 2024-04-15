@@ -46,5 +46,17 @@ namespace GeneMatrix.Properties {
                 this["ClustalW"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PRANK {
+            get {
+                return ((string)(this["PRANK"]));
+            }
+            set {
+                this["PRANK"] = value;
+            }
+        }
     }
 }

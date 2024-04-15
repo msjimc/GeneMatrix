@@ -4,13 +4,16 @@
 
 ## User interface
 
+```GeneMatrix``` consists of a single window split in to the four sections: ***Import data***, ***Combine features with different names***, ***Save sequence*** and ***Align individual features***. Each section performs a task as suggested by its name. The upper three section need to be performed in a set order so only the ***Import data*** option is active. However, since the ***Align individual features*** works with data saved to disk it can be user when required and so is always enabled.
+
+<hr />
+
 ![Figure 1](images/figure1.jpg)
 
 Figure 1
 
 <hr />
 
-```GeneMatrix``` consists of a single window split in to four sections: ***Import data***, ***Combine features with different names***, ***Save sequence*** and ***Align individual features***. Each section performs a task as suggested by its name. The upper three section need to be performed in a set order so only the ***Import data*** option is active. However, since the ***Align individual features*** works with data saved to disk it can be user when required and so is always enabled.
 
 ## Obtaining the sequence files
 

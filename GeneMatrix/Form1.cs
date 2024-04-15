@@ -618,7 +618,7 @@ namespace GeneMatrix
                         if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
                         {
                             if (string.IsNullOrEmpty(protein) == true)
-                            { protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "p"]); }
+                            { protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "P"]); }
                             System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
                             fw.Close();
@@ -646,6 +646,115 @@ namespace GeneMatrix
             return folder + "\\" + fileName;
         }
 
+
+        private string getPRANKFileName()
+        {
+            if (chkResetPrograms.Checked == false)
+            {
+                string PRANK = Properties.Settings.Default.PRANK;
+                if (System.IO.File.Exists(PRANK) == true)
+                { return PRANK; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\PRANK.exe";
+
+                if (System.IO.File.Exists(program) == true)
+                {
+                    Properties.Settings.Default.PRANK = program;
+                    Properties.Settings.Default.Save();
+                    return program;
+                }
+            }
+
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the PRANK.exe executable file", "program (*.exe)|*.exe");
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                Properties.Settings.Default.PRANK = fileName;
+                Properties.Settings.Default.Save();
+                return fileName;
+            }
+            else
+            {
+                MessageBox.Show("The PRANK.exe executable is required for this function, see user guide for more information", "No external aligner");
+                return null;
+            }
+        }
+
+        private void btnPrank_Click(object sender, EventArgs e)
+        {
+            string program = getPRANKFileName();
+            if (program == null) { return; }
+
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            if (files.Length > 0)
+            { runPRANK(program, folder, files, "DNA"); }
+
+            files = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+            if (files.Length > 0)
+            { runPRANK(program, folder, files, "PROTEIN"); }
+        }
+
+        private void runPRANK(string program, string folder, string[] files, string sequenceType)
+        {
+            System.IO.StreamWriter fw = null;
+            string fileName = folder + "\\cmd_PRANK.bat";
+            try
+            {
+                if (files.Length > 0)
+                {
+                    foreach (string file in files)
+                    {
+                        fw = new System.IO.StreamWriter(fileName);
+
+                        string filelinux = file.Replace("\\", "/");
+
+                        string answer = filelinux.Substring(0, file.Length - 6) + "_PRANK.fasta";
+                        fw.WriteLine("\"" + program + "\" -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
+                        fw.Close();
+
+                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                        Application.DoEvents();
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                        info.UseShellExecute = false;
+                        info.CreateNoWindow = !chkShowCMD.Checked;
+
+                        process.StartInfo = info;
+
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
+
+
+                if (chkAggregate.Checked == true)
+                {
+                    lblStatus.Text = "Status: Combining alignments";
+                    Application.DoEvents();
+                    CombineAlignments(folder, files, "PRANK", sequenceType);
+                }
+
+                lblStatus.Text = "Status: Done";
+                Application.DoEvents();
+
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (fw != null) { fw.Close(); }
+            }
+
+            if (System.IO.File.Exists(fileName) == true)
+            { System.IO.File.Delete(fileName); }
+
+        }
 
         private string getClustalWFileName()
         {
@@ -711,7 +820,7 @@ namespace GeneMatrix
                     foreach (string file in files)
                     {
                         fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_ClustalW.fasta";
+                        string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
                         fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
                         fw.Close();
 
@@ -817,7 +926,7 @@ namespace GeneMatrix
                     foreach (string file in files)
                     {
                         fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_" + SequenceType + "_Muscle.fasta";
+                        string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
                         fw.WriteLine("\"" + program + "\" -align \"" + file + "\" -output \"" + answer + "\"");
                         fw.Close();
 
@@ -873,7 +982,9 @@ namespace GeneMatrix
                     { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_Muscle.fasta"; }
                     else if (program == "clustalw")
                     { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_ClustalW.fasta"; }
-                    
+                    else if (program == "PRANK")
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_PRANK.fasta"; }
+
                     fs = new System.IO.StreamReader(alignedFile);
                     string line = "";
 
@@ -912,6 +1023,8 @@ namespace GeneMatrix
                 { exportName += "Muscle_" + sequenceType + ".fasta"; }
                 else if (program == "clustalw")
                 { exportName += "ClustalW_" + sequenceType + ".fasta"; }
+                else if (program == "PRANK")
+                { exportName += "PRANK_" + sequenceType + ".fasta"; }
 
                 fw = new System.IO.StreamWriter(exportName);
                 foreach (string key in sequences.Keys)
@@ -927,7 +1040,6 @@ namespace GeneMatrix
                 if (fs != null) { fs.Close(); }
                 if (fw != null) { fw.Close(); }
             }
-        }
-
+        }  
     }
 }

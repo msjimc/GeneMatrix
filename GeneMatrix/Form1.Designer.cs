@@ -54,6 +54,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
+            this.btnPrank = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -272,6 +273,7 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnPrank);
             this.groupBox4.Controls.Add(this.chkAggregate);
             this.groupBox4.Controls.Add(this.chkResetPrograms);
             this.groupBox4.Controls.Add(this.btnMuscle);
@@ -290,7 +292,7 @@
             // 
             this.chkAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAggregate.AutoSize = true;
-            this.chkAggregate.Location = new System.Drawing.Point(374, 64);
+            this.chkAggregate.Location = new System.Drawing.Point(275, 64);
             this.chkAggregate.Name = "chkAggregate";
             this.chkAggregate.Size = new System.Drawing.Size(133, 17);
             this.chkAggregate.TabIndex = 12;
@@ -303,9 +305,9 @@
             this.chkResetPrograms.AutoSize = true;
             this.chkResetPrograms.Location = new System.Drawing.Point(9, 64);
             this.chkResetPrograms.Name = "chkResetPrograms";
-            this.chkResetPrograms.Size = new System.Drawing.Size(162, 17);
+            this.chkResetPrograms.Size = new System.Drawing.Size(114, 17);
             this.chkResetPrograms.TabIndex = 10;
-            this.chkResetPrograms.Text = "Reselect alignment programs";
+            this.chkResetPrograms.Text = "Reselect programs";
             this.chkResetPrograms.UseVisualStyleBackColor = true;
             // 
             // btnMuscle
@@ -323,7 +325,7 @@
             // 
             this.chkShowCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkShowCMD.AutoSize = true;
-            this.chkShowCMD.Location = new System.Drawing.Point(177, 64);
+            this.chkShowCMD.Location = new System.Drawing.Point(129, 64);
             this.chkShowCMD.Name = "chkShowCMD";
             this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
             this.chkShowCMD.TabIndex = 11;
@@ -357,6 +359,16 @@
             this.btnClustalW.Text = "ClustalW";
             this.btnClustalW.UseVisualStyleBackColor = true;
             this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
+            // 
+            // btnPrank
+            // 
+            this.btnPrank.Location = new System.Drawing.Point(432, 60);
+            this.btnPrank.Name = "btnPrank";
+            this.btnPrank.Size = new System.Drawing.Size(75, 23);
+            this.btnPrank.TabIndex = 15;
+            this.btnPrank.Text = "PRANK";
+            this.btnPrank.UseVisualStyleBackColor = true;
+            this.btnPrank.Click += new System.EventHandler(this.btnPrank_Click);
             // 
             // Form1
             // 
@@ -415,6 +427,7 @@
         private System.Windows.Forms.Button btnMuscle;
         private System.Windows.Forms.CheckBox chkAggregate;
         private System.Windows.Forms.CheckBox chkResetPrograms;
+        private System.Windows.Forms.Button btnPrank;
     }
 }
 
