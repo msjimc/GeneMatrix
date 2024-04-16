@@ -47,6 +47,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnAll = new System.Windows.Forms.Button();
+            this.btnMAFFT = new System.Windows.Forms.Button();
+            this.btnPrank = new System.Windows.Forms.Button();
             this.chkAggregate = new System.Windows.Forms.CheckBox();
             this.chkResetPrograms = new System.Windows.Forms.CheckBox();
             this.btnMuscle = new System.Windows.Forms.Button();
@@ -54,7 +57,6 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
-            this.btnPrank = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -126,7 +128,7 @@
             // btnQuit
             // 
             this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnQuit.Location = new System.Drawing.Point(12, 529);
+            this.btnQuit.Location = new System.Drawing.Point(12, 573);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
             this.btnQuit.TabIndex = 15;
@@ -143,7 +145,7 @@
             this.groupBox2.Controls.Add(this.splitContainer1);
             this.groupBox2.Location = new System.Drawing.Point(12, 110);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 229);
+            this.groupBox2.Size = new System.Drawing.Size(674, 245);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
@@ -152,7 +154,7 @@
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(593, 197);
+            this.btnReset.Location = new System.Drawing.Point(593, 213);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 5;
@@ -175,7 +177,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tv2);
-            this.splitContainer1.Size = new System.Drawing.Size(668, 175);
+            this.splitContainer1.Size = new System.Drawing.Size(668, 191);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -184,7 +186,7 @@
             this.tv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv1.Location = new System.Drawing.Point(0, 0);
             this.tv1.Name = "tv1";
-            this.tv1.Size = new System.Drawing.Size(322, 175);
+            this.tv1.Size = new System.Drawing.Size(322, 191);
             this.tv1.TabIndex = 3;
             this.tv1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv1_NodeMouseClick);
             // 
@@ -193,7 +195,7 @@
             this.tv2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv2.Location = new System.Drawing.Point(0, 0);
             this.tv2.Name = "tv2";
-            this.tv2.Size = new System.Drawing.Size(342, 175);
+            this.tv2.Size = new System.Drawing.Size(342, 191);
             this.tv2.TabIndex = 4;
             this.tv2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv2_AfterSelect);
             this.tv2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv2_NodeMouseClick);
@@ -208,7 +210,7 @@
             this.groupBox3.Controls.Add(this.rboDNA);
             this.groupBox3.Controls.Add(this.btnSave);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(12, 356);
+            this.groupBox3.Location = new System.Drawing.Point(15, 361);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(674, 72);
             this.groupBox3.TabIndex = 3;
@@ -273,6 +275,8 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnAll);
+            this.groupBox4.Controls.Add(this.btnMAFFT);
             this.groupBox4.Controls.Add(this.btnPrank);
             this.groupBox4.Controls.Add(this.chkAggregate);
             this.groupBox4.Controls.Add(this.chkResetPrograms);
@@ -281,18 +285,48 @@
             this.groupBox4.Controls.Add(this.lblStatus);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.btnClustalW);
-            this.groupBox4.Location = new System.Drawing.Point(12, 434);
+            this.groupBox4.Location = new System.Drawing.Point(12, 439);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(674, 89);
+            this.groupBox4.Size = new System.Drawing.Size(674, 115);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Align individual features";
             // 
+            // btnAll
+            // 
+            this.btnAll.Location = new System.Drawing.Point(270, 86);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(75, 23);
+            this.btnAll.TabIndex = 17;
+            this.btnAll.Text = "All";
+            this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
+            // 
+            // btnMAFFT
+            // 
+            this.btnMAFFT.Location = new System.Drawing.Point(351, 86);
+            this.btnMAFFT.Name = "btnMAFFT";
+            this.btnMAFFT.Size = new System.Drawing.Size(75, 23);
+            this.btnMAFFT.TabIndex = 16;
+            this.btnMAFFT.Text = "MAFFT";
+            this.btnMAFFT.UseVisualStyleBackColor = true;
+            this.btnMAFFT.Click += new System.EventHandler(this.btnMAFFT_Click);
+            // 
+            // btnPrank
+            // 
+            this.btnPrank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrank.Location = new System.Drawing.Point(432, 86);
+            this.btnPrank.Name = "btnPrank";
+            this.btnPrank.Size = new System.Drawing.Size(75, 23);
+            this.btnPrank.TabIndex = 15;
+            this.btnPrank.Text = "PRANK";
+            this.btnPrank.UseVisualStyleBackColor = true;
+            this.btnPrank.Click += new System.EventHandler(this.btnPrank_Click);
+            // 
             // chkAggregate
             // 
-            this.chkAggregate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAggregate.AutoSize = true;
-            this.chkAggregate.Location = new System.Drawing.Point(275, 64);
+            this.chkAggregate.Location = new System.Drawing.Point(283, 63);
             this.chkAggregate.Name = "chkAggregate";
             this.chkAggregate.Size = new System.Drawing.Size(133, 17);
             this.chkAggregate.TabIndex = 12;
@@ -301,9 +335,8 @@
             // 
             // chkResetPrograms
             // 
-            this.chkResetPrograms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkResetPrograms.AutoSize = true;
-            this.chkResetPrograms.Location = new System.Drawing.Point(9, 64);
+            this.chkResetPrograms.Location = new System.Drawing.Point(12, 63);
             this.chkResetPrograms.Name = "chkResetPrograms";
             this.chkResetPrograms.Size = new System.Drawing.Size(114, 17);
             this.chkResetPrograms.TabIndex = 10;
@@ -313,7 +346,7 @@
             // btnMuscle
             // 
             this.btnMuscle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMuscle.Location = new System.Drawing.Point(513, 60);
+            this.btnMuscle.Location = new System.Drawing.Point(513, 86);
             this.btnMuscle.Name = "btnMuscle";
             this.btnMuscle.Size = new System.Drawing.Size(75, 23);
             this.btnMuscle.TabIndex = 13;
@@ -323,9 +356,8 @@
             // 
             // chkShowCMD
             // 
-            this.chkShowCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkShowCMD.AutoSize = true;
-            this.chkShowCMD.Location = new System.Drawing.Point(129, 64);
+            this.chkShowCMD.Location = new System.Drawing.Point(140, 63);
             this.chkShowCMD.Name = "chkShowCMD";
             this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
             this.chkShowCMD.TabIndex = 11;
@@ -335,7 +367,7 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(371, 42);
+            this.lblStatus.Location = new System.Drawing.Point(9, 47);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 2;
@@ -352,7 +384,7 @@
             // btnClustalW
             // 
             this.btnClustalW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClustalW.Location = new System.Drawing.Point(593, 60);
+            this.btnClustalW.Location = new System.Drawing.Point(593, 86);
             this.btnClustalW.Name = "btnClustalW";
             this.btnClustalW.Size = new System.Drawing.Size(75, 23);
             this.btnClustalW.TabIndex = 14;
@@ -360,21 +392,11 @@
             this.btnClustalW.UseVisualStyleBackColor = true;
             this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
             // 
-            // btnPrank
-            // 
-            this.btnPrank.Location = new System.Drawing.Point(432, 60);
-            this.btnPrank.Name = "btnPrank";
-            this.btnPrank.Size = new System.Drawing.Size(75, 23);
-            this.btnPrank.TabIndex = 15;
-            this.btnPrank.Text = "PRANK";
-            this.btnPrank.UseVisualStyleBackColor = true;
-            this.btnPrank.Click += new System.EventHandler(this.btnPrank_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 564);
+            this.ClientSize = new System.Drawing.Size(698, 608);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnQuit);
@@ -428,6 +450,8 @@
         private System.Windows.Forms.CheckBox chkAggregate;
         private System.Windows.Forms.CheckBox chkResetPrograms;
         private System.Windows.Forms.Button btnPrank;
+        private System.Windows.Forms.Button btnMAFFT;
+        private System.Windows.Forms.Button btnAll;
     }
 }
 

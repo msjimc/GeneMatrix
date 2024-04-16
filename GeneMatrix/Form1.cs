@@ -646,6 +646,135 @@ namespace GeneMatrix
             return folder + "\\" + fileName;
         }
 
+        private string getMAFFTFileName()
+        {
+            if (chkResetPrograms.Checked == false)
+            {
+                string MAFFT = Properties.Settings.Default.MAFFT;
+                if (System.IO.File.Exists(MAFFT) == true)
+                { return MAFFT; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\mafft.bat";
+
+                if (System.IO.File.Exists(program) == true)
+                {
+                    Properties.Settings.Default.MAFFT = program;
+                    Properties.Settings.Default.Save();
+                    return program;
+                }
+            }
+
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the mafft.bat executable file", "program (*.bat)|*.bat");
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                Properties.Settings.Default.MAFFT = fileName;
+                Properties.Settings.Default.Save();
+                return fileName;
+            }
+            else
+            {
+                MessageBox.Show("The mafft.bat batch file is required for this function, see user guide for more information", "No external aligner");
+                return null;
+            }
+        }
+
+        private void btnMAFFT_Click(object sender, EventArgs e)
+        {
+            string program = getMAFFTFileName();
+            if (program == null) { return; }
+
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            if (files.Length > 0)
+            { runMAFFT(program, folder, files, "DNA"); }
+
+            files = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+            if (files.Length > 0)
+            { runMAFFT(program, folder, files, "PROTEIN"); }
+        }
+
+        private void runMAFFT(string program, string folder, string[] files, string sequenceType)
+        {
+            System.IO.StreamWriter fw = null;
+            string fileName = program.Substring(0, program.LastIndexOf("\\")) + "\\cmd_MAFFT.bat";
+            string rootDir = program.Substring(0, program.LastIndexOf("\\"));
+            try
+            {
+                if (files.Length > 0)
+                {
+                    foreach (string file in files)
+                    {
+                        fw = new System.IO.StreamWriter(fileName);
+
+                        string filelinux = file.Replace("\\", "/");
+
+                        string answer = filelinux.Substring(0, file.Length - 6) + "_MAFFT.fasta";
+
+                        fw.Write("@echo off \r\nsetlocal enabledelayedexpansion\r\n" + 
+                            "cls; 1>&2\r\nchcp 65001 1>&2\r\n\r\n" + 
+                            "for /f \"usebackq tokens=*\" %%i IN (`cd`) DO @set current_dir=%%i\r\n" + 
+                            "if /i \"%current_dir%\" == \"%systemroot%\" (\r\n" +
+                            "set mafft_working_dir=\"%~dp0\"\r\n" + 
+                            ") else (\r\n" +
+                            " set mafft_working_dir=\"%current_dir%\"\r\n" +
+                            ")\r\n" + 
+                            "pushd \"%mafft_working_dir%\"" + 
+                            "echo; 1>&2\r\n" + 
+                            "echo Preparing environment to run MAFFT on Windows. 1>&2\r\n" +
+                            "echo This may take a while, if real-time scanning by anti-virus software is on. 1>&2\r\n\r\n" +
+                            "set ROOTDIR=" + rootDir + "\\\"\r\n" + 
+                            "set PATH=/usr/bin/:%PATH%\r\n" + 
+                            "set MAFFT_BINARIES=/usr/lib/mafft\r\n" + 
+                            "set TMPDIR=%TMP%\r\n" + 
+                            "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
+
+                        fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" --auto --retree 2 --inputorder \"" + filelinux + "\" > \"" + answer + "\"");
+                                                
+                        fw.Close();
+
+                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
+                        Application.DoEvents();
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                        info.UseShellExecute = false;
+                        info.CreateNoWindow = !chkShowCMD.Checked;
+
+                        process.StartInfo = info;
+
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
+
+
+                if (chkAggregate.Checked == true)
+                {
+                    lblStatus.Text = "Status: Combining alignments";
+                    Application.DoEvents();
+                    CombineAlignments(folder, files, "MAFFT", sequenceType);
+                }
+
+                lblStatus.Text = "Status: Done";
+                Application.DoEvents();
+
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                if (fw != null) { fw.Close(); }
+            }
+
+            if (System.IO.File.Exists(fileName) == true)
+            { System.IO.File.Delete(fileName); }
+
+        }
 
         private string getPRANKFileName()
         {
@@ -718,7 +847,7 @@ namespace GeneMatrix
                         fw.WriteLine("\"" + program + "\" -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
                         fw.Close();
 
-                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
                         Application.DoEvents();
                         System.Diagnostics.Process process = new System.Diagnostics.Process();
                         System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
@@ -936,7 +1065,6 @@ namespace GeneMatrix
                         System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
                         info.UseShellExecute = false;
                         info.CreateNoWindow = !chkShowCMD.Checked;
-
                         process.StartInfo = info;
 
                         process.Start();
@@ -979,11 +1107,13 @@ namespace GeneMatrix
                 {
                     string alignedFile = "";
                     if (program == "muscle")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_Muscle.fasta"; }
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_Muscle.fasta"; }
                     else if (program == "clustalw")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_ClustalW.fasta"; }
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_ClustalW.fasta"; }
                     else if (program == "PRANK")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_" + sequenceType + "_PRANK.fasta"; }
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_PRANK.fasta.best.fas"; }
+                    else if (program == "MAFFT")
+                    { alignedFile = file.Substring(0, file.Length - 6) + "_MAFFT.fasta"; }
 
                     fs = new System.IO.StreamReader(alignedFile);
                     string line = "";
@@ -1025,6 +1155,8 @@ namespace GeneMatrix
                 { exportName += "ClustalW_" + sequenceType + ".fasta"; }
                 else if (program == "PRANK")
                 { exportName += "PRANK_" + sequenceType + ".fasta"; }
+                else if (program == "MAFFT")
+                { exportName += "MAFFT_" + sequenceType + ".fasta"; }
 
                 fw = new System.IO.StreamWriter(exportName);
                 foreach (string key in sequences.Keys)
@@ -1040,6 +1172,58 @@ namespace GeneMatrix
                 if (fs != null) { fs.Close(); }
                 if (fw != null) { fw.Close(); }
             }
-        }  
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] DNAFiles = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            string[] ProteinFiles = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+
+            string program = getClustalWFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runClustalw(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runClustalw(program, folder, ProteinFiles, "Protein"); }
+            }
+
+
+            program = getMuscleFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMuscle(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runMuscle(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getMAFFTFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMAFFT(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length>0)
+                { runMAFFT(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getPRANKFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runPRANK(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runPRANK(program, folder, ProteinFiles, "Protein"); }
+            }
+
+        }
     }
 }

@@ -58,5 +58,17 @@ namespace GeneMatrix.Properties {
                 this["PRANK"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MAFFT {
+            get {
+                return ((string)(this["MAFFT"]));
+            }
+            set {
+                this["MAFFT"] = value;
+            }
+        }
     }
 }
