@@ -263,12 +263,12 @@ The Clustal algorithm first published in 1988 with the last version released in 
 
 The command issued to Clustalw2 is:
 
-> clustalw2.exe -INFILE=\<input file> -TYPE=\<DNA or PROTEIN> -OUTPUT=FASTA -OUTPUT=FASTA -OUTFILE=\<results file>
+> clustalw2.exe -INFILE=[input file>]-TYPE=[DNA or PROTEIN] -OUTPUT=FASTA -OUTPUT=FASTA -OUTFILE=[results file]
 
 where:
-* \<input file> is the fasta file to align
-* \<DNA or protein> is the type of sequence to align.
-* \<results file > is the name of the file to save the alignment too.
+* [input file] is the fasta file to align
+* [DNA or protein] is the type of sequence to align.
+* [results file] is the name of the file to save the alignment too.
 
 ##### Website
 
@@ -283,4 +283,45 @@ Last publication:
 > Larkin MA, Blackshields G, Brown NP, Chenna R, McGettigan PA, McWilliam H, Valentin F, Wallace IM, Wilm A, Lopez R, Thompson JD, Gibson TJ, Higgins DG.
 (2007). Clustal W and Clustal X version 2.0. Bioinformatics, 23, 2947-2948.
 
-### Combining the individual alignments 
+### About MAFFT
+#### Command
+
+> mafft --auto --retree 2 --inputorder [input file (Linux)] \> [results file (Linux)]
+
+where:
+* --auto - prompts MAFFT to use the best options for the alignment: rom L-INS-i, FFT-NS-i and FFT-NS-2, according to data size.
+* --retree 2 - Guide tree is built number times in the progressive stage. Valid with 6mer distance. Default: 2 
+* --inputorder - Output order: same as input.
+* [input file] is the fasta file to align.  The file name uses the Linux '/' rather than the Windows '\\' separators.
+* [results file] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
+
+##### Website
+
+https://mafft.cbrc.jp/alignment/server/index.html
+(Manual: https://mafft.cbrc.jp/alignment/software/manual/manual.html)
+
+##### References
+
+First publication
+> Katoh K, Misawa K, Kuma K, Miyata T. MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform. Nucleic Acids Res. 2002;30:3059-66
+
+Last publication
+> Katoh K, Standley DM. MAFFT multiple sequence alignment software version 7: improvements in performance and usability. Mol Biol Evol. 2013;30:772-80. 
+### About PRANK
+
+http://wasabiapp.org/software/prank/
+
+#### Command
+prank.exe-d=[input file (Linux)] -o=[results file (Linux)]
+
+
+where:
+* [input file (Linux)] is the fasta file to align. The file name uses the Linux '/' rather than the Windows '\\' separators
+* [results file (Linux)] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
+
+##### Website
+##### References
+
+> Löytynoja, A. (2014). Phylogeny-aware alignment with PRANK. In: Russell, D. (eds) Multiple Sequence Alignment Methods. Methods in Molecular Biology, vol 1079. Humana Press, Totowa, NJ. https://doi.org/10.1007/978-1-62703-646-7_10
+
+## Combining the individual alignments 
