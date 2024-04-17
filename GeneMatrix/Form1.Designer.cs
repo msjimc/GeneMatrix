@@ -57,6 +57,9 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
+            this.btnModify = new System.Windows.Forms.Button();
+            this.chkKeepCommandFile = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -275,6 +278,8 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.chkKeepCommandFile);
+            this.groupBox4.Controls.Add(this.btnModify);
             this.groupBox4.Controls.Add(this.btnAll);
             this.groupBox4.Controls.Add(this.btnMAFFT);
             this.groupBox4.Controls.Add(this.btnPrank);
@@ -285,6 +290,7 @@
             this.groupBox4.Controls.Add(this.lblStatus);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.btnClustalW);
+            this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(12, 439);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(674, 115);
@@ -326,7 +332,7 @@
             // chkAggregate
             // 
             this.chkAggregate.AutoSize = true;
-            this.chkAggregate.Location = new System.Drawing.Point(283, 63);
+            this.chkAggregate.Location = new System.Drawing.Point(397, 63);
             this.chkAggregate.Name = "chkAggregate";
             this.chkAggregate.Size = new System.Drawing.Size(133, 17);
             this.chkAggregate.TabIndex = 12;
@@ -392,6 +398,35 @@
             this.btnClustalW.UseVisualStyleBackColor = true;
             this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
             // 
+            // btnModify
+            // 
+            this.btnModify.Location = new System.Drawing.Point(158, 86);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(75, 23);
+            this.btnModify.TabIndex = 18;
+            this.btnModify.Text = "Modify";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
+            // 
+            // chkKeepCommandFile
+            // 
+            this.chkKeepCommandFile.AutoSize = true;
+            this.chkKeepCommandFile.Location = new System.Drawing.Point(283, 63);
+            this.chkKeepCommandFile.Name = "chkKeepCommandFile";
+            this.chkKeepCommandFile.Size = new System.Drawing.Size(108, 17);
+            this.chkKeepCommandFile.TabIndex = 19;
+            this.chkKeepCommandFile.Text = "Retain batch files";
+            this.chkKeepCommandFile.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(143, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Modify command line options";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,6 +487,9 @@
         private System.Windows.Forms.Button btnPrank;
         private System.Windows.Forms.Button btnMAFFT;
         private System.Windows.Forms.Button btnAll;
+        private System.Windows.Forms.Button btnModify;
+        private System.Windows.Forms.CheckBox chkKeepCommandFile;
+        private System.Windows.Forms.Label label4;
     }
 }
 

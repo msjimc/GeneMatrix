@@ -704,6 +704,13 @@ namespace GeneMatrix
             System.IO.StreamWriter fw = null;
             string fileName = program.Substring(0, program.LastIndexOf("\\")) + "\\cmd_MAFFT.bat";
             string rootDir = program.Substring(0, program.LastIndexOf("\\"));
+
+            string extension = "";
+            if (sequenceType == "DNA")
+            { extension = getCommandExtension("MAFFTD"); }
+            else
+            { extension = getCommandExtension("MAFFTP"); }
+
             try
             {
                 if (files.Length > 0)
@@ -734,7 +741,7 @@ namespace GeneMatrix
                             "set TMPDIR=%TMP%\r\n" + 
                             "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
 
-                        fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" --auto --retree 2 --inputorder \"" + filelinux + "\" > \"" + answer + "\"");
+                        fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
                                                 
                         fw.Close();
 
@@ -749,6 +756,12 @@ namespace GeneMatrix
 
                         process.Start();
                         process.WaitForExit();
+
+                        if (chkKeepCommandFile.Checked ==true)
+                        {
+                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
+                            System.IO.File.Copy(fileName, newBatchFileName);
+                        }
                     }
                 }
 
@@ -833,6 +846,13 @@ namespace GeneMatrix
         {
             System.IO.StreamWriter fw = null;
             string fileName = folder + "\\cmd_PRANK.bat";
+
+            string extension = "";
+            if (sequenceType == "DNA")
+            { extension = getCommandExtension("PRANKD"); }
+            else
+            { extension = getCommandExtension("PRANKP"); }
+
             try
             {
                 if (files.Length > 0)
@@ -844,7 +864,7 @@ namespace GeneMatrix
                         string filelinux = file.Replace("\\", "/");
 
                         string answer = filelinux.Substring(0, file.Length - 6) + "_PRANK.fasta";
-                        fw.WriteLine("\"" + program + "\" -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
+                        fw.WriteLine("\"" + program + "\" " + extension + "  -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
                         fw.Close();
 
                         lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
@@ -858,6 +878,12 @@ namespace GeneMatrix
 
                         process.Start();
                         process.WaitForExit();
+
+                        if (chkKeepCommandFile.Checked == true)
+                        {
+                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
+                            System.IO.File.Copy(fileName, newBatchFileName);
+                        }
                     }
                 }
 
@@ -942,6 +968,13 @@ namespace GeneMatrix
         {
             System.IO.StreamWriter fw = null;
             string fileName = folder + "\\cmd_ClustalW.bat";
+
+            string extension = "";
+            if (sequenceType == "DNA")
+            { extension = getCommandExtension("ClustalWD"); }
+            else
+            { extension = getCommandExtension("ClustalWP"); }
+
             try
             {               
                 if (files.Length > 0)
@@ -950,7 +983,7 @@ namespace GeneMatrix
                     {
                         fw = new System.IO.StreamWriter(fileName);
                         string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
-                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + " -OUTPUT=FASTA -OUTFILE=\"" + answer + "\"");
+                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + extension + " -OUTFILE=\"" + answer + "\"");
                         fw.Close();
 
                         lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
@@ -964,6 +997,12 @@ namespace GeneMatrix
 
                         process.Start();
                         process.WaitForExit();
+
+                        if (chkKeepCommandFile.Checked == true)
+                        {
+                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
+                            System.IO.File.Copy(fileName, newBatchFileName);
+                        }
                     }
                 }
 
@@ -1044,10 +1083,17 @@ namespace GeneMatrix
             { runMuscle(program, folder, files, "Protein"); }
         }
 
-        private void runMuscle(string program, string folder, string[] files, string SequenceType)
+        private void runMuscle(string program, string folder, string[] files, string sequenceType)
         {
             System.IO.StreamWriter fw = null;
             string fileName = folder + "\\cmd_Muscle.bat";
+
+            string extension = "";
+            if (sequenceType == "DNA")
+            { extension = getCommandExtension("MuscleD"); }
+            else
+            { extension = getCommandExtension("MuscleP"); }
+
             try
             {
                 if (files.Length > 0)
@@ -1056,7 +1102,7 @@ namespace GeneMatrix
                     {
                         fw = new System.IO.StreamWriter(fileName);
                         string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
-                        fw.WriteLine("\"" + program + "\" -align \"" + file + "\" -output \"" + answer + "\"");
+                        fw.WriteLine("\"" + program + "\" " + extension +  "  -align \"" + file + "\" -output \"" + answer + "\"");
                         fw.Close();
 
                         lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
@@ -1069,6 +1115,12 @@ namespace GeneMatrix
 
                         process.Start();
                         process.WaitForExit();
+
+                        if (chkKeepCommandFile.Checked == true)
+                        {
+                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
+                            System.IO.File.Copy(fileName, newBatchFileName);
+                        }
                     }
                 }
 
@@ -1076,7 +1128,7 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "muscle", SequenceType); 
+                    CombineAlignments(folder, files, "muscle", sequenceType); 
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1223,6 +1275,49 @@ namespace GeneMatrix
                 if (ProteinFiles.Length > 0)
                 { runPRANK(program, folder, ProteinFiles, "Protein"); }
             }
+
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            modifyCommand mc=new modifyCommand();
+            mc.ShowDialog();
+        }
+
+        private string getCommandExtension(string task)
+        {
+            string answer = "";
+
+            switch (task) 
+            {
+                case "MuscleD":
+                    answer = Properties.Settings.Default.MuscleD;
+                    break;
+                case "MuscleP":
+                    answer = Properties.Settings.Default.MuscleP;
+                    break;
+                case "PRANKD":
+                    answer = Properties.Settings.Default.PRANKD;
+                    break;
+                case "PRANKP":
+                    answer = Properties.Settings.Default.PRANKP;
+                    break;
+                case "MAFFTD":
+                    answer = Properties.Settings.Default.MAFFTD;
+                    break;
+                case "MAFFTP":
+                    answer = Properties.Settings.Default.MAFFTP;
+                    break;
+                case "ClustalWD":
+                    answer = Properties.Settings.Default.ClustalWD;
+                    break;
+                case "ClustalWP":
+                    answer = Properties.Settings.Default.ClustalWP;
+                    break;
+
+            }
+
+            return " " + answer + " ";
 
         }
     }

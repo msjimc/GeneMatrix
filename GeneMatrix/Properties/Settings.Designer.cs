@@ -70,5 +70,101 @@ namespace GeneMatrix.Properties {
                 this["MAFFT"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MuscleD {
+            get {
+                return ((string)(this["MuscleD"]));
+            }
+            set {
+                this["MuscleD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MuscleP {
+            get {
+                return ((string)(this["MuscleP"]));
+            }
+            set {
+                this["MuscleP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA")]
+        public string ClustalWD {
+            get {
+                return ((string)(this["ClustalWD"]));
+            }
+            set {
+                this["ClustalWD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA")]
+        public string ClustalWP {
+            get {
+                return ((string)(this["ClustalWP"]));
+            }
+            set {
+                this["ClustalWP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PRANKD {
+            get {
+                return ((string)(this["PRANKD"]));
+            }
+            set {
+                this["PRANKD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PRANKP {
+            get {
+                return ((string)(this["PRANKP"]));
+            }
+            set {
+                this["PRANKP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("--auto --retree 2 --inputorder")]
+        public string MAFFTD {
+            get {
+                return ((string)(this["MAFFTD"]));
+            }
+            set {
+                this["MAFFTD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("--auto --retree 2 --inputorder")]
+        public string MAFFTP {
+            get {
+                return ((string)(this["MAFFTP"]));
+            }
+            set {
+                this["MAFFTP"] = value;
+            }
+        }
     }
 }
