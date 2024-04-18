@@ -13,15 +13,15 @@ namespace GeneMatrix
 {
     public partial class Form1 : Form
     {
-        private  Dictionary<string, Dictionary<string, Dictionary<string, feature>>> data = new Dictionary<string, Dictionary<string, Dictionary<string, feature>>>();
+        private Dictionary<string, Dictionary<string, Dictionary<string, feature>>> data = new Dictionary<string, Dictionary<string, Dictionary<string, feature>>>();
         private List<string> sequenceName = null;
         private List<string> CDS = null;
         private List<string> tRNA = null;
         private List<string> rRNA = null;
         private int rightButton = 1;
         private bool quitAnalysis = false;
-        
-       public Form1()
+
+        public Form1()
         {
             InitializeComponent();
         }
@@ -47,7 +47,7 @@ namespace GeneMatrix
             g.Clear(tv1.BackColor);
             g.FillEllipse(Brushes.Green, 0, 0, 10, 10);
             g = null;
-                       
+
 
             ImageList myImageList = new ImageList();
 
@@ -68,7 +68,7 @@ namespace GeneMatrix
         {
             btnReset.Enabled = false;
 
-            if (chkFolder.Checked==true)
+            if (chkFolder.Checked == true)
             {
                 string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of GenBank files", "");
                 if (System.IO.Directory.Exists(folder) == false) { return; }
@@ -78,7 +78,7 @@ namespace GeneMatrix
                 lblDataSource.Text = folder.Substring(folder.LastIndexOf("\\") + 1);
                 Application.DoEvents();
 
-                string[] gb=System.IO.Directory.GetDirectories(folder, "*.gb");
+                string[] gb = System.IO.Directory.GetDirectories(folder, "*.gb");
                 string[] genbank = System.IO.Directory.GetDirectories(folder = "*.genbank");
 
                 if (gb.Length > 0)
@@ -121,7 +121,7 @@ namespace GeneMatrix
 
         private void readFile(string fileName)
         {
-            
+
             System.IO.StreamReader fs = null;
             try
             {
@@ -129,7 +129,7 @@ namespace GeneMatrix
                 List<string> lines = new List<string>();
                 fs = new System.IO.StreamReader(fileName);
 
-                while (fs.Peek()>0)
+                while (fs.Peek() > 0)
                 {
                     string line = fs.ReadLine();
                     if (line.StartsWith("//") == true)
@@ -137,9 +137,9 @@ namespace GeneMatrix
                         processData(lines, startOfSequence);
                         lines = new List<string>();
                         if (quitAnalysis == true)
-                        { 
+                        {
                             resetState();
-                            break; 
+                            break;
                         }
                     }
                     else if (line.StartsWith("ORIGIN") == true)
@@ -204,7 +204,7 @@ namespace GeneMatrix
                     return;
                 }
             }
-            
+
             int index = 0;
             int featureStart = -1;
             string featureType = "";
@@ -224,10 +224,10 @@ namespace GeneMatrix
                             if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
                             { data[accession][featureType].Add(f.WorkingName, f); }
                         }
-                        catch(Exception ex) { }
+                        catch (Exception ex) { }
                     }
-                    featureType = lines[index].Substring(5, lines[index].IndexOf(" ",6) - 5);
-                    featureStart = index;                    
+                    featureType = lines[index].Substring(5, lines[index].IndexOf(" ", 6) - 5);
+                    featureStart = index;
                 }
                 index++;
             }
@@ -235,7 +235,7 @@ namespace GeneMatrix
 
         private string getAccession(List<string> lines)
         {
-            for (int index = 0; index < 10;index++)
+            for (int index = 0; index < 10; index++)
             {
                 if (index < lines.Count)
                 {
@@ -272,10 +272,10 @@ namespace GeneMatrix
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int index = startPoint; index < lines.Count;index++)
+            for (int index = startPoint; index < lines.Count; index++)
             {
                 string sequenceRaw = lines[index].Substring(10).Trim().Replace(" ", "");
-                
+
                 sb.Append(sequenceRaw);
             }
 
@@ -320,20 +320,20 @@ namespace GeneMatrix
 
             TreeNode cds = new TreeNode("CDS", -1, -1);
             TreeNode trna = new TreeNode("tRNA", -1, -1);
-           TreeNode rrna = new TreeNode("rRNA", -1, -1);
-            
+            TreeNode rrna = new TreeNode("rRNA", -1, -1);
+
             if (CDS != null)
             {
                 CDS.Sort();
                 foreach (string name in CDS)
                 { cds.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
-            
-            if (tRNA != null) 
-            { 
-                tRNA.Sort(); 
-             foreach (string name in tRNA)
-            { trna.Nodes.Add(new TreeNode(name, 0, 0)); }
+
+            if (tRNA != null)
+            {
+                tRNA.Sort();
+                foreach (string name in tRNA)
+                { trna.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
 
             if (rRNA != null)
@@ -348,21 +348,21 @@ namespace GeneMatrix
 
             TreeNode tv2parent = new TreeNode("Sequences");
             tv2.Nodes.Add(tv2parent);
-            
+
             if (cds.Nodes.Count > 0)
-            { 
+            {
                 tv1parent.Nodes.Add(cds);
                 tv2parent.Nodes.Add(new TreeNode("CDS"));
             }
 
             if (trna.Nodes.Count > 0)
-            { 
-                tv1parent.Nodes.Add(trna); 
+            {
+                tv1parent.Nodes.Add(trna);
                 tv2parent.Nodes.Add(new TreeNode("tRNA"));
             }
 
             if (rrna.Nodes.Count > 0)
-            { 
+            {
                 tv1parent.Nodes.Add(rrna);
                 tv2parent.Nodes.Add(new TreeNode("rRNA"));
             }
@@ -391,18 +391,18 @@ namespace GeneMatrix
         private void tv2_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (rightButton == 1)
-            { moveTooRight(); }           
+            { moveTooRight(); }
         }
 
         private void moveTooLeft()
         {
             TreeNode n = tv2.SelectedNode;
             string featureType = (string)n.Tag;
-            
+
             foreach (TreeNode pN in tv1.Nodes[0].Nodes)
             {
                 if (pN.Text == featureType)
-                { 
+                {
                     n.Parent.Nodes.Remove(n);
                     pN.Nodes.Add(n);
                     if (n.Nodes.Count > 0)
@@ -411,7 +411,7 @@ namespace GeneMatrix
                         foreach (TreeNode cN in n.Nodes)
                         { children.Add(cN); }
 
-                        foreach(TreeNode cN in children)
+                        foreach (TreeNode cN in children)
                         {
                             n.Nodes.Remove(cN);
                             pN.Nodes.Add(cN);
@@ -424,14 +424,14 @@ namespace GeneMatrix
             btnSave.Enabled = false;
             foreach (TreeNode fN in tv2.Nodes[0].Nodes)
             {
-                if (fN.Nodes.Count >0)
+                if (fN.Nodes.Count > 0)
                 { btnSave.Enabled = true; }
             }
 
         }
 
         private void moveTooRight()
-        { 
+        {
             string featureType = "";
             if (tv2.SelectedNode.Parent == null)
             { return; }
@@ -444,7 +444,7 @@ namespace GeneMatrix
 
             List<TreeNode> names = new List<TreeNode>();
 
-            tv1.SelectedNode= null;
+            tv1.SelectedNode = null;
 
             foreach (TreeNode n in tv1.Nodes[0].Nodes)
             {
@@ -461,19 +461,19 @@ namespace GeneMatrix
                         }
                     }
                     foreach (TreeNode name in names)
-                    {  
+                    {
                         n.Nodes.Remove(name);
                         name.ImageIndex = -1;
                         tv2.SelectedNode.Nodes.Add(name);
                         name.Checked = false;
-                    }                   
+                    }
 
                 }
             }
             tv2.SelectedNode = tv2.Nodes[0];
             btnSave.Enabled = true;
         }
-               
+
         private void tv2_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -486,7 +486,7 @@ namespace GeneMatrix
         private void tv2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
-            { 
+            {
                 tv2.SelectedNode = e.Node;
                 moveTooLeft();
             }
@@ -514,7 +514,7 @@ namespace GeneMatrix
                     names.Add(nN.Text);
                     foreach (TreeNode nnN in nN.Nodes)
                     { names.Add(nnN.Text); }
-                    
+
                     foreach (string name in sequenceName)
                     {
                         foreach (string featureName in names)
@@ -531,13 +531,13 @@ namespace GeneMatrix
                                         { lengths[key] = length; }
                                     }
                                     else
-                                    { 
+                                    {
                                         lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(cleanFileNames( folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
-                                        { listOfFilesToDelete.Add(cleanFileNames(folder , featureType + "-" + names[0] + "_DNA.fasta")); }
+                                        if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
+                                        { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")); }
                                     }
                                 }
-                                if (rboBoth.Checked==true || rboProtein.Checked == true)
+                                if (rboBoth.Checked == true || rboProtein.Checked == true)
                                 {
                                     int length = data[name][featureType][featureName].getProteinSequence.Length;
                                     string key = featureType + "|" + names[0] + "|" + "P";
@@ -547,13 +547,13 @@ namespace GeneMatrix
                                         { lengths[key] = length; }
                                     }
                                     else
-                                    { 
+                                    {
                                         lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(cleanFileNames( folder , featureType + "-" + names[0] + "_protein.fasta")) == false)
-                                        { listOfFilesToDelete.Add(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta")); }
+                                        if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")) == false)
+                                        { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")); }
                                     }
                                 }
-                            }                            
+                            }
                         }
                     }
                 }
@@ -584,10 +584,10 @@ namespace GeneMatrix
                         string DNA = "";
                         string protein = "";
                         foreach (string featureName in names)
-                        {                            
+                        {
                             if (data[name][featureType].ContainsKey(featureName) == true)
                             {
-                                species = data[name][featureType][featureName].getOrganism.Replace(" ","_");
+                                species = data[name][featureType][featureName].getOrganism.Replace(" ", "_");
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
                                 {
                                     if (string.IsNullOrEmpty(DNA) == true)
@@ -607,11 +607,11 @@ namespace GeneMatrix
                             }
                         }
 
-                        if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D")==true)
+                        if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D") == true)
                         {
                             if (string.IsNullOrEmpty(DNA) == true)
                             { DNA = new string('n', lengths[featureType + "|" + names[0] + "|" + "D"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_DNA.fasta"), true);
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
                             fw.Close();
                         }
@@ -619,11 +619,11 @@ namespace GeneMatrix
                         {
                             if (string.IsNullOrEmpty(protein) == true)
                             { protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "P"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder , featureType + "-" + names[0] + "_protein.fasta"), true);
+                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
                             fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
                             fw.Close();
                         }
-                    }                    
+                    }
                 }
             }
 
@@ -645,6 +645,25 @@ namespace GeneMatrix
 
             return folder + "\\" + fileName;
         }
+
+        private bool checkFile(string fileName)
+        {
+
+            string name = fileName.Substring(fileName.LastIndexOf("\\") + 1);
+
+            if (name.ToLower().Contains("muscle") == true)
+            { return false; }
+            else if (fileName.ToLower().Contains("clustalw") == true)
+            { return false; }
+            else if (fileName.ToLower().Contains("prank") == true)
+            { return false; }
+            else if (fileName.ToLower().Contains("mafft") == true)
+            { return false; }
+
+            return true;
+
+        }
+                        
 
         private string getMAFFTFileName()
         {
@@ -717,32 +736,34 @@ namespace GeneMatrix
                 {
                     foreach (string file in files)
                     {
+                        if (checkFile(file) == true)
+                        { 
                         fw = new System.IO.StreamWriter(fileName);
 
                         string filelinux = file.Replace("\\", "/");
 
                         string answer = filelinux.Substring(0, file.Length - 6) + "_MAFFT.fasta";
 
-                        fw.Write("@echo off \r\nsetlocal enabledelayedexpansion\r\n" + 
-                            "cls; 1>&2\r\nchcp 65001 1>&2\r\n\r\n" + 
-                            "for /f \"usebackq tokens=*\" %%i IN (`cd`) DO @set current_dir=%%i\r\n" + 
+                        fw.Write("@echo off \r\nsetlocal enabledelayedexpansion\r\n" +
+                            "cls; 1>&2\r\nchcp 65001 1>&2\r\n\r\n" +
+                            "for /f \"usebackq tokens=*\" %%i IN (`cd`) DO @set current_dir=%%i\r\n" +
                             "if /i \"%current_dir%\" == \"%systemroot%\" (\r\n" +
-                            "set mafft_working_dir=\"%~dp0\"\r\n" + 
+                            "set mafft_working_dir=\"%~dp0\"\r\n" +
                             ") else (\r\n" +
                             " set mafft_working_dir=\"%current_dir%\"\r\n" +
-                            ")\r\n" + 
-                            "pushd \"%mafft_working_dir%\"" + 
-                            "echo; 1>&2\r\n" + 
+                            ")\r\n" +
+                            "pushd \"%mafft_working_dir%\"" +
+                            "echo; 1>&2\r\n" +
                             "echo Preparing environment to run MAFFT on Windows. 1>&2\r\n" +
                             "echo This may take a while, if real-time scanning by anti-virus software is on. 1>&2\r\n\r\n" +
-                            "set ROOTDIR=" + rootDir + "\\\"\r\n" + 
-                            "set PATH=/usr/bin/:%PATH%\r\n" + 
-                            "set MAFFT_BINARIES=/usr/lib/mafft\r\n" + 
-                            "set TMPDIR=%TMP%\r\n" + 
+                            "set ROOTDIR=" + rootDir + "\\\"\r\n" +
+                            "set PATH=/usr/bin/:%PATH%\r\n" +
+                            "set MAFFT_BINARIES=/usr/lib/mafft\r\n" +
+                            "set TMPDIR=%TMP%\r\n" +
                             "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
 
                         fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
-                                                
+
                         fw.Close();
 
                         lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
@@ -757,13 +778,16 @@ namespace GeneMatrix
                         process.Start();
                         process.WaitForExit();
 
-                        if (chkKeepCommandFile.Checked ==true)
-                        {
-                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
-                            System.IO.File.Copy(fileName, newBatchFileName);
-                        }
+                            if (chkKeepCommandFile.Checked == true)
+                            {
+                                string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
+                                if (System.IO.File.Exists(newBatchFileName) == true)
+                                { System.IO.File.Delete(newBatchFileName); }
+                                System.IO.File.Copy(fileName, newBatchFileName);
+                            }
                     }
                 }
+            }
 
 
                 if (chkAggregate.Checked == true)
@@ -859,34 +883,38 @@ namespace GeneMatrix
                 {
                     foreach (string file in files)
                     {
-                        fw = new System.IO.StreamWriter(fileName);
-
-                        string filelinux = file.Replace("\\", "/");
-
-                        string answer = filelinux.Substring(0, file.Length - 6) + "_PRANK.fasta";
-                        fw.WriteLine("\"" + program + "\" " + extension + "  -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
-                        fw.Close();
-
-                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
-                        Application.DoEvents();
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
-                        info.UseShellExecute = false;
-                        info.CreateNoWindow = !chkShowCMD.Checked;
-
-                        process.StartInfo = info;
-
-                        process.Start();
-                        process.WaitForExit();
-
-                        if (chkKeepCommandFile.Checked == true)
+                        if (checkFile(file) == true)
                         {
-                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
-                            System.IO.File.Copy(fileName, newBatchFileName);
+                            fw = new System.IO.StreamWriter(fileName);
+
+                            string filelinux = file.Replace("\\", "/");
+
+                            string answer = filelinux.Substring(0, file.Length - 6) + "_PRANK.fasta";
+                            fw.WriteLine("\"" + program + "\" " + extension + "  -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
+                            fw.Close();
+
+                            lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
+                            Application.DoEvents();
+                            System.Diagnostics.Process process = new System.Diagnostics.Process();
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                            info.UseShellExecute = false;
+                            info.CreateNoWindow = !chkShowCMD.Checked;
+
+                            process.StartInfo = info;
+
+                            process.Start();
+                            process.WaitForExit();
+
+                            if (chkKeepCommandFile.Checked == true)
+                            {
+                                string newBatchFileName = file + "_" + sequenceType + "_PRANK.bat";                               
+                                if (System.IO.File.Exists(newBatchFileName) == true)
+                                { System.IO.File.Delete(newBatchFileName); }
+                                System.IO.File.Copy(fileName, newBatchFileName);
+                            }
                         }
                     }
                 }
-
 
                 if (chkAggregate.Checked == true)
                 {
@@ -976,32 +1004,37 @@ namespace GeneMatrix
             { extension = getCommandExtension("ClustalWP"); }
 
             try
-            {               
+            {
                 if (files.Length > 0)
                 {
                     foreach (string file in files)
                     {
-                        fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
-                        fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" -TYPE=" + sequenceType + extension + " -OUTFILE=\"" + answer + "\"");
-                        fw.Close();
-
-                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
-                        Application.DoEvents();
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
-                        info.UseShellExecute = false;
-                        info.CreateNoWindow = ! chkShowCMD.Checked;
-
-                        process.StartInfo = info;
-
-                        process.Start();
-                        process.WaitForExit();
-
-                        if (chkKeepCommandFile.Checked == true)
+                        if (checkFile(file) == true)
                         {
-                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
-                            System.IO.File.Copy(fileName, newBatchFileName);
+                            fw = new System.IO.StreamWriter(fileName);
+                            string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
+                            fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" " + extension + " -OUTFILE=\"" + answer + "\"");
+                            fw.Close();
+
+                            lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                            Application.DoEvents();
+                            System.Diagnostics.Process process = new System.Diagnostics.Process();
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                            info.UseShellExecute = false;
+                            info.CreateNoWindow = !chkShowCMD.Checked;
+
+                            process.StartInfo = info;
+
+                            process.Start();
+                            process.WaitForExit();
+
+                            if (chkKeepCommandFile.Checked == true)
+                            {
+                                string newBatchFileName = file + "_" + sequenceType + "_ClustalW.bat";
+                                if (System.IO.File.Exists(newBatchFileName) == true)
+                                { System.IO.File.Delete(newBatchFileName); }
+                                System.IO.File.Copy(fileName, newBatchFileName);
+                            }
                         }
                     }
                 }
@@ -1100,26 +1133,31 @@ namespace GeneMatrix
                 {
                     foreach (string file in files)
                     {
-                        fw = new System.IO.StreamWriter(fileName);
-                        string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
-                        fw.WriteLine("\"" + program + "\" " + extension +  "  -align \"" + file + "\" -output \"" + answer + "\"");
-                        fw.Close();
-
-                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
-                        Application.DoEvents();
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
-                        info.UseShellExecute = false;
-                        info.CreateNoWindow = !chkShowCMD.Checked;
-                        process.StartInfo = info;
-
-                        process.Start();
-                        process.WaitForExit();
-
-                        if (chkKeepCommandFile.Checked == true)
+                        if (checkFile(file) == true)
                         {
-                            string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
-                            System.IO.File.Copy(fileName, newBatchFileName);
+                            fw = new System.IO.StreamWriter(fileName);
+                            string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
+                            fw.WriteLine("\"" + program + "\" " + extension + "  -align \"" + file + "\" -output \"" + answer + "\"");
+                            fw.Close();
+
+                            lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
+                            Application.DoEvents();
+                            System.Diagnostics.Process process = new System.Diagnostics.Process();
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                            info.UseShellExecute = false;
+                            info.CreateNoWindow = !chkShowCMD.Checked;
+                            process.StartInfo = info;
+
+                            process.Start();
+                            process.WaitForExit();
+
+                            if (chkKeepCommandFile.Checked == true)
+                            {
+                                string newBatchFileName = file + "_" + sequenceType + "_Muscle.bat";
+                                if (System.IO.File.Exists(newBatchFileName)== true) 
+                                { System.IO.File.Delete(newBatchFileName); }
+                                System.IO.File.Copy(fileName, newBatchFileName);
+                            }
                         }
                     }
                 }
@@ -1157,46 +1195,49 @@ namespace GeneMatrix
 
                 foreach (string file in files)
                 {
-                    string alignedFile = "";
-                    if (program == "muscle")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_Muscle.fasta"; }
-                    else if (program == "clustalw")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_ClustalW.fasta"; }
-                    else if (program == "PRANK")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_PRANK.fasta.best.fas"; }
-                    else if (program == "MAFFT")
-                    { alignedFile = file.Substring(0, file.Length - 6) + "_MAFFT.fasta"; }
-
-                    fs = new System.IO.StreamReader(alignedFile);
-                    string line = "";
-
-                    string accession = "";
-                    while (fs.Peek() > 0)
+                    if (checkFile(file) == true)
                     {
-                        line=fs.ReadLine();
-                        if (line.StartsWith(">") == true)
-                        {
-                            accession = line.Substring(1).Trim();
-                            if (sequences.ContainsKey(accession) == false)
-                            { sequences.Add(accession,""); }
-                        }
-                        else if (accession != "")
-                        {
-                            sequences[accession] += line.Trim();
-                        }
-                    }
-                    fs.Close();
+                        string alignedFile = "";
+                        if (program == "muscle")
+                        { alignedFile = file.Substring(0, file.Length - 6) + "_Muscle.fasta"; }
+                        else if (program == "clustalw")
+                        { alignedFile = file.Substring(0, file.Length - 6) + "_ClustalW.fasta"; }
+                        else if (program == "PRANK")
+                        { alignedFile = file.Substring(0, file.Length - 6) + "_PRANK.fasta.best.fas"; }
+                        else if (program == "MAFFT")
+                        { alignedFile = file.Substring(0, file.Length - 6) + "_MAFFT.fasta"; }
 
-                    int length = 0;
-                    foreach (string v in sequences.Values)
-                    { 
-                        if (length < v.Length) 
-                        { length = v.Length;}
-                    }
-                    foreach (string key in sequences.Keys)
-                    {
-                        if (length < sequences[key].Length)
-                        { sequences[key] +=  new string('-', length - sequences[key].Length); }
+                        fs = new System.IO.StreamReader(alignedFile);
+                        string line = "";
+
+                        string accession = "";
+                        while (fs.Peek() > 0)
+                        {
+                            line = fs.ReadLine();
+                            if (line.StartsWith(">") == true)
+                            {
+                                accession = line.Substring(1).Trim();
+                                if (sequences.ContainsKey(accession) == false)
+                                { sequences.Add(accession, ""); }
+                            }
+                            else if (accession != "")
+                            {
+                                sequences[accession] += line.Trim();
+                            }
+                        }
+                        fs.Close();
+
+                        int length = 0;
+                        foreach (string v in sequences.Values)
+                        {
+                            if (length < v.Length)
+                            { length = v.Length; }
+                        }
+                        foreach (string key in sequences.Keys)
+                        {
+                            if (length < sequences[key].Length)
+                            { sequences[key] += new string('-', length - sequences[key].Length); }
+                        }
                     }
                 }
 
@@ -1318,6 +1359,102 @@ namespace GeneMatrix
             }
 
             return " " + answer + " ";
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] DNAFiles = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            string[] ProteinFiles = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+
+            string program = getClustalWFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runClustalw(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runClustalw(program, folder, ProteinFiles, "Protein"); }
+            }
+
+
+            program = getMuscleFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMuscle(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runMuscle(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getMAFFTFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMAFFT(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runMAFFT(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getPRANKFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runPRANK(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runPRANK(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            DNAFiles = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
+            ProteinFiles = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
+
+            program = getClustalWFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runClustalw(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runClustalw(program, folder, ProteinFiles, "Protein"); }
+            }
+
+
+            program = getMuscleFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMuscle(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runMuscle(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getMAFFTFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runMAFFT(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runMAFFT(program, folder, ProteinFiles, "Protein"); }
+            }
+
+            program = getPRANKFileName();
+            if (program != null)
+            {
+                if (DNAFiles.Length > 0)
+                { runPRANK(program, folder, DNAFiles, "DNA"); }
+
+                if (ProteinFiles.Length > 0)
+                { runPRANK(program, folder, ProteinFiles, "Protein"); }
+            }
+
 
         }
     }

@@ -143,13 +143,13 @@ namespace GeneMatrix
 
         private void btnClustalWDNAr_Click(object sender, EventArgs e)
         {
-            txtClustalWDNA.Text = "-OUTPUT=FASTA";
+            txtClustalWDNA.Text = "-OUTPUT=FASTA -TYPE=DNA";
             btnClustalWDNA.PerformClick();
         }
 
         private void btnClustalWProteinr_Click(object sender, EventArgs e)
         {
-            txtClustalWProtein.Text = "-OUTPUT=FASTA";
+            txtClustalWProtein.Text = "-OUTPUT=FASTA -TYPE=PROTEIN";
             btnClustalWProtein.PerformClick();
         }
 

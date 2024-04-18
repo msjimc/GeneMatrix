@@ -97,7 +97,7 @@ namespace GeneMatrix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA -TYPE=DNA")]
         public string ClustalWD {
             get {
                 return ((string)(this["ClustalWD"]));
@@ -109,7 +109,7 @@ namespace GeneMatrix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-OUTPUT=FASTA -TYPE=PROTEIN")]
         public string ClustalWP {
             get {
                 return ((string)(this["ClustalWP"]));

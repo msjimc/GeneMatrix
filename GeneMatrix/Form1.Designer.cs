@@ -60,6 +60,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -427,11 +428,22 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Modify command line options";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(263, 577);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 608);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnQuit);
@@ -490,6 +502,7 @@
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.CheckBox chkKeepCommandFile;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
     }
 }
 

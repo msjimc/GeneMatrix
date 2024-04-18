@@ -1,4 +1,5 @@
-﻿namespace GeneMatrix
+﻿
+namespace GeneMatrix
 {
     partial class modifyCommand
     {
@@ -67,7 +68,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnClustalWProteinr);
             this.groupBox1.Controls.Add(this.btnClustalWDNAr);
@@ -129,7 +130,7 @@
             // 
             // txtMAFFTDNA
             // 
-            this.txtMAFFTDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMAFFTDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMAFFTDNA.Location = new System.Drawing.Point(103, 19);
             this.txtMAFFTDNA.Name = "txtMAFFTDNA";
@@ -139,7 +140,7 @@
             // 
             // txtMuscleDNA
             // 
-            this.txtMuscleDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMuscleDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMuscleDNA.Location = new System.Drawing.Point(103, 133);
             this.txtMuscleDNA.Name = "txtMuscleDNA";
@@ -167,7 +168,7 @@
             // 
             // txtMAFFTProtein
             // 
-            this.txtMAFFTProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMAFFTProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMAFFTProtein.Location = new System.Drawing.Point(103, 48);
             this.txtMAFFTProtein.Name = "txtMAFFTProtein";
@@ -186,7 +187,7 @@
             // 
             // txtPRANKDNA
             // 
-            this.txtPRANKDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPRANKDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPRANKDNA.Location = new System.Drawing.Point(103, 75);
             this.txtPRANKDNA.Name = "txtPRANKDNA";
@@ -205,7 +206,7 @@
             // 
             // txtPRANKProtein
             // 
-            this.txtPRANKProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPRANKProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPRANKProtein.Location = new System.Drawing.Point(103, 104);
             this.txtPRANKProtein.Name = "txtPRANKProtein";
@@ -224,7 +225,7 @@
             // 
             // txtMuscleProtein
             // 
-            this.txtMuscleProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMuscleProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMuscleProtein.Location = new System.Drawing.Point(103, 162);
             this.txtMuscleProtein.Name = "txtMuscleProtein";
@@ -243,7 +244,7 @@
             // 
             // txtClustalWDNA
             // 
-            this.txtClustalWDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtClustalWDNA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtClustalWDNA.Location = new System.Drawing.Point(103, 191);
             this.txtClustalWDNA.Name = "txtClustalWDNA";
@@ -262,7 +263,7 @@
             // 
             // txtClustalWProtein
             // 
-            this.txtClustalWProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtClustalWProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtClustalWProtein.Location = new System.Drawing.Point(103, 222);
             this.txtClustalWProtein.Name = "txtClustalWProtein";

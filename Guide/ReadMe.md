@@ -187,11 +187,11 @@ Sequences that are shorter than the longest sequence are padded with space chara
 
 ## Creating multiple sequence alignments
 
-The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independent of ```GeneMatrix``` or via the controls in the ``Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages, they can also be run a console applications using Windows ***cmd*** shell program. 
+The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independent of ```GeneMatrix``` or via the controls in the ```Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages, they can also be run a console applications using Windows ***cmd*** shell program. 
 
 ### Automation of the alignment
 
-Aligning the files is preformed by press one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue bos, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will align the sequences with each of the programs in turn. To use the programs the executable(s) must be present on your computer.  
+Aligning the sequences in the files is preformed by pressing one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue box, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will process the files with each of the programs in turn. ***Note:*** To use the programs the executable(s) must be present on your computer.  
 
 <hr />
 
@@ -202,9 +202,9 @@ Figure 11
 <hr />
 
 #### Finding the executable file
-To align the sequences, ```GeneMatrix``` first checks if the required program has been used before and whether the executable file still exists. If not, it looks for the file in the same folder as ```GeneMatrix``` program. If it still hasn't found the program it will ask you to select the program using a file selection dialogue box. Muscle and ClustalW each consists of a single program file which you need to select. However, ***PRANK*** and ***MAFFT*** require a number of other files to run and so you must download a zip file containing these files (See the [Program](../Program/) folder), unzip it and then select the ___mafft.bat___ file or the ___PRANK.exe___ file. 
+To align the sequences, ```GeneMatrix``` first checks if the required program has been used before and whether the executable file still exists. If not, ```GeneMatrix``` looks for the executable file in the same folder as the ```GeneMatrix``` program. If it still hasn't found the program it will ask you to select the program using a file selection dialogue box. Muscle (muscle5.1.win64.exe) and ClustalW (clustalw2.exe) each consists of a single program file which you need to select. However, ***PRANK*** and ***MAFFT*** require a number of other files to run and so you must download a zip file (currently prank.windows.140603.zip and mafft-7.520-win64-signed.zip respectively) containing these files (See the [Program](../Program/) folder), unzip it and then select the ___mafft.bat___ file or the ___PRANK.exe___ file. 
 
-If you which to change the selected program either simply delete/rename/move the original file or check the ```Reselect programs``` option (black box Figure 12) and GeneMatrix will prompt you for the location of the file when you start another alignment step. See the [Third party alignment applications](#third-party-alignment-applications) for more details regarding each program.
+If you wish to change the selected program either simply delete/rename/move the original file or check the ```Reselect programs``` option (black box, Figure 12) and GeneMatrix will prompt you for the location of the file when you start another alignment step. See the [Third party alignment applications](#third-party-alignment-applications) for more details regarding each program.
 
 <hr />
 
@@ -215,7 +215,7 @@ Figure 12
 <hr />
 
 #### Performing the alignment
-Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through the files in the folder looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file which contains the commands needed to run the program in a cmd shell. After each alignment the batch file is deleted, but if you wish to retain the files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. 
+Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through these files looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file which contains the commands needed to run the program in a cmd shell which is then sent a cmd shell to process. After each alignment, the batch file is deleted, but if you wish to retain the batch files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. If you try to open these files by clicking on them, they will open a cmd shell window and attempt to rerun the alignment, consequently, to view/edit their contents drag and drop the file icon on to a text editor ideally [Notepad++](https://notepad-plus-plus.org/).
 
 By default the cmd shell window is hidden meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it. If you have a number of alignments to perform, you may need to rename the folder, otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another other analysis will fail as GeneMatrix will not know where to find the files.
 
@@ -239,66 +239,49 @@ If the ```Show command window``` option is checked (Red box, Figure 12), the cmd
 
 ![Figure 15](images/figure15.jpg)
 
-Figure 15: cmd shell window showing the out put from a Muscle alignment.
+Figure 15: cmd shell window showing the feedback from a Muscle alignment.
 
 <hr />
 
 #### Combining the alignments into a single alignment
 
-When identifying the relationship between a number of species it is often performed using an alignment consisting of the sequences from a number of genes/features. If the Combine all alignments option is checked 
+When identifying the relationship between a number of species it is often performed using an alignment made from a number of alignments for individual genes/features which are concatenated to form a single master alignment. If the ```Combine all alignments``` option is checked, the results of any alignments will be concatenated together to form DNA and/or protein specific master alignments. The name of the files will consist the program used to make the alignments and the sequence type (DNA or protein) with the ".fasta" file extension. For example a master Protein alignment created using ***MAFFT*** will be called "MAFFT_protein.fasta"
 
+### Modifying the alignment command
 
-### Automating the alignment of the the exported sequences
-
- Four commonly used applications for the creation of multiple alignments are ClustalW, Muscle, PRANK and MAFFT. Their stand alone executable files are available from their web sites (see below) as well as in this pages [Program folder](../Program/). The lower section of ```GeneMatrix``` contains four buttons (```Muscle```, ```ClustalW```, ```MAFFT``` and ```PRANK```) that will automate the alignment of the exported files using Muscle, Clustal, MAFFT or PRANK (if the executable is on your computer) (Figure 11). A fifth button ```All``` will align the data using each program in turn. The commands used are described at the end of this guide, however, if required it is possible to modify the commands by pressing the ```Modify``` button and entering the preferred options. 
-
-### Modifying the command line options  
+The sections below give a very short description of the alignment programs, links to their websites, the first and last citation as well as the command used by ```GeneMatrix``` to make the alignment. These commands are very generic and you may wish to modify them. This can be achieved using the ```Command line options``` form that is accessed by pressing the Modify button (blue box, Figure 16 a)
 
 <hr />
 
-![Figure 11](images/figure11.jpg)
+![Figure 16a](images/figure16a.jpg)
 
-Figure 11
-
-<hr />
-
-When automating the use of either of these programs ```GeneMatrix``` will check if it has used the program before and if so attempt to use the same program file, otherwise it will look in the same folder as the ```GeneMatrix``` executable for the executable. Finally, if no program file was found it will ask you for its location. 
-
-Once GeneMatrix as found the executable (currently: clustalw2.exe and muscle5.1.win64.exe), it will prompt you to select the folder of files to be aligned. It will then search this folder for files ending _DNA.fasta or _Protein.fasta, if any are found it will process each in turn by creating a batch file which it will then attempt to run in the cmd.exe shell window. cmd.exe is an integral component of Windows that provides a simple method to automate commands written as text. It as a very simple interface that just displays text written by you or any programs you have asked it to run (Figure 12)  
+Figure 16 a
 
 <hr />
 
-![Figure 12](images/figure12.jpg)
+![Figure 16b](images/figure16b.jpg)
 
-Figure 12
-
-<hr />
-
-By default, the cmd.exe interface is hidden by ```Genematrix``` and the only feed back is given by the ```Status``` label, which is updated as the ```GeneMatrix``` works through the list of files. During this time, ```GeneMatrix``` will be locked and will not respond to any user input. To see if Muscle or Clustal is running you may need to either open Task Manger (type Task Manager in the box at the bottom left of your primary monitor) and see if Clustal or Muscle is shown in the application list (Figure 13). When using Muscle, it will use all the computers processes and may limit the computers ability to do other things,  Clustal will typically use less processors. 
+Figure 16 b
 
 <hr />
 
-![Figure 13](images/figure13.jpg)
+![Figure 16c](images/figure16c.jpg)
 
-Figure 13
+Figure 16 c: Compared to Figure 16 b, the Muscle commands have been extended to include the option to specify the sequence type. The edit for Muscle - DNA has not been saved (```Save``` button text is red), while the Muscle - Protein edit as has (```Save``` button text is black)
 
 <hr />
 
+The current options are displayed in the text area to the right of the programs name and target sequence type. If the text is changed, the font on the ```Save``` button becomes red. Pressing the ```Save``` button will save the new command options, while pressing the ```Reset``` button will set the options to those shown in Figure 16 c. 
 
-If the ```Show command window``` option is checked (black line in Figure 11), the cmd.exe window will not be hidden and you'll be able to see the output generated by the alignment program (Figures 14 and 15). Closing this window will halt the alignment and ```GeneMatrix``` will start the alignment of the next file. Once started, the only way to stop the alignments may be to kill ```GeneMatrix``` and then the aligner in the Task Manager window or change the data folders name and then kill the aligner in Task Manager. 
-
-If the ```Combine all the alignments``` option is checked, when all the alignments have been made, ```GeneMatrix``` will collate all the sequences in to a single fasta file such that all the exported sequences for an GenBank entry will be concatenated in to one line in the resultant fasta file. This file can then be used as the input for a program that creates phylogenic trees for example.
-
-
-***Note:*** If you want to change the version of the executable, either swap the file or check the ```Reselect alignment program``` option on the lower left of the ```Align individual features``` section (yellow line in Figure 11) before pressing the ```Muscle``` or ```ClustalW``` buttons: this will force ```GeneMatrix``` to ask for the executable's location.
+The text displayed in the text area is inserted into the command line as written and undergoes you error checking. Consequently, it is best to test the options on a single, small dataset before attempting to process a larger dataset.
 
 # Third party alignment applications
 
 ## About Muscle
 
-isMuscle v5 was a major rewrite of the original program and is reportedly the most accurate aligner when tested in 2021. The application consists of a single executable file, a copy of which is present in the [Program](../Program/) folder.
+Muscle v5 was a major rewrite of the original program and is reportedly the most accurate aligner when tested in 2021. The application consists of a single executable file, a copy of which is present in the [Program](../Program/) folder.
 
-```GeneMatrix``` uses the ***align*** command to create the alignment with no parameters other than the name of the input and export file names. The [manual](https://drive5.com/muscle5/manual/cmd_align.html) contains a number of options which can be included by use of the  ```Command line extension``` form as described in the [Modifying the command line options](#modifying-the-command-line-options) section.
+```GeneMatrix``` uses the ***align*** command to create the alignment with no parameters other than the name of the input and export file names. The [manual](https://drive5.com/muscle5/manual/cmd_align.html) contains a number of options which can be included by use of the  ```Command line extension``` form as described in the [Modifying the alignment command](#modifying-the-alignment-command) section.
 
 #### Command
 
@@ -308,24 +291,23 @@ where:
 * \<input file> is the fasta file to align
 * \<results file > is the name of the file to save the alignment too.
 
-
-
 ##### Website
 
-https://www.drive5.com/muscle/
+https://www.drive5.com/muscle/  
+(Manual: https://drive5.com/muscle5/manual/cmd_align.html)
 
 ##### References
 
 > RC Edgar. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic acids research 32 (5), 1792-1797
 
 ## About Clustal 
-The Clustal algorithm first published in 1988 with the last version released in 17th, Oct 2010. It is available as a desktop, console and web server application, with a number of sites hosting the web server. While it is old, it is still routinely used to create multiple sequence alignments. 
+The Clustal algorithm was first published in 1988 with the last version released in 17th, Oct 2010. It is available as a desktop, console and web server application, with a number of sites hosting the web server. While it is old, it is still routinely used to create multiple sequence alignments. 
 
 Like Muscle, ClustalW consists of a single executable file, a copy of which is present in the [Program](../Program/) folder.
 
 #### Command
 
-```GeneMatrix``` a generic command to create the alignment with just twfouro parameters which indicate the type of sequence (DNA or ptroein) and asking the aligned data to be exported as a fasta file a long with the names of the input and export files. The [manual](http://www.clustal.org/download/clustalw_help.txt) (search for section >> Help 9 <<) contains a number of options which can be included by use of the  ```Command line extension``` form as described in the [Modifying the command line options](#modifying-the-command-line-options) section.
+```GeneMatrix``` uses a generic command to create the alignment with just four parameters which indicate the type of sequence (DNA or protein) and asking the aligned data to be exported as a fasta file a long with the names of the input and export files. The [manual](http://www.clustal.org/download/clustalw_help.txt) (search for section >> Help 9 <<) contains a number of options which can be included by use of the  ```Command line extension``` form as described in the [Modifying the command line options](#modifying-the-command-line-options) section.
 
 
 The standard command issued to Clustalw2 is:
@@ -339,8 +321,8 @@ where:
 
 ##### Website
 
-http://www.clustal.org/clustal2/
-
+http://www.clustal.org/clustal2/  
+(Manual: http://www.clustal.org/download/clustalw_help.txt)
 ##### References
 
 First publication: 
@@ -371,7 +353,7 @@ where:
 
 ##### Website
 
-https://mafft.cbrc.jp/alignment/server/index.html (see links on the left of the webpage)
+https://mafft.cbrc.jp/alignment/server/index.html (see links on the left of the webpage)  
 (Manual: https://mafft.cbrc.jp/alignment/software/manual/manual.html)
 
 ##### References
@@ -398,7 +380,8 @@ where:
 
 ##### Website
 
-https://ariloytynoja.github.io/prank-msa/
+https://ariloytynoja.github.io/prank-msa/   
+(Manual/main options: https://ariloytynoja.github.io/prank-msa/#main-program-options)
 
 ##### References
 

@@ -21,10 +21,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ClustalWD" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-OUTPUT=FASTA</Value>
+      <Value Profile="(Default)">-OUTPUT=FASTA -TYPE=DNA</Value>
     </Setting>
     <Setting Name="ClustalWP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-OUTPUT=FASTA</Value>
+      <Value Profile="(Default)">-OUTPUT=FASTA -TYPE=PROTEIN</Value>
     </Setting>
     <Setting Name="PRANKD" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
