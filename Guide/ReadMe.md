@@ -145,7 +145,7 @@ Figure 8: Right mouse clicking on the ***CYTB*** node in the right hand panel (F
 <hr />
 
 
-### Resetting the selection of sequences for export
+### Deselecting all sequences picked for export
 
 The ```Reset``` button in the lower right hand corner of the ```Combine features with different names``` section allows you to discard the current selection of sequences for export. Pressing it will remove all child nodes of the ___CDS___, ___rRNA___ and ___tRNA___ nodes in the right hand panel, moving them to the appropriate node in the left hand panel. 
 
@@ -187,9 +187,11 @@ Sequences that are shorter than the longest sequence are padded with space chara
 
 ## Creating multiple sequence alignments
 
-The exported files can then be aligned by a third party alignment program and if required combined to create a single alignment file that may be used by an application that determines the level of similarity or relatedness between the different species.
+The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independent of ```GeneMatrix``` or via the controls in the ``Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages, they can also be run a console applications using Windows ***cmd*** shell program. 
 
-The ```Align individual features``` section contains a number of controls that allow you to create multiple sequence alignments form the saved features using ***Muscle***, ***ClustalW***, ***MAFFT*** and ***PRANK*** (if present on your computer). ```GeneMatrix``` is able to automate these applications, running them as console programs via a Windows command shell when you press one of the ```Muscle```, ```ClustalW```, ```MAFFT``` and ```PRANK``` buttons (blue box, Figure 11). Pressing the ```All``` button will create multiple alignments from the saved data using each of the applications in turn.
+### Automation of the alignment
+
+Aligning the files is preformed by press one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue bos, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will align the sequences with each of the programs in turn. To use the programs the executable(s) must be present on your computer.  
 
 <hr />
 
@@ -199,9 +201,52 @@ Figure 11
 
 <hr />
 
-### Selecting the location of the third party applications.
+#### Finding the executable file
+To align the sequences, ```GeneMatrix``` first checks if the required program has been used before and whether the executable file still exists. If not, it looks for the file in the same folder as ```GeneMatrix``` program. If it still hasn't found the program it will ask you to select the program using a file selection dialogue box. Muscle and ClustalW each consists of a single program file which you need to select. However, ***PRANK*** and ***MAFFT*** require a number of other files to run and so you must download a zip file containing these files (See the [Program](../Program/) folder), unzip it and then select the ___mafft.bat___ file or the ___PRANK.exe___ file. 
 
-```GeneMatrix``` is able to automate the production of multiple sequence alignments using ```Muscle```, ```ClustalW```, ```MAFFT``` and ```PRANK```, however, it most first know where the applications are. Consequently, when a program is used for the first time, GeneMatrix will prompt you to enter the application location. Once selected, ```GeneMatrix``` will remember the location of the file. If you wish to change the version of the program used, checking the ```Reselect programs``` option (below red line, Figure 11) will direct ```GeneMatrix``` to ask for the location of the program when you press. 
+If you which to change the selected program either simply delete/rename/move the original file or check the ```Reselect programs``` option (black box Figure 12) and GeneMatrix will prompt you for the location of the file when you start another alignment step. See the [Third party alignment applications](#third-party-alignment-applications) for more details regarding each program.
+
+<hr />
+
+![Figure 12](images/figure12.jpg)
+
+Figure 12
+
+<hr />
+
+#### Performing the alignment
+Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through the files in the folder looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file which contains the commands needed to run the program in a cmd shell. After each alignment the batch file is deleted, but if you wish to retain the files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. 
+
+By default the cmd shell window is hidden meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it. If you have a number of alignments to perform, you may need to rename the folder, otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another other analysis will fail as GeneMatrix will not know where to find the files.
+
+<hr />
+
+![Figure 13](images/figure13.jpg)
+
+Figure 13
+
+<hr />
+
+![Figure 14](images/figure13a.jpg)
+
+Figure 14: The ```Task Manger``` window showing Muscle (muscle5.1.win64.exe) running. 
+
+<hr />
+
+If the ```Show command window``` option is checked (Red box, Figure 12), the cmd shell window will be shown and the output from the alignment program will be visible (Figure 15). Manually closing the window will kill the alignment. Once the alignment is complete the cmd shell window will close, and another one opened if required.
+
+<hr />
+
+![Figure 15](images/figure15.jpg)
+
+Figure 15: cmd shell window showing the out put from a Muscle alignment.
+
+<hr />
+
+#### Combining the alignments into a single alignment
+
+When identifying the relationship between a number of species it is often performed using an alignment consisting of the sequences from a number of genes/features. If the Combine all alignments option is checked 
+
 
 ### Automating the alignment of the the exported sequences
 
@@ -246,6 +291,8 @@ If the ```Combine all the alignments``` option is checked, when all the alignmen
 
 
 ***Note:*** If you want to change the version of the executable, either swap the file or check the ```Reselect alignment program``` option on the lower left of the ```Align individual features``` section (yellow line in Figure 11) before pressing the ```Muscle``` or ```ClustalW``` buttons: this will force ```GeneMatrix``` to ask for the executable's location.
+
+# Third party alignment applications
 
 ## About Muscle
 
