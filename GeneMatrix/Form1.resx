@@ -121,6 +121,6 @@
     <value>The imported data can be a folder of individual files, a single file with multiple enteries or a combination of the two. If you want to import multiple files, put them in an empty folder and check the 'Folder;' option. Pressing the 'Import' button will then prompt for the specific folder/file before reading the data.</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>To align each set of features press either the 'ClustalW' or 'Muscle' button and then select the folder of perviously saved files. The requested program will then align the data with the status given below.</value>
+    <value>To align each set of features press either the 'PRANK', 'MAFFT', 'ClustalW' or 'Muscle' button and then select the folder of perviously saved files. The requested program will then align the data with the status given below.</value>
   </data>
 </root>

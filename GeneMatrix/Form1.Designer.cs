@@ -47,6 +47,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkKeepCommandFile = new System.Windows.Forms.CheckBox();
+            this.btnModify = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnMAFFT = new System.Windows.Forms.Button();
             this.btnPrank = new System.Windows.Forms.Button();
@@ -57,8 +59,6 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
-            this.btnModify = new System.Windows.Forms.Button();
-            this.chkKeepCommandFile = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -298,6 +298,26 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Align individual features";
             // 
+            // chkKeepCommandFile
+            // 
+            this.chkKeepCommandFile.AutoSize = true;
+            this.chkKeepCommandFile.Location = new System.Drawing.Point(283, 63);
+            this.chkKeepCommandFile.Name = "chkKeepCommandFile";
+            this.chkKeepCommandFile.Size = new System.Drawing.Size(108, 17);
+            this.chkKeepCommandFile.TabIndex = 19;
+            this.chkKeepCommandFile.Text = "Retain batch files";
+            this.chkKeepCommandFile.UseVisualStyleBackColor = true;
+            // 
+            // btnModify
+            // 
+            this.btnModify.Location = new System.Drawing.Point(158, 86);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(75, 23);
+            this.btnModify.TabIndex = 18;
+            this.btnModify.Text = "Modify";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
+            // 
             // btnAll
             // 
             this.btnAll.Location = new System.Drawing.Point(270, 86);
@@ -397,26 +417,6 @@
             this.btnClustalW.Text = "ClustalW";
             this.btnClustalW.UseVisualStyleBackColor = true;
             this.btnClustalW.Click += new System.EventHandler(this.btnClustalW_Click);
-            // 
-            // btnModify
-            // 
-            this.btnModify.Location = new System.Drawing.Point(158, 86);
-            this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(75, 23);
-            this.btnModify.TabIndex = 18;
-            this.btnModify.Text = "Modify";
-            this.btnModify.UseVisualStyleBackColor = true;
-            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
-            // 
-            // chkKeepCommandFile
-            // 
-            this.chkKeepCommandFile.AutoSize = true;
-            this.chkKeepCommandFile.Location = new System.Drawing.Point(283, 63);
-            this.chkKeepCommandFile.Name = "chkKeepCommandFile";
-            this.chkKeepCommandFile.Size = new System.Drawing.Size(108, 17);
-            this.chkKeepCommandFile.TabIndex = 19;
-            this.chkKeepCommandFile.Text = "Retain batch files";
-            this.chkKeepCommandFile.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
