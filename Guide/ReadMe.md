@@ -4,7 +4,7 @@
 
 ## User interface
 
-```GeneMatrix``` consists of a single window split in to the four sections: ***Import data***, ***Combine features with different names***, ***Save sequence*** and ***Align individual features***. Each section performs a task as suggested by its name. The upper three section need to be performed in a set order so only the ***Import data*** option is active. However, since the ***Align individual features*** works with data saved to disk it can be user when required and so is always enabled.
+```GeneMatrix``` consists of a single window split in to the four sections: ***Import data***, ***Combine features with different names***, ***Save sequences*** and ***Align individual features***. Each section performs a task as suggested by its name. The upper three section need to be performed in a set order so only the ***Import data*** option is active. However, since the ***Align individual features*** works with data saved to disk it can be user when required and so is always enabled.
 
 <hr />
 
@@ -17,11 +17,11 @@ Figure 1
 
 ## Obtaining the sequence files
 
-```GeneMatrix``` is designed to work with files downloaded from the NCBI web site that consist of a cohort of related sequences such as mitochondrial genomes from species in the same genus or viruses from the same family. For this guide I downloaded 144 mitochondrial genome sequences for the genus Chelonoidis. A fuller description of how to selection and download download the data is [here](obtainingFiles.md) while the [data file](../ExampleData/sequence.gb) is in the [ExampleData folder](../ExampleData/). 
+```GeneMatrix``` is designed to work with files downloaded from the NCBI web site that consist of a collection of related sequences such as mitochondrial genomes from species in the same genus or viruses from the same family. For this guide I downloaded 144 mitochondrial genome sequences for the genus Chelonoidis. A description of how to selection and download the data is [here](obtainingFiles.md) while the [data file](../ExampleData/sequence.gb) is in the [ExampleData folder](../ExampleData/). 
 
 ## Importing sequence data
 
-The  ***Import data*** section consists of just two controls which allow the selection of the data files. To import data press the ```Import``` button in the lower right of the panel (blue box Figure 2 a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will result in a file selection dialogue box appearing that will accept files with a *.gb or *.genbank file extensions, while if checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with either the *.gb or *.genbank file extension, with each file containing one or more sequences.  
+The  ***Import data*** section consists of just two controls which allow the selection of the data files. To import data press the ```Import``` button in the lower right of the panel (blue box Figure 2 a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb or *.genbank file extension, while if checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb or *.genbank file extension, with each file containing one or more sequences.  
 
 <hr />
 
@@ -31,9 +31,9 @@ Figure 2: Data is imported by pressing the ```Import``` button.
 
 <hr />
 
-***Note:*** When importing a single file it is expected that the file contains multiple sequence, while when importing a folder of files each file can contain one or more sequences. If the same accession number is present twice, ```GeneMatrix``` will warn you and give the option to abort the process allowing you to remove the duplicated sequences or allow you to continue and ignoring the 2nd copy.
+***Note:*** When importing a single file it is expected that the file contains multiple entries, while when importing a folder of files each file can contain one or more sequences. If the same accession number is present twice, ```GeneMatrix``` will warn you and give the option to abort the process allowing you to remove the duplicated sequences or allow you to continue and ignoring the second entry.
 
-Once imported ```GeneMatrix``` states the number of retained entries and lists any with no relevant annotation (contained no tRNA, rRNA or CDS features): these sequences will be omitted from all subsequent processing (Figure 3 and see [Feature selection](#features-names) below).
+Once imported, ```GeneMatrix``` displays the number of retained entries and lists any with no relevant annotation (i.e. contains no tRNA, rRNA or CDS features), these sequences will be omitted from all subsequent processing (Figure 3 and see [Feature selection](#features-names) below).
 
 <hr />
 
@@ -49,11 +49,11 @@ Figure 3
 When reading an entry, ```GeneMatrix``` identifies the entry's accession number, species name and its sequence as follows:   
 * The accession ID is obtained from the line beginning with ___VERSION___.   
 * The species name is taken from the line starting with two spaces and then ___ORGANISM___.  
-* The sequence is considered as any text after the line starting with ___ORIGIN___ and before the starting with ___\\\\___. When all the features from an entry have been stored the sequence data is discarded. 
+* The sequence is considered as any text after the line starting with ___ORIGIN___ and before the line starting with ___\\\\___. When all the features from an entry have been stored the sequence data is discarded. 
  
 ### Selection of sequences to be retained
 
-The level of annotation in GenBank entries is very variable, some entries only have the sequence and genome level annotation such as accession ID, species taxonomy and submitter details, while other are extensively annotated. For instance in the sequence.gb file downloaded in the [Obtaining the sequence files](obtainingFiles.md), 18 contain no relevant annotation. Not all of the features are relevant to the production of sequence alignments for phylogenetic studies consequently, ```GeneMatrix``` limits the features retain to those tagged with the CDS, tRNA or rRNA. These were selected as they have very well defined starting and ending points, with their sequence consistent between species, whereas features such as  those linked to the ___variation___, ___gene___ and ___misc_feature___ are not. For example:
+The level of annotation in GenBank entries is very variable, some entries only have the sequence and genome level annotation such as accession ID, species taxonomy and submitter details, while others are extensively annotated. For instance in the sequence.gb file downloaded in the [Obtaining the sequence files](obtainingFiles.md), 18 contain no relevant annotation. Not all of the features are relevant to the production of sequence alignments for phylogenetic studies consequently, ```GeneMatrix``` limits the features retained to those tagged with the ***CDS***, ***tRNA*** or ***rRNA***. These were selected as they have very well defined starting and ending points, with their sequence consistent between species, whereas features such as  those linked to the ___variation___, ___gene___ and ___misc_feature___ are not. For example:
 
 * ___variation___ : these features are not consistent between species
 * ___gene___: poorly defined start and end points with interesting sequences present in the ___CDS___ features
@@ -63,11 +63,11 @@ The level of annotation in GenBank entries is very variable, some entries only h
 Due to variation in the annotation of different GenBank entries, when extracting data for a specific feature ```GeneMatrix``` looks for lines containing the tags: ___/gene=___, ___/product=___,  ___/protein_id=___ and ___/locus_tag=___.  When more than one tag is present, the feature's name is taken as the first tag to be given a value in the order of ___/gene=___ then ___/product=___ followed by  ___/protein_id=___ and finally ___/locus_tag=___.
 
 #### Protein sequence
-Typically a ___CDS___ feature is linked to a protein sequence which is found by searching for the ___/translation=___ tag and retaining the subsequence text until a ine ending with a __&rdquo;__ is found.  Obviously ___tRNA___ and ___rRNAs___ never linked to a protein sequence.  
+Typically a ___CDS___ feature is linked to a protein sequence which is found by searching for the ___/translation=___ tag and retaining the subsequence text until a line ending with a __&rdquo;__ is found.  Obviously ___tRNA___ and ___rRNAs___ are never linked to a protein sequence.  
 
 #### Sequence coordinates
 For a short, simple sequence such as a tRNA or mitochondrial CDS, the sequence is present as a single run of nucleotides. In these situations the coordinates simply follow the feature's tag (___CDS___, ___rRNA___ or ___tRNA___) with the start and end points separated by two periods (Table 1, row 1). In these cases the coordinates of each feature are extracted from the GenBank entry's sequence and stored.  
-However, the sequence of a ___CDS___ feature may be contained in a number of exons or in the case of a circular genome a feature may span the beginning and the end of the sequence. In these cases the feature's tag is followed by a series of start/end coordinates separated by commas with the whole series placed in brackets following the word ___join___ (Table 1, row 2). In these case the sequence identified each pair of coordinates is extracted and concatenated to form one sequence.  
+However, the sequence of a ___CDS___ feature may be contained in a number of exons or in the case of a circular genome a feature may span the beginning and the end of the sequence. In these cases the feature's tag is followed by a series of start/end coordinates separated by commas with the whole series placed in brackets following the word ___join___ (Table 1, row 2). In these case the sequence specified by each pair of coordinates is extracted and concatenated to form one sequence.  
 
 |Scenario|Example|
 |-|-|
@@ -78,7 +78,7 @@ However, the sequence of a ___CDS___ feature may be contained in a number of exo
 
 Table 1: Feature coordinates
 
-If the feature is encoded on the reverse strand, the coordinates are places in brackets following the complement key word (Table 1, rows 3 and 4). In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. This [page](revesreComplement.md) gives the conversion table including the ambiguous codes.  
+If the feature is encoded on the reverse strand, the coordinates are places in brackets following the ___complement___ key word (Table 1, rows 3 and 4). In these cases the sequence is extracted as above and then the reverse complement sequence is determined and stored. This [page](revesreComplement.md) gives the conversion table including the ambiguous codes.  
 
 Occasionally, the exact coordinates for a sequence are not know, in these cases the coordinates may contain one or both '<' '>' characters suggesting the sequences starts or ends beyond the region suggested. In these situations ```GeneMatrix``` just uses the coordinates supplied i.e. the entry: <1..532 would be treated as: 1..532.   
 In the data file downloaded in the [Obtaining the sequence files](obtainingFiles.md) section, sequence MG912796.1 contains the sequence for a tRNA-Leu as located at ***complement(<13358)***, in this case with so little information the tRNA is ignored.
@@ -86,7 +86,7 @@ In the data file downloaded in the [Obtaining the sequence files](obtainingFiles
 
 ## Working with the imported sequences
 
-Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of the trees is the ___Sequence___ node, which contains up to three child nodes (___CDS___, ___rRNA___ and ___tRNA___). The panel on the left represents  unselected data, while the panel on the right represents the selected features. Consequently, initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
+Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, which contains up to three child nodes (___CDS___, ___rRNA___ and ___tRNA___). The panel on the left represents  unselected data, while the panel on the right represents the selected features. Consequently, initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
 
 <hr />
 
@@ -96,12 +96,12 @@ Figure 4
 
 <hr />
 
-```GeneMatrix``` is designed for the collation of orthologue sequences, which is achieved  with user interaction by selecting features with the required names rather than similar sequences. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situation where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames which give rise to a number of different proteins though different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features represent is typically obvious from the feature's name, but may not be that obvious from the sequence, for example:  
+```GeneMatrix``` is designed for the collation of orthologue sequences, which is achieved  with user interaction by selecting features with respect to their names rather than similar sequences. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situation where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames which give rise to a number of different proteins though different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features represent is typically obvious from the feature's name, but may not be that obvious from the sequence, for example:  
 * The CDV virus genome contains a PVC or PCV open reading frame that generates the P, V and C proteins which have overlapping sequences. Some CDV genomes in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file contains a PVC/PCV feature, while other have one or more of the P, V, and C sequences. Trying to group these features base on sequence homology could result in situations where some species have the whole PVC/PCV sequence included while others had the overlapping P, V and C sequences with or without the PVC/PCV sequence, which could ultimately result in erroneous results.  
   
 ## Selecting sequences for export based on their names
 
-Ideally, ```GeneMatrix``` would automate the selection of the features based on their name, however, because features are not named in a consistent, systematic manner in this step requires user interaction. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, there are eight different names for the Haemagglutinin protein H ___CDS___ feature. 
+Ideally, ```GeneMatrix``` would automate the selection of the features based on their name, however, because features are not named in a consistent, systematic manner, this step requires user interaction. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, there are eight different names for the Haemagglutinin protein H ___CDS___ feature. 
 
 <hr >
 
@@ -111,7 +111,7 @@ Figure 5:
 
 <hr />
 
-Multiple features can be selected at once as long as they all are the same type (i.e. they are all ___CDS___ features.) To select an orthologue for inclusion in the exported data set, click on the feature's name in the left hand panel using the left mouse button. This should change the features's icon from a light grey to a green. Clicking on the node a second time will deselect it as indicated by the now light grey icon. If an orthologue has multiple names, initially select the node which has the preferred name and then include the other sequences as outlined in the next section. Once you have selected all the features, click on the relevant node in the right hand panel using the mouse's left hand button. This will move the features from the left hand tree to the right hand tree (Figure 6).  
+Multiple features can be selected at once as long as they all are the same type (i.e. they are all ___CDS___ features.) To select an orthologue for inclusion in the exported data set, click on the feature's name in the left hand panel using the left mouse button. This should change the features's icon from a light grey to a green. Clicking on the node a second time will deselect it as indicated by the now light grey icon. If an orthologue has multiple names, initially select the node which has the preferred name and then include the other sequences as child sequences as outlined in the next section. Once you have selected all the features, click on the relevant node in the right hand panel using the mouse's left hand button. This will move the features from the left hand tree to the right hand tree (Figure 6).  
 
 <hr />
 
@@ -121,7 +121,7 @@ Figure 6: In Figure 6 a, all the features in the ___CDS___ set except ***cytb***
 
 ### Amalgamating sequences with different names
 
-In Figure 7 a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes respectively. As a result, features with the ***NADH dehydrogenase subunit 1*** name will be combined with those called ***ND1*** in to a data set called ***ND1***. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
+In Figure 7 a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes respectively. As a result, features with the ***NADH dehydrogenase subunit 1*** name will be combined with those called ***ND1*** in to a data file called ***ND1***_DNA.fasta or ***ND1***_Protein.fasta. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
 To combine the unselected ***cytb*** features with the selected  ***CYTB*** features, left mouse click the ***cytb*** feature in the left hand panel and then click the ***CYTB*** text using the left mouse button (Figure 7 b). 
 
 <hr />
@@ -152,7 +152,7 @@ The ```Reset``` button in the lower right hand corner of the ```Combine features
 
 ### Saving the selected gene sequences
 
-Once at least one feature has been selected for export the the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 9). Pressing this button will prompt you to select a folder to save the data too. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 10).
+When at least one feature has been selected for export the the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 9). Pressing this button will prompt you to select a folder to save the data too. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 10).
 
 <hr />
 
@@ -168,9 +168,9 @@ Figure 10
 
 <hr />
 
-The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (red box in Figure 9). These options select whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another term. For instance in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the parent's file which is called ***CDS-ND1_DNA.fasta***. 
+The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (red box in Figure 9). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another term. For instance in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the parent's file which is called ***CDS-ND1_DNA.fasta***. 
 
-Not all names can be used in file names as some contain characters that are not allowed such as '\\', '?' or ":". Consequently, characters that are letters, numbers, '-', '_', '.' or white space are replaced by a '\_' character.
+Not all names can be used in file names as they may contain characters that are not allowed such as '\\', '?' or ":". Consequently, characters that are not letters, numbers, '-', '_', '.' or white space are replaced by a '\_' character.
 
 #### Sequence names
 
@@ -217,7 +217,7 @@ Figure 12
 #### Performing the alignment
 Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through these files looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file which contains the commands needed to run the program in a cmd shell which is then sent a cmd shell to process. After each alignment, the batch file is deleted, but if you wish to retain the batch files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. If you try to open these files by clicking on them, they will open a cmd shell window and attempt to rerun the alignment, consequently, to view/edit their contents drag and drop the file icon on to a text editor ideally [Notepad++](https://notepad-plus-plus.org/).
 
-By default the cmd shell window is hidden meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it. If you have a number of alignments to perform, you may need to rename the folder, otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another other analysis will fail as GeneMatrix will not know where to find the files.
+By default the cmd shell window is hidden meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it (right click on the programs name and select ```End task```). If you are producing a number of alignments, you may need to rename the folder of files, otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another alignment will fail as ```GeneMatrix``` will not know where to find the files.
 
 <hr />
 

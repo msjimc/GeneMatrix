@@ -648,6 +648,8 @@ namespace GeneMatrix
 
         private bool checkFile(string fileName)
         {
+            if (System.IO.File.Exists(fileName) == false)
+            { return false; }
 
             string name = fileName.Substring(fileName.LastIndexOf("\\") + 1);
 
