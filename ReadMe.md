@@ -3,8 +3,8 @@
 ## Contents
 
 - [Introduction](#Introduction)
-- [Guide](#guide)
-- [Download](#download)
+- [Guide](Guide/ReadMe.md)
+- [Download](Program/README.md)
 
 ## Introduction 
 
