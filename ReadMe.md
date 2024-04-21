@@ -16,7 +16,7 @@ Once imported, ```GeneMatrix``` extracts each DNA and/or protein feature linked 
 
 ## Guide
 
-The user guide is [here](Guide/README.md).
+The user guide is [here](Guide/ReadMe.md).
 
 ## Download
 
