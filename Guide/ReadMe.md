@@ -2,6 +2,50 @@
 
 ## Contents
 
+  * [User interface](#user-interface)
+  * [Obtaining the sequence files](#obtaining-the-sequence-files)
+  * [Importing sequence data](#importing-sequence-data)
+  * [Retained data](#retained-data)
+    + [Genbank entry level data: accession ID, species name and sequence](#genbank-entry-level-data--accession-id--species-name-and-sequence)
+    + [Selection of features to be retained](#selection-of-features-to-be-retained)
+      - [Feature's Names](#feature-s-names)
+      - [Feature's protein sequence](#feature-s-protein-sequence)
+      - [Feature's coordinates](#feature-s-coordinates)
+  * [Working with the imported sequences](#working-with-the-imported-sequences)
+  * [Selecting sequences for export based on their names](#selecting-sequences-for-export-based-on-their-names)
+    + [Amalgamating sequences with different names](#amalgamating-sequences-with-different-names)
+    + [Deselecting a sequence for export](#deselecting-a-sequence-for-export)
+    + [Deselecting all sequences picked for export](#deselecting-all-sequences-picked-for-export)
+  * [Saving the selected gene sequences](#saving-the-selected-gene-sequences)
+      - [Sequence names](#sequence-names)
+      - [Absent data](#absent-data)
+  * [Creating multiple sequence alignments](#creating-multiple-sequence-alignments)
+    + [Automation of the alignment process](#automation-of-the-alignment-process)
+    + [Getting the alignment tools](#getting-the-alignment-tools)
+    + [Selecting the executable file](#selecting-the-executable-file)
+    + [Performing the alignment](#performing-the-alignment)
+    + [Combining the alignments into a single alignment](#combining-the-alignments-into-a-single-alignment)
+    + [Modifying the alignment command](#modifying-the-alignment-command)
+- [Third party alignment applications](#third-party-alignment-applications)
+  * [Muscle](#muscle)
+      - [Command](#command)
+      - [Website](#website)
+      - [References](#references)
+  * [Clustal](#clustal)
+      - [Command](#command-1)
+      - [Website](#website-1)
+      - [References](#references-1)
+  * [MAFFT](#mafft)
+      - [Command](#command-2)
+      - [Website](#website-2)
+      - [References](#references-2)
+  * [PRANK](#prank)
+      - [Command](#command-3)
+      - [Website](#website-3)
+      - [References](#references-3)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## User interface
 
 ```GeneMatrix``` consists of a single window split in to the four sections: ***Import data***, ***Combine features with different names***, ***Save sequences*** and ***Align individual features***. Each section performs a task as suggested by its name. The upper three section need to be performed in a set order so only the ***Import data*** option is active. However, since the ***Align individual features*** works with data saved to disk it can be user when required and so is always enabled.
@@ -51,7 +95,7 @@ When reading an entry, ```GeneMatrix``` identifies the entry's accession number,
 * The species name is taken from the line starting with two spaces and then ___ORGANISM___.  
 * The sequence is considered as any text after the line starting with ___ORIGIN___ and before the line starting with ___\\\\___. When all the features from an entry have been stored the sequence data is discarded. 
  
-### Selection of sequences to be retained
+### Selection of features to be retained
 
 The level of annotation in GenBank entries is very variable, some entries only have the sequence and genome level annotation such as accession ID, species taxonomy and submitter details, while others are extensively annotated. For instance in the sequence.gb file downloaded in the [Obtaining the sequence files](obtainingFiles.md), 18 contain no relevant annotation. Not all of the features are relevant to the production of sequence alignments for phylogenetic studies consequently, ```GeneMatrix``` limits the features retained to those tagged with the ***CDS***, ***tRNA*** or ***rRNA***. These were selected as they have very well defined starting and ending points, with their sequence consistent between species, whereas features such as  those linked to the ___variation___, ___gene___ and ___misc_feature___ are not. For example:
 
@@ -62,10 +106,10 @@ The level of annotation in GenBank entries is very variable, some entries only h
 #### Feature's Names
 Due to variation in the annotation of different GenBank entries, when extracting data for a specific feature ```GeneMatrix``` looks for lines containing the tags: ___/gene=___, ___/product=___,  ___/protein_id=___ and ___/locus_tag=___.  When more than one tag is present, the feature's name is taken as the first tag to be given a value in the order of ___/gene=___ then ___/product=___ followed by  ___/protein_id=___ and finally ___/locus_tag=___.
 
-#### Protein sequence
+#### Feature's protein sequence
 Typically a ___CDS___ feature is linked to a protein sequence which is found by searching for the ___/translation=___ tag and retaining the subsequence text until a line ending with a __&rdquo;__ is found.  Obviously ___tRNA___ and ___rRNAs___ are never linked to a protein sequence.  
 
-#### Sequence coordinates
+#### Feature's coordinates
 For a short, simple sequence such as a tRNA or mitochondrial CDS, the sequence is present as a single run of nucleotides. In these situations the coordinates simply follow the feature's tag (___CDS___, ___rRNA___ or ___tRNA___) with the start and end points separated by two periods (Table 1, row 1). In these cases the coordinates of each feature are extracted from the GenBank entry's sequence and stored.  
 However, the sequence of a ___CDS___ feature may be contained in a number of exons or in the case of a circular genome a feature may span the beginning and the end of the sequence. In these cases the feature's tag is followed by a series of start/end coordinates separated by commas with the whole series placed in brackets following the word ___join___ (Table 1, row 2). In these case the sequence specified by each pair of coordinates is extracted and concatenated to form one sequence.  
 
@@ -132,7 +176,7 @@ Figure 7
 
 <hr />
 
-### Deselecting sequences for export
+### Deselecting a sequence for export
 
 Deselecting a feature for export is achieved by clicking on the node using the right hand mouse button. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). 
 
@@ -150,7 +194,7 @@ Figure 8: Right mouse clicking on the ***CYTB*** node in the right hand panel (F
 The ```Reset``` button in the lower right hand corner of the ```Combine features with different names``` section allows you to discard the current selection of sequences for export. Pressing it will remove all child nodes of the ___CDS___, ___rRNA___ and ___tRNA___ nodes in the right hand panel, moving them to the appropriate node in the left hand panel. 
 
 
-### Saving the selected gene sequences
+## Saving the selected gene sequences
 
 When at least one feature has been selected for export the the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 9). Pressing this button will prompt you to select a folder to save the data too. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 10).
 
@@ -186,7 +230,7 @@ Sequences that are shorter than the longest sequence are padded with space chara
 
 The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independent of ```GeneMatrix``` or via the controls in the ```Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages or desktop applications, they can also be run as console applications using Windows ***cmd*** shell program (Command Prompt: Figure 15). 
 
-### Automation of the alignment
+### Automation of the alignment process
 
 Aligning the sequences in the files is preformed by pressing one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue box, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will process the files with each of the programs in turn.   
 ***Note:*** To use the programs the executable(s) must be present on your computer.   
@@ -294,12 +338,12 @@ where:
 * \<input file> is the fasta file to align
 * \<results file > is the name of the file to save the alignment too.
 
-##### Website
+#### Website
 
 https://www.drive5.com/muscle/  
 (Manual: https://drive5.com/muscle5/manual/cmd_align.html)
 
-##### References
+#### References
 
 > RC Edgar. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic acids research 32 (5), 1792-1797
 
@@ -322,11 +366,11 @@ where:
 * [DNA or protein] is the type of sequence to align.
 * [results file] is the name of the file to save the alignment too.
 
-##### Website
+#### Website
 
 http://www.clustal.org/clustal2/  
 (Manual: http://www.clustal.org/download/clustalw_help.txt)
-##### References
+#### References
 
 First publication: 
 > Higgins,D.G. and Sharp,P.M. (1988). CLUSTAL: a package for performing multiple sequence alignment on a microcomputer. Gene, 73, 237-244.
@@ -335,7 +379,7 @@ Last publication:
 > Larkin MA, Blackshields G, Brown NP, Chenna R, McGettigan PA, McWilliam H, Valentin F, Wallace IM, Wilm A, Lopez R, Thompson JD, Gibson TJ, Higgins DG.
 (2007). Clustal W and Clustal X version 2.0. Bioinformatics, 23, 2947-2948.
 
-### MAFFT
+## MAFFT
 
 MAFFT was designed to align sequences that may have large insertions/deletions such as rRNA that may have variable loop regions. It can align the data via  a number of different algorithms. ```GeneMatrix``` uses the --auto options which prompts MAFFT to select the most appropriate option.
 
@@ -354,12 +398,12 @@ where:
 * [input file (Linux)] is the fasta file to align.  The file name uses the Linux '/' rather than the Windows '\\' separators.
 * [results file (Linux)] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
 
-##### Website
+#### Website
 
 https://mafft.cbrc.jp/alignment/server/index.html (see links on the left of the webpage)  
 (Manual: https://mafft.cbrc.jp/alignment/software/manual/manual.html)
 
-##### References
+#### References
 
 First publication
 > Katoh K, Misawa K, Kuma K, Miyata T. MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform. Nucleic Acids Res. 2002;30:3059-66
@@ -367,7 +411,7 @@ First publication
 Last publication
 > Katoh K, Standley DM. MAFFT multiple sequence alignment software version 7: improvements in performance and usability. Mol Biol Evol. 2013;30:772-80. 
 
-### PRANK
+## PRANK
 
 According to its web site: PRANK is a probabilistic multiple alignment program for DNA, codon and amino-acid sequences. It’s based on a novel algorithm that treats insertions correctly and avoids over-estimation of the number of deletion events.
 
@@ -381,12 +425,12 @@ where:
 * [input file (Linux)] is the fasta file to align. The file name uses the Linux '/' rather than the Windows '\\' separators
 * [results file (Linux)] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
 
-##### Website
+#### Website
 
 https://ariloytynoja.github.io/prank-msa/   
 (Manual/main options: https://ariloytynoja.github.io/prank-msa/#main-program-options)
 
-##### References
+#### References
 
 > Löytynoja, A. (2014). Phylogeny-aware alignment with PRANK. In: Russell, D. (eds) Multiple Sequence Alignment Methods. Methods in Molecular Biology, vol 1079. Humana Press, Totowa, NJ. https://doi.org/10.1007/978-1-62703-646-7_10
 
