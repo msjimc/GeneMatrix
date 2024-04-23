@@ -20,6 +20,7 @@ namespace GeneMatrix
         private List<string> rRNA = null;
         private int rightButton = 1;
         private bool quitAnalysis = false;
+        private string gblocks = null;
 
         public Form1()
         {
@@ -666,6 +667,42 @@ namespace GeneMatrix
 
         }
 
+        private string getGBlocksFileName()
+        {
+            if (chkResetPrograms.Checked == false)
+            {
+                string GBlocks = Properties.Settings.Default.GBlocks;
+                if (System.IO.File.Exists(GBlocks) == true)
+                { return GBlocks; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\Gblocks.exe";
+
+                if (System.IO.File.Exists(program) == true)
+                {
+                    Properties.Settings.Default.GBlocks = program;
+                    Properties.Settings.Default.Save();
+                    return program;
+                }
+            }
+
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the GBlocks executable file", "program (*.exe|*.exe");
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                Properties.Settings.Default.GBlocks = fileName;
+                Properties.Settings.Default.Save();
+                return fileName;
+            }
+            else
+            {
+                MessageBox.Show("The GBlocks executable file is required for this function, see user guide for more information", "No external aligner cleaner");
+                return null;
+            }
+        }
+
 
         private string getMAFFTFileName()
         {
@@ -706,7 +743,7 @@ namespace GeneMatrix
         private void btnMAFFT_Click(object sender, EventArgs e)
         {
             string program = getMAFFTFileName();
-            if (program == null) { return; }
+            if (program == null) { return; }                       
 
             string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
             if (System.IO.Directory.Exists(folder) == false) { return; }
@@ -766,6 +803,16 @@ namespace GeneMatrix
 
                             fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
 
+                            if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
+                            {
+                                string gblocksExtension = "";
+                                if (sequenceType == "DNA")
+                                { gblocksExtension = getCommandExtension("GBlocksD"); }
+                                else
+                                { gblocksExtension = getCommandExtension("GBlocksP"); }
+                                fw.Write("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + "\"" + gblocksExtension);
+                            }
+
                             fw.Close();
 
                             lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
@@ -785,7 +832,7 @@ namespace GeneMatrix
                                 string newBatchFileName = file + "_" + sequenceType + "_MAFFT.bat";
                                 if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
-                                System.IO.File.Copy(fileName, newBatchFileName);
+                                try { System.IO.File.Copy(fileName, newBatchFileName); } catch { }
                             }
                         }
                     }
@@ -893,6 +940,17 @@ namespace GeneMatrix
 
                             string answer = filelinux.Substring(0, file.Length - 6) + "_PRANK.fasta";
                             fw.WriteLine("\"" + program + "\" " + extension + "  -d=\"" + filelinux + "\" -o=\"" + answer + "\"");
+
+                            if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
+                            {
+                                string gblocksExtension = "";
+                                if (sequenceType == "DNA")
+                                { gblocksExtension = getCommandExtension("GBlocksD"); }
+                                else
+                                { gblocksExtension = getCommandExtension("GBlocksP"); }
+                                fw.Write("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + ".best.fas\"" + gblocksExtension);
+                            }
+
                             fw.Close();
 
                             lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
@@ -912,7 +970,7 @@ namespace GeneMatrix
                                 string newBatchFileName = file + "_" + sequenceType + "_PRANK.bat";
                                 if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
-                                System.IO.File.Copy(fileName, newBatchFileName);
+                                try { System.IO.File.Copy(fileName, newBatchFileName); } catch { }
                             }
                         }
                     }
@@ -1016,6 +1074,17 @@ namespace GeneMatrix
                             fw = new System.IO.StreamWriter(fileName);
                             string answer = file.Substring(0, file.Length - 6) + "_ClustalW.fasta";
                             fw.WriteLine("\"" + program + "\" -INFILE=\"" + file + "\" " + extension + " -OUTFILE=\"" + answer + "\"");
+
+                            if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
+                            {
+                                string gblocksExtension = "";
+                                if (sequenceType == "DNA")
+                                { gblocksExtension = getCommandExtension("GBlocksD"); }
+                                else
+                                { gblocksExtension = getCommandExtension("GBlocksP"); }
+                                fw.Write("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
+                            }
+
                             fw.Close();
 
                             lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
@@ -1035,7 +1104,7 @@ namespace GeneMatrix
                                 string newBatchFileName = file + "_" + sequenceType + "_ClustalW.bat";
                                 if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
-                                System.IO.File.Copy(fileName, newBatchFileName);
+                                try { System.IO.File.Copy(fileName, newBatchFileName); } catch { }
                             }
                         }
                     }
@@ -1140,6 +1209,17 @@ namespace GeneMatrix
                             fw = new System.IO.StreamWriter(fileName);
                             string answer = file.Substring(0, file.Length - 6) + "_Muscle.fasta";
                             fw.WriteLine("\"" + program + "\" " + extension + "  -align \"" + file + "\" -output \"" + answer + "\"");
+
+                            if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
+                            {
+                                string gblocksExtension = "";
+                                if (sequenceType == "DNA")
+                                { gblocksExtension = getCommandExtension("GBlocksD"); }
+                                else
+                                { gblocksExtension = getCommandExtension("GBlocksP"); }
+                                fw.Write("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
+                            }
+
                             fw.Close();
 
                             lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('\\') + 1);
@@ -1158,7 +1238,7 @@ namespace GeneMatrix
                                 string newBatchFileName = file + "_" + sequenceType + "_Muscle.bat";
                                 if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
-                                System.IO.File.Copy(fileName, newBatchFileName);
+                                try { System.IO.File.Copy(fileName, newBatchFileName); } catch { }
                             }
                         }
                     }
@@ -1258,6 +1338,12 @@ namespace GeneMatrix
                 {
                     fw.Write(">" + key + "\n" + sequences[key] + "\n");
                 }
+                fw.Close();
+
+                if (chkGBlocks.Checked==true && string.IsNullOrEmpty(gblocks)== false)
+                {
+                    runGBlocks(folder, exportName,sequenceType,program);
+                }
 
             }
             catch (Exception ex)
@@ -1267,6 +1353,52 @@ namespace GeneMatrix
                 if (fs != null) { fs.Close(); }
                 if (fw != null) { fw.Close(); }
             }
+        }
+
+        private void runGBlocks(string folder, string file, string sequenceType, string program)
+        {            
+            System.IO.StreamWriter fw = null;
+            try
+            {
+                if (System.IO.File.Exists(file) == true)
+                {
+                    string fileName = folder + "\\GBlocks.bat";
+                    fw = new System.IO.StreamWriter(folder + "\\GBlocks.bat");
+
+                    fw.Write("\n");
+                    string gblocksExtension = "";
+                    if (sequenceType == "DNA")
+                    { gblocksExtension = getCommandExtension("GBlocksD"); }
+                    else
+                    { gblocksExtension = getCommandExtension("GBlocksP"); }
+                    fw.Write("\"" + gblocks + "\" \"" + file + "\"" + gblocksExtension);
+
+
+                    fw.Close();
+
+                    lblStatus.Text = "Status: GBlocks";
+                    Application.DoEvents();
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                    info.UseShellExecute = false;
+                    info.CreateNoWindow = !chkShowCMD.Checked;
+                    process.StartInfo = info;
+
+                    process.Start();
+                    process.WaitForExit();
+
+                    if (chkKeepCommandFile.Checked == true)
+                    {
+                        string newBatchFileName = file + "_" + sequenceType + "_" + program + ".bat";
+                        if (System.IO.File.Exists(newBatchFileName) == true)
+                        { System.IO.File.Delete(newBatchFileName); }
+                        try { System.IO.File.Copy(fileName, newBatchFileName); } catch { }
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            finally
+            { if (fw != null) { fw.Close(); } }
         }
 
         private void btnAll_Click(object sender, EventArgs e)
@@ -1357,11 +1489,40 @@ namespace GeneMatrix
                 case "ClustalWP":
                     answer = Properties.Settings.Default.ClustalWP;
                     break;
-
+                case "GBlocksD":
+                    answer = Properties.Settings.Default.GBlocksD;
+                    break;
+                case "GBlocksP":
+                    answer = Properties.Settings.Default.GBlocksP;
+                    break;
             }
 
             return " " + answer + " ";
 
+        }
+
+        private void chkGBlocks_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGBlocks.Checked) 
+            {
+                gblocks = getGBlocksFileName();
+                if (gblocks == null)
+                { chkGBlocks.Checked = false; }
+            }
+            else
+            { gblocks = null; }
+        }
+
+        private void chkResetPrograms_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGBlocks.Checked)
+            {
+                gblocks = getGBlocksFileName();
+                if (gblocks == null)
+                { chkGBlocks.Checked = false; }
+            }
+            else
+            { gblocks = null; }
         }
     }
 }

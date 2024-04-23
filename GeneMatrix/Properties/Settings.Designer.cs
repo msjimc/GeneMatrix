@@ -166,5 +166,41 @@ namespace GeneMatrix.Properties {
                 this["MAFFTP"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-t=d -e=.fa")]
+        public string GBlocksD {
+            get {
+                return ((string)(this["GBlocksD"]));
+            }
+            set {
+                this["GBlocksD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-t=p -e=fa")]
+        public string GBlocksP {
+            get {
+                return ((string)(this["GBlocksP"]));
+            }
+            set {
+                this["GBlocksP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GBlocks {
+            get {
+                return ((string)(this["GBlocks"]));
+            }
+            set {
+                this["GBlocks"] = value;
+            }
+        }
     }
 }

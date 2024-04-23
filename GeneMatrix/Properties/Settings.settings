@@ -38,5 +38,14 @@
     <Setting Name="MAFFTP" Type="System.String" Scope="User">
       <Value Profile="(Default)">--auto --retree 2 --inputorder</Value>
     </Setting>
+    <Setting Name="GBlocksD" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-t=d -e=.fa</Value>
+    </Setting>
+    <Setting Name="GBlocksP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-t=p -e=fa</Value>
+    </Setting>
+    <Setting Name="GBlocks" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
