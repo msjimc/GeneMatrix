@@ -665,7 +665,7 @@ namespace GeneMatrix
             return true;
 
         }
-                        
+
 
         private string getMAFFTFileName()
         {
@@ -739,46 +739,46 @@ namespace GeneMatrix
                     foreach (string file in files)
                     {
                         if (checkFile(file) == true)
-                        { 
-                        fw = new System.IO.StreamWriter(fileName);
+                        {
+                            fw = new System.IO.StreamWriter(fileName);
 
-                        string filelinux = file.Replace("\\", "/");
+                            string filelinux = file.Replace("\\", "/");
 
-                        string answer = filelinux.Substring(0, file.Length - 6) + "_MAFFT.fasta";
+                            string answer = filelinux.Substring(0, file.Length - 6) + "_MAFFT.fasta";
 
-                        fw.Write("@echo off \r\nsetlocal enabledelayedexpansion\r\n" +
-                            "cls; 1>&2\r\nchcp 65001 1>&2\r\n\r\n" +
-                            "for /f \"usebackq tokens=*\" %%i IN (`cd`) DO @set current_dir=%%i\r\n" +
-                            "if /i \"%current_dir%\" == \"%systemroot%\" (\r\n" +
-                            "set mafft_working_dir=\"%~dp0\"\r\n" +
-                            ") else (\r\n" +
-                            " set mafft_working_dir=\"%current_dir%\"\r\n" +
-                            ")\r\n" +
-                            "pushd \"%mafft_working_dir%\"" +
-                            "echo; 1>&2\r\n" +
-                            "echo Preparing environment to run MAFFT on Windows. 1>&2\r\n" +
-                            "echo This may take a while, if real-time scanning by anti-virus software is on. 1>&2\r\n\r\n" +
-                            "set ROOTDIR=" + rootDir + "\\\"\r\n" +
-                            "set PATH=/usr/bin/:%PATH%\r\n" +
-                            "set MAFFT_BINARIES=/usr/lib/mafft\r\n" +
-                            "set TMPDIR=%TMP%\r\n" +
-                            "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
+                            fw.Write("@echo off \r\nsetlocal enabledelayedexpansion\r\n" +
+                                "cls; 1>&2\r\nchcp 65001 1>&2\r\n\r\n" +
+                                "for /f \"usebackq tokens=*\" %%i IN (`cd`) DO @set current_dir=%%i\r\n" +
+                                "if /i \"%current_dir%\" == \"%systemroot%\" (\r\n" +
+                                "set mafft_working_dir=\"%~dp0\"\r\n" +
+                                ") else (\r\n" +
+                                " set mafft_working_dir=\"%current_dir%\"\r\n" +
+                                ")\r\n" +
+                                "pushd \"%mafft_working_dir%\"" +
+                                "echo; 1>&2\r\n" +
+                                "echo Preparing environment to run MAFFT on Windows. 1>&2\r\n" +
+                                "echo This may take a while, if real-time scanning by anti-virus software is on. 1>&2\r\n\r\n" +
+                                "set ROOTDIR=" + rootDir + "\\\"\r\n" +
+                                "set PATH=/usr/bin/:%PATH%\r\n" +
+                                "set MAFFT_BINARIES=/usr/lib/mafft\r\n" +
+                                "set TMPDIR=%TMP%\r\n" +
+                                "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
 
-                        fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
+                            fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
 
-                        fw.Close();
+                            fw.Close();
 
-                        lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
-                        Application.DoEvents();
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
-                        info.UseShellExecute = false;
-                        info.CreateNoWindow = !chkShowCMD.Checked;
+                            lblStatus.Text = "Status: " + answer.Substring(answer.LastIndexOf('/') + 1);
+                            Application.DoEvents();
+                            System.Diagnostics.Process process = new System.Diagnostics.Process();
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
+                            info.UseShellExecute = false;
+                            info.CreateNoWindow = !chkShowCMD.Checked;
 
-                        process.StartInfo = info;
+                            process.StartInfo = info;
 
-                        process.Start();
-                        process.WaitForExit();
+                            process.Start();
+                            process.WaitForExit();
 
                             if (chkKeepCommandFile.Checked == true)
                             {
@@ -787,9 +787,9 @@ namespace GeneMatrix
                                 { System.IO.File.Delete(newBatchFileName); }
                                 System.IO.File.Copy(fileName, newBatchFileName);
                             }
+                        }
                     }
                 }
-            }
 
 
                 if (chkAggregate.Checked == true)
@@ -909,7 +909,7 @@ namespace GeneMatrix
 
                             if (chkKeepCommandFile.Checked == true)
                             {
-                                string newBatchFileName = file + "_" + sequenceType + "_PRANK.bat";                               
+                                string newBatchFileName = file + "_" + sequenceType + "_PRANK.bat";
                                 if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
                                 System.IO.File.Copy(fileName, newBatchFileName);
@@ -1041,12 +1041,12 @@ namespace GeneMatrix
                     }
                 }
 
-               
+
                 if (chkAggregate.Checked == true)
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "clustalw", sequenceType); 
+                    CombineAlignments(folder, files, "clustalw", sequenceType);
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1088,21 +1088,21 @@ namespace GeneMatrix
             }
 
             string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the Muscle executable file", "program (*.exe)|*.exe");
-            if (System.IO.File.Exists (fileName) == true)
+            if (System.IO.File.Exists(fileName) == true)
             {
                 Properties.Settings.Default.Muscle = fileName;
                 Properties.Settings.Default.Save();
-                return fileName; 
+                return fileName;
             }
-            else 
+            else
             {
                 MessageBox.Show("The Muscle executable is required for this function, see user guide for more information", "No external aligner");
-                return null; 
+                return null;
             }
         }
 
         private void btnMuscle_Click(object sender, EventArgs e)
-        {            
+        {
             string program = getMuscleFileName();
             if (program == null) { return; }
 
@@ -1156,7 +1156,7 @@ namespace GeneMatrix
                             if (chkKeepCommandFile.Checked == true)
                             {
                                 string newBatchFileName = file + "_" + sequenceType + "_Muscle.bat";
-                                if (System.IO.File.Exists(newBatchFileName)== true) 
+                                if (System.IO.File.Exists(newBatchFileName) == true)
                                 { System.IO.File.Delete(newBatchFileName); }
                                 System.IO.File.Copy(fileName, newBatchFileName);
                             }
@@ -1164,16 +1164,16 @@ namespace GeneMatrix
                     }
                 }
 
-               if (chkAggregate.Checked == true)
+                if (chkAggregate.Checked == true)
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "muscle", sequenceType); 
+                    CombineAlignments(folder, files, "muscle", sequenceType);
                 }
 
                 lblStatus.Text = "Status: Done";
                 Application.DoEvents();
-                
+
             }
             catch (Exception ex)
             { }
@@ -1190,7 +1190,7 @@ namespace GeneMatrix
         private void CombineAlignments(string folder, string[] files, string program, string sequenceType)
         {
             System.IO.StreamReader fs = null;
-            System.IO.StreamWriter fw = null;            
+            System.IO.StreamWriter fw = null;
             try
             {
                 Dictionary<string, string> sequences = new Dictionary<string, string>();
@@ -1305,7 +1305,7 @@ namespace GeneMatrix
                 if (DNAFiles.Length > 0)
                 { runMAFFT(program, folder, DNAFiles, "DNA"); }
 
-                if (ProteinFiles.Length>0)
+                if (ProteinFiles.Length > 0)
                 { runMAFFT(program, folder, ProteinFiles, "Protein"); }
             }
 
@@ -1323,7 +1323,7 @@ namespace GeneMatrix
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            modifyCommand mc=new modifyCommand();
+            modifyCommand mc = new modifyCommand();
             mc.ShowDialog();
         }
 
@@ -1331,7 +1331,7 @@ namespace GeneMatrix
         {
             string answer = "";
 
-            switch (task) 
+            switch (task)
             {
                 case "MuscleD":
                     answer = Properties.Settings.Default.MuscleD;
@@ -1361,102 +1361,6 @@ namespace GeneMatrix
             }
 
             return " " + answer + " ";
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder containing the sequences", "");
-            if (System.IO.Directory.Exists(folder) == false) { return; }
-
-            string[] DNAFiles = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
-            string[] ProteinFiles = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
-
-            string program = getClustalWFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runClustalw(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runClustalw(program, folder, ProteinFiles, "Protein"); }
-            }
-
-
-            program = getMuscleFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runMuscle(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runMuscle(program, folder, ProteinFiles, "Protein"); }
-            }
-
-            program = getMAFFTFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runMAFFT(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runMAFFT(program, folder, ProteinFiles, "Protein"); }
-            }
-
-            program = getPRANKFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runPRANK(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runPRANK(program, folder, ProteinFiles, "Protein"); }
-            }
-
-            DNAFiles = System.IO.Directory.GetFiles(folder, "*_DNA.fasta");
-            ProteinFiles = System.IO.Directory.GetFiles(folder, "*_protein.fasta");
-
-            program = getClustalWFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runClustalw(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runClustalw(program, folder, ProteinFiles, "Protein"); }
-            }
-
-
-            program = getMuscleFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runMuscle(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runMuscle(program, folder, ProteinFiles, "Protein"); }
-            }
-
-            program = getMAFFTFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runMAFFT(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runMAFFT(program, folder, ProteinFiles, "Protein"); }
-            }
-
-            program = getPRANKFileName();
-            if (program != null)
-            {
-                if (DNAFiles.Length > 0)
-                { runPRANK(program, folder, DNAFiles, "DNA"); }
-
-                if (ProteinFiles.Length > 0)
-                { runPRANK(program, folder, ProteinFiles, "Protein"); }
-            }
-
 
         }
     }
