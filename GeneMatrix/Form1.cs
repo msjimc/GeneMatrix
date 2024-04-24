@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace GeneMatrix
 {
@@ -18,6 +20,7 @@ namespace GeneMatrix
         private List<string> CDS = null;
         private List<string> tRNA = null;
         private List<string> rRNA = null;
+        private List<string> Unknown = null;
         private int rightButton = 1;
         private bool quitAnalysis = false;
         private string gblocks = null;
@@ -71,7 +74,7 @@ namespace GeneMatrix
 
             if (chkFolder.Checked == true)
             {
-                string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of GenBank files", "");
+                string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of GenBank and fasta files", "");
                 if (System.IO.Directory.Exists(folder) == false) { return; }
 
                 resetState();
@@ -79,8 +82,10 @@ namespace GeneMatrix
                 lblDataSource.Text = folder.Substring(folder.LastIndexOf("\\") + 1);
                 Application.DoEvents();
 
-                string[] gb = System.IO.Directory.GetDirectories(folder, "*.gb");
-                string[] genbank = System.IO.Directory.GetDirectories(folder = "*.genbank");
+                string[] gb = System.IO.Directory.GetFiles(folder, "*.gb");
+                string[] genbank = System.IO.Directory.GetFiles(folder ,"*.genbank");
+                string[] fasta = System.IO.Directory.GetFiles(folder , "*.fasta");
+                string[] fa = System.IO.Directory.GetFiles(folder , "*.fa");
 
                 if (gb.Length > 0)
                 {
@@ -92,6 +97,18 @@ namespace GeneMatrix
                 {
                     foreach (string f in genbank)
                     { readFile(f); }
+                }
+
+                if (fa.Length > 0)
+                {
+                    foreach (string f in fa)
+                    { readFAFile(f); }
+                }
+
+                if (fasta.Length > 0)
+                {
+                    foreach (string f in fasta)
+                    { readFAFile(f); }
                 }
             }
             else
@@ -106,6 +123,13 @@ namespace GeneMatrix
 
                 readFile(fileNmae);
             }
+
+            if (data.Count > 0)
+            {
+                populateLists();
+                btnReset.Enabled = true;
+            }
+
         }
 
         private void resetState()
@@ -116,6 +140,7 @@ namespace GeneMatrix
             CDS = new List<string>();
             tRNA = new List<string>();
             rRNA = new List<string>();
+            Unknown = new List<string>();
             tv1.Nodes.Clear();
             tv2.Nodes.Clear();
         }
@@ -176,9 +201,94 @@ namespace GeneMatrix
                 if (string.IsNullOrEmpty(empty) == true)
                 { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
                 else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
+                               
 
-                populateLists();
-                btnReset.Enabled = true;
+            }
+            finally
+            {
+                if (fs != null) { fs.Close(); }
+            }
+        }
+
+        private void readFAFile(string fileName)
+        {
+            System.IO.StreamReader fs = null;
+            try
+            {
+                fs = new System.IO.StreamReader(fileName);
+                string makeAccession =  (data.Count + 1).ToString(); ;
+                string name = "";
+                string sequence = "";
+                string organism = fileName.Substring(fileName.LastIndexOf("\\") + 1);
+                organism = organism.Substring(0, organism.LastIndexOf("."));
+
+                while (fs.Peek() > 0)
+                {
+                    string line = fs.ReadLine();
+                    if (line.StartsWith(">") == true)
+                    {
+                        if (sequence.Length > 0)
+                        {                          
+                            if (data.ContainsKey(makeAccession) == false)
+                            { data.Add(makeAccession, new Dictionary<string, Dictionary<string, feature>>()); }
+                            if (data[makeAccession].ContainsKey("Unknown") == false)
+                            { data[makeAccession].Add("Unknown", new Dictionary<string, feature>()); }
+                            int count = data[makeAccession]["Unknown"].Count;
+
+                            try
+                            {
+                                feature f = new feature(name, sequence, organism);
+                                if (data[makeAccession]["Unknown"].ContainsKey(f.WorkingName) == false)
+                                { data[makeAccession]["Unknown"].Add(f.WorkingName, f); }
+                            }
+                            catch (Exception ex) { }
+                        }
+                        name = line;
+                        sequence = "";
+                    }
+                    else
+                    {
+                        sequence += line.Trim();
+                    }                   
+                }
+
+                if (sequence.Length > 0 && name.Length>0)
+                {
+                    if (data.ContainsKey(makeAccession) == false)
+                    { data.Add(makeAccession, new Dictionary<string, Dictionary<string, feature>>()); }
+                    if (data[makeAccession].ContainsKey("Unknown") == false)
+                    { data[makeAccession].Add("Unknown", new Dictionary<string, feature>()); }
+                    int count = data[makeAccession]["Unknown"].Count;
+
+                    try
+                    {
+                        feature f = new feature(name, sequence, organism);
+                        if (data[makeAccession]["Unknown"].ContainsKey(f.WorkingName) == false)
+                        { data[makeAccession]["Unknown"].Add(f.WorkingName, f); }
+                    }
+                    catch (Exception ex) { }
+
+                    name = "";
+                    sequence = "";
+                }
+
+                string empty = "";
+                List<string> empltyList = new List<string>();
+                foreach (string key in data.Keys)
+                {
+                    if (data[key].Count == 0)
+                    {
+                        empty += " " + key;
+                        empltyList.Add(key);
+                    }
+                    else { sequenceName.Add(key); }
+                }
+                foreach (string key in empltyList)
+                { data.Remove(key); }
+
+                if (string.IsNullOrEmpty(empty) == true)
+                { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
+                else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
 
             }
             finally
@@ -315,6 +425,13 @@ namespace GeneMatrix
                                 { rRNA.Add(f.WorkingName); }
                             }
                             break;
+                        case "Unknown":
+                            foreach (feature f in data[name][featureType].Values)
+                            {
+                                if (Unknown.Contains(f.WorkingName) == false)
+                                { Unknown.Add(f.WorkingName); }
+                            }
+                            break;
                     }
                 }
             }
@@ -322,6 +439,7 @@ namespace GeneMatrix
             TreeNode cds = new TreeNode("CDS", -1, -1);
             TreeNode trna = new TreeNode("tRNA", -1, -1);
             TreeNode rrna = new TreeNode("rRNA", -1, -1);
+            TreeNode unknown = new TreeNode("Unknown", -1, -1);
 
             if (CDS != null)
             {
@@ -344,6 +462,13 @@ namespace GeneMatrix
                 { rrna.Nodes.Add(new TreeNode(name, 0, 0)); }
             }
 
+            if (Unknown != null)
+            {
+                Unknown.Sort();
+                foreach (string name in Unknown)
+                { unknown.Nodes.Add(new TreeNode(name, 0, 0)); }
+            }
+
             TreeNode tv1parent = new TreeNode("Sequences", -1, -1);
             tv1.Nodes.Add(tv1parent);
 
@@ -351,22 +476,21 @@ namespace GeneMatrix
             tv2.Nodes.Add(tv2parent);
 
             if (cds.Nodes.Count > 0)
-            {
-                tv1parent.Nodes.Add(cds);
+            { tv1parent.Nodes.Add(cds); }
                 tv2parent.Nodes.Add(new TreeNode("CDS"));
-            }
+            
 
             if (trna.Nodes.Count > 0)
-            {
-                tv1parent.Nodes.Add(trna);
+            { tv1parent.Nodes.Add(trna); }
                 tv2parent.Nodes.Add(new TreeNode("tRNA"));
-            }
+
 
             if (rrna.Nodes.Count > 0)
-            {
-                tv1parent.Nodes.Add(rrna);
+            { tv1parent.Nodes.Add(rrna); }
                 tv2parent.Nodes.Add(new TreeNode("rRNA"));
-            }
+            
+            if (unknown.Nodes.Count > 0)
+            { tv1parent.Nodes.Add(unknown); }
 
             tv1parent.Expand();
             tv2parent.Expand();
@@ -418,7 +542,7 @@ namespace GeneMatrix
                             pN.Nodes.Add(cN);
                         }
                     }
-                }
+                }                
             }
             tv2.SelectedNode = tv2.Nodes[0];
 
@@ -449,11 +573,15 @@ namespace GeneMatrix
 
             foreach (TreeNode n in tv1.Nodes[0].Nodes)
             {
-                if (n.Text == featureType)
+                if (n.Text == featureType || n.Text == "Unknown")
                 {
                     foreach (TreeNode donor in n.Nodes)
                     {
-                        donor.Tag = featureType;
+                        if (n.Text != "Unknown")
+                        { donor.Tag = featureType; }
+                        else
+                        { donor.Tag = "Unknown"; }
+
                         if (donor.Checked == true)
                         {
                             donor.ImageIndex = 0;

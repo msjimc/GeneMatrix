@@ -19,10 +19,38 @@ namespace GeneMatrix
         private string featureType = "";
         private string DNA = "";
         private string protein = "";
+
+        public feature(string Name, string Sequence, string Organism)
+        {
+            
+            featureType = "Unknown";
+            
+
+            string[] data = Name.Split(';');
+            if (data.Length == 4)
+            {
+                name = Name.Substring(1);
+                workingName = data[3];
+                if (data[2] == "-")
+                { DNA = reverseComplement(Sequence); }
+                else { DNA = Sequence; }
+            }
+            else
+            { 
+                name = Name.Substring(1);
+                workingName = name;
+                organism = Organism;
+                DNA = Sequence;
+            }
+
+        }
+
         public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count)
         {
-            organism=Organism;
+            organism = Organism;
             featureType = FeatureType;
+           
+            
             setcoordinates(lines, index, sequence);
 
             for (int lineIndex = index + 1; lineIndex < endIndex; lineIndex++)
