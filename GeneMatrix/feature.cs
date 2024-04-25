@@ -29,6 +29,7 @@ namespace GeneMatrix
             string[] data = Name.Split(';');
             if (data.Length == 4)
             {
+                featureType = data[0];
                 name = Name.Substring(1);
                 workingName = data[3];
                 if (data[2] == "-")
@@ -37,9 +38,9 @@ namespace GeneMatrix
             }
             else
             { 
-                name = Name.Substring(1);
-                workingName = name;
                 organism = Organism;
+                name = Name.Substring(1);
+                workingName = name;                
                 DNA = Sequence;
             }
 

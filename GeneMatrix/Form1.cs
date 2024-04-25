@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.LinkLabel;
 
 namespace GeneMatrix
@@ -71,6 +72,7 @@ namespace GeneMatrix
         private void btnImport_Click(object sender, EventArgs e)
         {
             btnReset.Enabled = false;
+            string empty = "";
 
             if (chkFolder.Checked == true)
             {
@@ -86,49 +88,69 @@ namespace GeneMatrix
                 string[] genbank = System.IO.Directory.GetFiles(folder ,"*.genbank");
                 string[] fasta = System.IO.Directory.GetFiles(folder , "*.fasta");
                 string[] fa = System.IO.Directory.GetFiles(folder , "*.fa");
+                              
 
                 if (gb.Length > 0)
                 {
                     foreach (string f in gb)
-                    { readFile(f); }
+                    { empty = readFile(f, empty); }
                 }
 
                 if (genbank.Length > 0)
                 {
                     foreach (string f in genbank)
-                    { readFile(f); }
+                    { empty += readFile(f, empty); }
                 }
 
                 if (fa.Length > 0)
                 {
                     foreach (string f in fa)
-                    { readFAFile(f); }
+                    { empty += readFAFile(f, empty); }
                 }
 
                 if (fasta.Length > 0)
                 {
                     foreach (string f in fasta)
-                    { readFAFile(f); }
+                    { empty += readFAFile(f, empty); }
                 }
             }
             else
             {
-                string fileNmae = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb;*.genbank)|*.gb;*.genbank");
-                if (System.IO.File.Exists(fileNmae) == false) { return; }
+                string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb;*.genbank)|*.gb;*.genbank");
+                if (System.IO.File.Exists(fileName) == false) { return; }
 
                 resetState();
 
-                lblDataSource.Text = fileNmae.Substring(fileNmae.LastIndexOf("\\") + 1);
+                lblDataSource.Text = fileName.Substring(fileName.LastIndexOf("\\") + 1);
                 Application.DoEvents();
 
-                readFile(fileNmae);
+                empty = readFile(fileName, empty);
             }
+
+            List<string> empltyList = new List<string>();
+            foreach (string key in data.Keys)
+            {
+                if (data[key].Count == 0)
+                {
+                    empty += " " + key;
+                    empltyList.Add(key);
+                }
+                else { sequenceName.Add(key); }
+            }
+            foreach (string key in empltyList)
+            { data.Remove(key); }
+
+
 
             if (data.Count > 0)
             {
                 populateLists();
                 btnReset.Enabled = true;
             }
+
+            if (string.IsNullOrEmpty(empty) == true)
+            { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
+            else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
 
         }
 
@@ -145,7 +167,7 @@ namespace GeneMatrix
             tv2.Nodes.Clear();
         }
 
-        private void readFile(string fileName)
+        private string readFile(string fileName, string empty)
         {
 
             System.IO.StreamReader fs = null;
@@ -182,35 +204,16 @@ namespace GeneMatrix
                     lines = new List<string>();
                     if (quitAnalysis == true)
                     { resetState(); }
-                }
-
-                string empty = "";
-                List<string> empltyList = new List<string>();
-                foreach (string key in data.Keys)
-                {
-                    if (data[key].Count == 0)
-                    {
-                        empty += " " + key;
-                        empltyList.Add(key);
-                    }
-                    else { sequenceName.Add(key); }
-                }
-                foreach (string key in empltyList)
-                { data.Remove(key); }
-
-                if (string.IsNullOrEmpty(empty) == true)
-                { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
-                else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
-                               
-
+                }                                                                                          
             }
             finally
             {
                 if (fs != null) { fs.Close(); }
             }
+            return empty;
         }
 
-        private void readFAFile(string fileName)
+        private string readFAFile(string fileName, string empty)
         {
             System.IO.StreamReader fs = null;
             try
@@ -270,31 +273,15 @@ namespace GeneMatrix
 
                     name = "";
                     sequence = "";
-                }
-
-                string empty = "";
-                List<string> empltyList = new List<string>();
-                foreach (string key in data.Keys)
-                {
-                    if (data[key].Count == 0)
-                    {
-                        empty += " " + key;
-                        empltyList.Add(key);
-                    }
-                    else { sequenceName.Add(key); }
-                }
-                foreach (string key in empltyList)
-                { data.Remove(key); }
-
-                if (string.IsNullOrEmpty(empty) == true)
-                { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
-                else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
-
+                }                            
             }
             finally
             {
                 if (fs != null) { fs.Close(); }
             }
+
+            return empty;
+        
         }
 
         private void processData(List<string> lines, int startOfSequence)
@@ -643,12 +630,12 @@ namespace GeneMatrix
                     names.Add(nN.Text);
                     foreach (TreeNode nnN in nN.Nodes)
                     { names.Add(nnN.Text); }
-
+                    
                     foreach (string name in sequenceName)
                     {
                         foreach (string featureName in names)
                         {
-                            if (data[name][featureType].ContainsKey(featureName) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
                             {
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
                                 {
@@ -683,6 +670,25 @@ namespace GeneMatrix
                                     }
                                 }
                             }
+                            if (data[name].ContainsKey("Unknown") == true && data[name]["Unknown"].ContainsKey(featureName) == true)
+                            {
+                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                {
+                                    int length = data[name]["Unknown"][featureName].getDNASequence.Length;
+                                    string key = featureType + "|" + names[0] + "|" + "D";
+                                    if (lengths.ContainsKey(key) == true)
+                                    {
+                                        if (lengths[key] < length)
+                                        { lengths[key] = length; }
+                                    }
+                                    else
+                                    {
+                                        lengths.Add(key, length);
+                                        if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
+                                        { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")); }
+                                    }
+                                }                               
+                            }
                         }
                     }
                 }
@@ -695,7 +701,7 @@ namespace GeneMatrix
             }
 
             char padding = ' ';
-            if (false) { padding = '-'; }
+            //if (false) { padding = '-'; }
 
             foreach (TreeNode fN in tv2.Nodes[0].Nodes)
             {
@@ -708,13 +714,13 @@ namespace GeneMatrix
                     { names.Add(nnN.Text); }
 
                     foreach (string name in sequenceName)
-                    {
+                    {               
                         string species = "";
                         string DNA = "";
                         string protein = "";
                         foreach (string featureName in names)
                         {
-                            if (data[name][featureType].ContainsKey(featureName) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
                             {
                                 species = data[name][featureType][featureName].getOrganism.Replace(" ", "_");
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
@@ -731,6 +737,18 @@ namespace GeneMatrix
                                     {
                                         protein = data[name][featureType][featureName].getProteinSequence;
                                         protein = protein + new string(padding, lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
+                                    }
+                                }
+                            }
+                            else if (data[name].ContainsKey("Unknown") == true && data[name]["Unknown"].ContainsKey(featureName) == true)
+                            {
+                                species = data[name]["Unknown"][featureName].getOrganism.Replace(" ", "_");
+                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                {
+                                    if (string.IsNullOrEmpty(DNA) == true)
+                                    {
+                                        DNA = data[name]["Unknown"][featureName].getDNASequence;
+                                        DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
                                     }
                                 }
                             }
@@ -1402,6 +1420,8 @@ namespace GeneMatrix
             try
             {
                 Dictionary<string, string> sequences = new Dictionary<string, string>();
+                Dictionary<string, string> limits = new Dictionary<string, string>();
+                int lastLimit = 0;
 
                 foreach (string file in files)
                 {
@@ -1437,12 +1457,19 @@ namespace GeneMatrix
                         }
                         fs.Close();
 
+
                         int length = 0;
                         foreach (string v in sequences.Values)
                         {
                             if (length < v.Length)
                             { length = v.Length; }
                         }
+
+                        string LimitsKey = file.Substring(file.LastIndexOf("\\") + 1).Replace(".fasta","");
+                        string limit = LimitsKey + "\t" + (lastLimit + 1).ToString() +  "\t" + length.ToString();
+                        limits.Add(LimitsKey, limit);
+                        lastLimit = length;
+
                         foreach (string key in sequences.Keys)
                         {
                             if (length < sequences[key].Length)
@@ -1467,6 +1494,11 @@ namespace GeneMatrix
                     fw.Write(">" + key + "\n" + sequences[key] + "\n");
                 }
                 fw.Close();
+
+                fw = new System.IO.StreamWriter(exportName.Substring(0, exportName.Length - 6) + ".txt");
+                foreach (string key in limits.Keys)
+                { fw.Write(limits[key] + "\n"); }
+                fw.Close ();
 
                 if (chkGBlocks.Checked==true && string.IsNullOrEmpty(gblocks)== false)
                 {
