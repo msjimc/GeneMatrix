@@ -65,7 +65,7 @@ Figure 1
 
 ## Importing sequence data
 
-The  ***Import data*** section consists of just two controls which allow the selection of the data files. To import data press the ```Import``` button in the lower right of the panel (blue box Figure 2 a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb or *.genbank file extension, while if checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb or *.genbank file extension, with each file containing one or more sequences.  
+The  ***Import data*** section consists of just two controls which allow the selection of the data files. To import data press the ```Import``` button in the lower right of the panel (blue box Figure 2 a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb, or *.genbank file extension, while if checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb, *.genbank, *.fa or *.fasta file extension. When processing a genbank file it may contain data on one or more GenBank entries (i.e mitochondrial or viral genomes) a fasta file should only contain sequences from a single species/genome.  
 
 <hr />
 
@@ -77,7 +77,7 @@ Figure 2: Data is imported by pressing the ```Import``` button.
 
 ***Note:*** When importing a single file it is expected that the file contains multiple entries, while when importing a folder of files each file can contain one or more sequences. If the same accession number is present twice, ```GeneMatrix``` will warn you and give the option to abort the process allowing you to remove the duplicated sequences or allow you to continue and ignoring the second entry.
 
-Once imported, ```GeneMatrix``` displays the number of retained entries and lists any with no relevant annotation (i.e. contains no tRNA, rRNA or CDS features), these sequences will be omitted from all subsequent processing (Figure 3 and see [Feature selection](#features-names) below).
+Once imported, ```GeneMatrix``` displays the number of retained entries and lists any with no relevant annotation (i.e. genBank entry that contains no tRNA, rRNA or CDS features), these sequences will be omitted from all subsequent processing (Figure 3 and see [Feature selection](#features-names) below).
 
 <hr />
 
@@ -127,10 +127,26 @@ If the feature is encoded on the reverse strand, the coordinates are places in b
 Occasionally, the exact coordinates for a sequence are not know, in these cases the coordinates may contain one or both '<' '>' characters suggesting the sequences starts or ends beyond the region suggested. In these situations ```GeneMatrix``` just uses the coordinates supplied i.e. the entry: <1..532 would be treated as: 1..532.   
 In the data file downloaded in the [Obtaining the sequence files](obtainingFiles.md) section, sequence MG912796.1 contains the sequence for a tRNA-Leu as located at ***complement(<13358)***, in this case with so little information the tRNA is ignored.
 
+### Fasta file data
+
+A fasta file may contain data for a number of different genes, rRNAs or tRNAs, but should only contain data that relates to a single data set. For instance the genes originated from a single viral genome, mitochondrion or species.   
+ If the fasta file was created by the Mitos mitochondrion annotation web site hosted on Galaxy, each sequence's name in a fasta file will follow the specific format:
+
+> \>'Species name';'Coordinates in genome sequence';'Strand orientation';'Name'
+
+Consequently, if the name appears to follow this format (it contains only three ';' characters), the species and sequence name will be taken from the sequence's name. Also if the 'Strand orientation' is '-' the the saved sequence will be the reverse complement of the sequence in the file. If the sequence name doesn't follow this format, the fasta file's name will be used as the the species name and the sequence's name in the file will be used as the gene/feature name. ***Importantly:***
+ the sequence will be assumed to be in the forward orientation. 
+ 
+#### Important differences to GenBank data
+ 
+Since fasta files do not contain an accession ID, this value is set to a number that represent how many sequences GenBank entries / fasta files had been previously imported. 
+
+Since fasta files do not contain any information on the sequences type (___CDS___, ___rRNA___ and ___tRNA___) all the sequences are classified as ___Unknown___.
+
 
 ## Working with the imported sequences
 
-Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, which contains up to three child nodes (___CDS___, ___rRNA___ and ___tRNA___). The panel on the left represents  unselected data, while the panel on the right represents the selected features. Consequently, initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
+Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, the left hand tree represents unselected sequences and contains up to four child nodes (___CDS___, ___rRNA___, ___tRNA___ and ___Unknown___), while the right hand view represents selected sequences and contain three nodes (___CDS___, ___rRNA___ and ___tRNA___). Initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
 
 <hr />
 
