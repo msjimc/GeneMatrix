@@ -181,7 +181,7 @@ namespace GeneMatrix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-t=p -e=fa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-t=p -e=.fa")]
         public string GBlocksP {
             get {
                 return ((string)(this["GBlocksP"]));

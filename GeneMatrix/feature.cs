@@ -29,8 +29,8 @@ namespace GeneMatrix
             string[] data = Name.Split(';');
             if (data.Length == 4)
             {
-                featureType = data[0];
-                name = Name.Substring(1);
+                organism = data[0].Substring(1);
+                name = data[3];                
                 workingName = data[3];
                 if (data[2] == "-")
                 { DNA = reverseComplement(Sequence); }
@@ -43,7 +43,6 @@ namespace GeneMatrix
                 workingName = name;                
                 DNA = Sequence;
             }
-
         }
 
         public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count)

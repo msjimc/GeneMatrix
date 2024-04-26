@@ -756,19 +756,35 @@ namespace GeneMatrix
 
                         if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D") == true)
                         {
-                            if (string.IsNullOrEmpty(DNA) == true)
-                            { DNA = new string('n', lengths[featureType + "|" + names[0] + "|" + "D"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta"), true);
-                            fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
-                            fw.Close();
+                            if (string.IsNullOrEmpty(DNA) == true && chkIgnoreEmptySequence.Checked == false)
+                            { 
+                                DNA = new string('n', lengths[featureType + "|" + names[0] + "|" + "D"]); 
+                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta"), true);
+                                fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
+                                fw.Close();
+                            }
+                            else if (string.IsNullOrEmpty(DNA) ==false)
+                            {
+                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
+                                fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
+                                fw.Close();
+                            }
                         }
                         if ((rboBoth.Checked == true || rboProtein.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "P") == true)
                         {
-                            if (string.IsNullOrEmpty(protein) == true)
-                            { protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "P"]); }
-                            System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
-                            fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
-                            fw.Close();
+                            if (string.IsNullOrEmpty(protein) == true && chkIgnoreEmptySequence.Checked == false)
+                            {
+                                protein = new string('x', lengths[featureType + "|" + names[0] + "|" + "P"]);
+                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
+                                fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
+                                fw.Close();
+                            }
+                            else if (string.IsNullOrEmpty(protein) == false)
+                            {
+                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
+                                fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
+                                fw.Close();
+                            }
                         }
                     }
                 }
@@ -947,7 +963,7 @@ namespace GeneMatrix
                                 "set TMPDIR=%TMP%\r\n" +
                                 "set MAFFT_TMPDIR=%TMPDIR%\r\n\r\n");
 
-                            fw.Write("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
+                            fw.WriteLine("%ROOTDIR%\\usr\\bin\\bash\" \"/usr/bin/mafft\" " + extension + " \"" + filelinux + "\" > \"" + answer + "\"");
 
                             if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
                             {
@@ -956,7 +972,7 @@ namespace GeneMatrix
                                 { gblocksExtension = getCommandExtension("GBlocksD"); }
                                 else
                                 { gblocksExtension = getCommandExtension("GBlocksP"); }
-                                fw.Write("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + "\"" + gblocksExtension);
+                                fw.WriteLine("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + "\"" + gblocksExtension);
                             }
 
                             fw.Close();
@@ -966,7 +982,7 @@ namespace GeneMatrix
                             System.Diagnostics.Process process = new System.Diagnostics.Process();
                             System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/c " + fileName);
                             info.UseShellExecute = false;
-                            info.CreateNoWindow = !chkShowCMD.Checked;
+                            info.CreateNoWindow = false;// !chkShowCMD.Checked;
 
                             process.StartInfo = info;
 
@@ -1062,7 +1078,7 @@ namespace GeneMatrix
         }
 
         private void runPRANK(string program, string folder, string[] files, string sequenceType)
-        {
+           {
             System.IO.StreamWriter fw = null;
             string fileName = folder + "\\cmd_PRANK.bat";
 
@@ -1094,7 +1110,7 @@ namespace GeneMatrix
                                 { gblocksExtension = getCommandExtension("GBlocksD"); }
                                 else
                                 { gblocksExtension = getCommandExtension("GBlocksP"); }
-                                fw.Write("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + ".best.fas\"" + gblocksExtension);
+                                fw.WriteLine("\"" + gblocks + "\" \"" + answer.Replace("/", "\\") + ".best.fas\"" + gblocksExtension);
                             }
 
                             fw.Close();
@@ -1228,7 +1244,7 @@ namespace GeneMatrix
                                 { gblocksExtension = getCommandExtension("GBlocksD"); }
                                 else
                                 { gblocksExtension = getCommandExtension("GBlocksP"); }
-                                fw.Write("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
+                                fw.WriteLine("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
                             }
 
                             fw.Close();
@@ -1363,7 +1379,7 @@ namespace GeneMatrix
                                 { gblocksExtension = getCommandExtension("GBlocksD"); }
                                 else
                                 { gblocksExtension = getCommandExtension("GBlocksP"); }
-                                fw.Write("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
+                                fw.WriteLine("\"" + gblocks + "\" \"" + answer + "\"" + gblocksExtension);
                             }
 
                             fw.Close();
@@ -1502,7 +1518,7 @@ namespace GeneMatrix
 
                 if (chkGBlocks.Checked==true && string.IsNullOrEmpty(gblocks)== false)
                 {
-                    runGBlocks(folder, exportName,sequenceType,program);
+                    runGBlocks(folder, exportName, sequenceType, program);
                 }
 
             }

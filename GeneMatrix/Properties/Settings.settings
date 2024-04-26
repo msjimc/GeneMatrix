@@ -42,7 +42,7 @@
       <Value Profile="(Default)">-t=d -e=.fa</Value>
     </Setting>
     <Setting Name="GBlocksP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-t=p -e=fa</Value>
+      <Value Profile="(Default)">-t=p -e=.fa</Value>
     </Setting>
     <Setting Name="GBlocks" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

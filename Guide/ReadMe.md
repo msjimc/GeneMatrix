@@ -89,13 +89,14 @@ Figure 3
 
 ## Retained data
 
-### Genbank entry level data: accession ID, species name and sequence
+### Genbank files 
+#### Genbank entry level data: accession ID, species name and sequence
 When reading an entry, ```GeneMatrix``` identifies the entry's accession number, species name and its sequence as follows:   
 * The accession ID is obtained from the line beginning with ___VERSION___.   
 * The species name is taken from the line starting with two spaces and then ___ORGANISM___.  
 * The sequence is considered as any text after the line starting with ___ORIGIN___ and before the line starting with ___\\\\___. When all the features from an entry have been stored the sequence data is discarded. 
  
-### Selection of features to be retained
+#### Selection of features to be retained
 
 The level of annotation in GenBank entries is very variable, some entries only have the sequence and genome level annotation such as accession ID, species taxonomy and submitter details, while others are extensively annotated. For instance in the sequence.gb file downloaded in the [Obtaining the sequence files](obtainingFiles.md), 18 contain no relevant annotation. Not all of the features are relevant to the production of sequence alignments for phylogenetic studies consequently, ```GeneMatrix``` limits the features retained to those tagged with the ***CDS***, ***tRNA*** or ***rRNA***. These were selected as they have very well defined starting and ending points, with their sequence consistent between species, whereas features such as  those linked to the ___variation___, ___gene___ and ___misc_feature___ are not. For example:
 
@@ -134,25 +135,26 @@ A fasta file may contain data for a number of different genes, rRNAs or tRNAs, b
 
 > \>'Species name';'Coordinates in genome sequence';'Strand orientation';'Name'
 
-Consequently, if the name appears to follow this format (it contains only three ';' characters), the species and sequence name will be taken from the sequence's name. Also if the 'Strand orientation' is '-' the the saved sequence will be the reverse complement of the sequence in the file. If the sequence name doesn't follow this format, the fasta file's name will be used as the the species name and the sequence's name in the file will be used as the gene/feature name. ***Importantly:***
+Consequently, if the name appears to follow this format (it contains exactly three ';' characters), the species and sequence name will be taken from the sequence's name. Also if the 'Strand orientation' value is a '-' character the the saved sequence will be the reverse complement of the sequence in the file. If the sequence name doesn't follow this format, the fasta file's name will be used as the the species name and the sequence's name in the file will be used as the gene/feature name. ***Importantly:***
  the sequence will be assumed to be in the forward orientation. 
  
-#### Important differences to GenBank data
+### Important differences between fasta file and GenBank data
  
-Since fasta files do not contain an accession ID, this value is set to a number that represent how many sequences GenBank entries / fasta files had been previously imported. 
+* Fasta files do not contain an accession ID, this value is set to a number that represent how many sequences GenBank entries / fasta files had been previously imported. 
 
-Since fasta files do not contain any information on the sequences type (___CDS___, ___rRNA___ and ___tRNA___) all the sequences are classified as ___Unknown___.
+* Fasta files do not contain any information on the sequences type (___CDS___, ___rRNA___ and ___tRNA___) consequently, all the sequences are classified as ___Unknown___.
 
+* Only nucleotide data can be imported in a fasta file and GeneMatrix does not translate DNA t protein sequence.
 
 ## Working with the imported sequences
 
-Once the data has been imported, the ```Combine features with different names``` section becomes active. The area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, the left hand tree represents unselected sequences and contains up to four child nodes (___CDS___, ___rRNA___, ___tRNA___ and ___Unknown___), while the right hand view represents selected sequences and contain three nodes (___CDS___, ___rRNA___ and ___tRNA___). Initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left do as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
+Once the data has been imported, the ```Combine features with different names``` section becomes active. This area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, the left hand tree represents unselected sequences and contains up to four child nodes (___CDS___, ___rRNA___, ___tRNA___ and ___Unknown___), while the right hand view represents selected sequences and contains three nodes (___CDS___, ___rRNA___ and ___tRNA___). Initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left contain references to all the imported data as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
 
 <hr />
 
 ![Figure 4](images/figure4.jpg)
 
-Figure 4
+Figure 4 Sequence data imported from a folder containing one fasta file and a single multiple entry GenBank file.
 
 <hr />
 
@@ -181,7 +183,7 @@ Figure 6: In Figure 6 a, all the features in the ___CDS___ set except ***cytb***
 
 ### Amalgamating sequences with different names
 
-In Figure 7 a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes respectively. As a result, features with the ***NADH dehydrogenase subunit 1*** name will be combined with those called ***ND1*** in to a data file called ***ND1***_DNA.fasta or ***ND1***_Protein.fasta. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
+In Figure 7 a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes respectively. As a result, features called ***NADH dehydrogenase subunit 1*** will be combined with those called ***ND1*** in to a data file called ***ND1***_DNA.fasta or ***ND1***_Protein.fasta. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
 To combine the unselected ***cytb*** features with the selected  ***CYTB*** features, left mouse click the ***cytb*** feature in the left hand panel and then click the ***CYTB*** text using the left mouse button (Figure 7 b). 
 
 <hr />
@@ -192,9 +194,13 @@ Figure 7
 
 <hr />
 
+### Working with features in the Unknown dataset
+
+Features with a known type i.e. they are in one of the  ___CDS___, ___rRNA___ and ___tRNA___ nodes on the left hand panel can only be moved to the same node in the right han panel. However, features imported from a fasta file have no known type and so are placed in the ___Unknown___ panel. When selecting these sequence, the user can place them in any of the three feature type nodes (___CDS___, ___rRNA___ and ___tRNA___) or one of their child nodes. If a feature of Unknown type is deselected it will return to the ___Unknown___ node (See below).
+
 ### Deselecting a sequence for export
 
-Deselecting a feature for export is achieved by clicking on the node using the right hand mouse button. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). 
+Deselecting a feature for export is achieved by clicking on the node using the right hand mouse button. This removes the node from the right hand tree, returning it to left hand tree. If a node contains child nodes, these are removed from the node and also placed in the left hand tree (Figure 8). If a node was originally from a fasta file, it is returned to the ___Unknown___ node.
 
 <hr />
 
@@ -230,17 +236,17 @@ Figure 10
 
 The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (red box in Figure 9). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another feature. For instance in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the ND1 file, which is called ***CDS-ND1_DNA.fasta***. 
 
-***Note:*** Not all names can be used in file names as they may contain characters that are not allowed such as '\\', '?' or ":". Consequently, characters that are not letters, numbers, '-', '_', '.' or white space are replaced by a '\_' character.
+***Note:*** Not all names can be used in file names as they may contain characters that are not allowed such as '\\', '?' or ":". Consequently, characters that are not letters, numbers, '-', '_', '.' or ' ' are replaced by a '\_' character.
 
 #### Sequence names
 
 The name of the file denotes which feature it contains, while each individual sequence in the file is named after the GenBank's accession ID and the species name: \<Accession ID>-\<Species name>
 
-To make the names compatible with various multiple alignment programs, any space characters are replaced by a '_', otherwise the names may be truncated in an alignment file generated by programs such as Muscle. 
+To make the names compatible with various multiple alignment programs, any space characters are replaced by a '_', otherwise the names may be truncated after the first space charater in an alignment file generated by programs such as Muscle. For eaxmple: ***OQ581203.1-Chelonoidis vicina*** may be reduced to ***OQ581203.1-Chelonoidis***.
 
 #### Absent data
 
-Sequences that are shorter than the longest sequence are padded with space characters to make all sequence lines in a file the same length. If a GenBank entry doesn't contain any sequence data for a particular feature, its sequence in the exported file will be a series of 'n' (DNA) or 'x' (protein) characters that is the same length as the longest sequence in that set. However, if no entries have data (i.e. no tRNA or rRNA feature will have a protein sequence) no file will be produced.
+Sequences that are shorter than the longest sequence are padded with space characters to make all sequence lines in a file the same length. If an entry doesn't contain any sequence data for a particular feature and the ___Ignore empty sequences___ is unchecked (red box in Figure 9), the sequence in the exported file will be a series of 'n' (DNA) or 'x' (protein) characters that is the same length as the longest sequence in that set. Whereas, if sequence is blank and the ___Ignore empty sequences___ is checked, the sequences will not be added to the file. However, if no entries have data (i.e. no tRNA or rRNA feature will have a protein sequence) no file will be produced.
 
 ## Creating multiple sequence alignments
 
@@ -281,6 +287,10 @@ Figure 12
 Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through these files looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file which contains the command(s) needed to run the program. This file is then sent a ```cmd shell``` to process. After each alignment, the batch file is deleted, but if you wish to retain the batch files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. If you try to open these files by clicking on them, they will open a ```cmd shell``` window and attempt to rerun the alignment, consequently, to view/edit their contents drag and drop the file icon on to a text editor ideally [Notepad++](https://notepad-plus-plus.org/).
 
 By default the ```cmd shell``` window is hidden meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it (right click on the programs name and select ```End task```). If you are producing a number of alignments, you may need to rename the folder of files, otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another alignment will fail as ```GeneMatrix``` will not know where to find the files.
+
+### Cleaning the alignment with GBlocks
+
+Once the alignment has been created, it is possible to 'clean' the alignment using GBlocks. To do this check the ___Clean with GBlocks___ option. This will produce a webpage with the ___*.htm___ file extension and a cleaned aligned with the same name as the uncleaned aligned to which ___.fa___ has been added.
 
 <hr />
 
@@ -413,6 +423,9 @@ where:
 * --inputorder - order of sequences in the alignment is the same as their order in the input file.
 * [input file (Linux)] is the fasta file to align.  The file name uses the Linux '/' rather than the Windows '\\' separators.
 * [results file (Linux)] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
+
+
+***Note***: while for the other programs it is possible to hidden the ___CMD___ window, for MAFFT to work with the GBlocks program the window needs to be visible.
 
 #### Website
 

@@ -47,6 +47,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.chkGBlocks = new System.Windows.Forms.CheckBox();
             this.chkKeepCommandFile = new System.Windows.Forms.CheckBox();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
@@ -60,7 +61,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.chkGBlocks = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreEmptySequence = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -209,6 +210,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.chkIgnoreEmptySequence);
             this.groupBox3.Controls.Add(this.rboBoth);
             this.groupBox3.Controls.Add(this.rboProtein);
             this.groupBox3.Controls.Add(this.rboDNA);
@@ -299,6 +301,17 @@
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Align individual features";
+            // 
+            // chkGBlocks
+            // 
+            this.chkGBlocks.AutoSize = true;
+            this.chkGBlocks.Location = new System.Drawing.Point(533, 63);
+            this.chkGBlocks.Name = "chkGBlocks";
+            this.chkGBlocks.Size = new System.Drawing.Size(118, 17);
+            this.chkGBlocks.TabIndex = 21;
+            this.chkGBlocks.Text = "Clean with GBlocks";
+            this.chkGBlocks.UseVisualStyleBackColor = true;
+            this.chkGBlocks.CheckedChanged += new System.EventHandler(this.chkGBlocks_CheckedChanged);
             // 
             // chkKeepCommandFile
             // 
@@ -430,16 +443,15 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Modify command line options";
             // 
-            // chkGBlocks
+            // chkIgnoreEmptySequence
             // 
-            this.chkGBlocks.AutoSize = true;
-            this.chkGBlocks.Location = new System.Drawing.Point(533, 63);
-            this.chkGBlocks.Name = "chkGBlocks";
-            this.chkGBlocks.Size = new System.Drawing.Size(118, 17);
-            this.chkGBlocks.TabIndex = 21;
-            this.chkGBlocks.Text = "Clean with GBlocks";
-            this.chkGBlocks.UseVisualStyleBackColor = true;
-            this.chkGBlocks.CheckedChanged += new System.EventHandler(this.chkGBlocks_CheckedChanged);
+            this.chkIgnoreEmptySequence.AutoSize = true;
+            this.chkIgnoreEmptySequence.Location = new System.Drawing.Point(424, 46);
+            this.chkIgnoreEmptySequence.Name = "chkIgnoreEmptySequence";
+            this.chkIgnoreEmptySequence.Size = new System.Drawing.Size(142, 17);
+            this.chkIgnoreEmptySequence.TabIndex = 10;
+            this.chkIgnoreEmptySequence.Text = "Ignore empty sequences";
+            this.chkIgnoreEmptySequence.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -451,7 +463,7 @@
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(709, 588);
             this.Name = "Form1";
             this.Text = "Gene matrix";
@@ -505,6 +517,7 @@
         private System.Windows.Forms.CheckBox chkKeepCommandFile;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkGBlocks;
+        private System.Windows.Forms.CheckBox chkIgnoreEmptySequence;
     }
 }
 
