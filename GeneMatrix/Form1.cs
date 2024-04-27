@@ -1743,5 +1743,110 @@ namespace GeneMatrix
                 }
             }
         }
+
+        private void btnImportSteps_Click(object sender, EventArgs e)
+        {
+            string file = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the file containing the amalgamtions steps", "Text file (*.txt)|*.txt");
+            if (System.IO.File.Exists(file)== false) { return; }
+
+            System.IO.StreamReader fs = null;
+            try
+            {
+                fs = new System.IO.StreamReader(file);
+
+                string line = "";
+                while(fs.Peek() > 0)
+                {
+                    TreeNode target = null;
+                    TreeNode oldParent = null;
+                    TreeNode newParernt = null;
+
+
+                    line = fs.ReadLine();
+                    string[] items = line.Split('\t');
+                    if (items.Length == 4)
+                    {
+                        int found = 0;
+                        foreach (TreeNode pn in tv1.Nodes[0].Nodes)
+                        {
+                            if (pn.Text == items[3])
+                            {
+                                foreach (TreeNode n in pn.Nodes)
+                                {
+                                    if (n.Text == items[1])
+                                    {
+                                        target = n;
+                                        oldParent = pn;
+                                        found = 1;
+                                        break;
+                                    }
+                                    else if (n.Text == items[2])
+                                    {
+                                        target = n;
+                                        oldParent = pn; found = 1;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (found > 0)
+                            { break; }
+                        }
+                        if (found == 1)
+                        {
+                            if (string.IsNullOrEmpty(items[2]) == true)
+                            {
+                                foreach (TreeNode pn in tv2.Nodes[0].Nodes)
+                                {
+                                    if (pn.Text == items[0])
+                                    {
+                                        found = 2;
+                                        newParernt = pn;
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (TreeNode pn in tv2.Nodes[0].Nodes)
+                                {
+                                    if (pn.Text == items[0])
+                                    {
+                                        foreach (TreeNode n in pn.Nodes)
+                                        {
+                                            if (n.Text == items[1])
+                                            {
+                                                found = 2;
+                                               newParernt = n;
+                                                break;
+                                            }
+                                        }
+                                        if (found == 2) { break; }
+                                    }
+                                }
+                            }
+                            {
+                                if (found == 2)
+                                { 
+                                    if (target != null && newParernt !=null && oldParent != null)
+                                    {
+                                        oldParent.Nodes.Remove(target);
+                                        Application.DoEvents();
+                                        newParernt.Nodes.Add(target);
+                                        Application.DoEvents();
+                                    }                                
+                                }                                
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch { MessageBox.Show("An error occured opening the file"); }
+            finally
+            {
+                if (fs != null) { fs.Close(); }
+            }
+
+        }
     }
 }

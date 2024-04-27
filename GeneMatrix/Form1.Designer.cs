@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnImportSteps = new System.Windows.Forms.Button();
             this.btnSaveSteps = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -63,7 +64,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnImportSteps = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -159,8 +159,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
             // 
+            // btnImportSteps
+            // 
+            this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnImportSteps.Location = new System.Drawing.Point(87, 213);
+            this.btnImportSteps.Name = "btnImportSteps";
+            this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
+            this.btnImportSteps.TabIndex = 7;
+            this.btnImportSteps.Text = "Import steps";
+            this.btnImportSteps.UseVisualStyleBackColor = true;
+            this.btnImportSteps.Click += new System.EventHandler(this.btnImportSteps_Click);
+            // 
             // btnSaveSteps
             // 
+            this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSaveSteps.Location = new System.Drawing.Point(6, 213);
             this.btnSaveSteps.Name = "btnSaveSteps";
             this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
@@ -467,15 +479,6 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Modify command line options";
             // 
-            // btnImportSteps
-            // 
-            this.btnImportSteps.Location = new System.Drawing.Point(87, 213);
-            this.btnImportSteps.Name = "btnImportSteps";
-            this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
-            this.btnImportSteps.TabIndex = 7;
-            this.btnImportSteps.Text = "Import steps";
-            this.btnImportSteps.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,7 +492,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(709, 588);
             this.Name = "Form1";
-            this.Text = "Gene matrix";
+            this.Text = "GeneMatrix";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
