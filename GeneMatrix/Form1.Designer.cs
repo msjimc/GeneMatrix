@@ -36,11 +36,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSaveSteps = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tv1 = new System.Windows.Forms.TreeView();
             this.tv2 = new System.Windows.Forms.TreeView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkIgnoreEmptySequence = new System.Windows.Forms.CheckBox();
             this.rboBoth = new System.Windows.Forms.RadioButton();
             this.rboProtein = new System.Windows.Forms.RadioButton();
             this.rboDNA = new System.Windows.Forms.RadioButton();
@@ -61,7 +63,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.chkIgnoreEmptySequence = new System.Windows.Forms.CheckBox();
+            this.btnImportSteps = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -146,6 +148,8 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnImportSteps);
+            this.groupBox2.Controls.Add(this.btnSaveSteps);
             this.groupBox2.Controls.Add(this.btnReset);
             this.groupBox2.Controls.Add(this.splitContainer1);
             this.groupBox2.Location = new System.Drawing.Point(12, 110);
@@ -154,6 +158,16 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
+            // 
+            // btnSaveSteps
+            // 
+            this.btnSaveSteps.Location = new System.Drawing.Point(6, 213);
+            this.btnSaveSteps.Name = "btnSaveSteps";
+            this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveSteps.TabIndex = 6;
+            this.btnSaveSteps.Text = "Save steps";
+            this.btnSaveSteps.UseVisualStyleBackColor = true;
+            this.btnSaveSteps.Click += new System.EventHandler(this.btnSaveSteps_Click);
             // 
             // btnReset
             // 
@@ -222,6 +236,16 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Save sequences";
+            // 
+            // chkIgnoreEmptySequence
+            // 
+            this.chkIgnoreEmptySequence.AutoSize = true;
+            this.chkIgnoreEmptySequence.Location = new System.Drawing.Point(424, 46);
+            this.chkIgnoreEmptySequence.Name = "chkIgnoreEmptySequence";
+            this.chkIgnoreEmptySequence.Size = new System.Drawing.Size(142, 17);
+            this.chkIgnoreEmptySequence.TabIndex = 10;
+            this.chkIgnoreEmptySequence.Text = "Ignore empty sequences";
+            this.chkIgnoreEmptySequence.UseVisualStyleBackColor = true;
             // 
             // rboBoth
             // 
@@ -443,15 +467,14 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Modify command line options";
             // 
-            // chkIgnoreEmptySequence
+            // btnImportSteps
             // 
-            this.chkIgnoreEmptySequence.AutoSize = true;
-            this.chkIgnoreEmptySequence.Location = new System.Drawing.Point(424, 46);
-            this.chkIgnoreEmptySequence.Name = "chkIgnoreEmptySequence";
-            this.chkIgnoreEmptySequence.Size = new System.Drawing.Size(142, 17);
-            this.chkIgnoreEmptySequence.TabIndex = 10;
-            this.chkIgnoreEmptySequence.Text = "Ignore empty sequences";
-            this.chkIgnoreEmptySequence.UseVisualStyleBackColor = true;
+            this.btnImportSteps.Location = new System.Drawing.Point(87, 213);
+            this.btnImportSteps.Name = "btnImportSteps";
+            this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
+            this.btnImportSteps.TabIndex = 7;
+            this.btnImportSteps.Text = "Import steps";
+            this.btnImportSteps.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -518,6 +541,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkGBlocks;
         private System.Windows.Forms.CheckBox chkIgnoreEmptySequence;
+        private System.Windows.Forms.Button btnSaveSteps;
+        private System.Windows.Forms.Button btnImportSteps;
     }
 }
 
