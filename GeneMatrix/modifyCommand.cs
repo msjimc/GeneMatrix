@@ -25,6 +25,8 @@ namespace GeneMatrix
             txtMuscleProtein.Text = Properties.Settings.Default.MuscleP;
             txtClustalWDNA.Text = Properties.Settings.Default.ClustalWD;
             txtClustalWProtein.Text = Properties.Settings.Default.ClustalWP;
+            txtGBlocksD.Text = Properties.Settings.Default.GBlocksD;
+            txtGBlocksP.Text = Properties.Settings.Default.GBlocksP;
 
             btnMAFFTDNA.ForeColor = btnMAFFTDr.ForeColor;
             btnMAFFTProtein.ForeColor = btnMAFFTDr.ForeColor;
@@ -34,6 +36,8 @@ namespace GeneMatrix
             btnMuscleProtein.ForeColor = btnMAFFTDr.ForeColor;
             btnClustalWDNA.ForeColor = btnMAFFTDr.ForeColor;
             btnClustalWProtein.ForeColor = btnMAFFTDr.ForeColor;
+            btnGBlocksD.ForeColor= btnMAFFTDr.ForeColor;
+            btnGBlocksP.ForeColor = btnMAFFTDr.ForeColor;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -54,7 +58,7 @@ namespace GeneMatrix
             string c = txtMAFFTProtein.Text.Trim();
             Properties.Settings.Default.MAFFTP = c;
             Properties.Settings.Default.Save();
-           btnMAFFTProtein.ForeColor = btnMAFFTDr.ForeColor;
+            btnMAFFTProtein.ForeColor = btnMAFFTDr.ForeColor;
         }
 
         private void btnPRANKDNA_Click(object sender, EventArgs e)
@@ -191,6 +195,44 @@ namespace GeneMatrix
         private void txtClustalWProtein_TextChanged(object sender, EventArgs e)
         {
             btnClustalWProtein.ForeColor = Color.Red;
+        }
+
+        private void txtGBlocksD_TextChanged(object sender, EventArgs e)
+        {
+            btnGBlocksD.ForeColor = Color.Red;
+        }
+
+        private void txtGBlocksP_TextChanged(object sender, EventArgs e)
+        {
+            btnGBlocksP.ForeColor = Color.Red;
+        }
+
+        private void btnGBlocksD_Click(object sender, EventArgs e)
+        {
+            string c = txtGBlocksD.Text.Trim();
+            Properties.Settings.Default.GBlocksD = c;
+            Properties.Settings.Default.Save();
+            btnGBlocksD.ForeColor = btnMAFFTDr.ForeColor;
+        }
+
+        private void btnGBlocksP_Click(object sender, EventArgs e)
+        {
+            string c = txtGBlocksP.Text.Trim();
+            Properties.Settings.Default.GBlocksP = c;
+            Properties.Settings.Default.Save();
+            btnGBlocksP.ForeColor = btnMAFFTDr.ForeColor;
+        }
+
+        private void btnGBlocksDr_Click(object sender, EventArgs e)
+        {
+            txtGBlocksD.Text = "-t=d -e=.fa";
+            btnGBlocksD.PerformClick();
+        }
+
+        private void btnGBlocksPr_Click(object sender, EventArgs e)
+        {
+            txtGBlocksP.Text = "-t=p -e=.fa";
+            btnGBlocksP.PerformClick();
         }
     }
 }

@@ -148,7 +148,7 @@ Consequently, if the name appears to follow this format (it contains exactly thr
 
 ## Working with the imported sequences
 
-Once the data has been imported, the ```Combine features with different names``` section becomes active. This area consists of two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, the left hand tree represents unselected sequences and contains up to four child nodes (___CDS___, ___rRNA___, ___tRNA___ and ___Unknown___), while the right hand view represents selected sequences and contains three nodes (___CDS___, ___rRNA___ and ___tRNA___). Initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left contain references to all the imported data as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
+Once the data has been imported, the ```Combine features with different names``` section becomes active. This area consists of three buttons and two tree view panels with the data arranged as nodes in a tree like structure. The root of each tree is the ___Sequence___ node, the left hand tree represents unselected sequences and contains up to four child nodes (___CDS___, ___rRNA___, ___tRNA___ and ___Unknown___), while the right hand view represents selected sequences and contains three nodes (___CDS___, ___rRNA___ and ___tRNA___). Initially the ___CDS___, ___rRNA___ and ___tRNA___ nodes on the right contain no child nodes, while those on the left contain references to all the imported data as shown by the cross to the right of the text (Figure 4). If no data is found for a feature type, the linked node will not be displayed.
 
 <hr />
 
@@ -210,11 +210,22 @@ Figure 8: Right mouse clicking on the ***CYTB*** node in the right hand panel (F
 
 <hr />
 
+### Saving and importing the amalgamation steps
+
+While the process of selecting and amalgamating features is straight forward, it can become repetitive when reanalysing large dataset as new data is included. Consequently, it is possible to save the current selection process by pressing the ```Save steps``` button in the button left of the ```Combine features with different names``` section. This examines the nodes in the right hand panel saving the structure to file. 
+
+The table below shows two possible lines from a saved file, the first row indicates that the ***CDS*** node in the right hand panel should contain the ***CYTB*** node that will be found in the ***CBS*** node in the left hand panel. The second row indicates that the ***cytb*** node found in the ***CBS*** node in the left hand panel should be moved to the ***CBS*** > ***CYTB*** node in the right hand panel.
+
+|Right hand feature type node|Export feature node|Child feature node|Left hand feature type node|
+|-|-|-|-|
+|CDS|CYTB|-|CDS|
+|CDS|CYTB|cytb|CDS|
+
+Pressing the Import steps button in the button left of the ```Combine features with different names``` section allows you to select a previously saved 'steps' file which will recreate the desired amalgamation process. Obviously, this process requires the underlying data to be similar. If there is a miss match for instance, for instance the current data set doesn't contain a ***CYTB*** feature ```GeneMatrix``` will ignore this instruction in the first row of the table as well as the line instructing the ***cytb*** feature to be added to the ***CYTB*** node.
 
 ### Deselecting all sequences picked for export
 
 The ```Reset``` button in the lower right hand corner of the ```Combine features with different names``` section allows you to discard the current selection of sequences for export. Pressing it will remove all child nodes of the ___CDS___, ___rRNA___ and ___tRNA___ nodes in the right hand panel, moving them to the appropriate node in the left hand panel. 
-
 
 ## Saving the selected gene sequences
 
@@ -322,7 +333,7 @@ When identifying the relationship between a number of species it is often perfor
 
 ### Modifying the alignment command
 
-The ([Third party alignment applications](#third-party-alignment-applications)) sections below give a very short description of the alignment programs, links to their websites, the first and last citation as well as the command used by ```GeneMatrix``` to make the alignment. These commands are very generic and you may wish to modify them. This can be achieved using the ```Command line options``` window that is accessed by pressing the ```Modify button``` (blue box, Figure 16 a)
+The ([Third party alignment applications](#third-party-alignment-applications) and [GBlocks alignment cleaning](gblocks-alignment-cleaning)) sections below give a very short description of the alignment and cleaning programs, links to their websites, the first and last citation as well as the command used by ```GeneMatrix``` to make the alignment. These commands are very generic and you may wish to modify them. This can be achieved using the ```Command line options``` window that is accessed by pressing the ```Modify button``` (blue box, Figure 16 a)
 
 <hr />
 
@@ -449,7 +460,6 @@ Like MAFFT, PRANK was written to run on Linux computers and so needs a number of
 #### Command
 prank.exe -d=[input file (Linux)] -o=[results file (Linux)]
 
-
 where:
 * [input file (Linux)] is the fasta file to align. The file name uses the Linux '/' rather than the Windows '\\' separators
 * [results file (Linux)] is the name of the file to save the alignment too.  The file name uses the Linux '/' rather than the Windows '\\' separators
@@ -463,3 +473,31 @@ https://ariloytynoja.github.io/prank-msa/
 
 > Löytynoja, A. (2014). Phylogeny-aware alignment with PRANK. In: Russell, D. (eds) Multiple Sequence Alignment Methods. Methods in Molecular Biology, vol 1079. Humana Press, Totowa, NJ. https://doi.org/10.1007/978-1-62703-646-7_10
 
+## GBlocks alignment cleaning
+
+According to its web site: Gblocks eliminates poorly aligned positions and divergent regions of an alignment of DNA or protein sequences. It selects blocks in a similar way as it is usually done by hand but following a reproducible set of conditions. The selected blocks must fulfill certain requirements with respect to the lack of large segments of contiguous nonconserved positions, lack of gap positions and high conservation of flanking positions, making the final alignment more suitable for phylogenetic analysis.
+
+GBlocks creates two files, a fasta file with the cleaned alignment and a webpage (*.htm) that displays a colour coded alignment with secondary information.
+
+#### Command
+
+GBlocks.exe [input file]  -t=[sequence type] -e=.fa
+
+where:
+* [input file] is the name with path of the original alignment
+* -t=[sequence type] indicates the sequence type (-t=d for DNA and -t=p for protein)
+* -e=.fa directs GBlocks to name the cleaned alignment to a file with the same name as the input file to which '.fa' has been appended.
+#### Website
+
+https://www.biologiaevolutiva.org/jcastresana/Gblocks.html   
+(Manual: https://www.biologiaevolutiva.org/jcastresana/Gblocks/Gblocks_documentation.html)
+
+#### Reference
+
+First publication
+
+> Castresana, J. (2000). Selection of conserved blocks from multiple alignments for their use in phylogenetic analysis. Molecular Biology and Evolution 17, 540-552.
+
+Last publication
+
+> Talavera, G., and Castresana, J. (2007). Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Systematic Biology 56, 564-577.
