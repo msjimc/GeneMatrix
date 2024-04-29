@@ -431,28 +431,44 @@ namespace GeneMatrix
             {
                 CDS.Sort();
                 foreach (string name in CDS)
-                { cds.Nodes.Add(new TreeNode(name, 0, 0)); }
+                {
+                    TreeNode n = new TreeNode(name, 0, 0);
+                    n.Tag = "CDS";
+                    cds.Nodes.Add(n); 
+                }
             }
 
             if (tRNA != null)
             {
                 tRNA.Sort();
                 foreach (string name in tRNA)
-                { trna.Nodes.Add(new TreeNode(name, 0, 0)); }
+                {
+                    TreeNode n = new TreeNode(name, 0, 0);
+                    n.Tag = "tRNA"; 
+                    trna.Nodes.Add(n); 
+                }
             }
 
             if (rRNA != null)
             {
                 rRNA.Sort();
                 foreach (string name in rRNA)
-                { rrna.Nodes.Add(new TreeNode(name, 0, 0)); }
+                {
+                    TreeNode n = new TreeNode(name, 0, 0);
+                    n.Tag = "rRNA"; 
+                    rrna.Nodes.Add(n); 
+                }
             }
 
             if (Unknown != null)
             {
                 Unknown.Sort();
                 foreach (string name in Unknown)
-                { unknown.Nodes.Add(new TreeNode(name, 0, 0)); }
+                {
+                    TreeNode n = new TreeNode(name, 0, 0);
+                    n.Tag = "Unknown"; 
+                    unknown.Nodes.Add(n); 
+                }
             }
 
             TreeNode tv1parent = new TreeNode("Sequences", -1, -1);
@@ -525,7 +541,11 @@ namespace GeneMatrix
                         foreach (TreeNode cN in children)
                         {
                             n.Nodes.Remove(cN);
-                            pN.Nodes.Add(cN);
+                            foreach (TreeNode pnn in tv1.Nodes[0].Nodes)
+                            {
+                                if ((string)cN.Tag == pnn.Text)
+                                { pnn.Nodes.Add(cN);}
+                            }                            
                         }
                     }
                 }
@@ -764,8 +784,8 @@ namespace GeneMatrix
                             }
                             else if (string.IsNullOrEmpty(DNA) == false)
                             {
-                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta"), true);
-                                fw.Write(">" + name + "-" + species + "\n" + protein + "\n");
+                                System.IO.StreamWriter fw = new System.IO.StreamWriter(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta"), true);
+                                fw.Write(">" + name + "-" + species + "\n" + DNA + "\n");
                                 fw.Close();
                             }
                         }
@@ -1004,7 +1024,9 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "MAFFT", sequenceType);
+                    CombineAlignments(folder, files, "MAFFT", sequenceType, false);
+                    if (chkGBlocks.Checked == true)
+                    { CombineAlignments(folder, files, "MAFFT", sequenceType, true); }
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1141,7 +1163,9 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "PRANK", sequenceType);
+                    CombineAlignments(folder, files, "PRANK", sequenceType, false);
+                    if (chkGBlocks.Checked == true)
+                    { CombineAlignments(folder, files, "PRANK", sequenceType, true); }
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1276,7 +1300,9 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "clustalw", sequenceType);
+                    CombineAlignments(folder, files, "clustalw", sequenceType, false);
+                    if (chkGBlocks.Checked == true) 
+                    { CombineAlignments(folder, files, "clustalw", sequenceType, true); }
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1409,7 +1435,9 @@ namespace GeneMatrix
                 {
                     lblStatus.Text = "Status: Combining alignments";
                     Application.DoEvents();
-                    CombineAlignments(folder, files, "muscle", sequenceType);
+                    CombineAlignments(folder, files, "muscle", sequenceType, false);
+                    if (chkGBlocks.Checked == true) 
+                    { CombineAlignments(folder, files, "muscle", sequenceType, true); }
                 }
 
                 lblStatus.Text = "Status: Done";
@@ -1428,7 +1456,7 @@ namespace GeneMatrix
 
         }
 
-        private void CombineAlignments(string folder, string[] files, string program, string sequenceType)
+        private void CombineAlignments(string folder, string[] files, string program, string sequenceType, bool gblocks)
         {
             System.IO.StreamReader fs = null;
             System.IO.StreamWriter fw = null;
@@ -1436,6 +1464,7 @@ namespace GeneMatrix
             {
                 Dictionary<string, string> sequences = new Dictionary<string, string>();
                 Dictionary<string, string> limits = new Dictionary<string, string>();
+                
                 int lastLimit = 0;
 
                 foreach (string file in files)
@@ -1451,6 +1480,9 @@ namespace GeneMatrix
                         { alignedFile = file.Substring(0, file.Length - 6) + "_PRANK.fasta.best.fas"; }
                         else if (program == "MAFFT")
                         { alignedFile = file.Substring(0, file.Length - 6) + "_MAFFT.fasta"; }
+
+                        if (gblocks==true)
+                        { alignedFile += ".fa"; }
 
                         fs = new System.IO.StreamReader(alignedFile);
                         string line = "";
@@ -1479,7 +1511,7 @@ namespace GeneMatrix
                             if (length < v.Length)
                             { length = v.Length; }
                         }
-
+                        
                         string LimitsKey = file.Substring(file.LastIndexOf("\\") + 1).Replace(".fasta", "");
                         string limit = LimitsKey + "\t" + (lastLimit + 1).ToString() + "\t" + length.ToString();
                         limits.Add(LimitsKey, limit);
@@ -1490,6 +1522,8 @@ namespace GeneMatrix
                             if (length < sequences[key].Length)
                             { sequences[key] += new string('-', length - sequences[key].Length); }
                         }
+
+
                     }
                 }
 
@@ -1503,6 +1537,9 @@ namespace GeneMatrix
                 else if (program == "MAFFT")
                 { exportName += "MAFFT_" + sequenceType + ".fasta"; }
 
+                if (gblocks == true)
+                { exportName += ".fa"; }
+
                 fw = new System.IO.StreamWriter(exportName);
                 foreach (string key in sequences.Keys)
                 {
@@ -1510,16 +1547,12 @@ namespace GeneMatrix
                 }
                 fw.Close();
 
+
                 fw = new System.IO.StreamWriter(exportName.Substring(0, exportName.Length - 6) + ".txt");
                 foreach (string key in limits.Keys)
                 { fw.Write(limits[key] + "\n"); }
                 fw.Close();
-
-                if (chkGBlocks.Checked == true && string.IsNullOrEmpty(gblocks) == false)
-                {
-                    runGBlocks(folder, exportName, sequenceType, program);
-                }
-
+                             
             }
             catch (Exception ex)
             { }
@@ -1716,7 +1749,7 @@ namespace GeneMatrix
                         {
                             foreach (TreeNode cn in n.Nodes)
                             {
-                                place = pn.Text + "\t" + n.Text + "\t" + cn.Text + "\t" + (string)n.Tag;
+                                place = pn.Text + "\t" + n.Text + "\t" + cn.Text + "\t" + (string)cn.Tag;
                                 steps.Add(place);
                             }
                         }
@@ -1833,13 +1866,14 @@ namespace GeneMatrix
                                         Application.DoEvents();
                                         newParernt.Nodes.Add(target);
                                         Application.DoEvents();
+                                        btnSave.Enabled = true;
                                     }                                
                                 }                                
                             }
                         }
                     }
 
-                }
+                }              
             }
             catch { MessageBox.Show("An error occured opening the file"); }
             finally
