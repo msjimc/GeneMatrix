@@ -1522,8 +1522,6 @@ namespace GeneMatrix
                             if (length < sequences[key].Length)
                             { sequences[key] += new string('-', length - sequences[key].Length); }
                         }
-
-
                     }
                 }
 
