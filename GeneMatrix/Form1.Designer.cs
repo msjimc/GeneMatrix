@@ -371,6 +371,7 @@
             // 
             // btnAll
             // 
+            this.btnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAll.Location = new System.Drawing.Point(270, 86);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(75, 23);
@@ -381,6 +382,7 @@
             // 
             // btnMAFFT
             // 
+            this.btnMAFFT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMAFFT.Location = new System.Drawing.Point(351, 86);
             this.btnMAFFT.Name = "btnMAFFT";
             this.btnMAFFT.Size = new System.Drawing.Size(75, 23);

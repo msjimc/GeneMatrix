@@ -263,6 +263,10 @@ Sequences that are shorter than the longest sequence are padded with space chara
 
 The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independent of ```GeneMatrix``` or via the controls in the ```Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages or desktop applications, they can also be run as console applications using Windows ***cmd*** shell program (Command Prompt: Figure 15). 
 
+### Very important note
+
+Due to the security concerns your computer will not allow ```GeneMatrix``` to automate an alignment in special folders such as OneDrive folders or possible with aligners saved on a USB stick. Consequently, if an alignment runs very quickly, but produces no files, either move everything to a hard drive on your computer or check the option to save the batch command files and then double click on each file in turn and run them manually. 
+
 ### Automation of the alignment process
 
 Aligning the sequences in the files is preformed by pressing one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue box, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will process the files with each of the programs in turn.   
