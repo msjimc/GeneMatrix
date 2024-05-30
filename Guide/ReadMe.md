@@ -400,7 +400,7 @@ Like Muscle, ClustalW consists of a single executable file, a copy of which is p
 
 The standard command issued to Clustalw2 is:
 
-> clustalw2.exe -INFILE=[input file] -TYPE=[DNA or PROTEIN] -OUTPUT=FASTA -OUTPUT=FASTA -OUTFILE=[results file]
+> clustalw2.exe -INFILE=[input file] -TYPE=[DNA or PROTEIN] -OUTPUT=FASTA -OUTFILE=[results file]
 
 where:
 * [input file] is the fasta file to align

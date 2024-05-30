@@ -5,7 +5,7 @@
 - [Introduction](#Introduction)
 - [Guide](Guide/ReadMe.md)
 - [Download](Program/README.md)
-- [Running on Lunix](#running-on-a-linux-computer)
+- [Running on Linux](#running-on-a-linux-computer)
 
 ## Introduction 
 
