@@ -437,7 +437,7 @@
             // chkShowCMD
             // 
             this.chkShowCMD.AutoSize = true;
-            this.chkShowCMD.Location = new System.Drawing.Point(140, 63);
+            this.chkShowCMD.Location = new System.Drawing.Point(136, 63);
             this.chkShowCMD.Name = "chkShowCMD";
             this.chkShowCMD.Size = new System.Drawing.Size(141, 17);
             this.chkShowCMD.TabIndex = 11;
