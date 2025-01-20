@@ -870,7 +870,7 @@ namespace GeneMatrix
                 }
             }
 
-            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the GBlocks executable file", "program (*.exe|*.exe");
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the GBlocks executable file", "program (*.exe)|*.exe");
             if (System.IO.File.Exists(fileName) == true)
             {
                 Properties.Settings.Default.GBlocks = fileName;
