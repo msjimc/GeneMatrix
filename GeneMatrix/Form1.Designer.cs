@@ -64,6 +64,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnRunPartitionFinder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -72,6 +77,7 @@
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -135,7 +141,7 @@
             // btnQuit
             // 
             this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnQuit.Location = new System.Drawing.Point(12, 573);
+            this.btnQuit.Location = new System.Drawing.Point(12, 642);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
             this.btnQuit.TabIndex = 15;
@@ -154,7 +160,7 @@
             this.groupBox2.Controls.Add(this.splitContainer1);
             this.groupBox2.Location = new System.Drawing.Point(12, 110);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 245);
+            this.groupBox2.Size = new System.Drawing.Size(674, 256);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
@@ -162,7 +168,7 @@
             // btnImportSteps
             // 
             this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImportSteps.Location = new System.Drawing.Point(87, 213);
+            this.btnImportSteps.Location = new System.Drawing.Point(87, 224);
             this.btnImportSteps.Name = "btnImportSteps";
             this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
             this.btnImportSteps.TabIndex = 7;
@@ -173,7 +179,7 @@
             // btnSaveSteps
             // 
             this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveSteps.Location = new System.Drawing.Point(6, 213);
+            this.btnSaveSteps.Location = new System.Drawing.Point(6, 224);
             this.btnSaveSteps.Name = "btnSaveSteps";
             this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
             this.btnSaveSteps.TabIndex = 6;
@@ -185,7 +191,7 @@
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(593, 213);
+            this.btnReset.Location = new System.Drawing.Point(593, 224);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 5;
@@ -208,7 +214,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tv2);
-            this.splitContainer1.Size = new System.Drawing.Size(668, 191);
+            this.splitContainer1.Size = new System.Drawing.Size(668, 202);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -217,7 +223,7 @@
             this.tv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv1.Location = new System.Drawing.Point(0, 0);
             this.tv1.Name = "tv1";
-            this.tv1.Size = new System.Drawing.Size(322, 191);
+            this.tv1.Size = new System.Drawing.Size(322, 202);
             this.tv1.TabIndex = 3;
             this.tv1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv1_NodeMouseClick);
             // 
@@ -226,7 +232,7 @@
             this.tv2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tv2.Location = new System.Drawing.Point(0, 0);
             this.tv2.Name = "tv2";
-            this.tv2.Size = new System.Drawing.Size(342, 191);
+            this.tv2.Size = new System.Drawing.Size(342, 202);
             this.tv2.TabIndex = 4;
             this.tv2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv2_AfterSelect);
             this.tv2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv2_NodeMouseClick);
@@ -242,7 +248,7 @@
             this.groupBox3.Controls.Add(this.rboDNA);
             this.groupBox3.Controls.Add(this.btnSave);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(15, 361);
+            this.groupBox3.Location = new System.Drawing.Point(12, 372);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(674, 72);
             this.groupBox3.TabIndex = 3;
@@ -331,7 +337,7 @@
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.btnClustalW);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(12, 439);
+            this.groupBox4.Location = new System.Drawing.Point(12, 450);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(674, 115);
             this.groupBox4.TabIndex = 4;
@@ -481,11 +487,66 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Modify command line options";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.btnRunPartitionFinder);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.btnMakePartitionFinderFiles);
+            this.groupBox5.Location = new System.Drawing.Point(15, 571);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(674, 65);
+            this.groupBox5.TabIndex = 16;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "PartitionFinder2";
+            // 
+            // btnMakePartitionFinderFiles
+            // 
+            this.btnMakePartitionFinderFiles.Location = new System.Drawing.Point(593, 11);
+            this.btnMakePartitionFinderFiles.Name = "btnMakePartitionFinderFiles";
+            this.btnMakePartitionFinderFiles.Size = new System.Drawing.Size(75, 23);
+            this.btnMakePartitionFinderFiles.TabIndex = 0;
+            this.btnMakePartitionFinderFiles.Text = "Make";
+            this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
+            this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(565, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "To create a PartitionFinder2 config file and a phylip alignment file from anignme" +
+    "nts in a fatsa file press the \'Make\' button";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(339, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "To run PartitionFinder2 using premade input files press the \'Run\' button";
+            // 
+            // btnRunPartitionFinder
+            // 
+            this.btnRunPartitionFinder.Location = new System.Drawing.Point(596, 39);
+            this.btnRunPartitionFinder.Name = "btnRunPartitionFinder";
+            this.btnRunPartitionFinder.Size = new System.Drawing.Size(75, 23);
+            this.btnRunPartitionFinder.TabIndex = 3;
+            this.btnRunPartitionFinder.Text = "Run";
+            this.btnRunPartitionFinder.UseVisualStyleBackColor = true;
+            this.btnRunPartitionFinder.Click += new System.EventHandler(this.btnRunPartitionFinder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 608);
+            this.ClientSize = new System.Drawing.Size(698, 677);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnQuit);
@@ -507,6 +568,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -548,6 +611,11 @@
         private System.Windows.Forms.CheckBox chkIgnoreEmptySequence;
         private System.Windows.Forms.Button btnSaveSteps;
         private System.Windows.Forms.Button btnImportSteps;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnMakePartitionFinderFiles;
+        private System.Windows.Forms.Button btnRunPartitionFinder;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 

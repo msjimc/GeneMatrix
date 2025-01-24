@@ -85,7 +85,7 @@ The [p_CombineMultiFastaFilesToOneMultiFasta.py](p_CombineMultiFastaFilesToOneMu
 ### Running p_CombineMultiFastaFilesToOneMultiFasta.py
 
 > cd /nobackup/workFolder/;  
-> python ~/programs/p_CombineMultiFastaFilesToOneMultiFasta.py /nobackup/workFolder/clusta;l
+> python ~/programs/p_CombineMultiFastaFilesToOneMultiFasta.py /nobackup/workFolder/clustal;
 
 This creates the supermatrix2.fa file in /nobackup/workFolder/clustal
 

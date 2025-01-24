@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -1318,7 +1319,6 @@ namespace GeneMatrix
 
             if (System.IO.File.Exists(fileName) == true)
             { System.IO.File.Delete(fileName); }
-
         }
 
         private string getMuscleFileName()
@@ -1767,7 +1767,7 @@ namespace GeneMatrix
                     foreach (string l in steps)
                     { sw.WriteLine(l); }
                 }
-                catch { MessageBox.Show("An error occured saving the data to file"); }
+                catch { MessageBox.Show("An error occurred saving the data to file"); }
                 finally
                 {
                     if (sw != null) { sw.Close(); }
@@ -1777,7 +1777,7 @@ namespace GeneMatrix
 
         private void btnImportSteps_Click(object sender, EventArgs e)
         {
-            string file = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the file containing the amalgamtions steps", "Text file (*.txt)|*.txt");
+            string file = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the file containing the amalgamations steps", "Text file (*.txt)|*.txt");
             if (System.IO.File.Exists(file)== false) { return; }
 
             System.IO.StreamReader fs = null;
@@ -1790,7 +1790,7 @@ namespace GeneMatrix
                 {
                     TreeNode target = null;
                     TreeNode oldParent = null;
-                    TreeNode newParernt = null;
+                    TreeNode newParent = null;
 
 
                     line = fs.ReadLine();
@@ -1831,7 +1831,7 @@ namespace GeneMatrix
                                     if (pn.Text == items[0])
                                     {
                                         found = 2;
-                                        newParernt = pn;
+                                        newParent = pn;
                                         break;
                                     }
                                 }
@@ -1847,7 +1847,7 @@ namespace GeneMatrix
                                             if (n.Text == items[1])
                                             {
                                                 found = 2;
-                                               newParernt = n;
+                                               newParent = n;
                                                 break;
                                             }
                                         }
@@ -1858,11 +1858,11 @@ namespace GeneMatrix
                             {
                                 if (found == 2)
                                 { 
-                                    if (target != null && newParernt !=null && oldParent != null)
+                                    if (target != null && newParent !=null && oldParent != null)
                                     {
                                         oldParent.Nodes.Remove(target);
                                         Application.DoEvents();
-                                        newParernt.Nodes.Add(target);
+                                        newParent.Nodes.Add(target);
                                         Application.DoEvents();
                                         btnSave.Enabled = true;
                                     }                                
@@ -1873,12 +1873,183 @@ namespace GeneMatrix
 
                 }              
             }
-            catch { MessageBox.Show("An error occured opening the file"); }
+            catch { MessageBox.Show("An error occurred opening the file"); }
             finally
             {
                 if (fs != null) { fs.Close(); }
             }
 
+        }
+
+        private void btnMakePartitionFinderFiles_Click(object sender, EventArgs e)
+        {
+            PartitionFinder pf = new PartitionFinder();
+            pf.ShowDialog();
+        }
+
+        private void btnRunPartitionFinder_Click(object sender, EventArgs e)
+        {
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select the folder containing the alignment and configuration files.", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string program = getPartitionFinder2Filename();
+            if (program == null) { return; }
+
+            string configFile = folder + "\\PartitionFinder.cfg";
+            if (System.IO.File.Exists(configFile) == false)
+            {
+                MessageBox.Show("There is no configuration called PartitionFinder.cfg in the folder", "No config file");
+                return;
+            }
+
+            System.IO.StreamReader sf = null;
+            List<string> configLines = null;
+            try 
+            {
+                sf = new System.IO.StreamReader(configFile);
+                configLines.AddRange(sf.ReadToEnd().Split('\n'));
+                sf.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("There was an error reading the config file:" + ex.Message, "Config file error");
+                return;
+            }
+            finally
+            { if (sf != null) { sf.Close(); } }
+
+
+
+            string phyFile = getAlignmentFile(configLines, folder);
+            if (System.IO.File.Exists(phyFile) == false)
+            {
+                MessageBox.Show("There is no alignment file called " + phyFile.Substring(phyFile.LastIndexOf("\\") + 1) + " in the folder", "No alignment file");
+                return;
+            }
+
+            bool addraxml = UsingCluster(configLines);
+            bool addforceRestart = false;
+            if (System.IO.Directory.Exists(folder + "\\analysis" ) == true)
+            {
+                if( MessageBox.Show("Do you want to overwrite previous analysis?", "Delete old analysis",MessageBoxButtons.YesNo) != DialogResult.Yes)
+                { return; }
+               else { addforceRestart = true; }                
+            }
+
+            //offer abort not force
+            throw new Exception("put stuff in about getting test aa or dna and test of models = JC, JC+G, HKY, HKY+G, GTR, GTR+G; vs models = LG, LG+G, LG+G+F, WAG, WAG+G, WAG+G+F; ");
+
+
+
+        }
+
+        private int isDNA(string alignmentFile)
+        {
+            System.IO.StreamReader sf = null;
+            List<string> alignmentLines = null;
+            try
+            {
+                sf = new System.IO.StreamReader(alignmentFile);
+                alignmentLines.AddRange(sf.ReadToEnd().Split('\n'));
+                sf.Close();
+
+                int all = 0;
+                int Noacgt = 0;
+
+                for (int index = 1; index < alignmentLines.Count; index++)
+                {
+                    string line = alignmentLines[index].Trim();
+                    line = line.Substring(line.LastIndexOf(" ") + 1).ToLower();
+                    line = line.Replace("-", "");
+                    line = line.Replace("?", "");
+                    all += line.Length;
+                    line = line.Replace("a", "");
+                    line = line.Replace("c", "");
+                    line = line.Replace("g", "");
+                    line = line.Replace("t", "");
+
+                    Noacgt += line.Length;
+                }
+
+                if (Noacgt *5 > all)
+                { return 1; }
+                else { return 2; }
+            }
+            catch (Exception ex)
+            {
+                return 3;
+            }
+            finally
+            { if (sf != null) { sf.Close(); } }
+        }
+
+        private bool UsingCluster(List<string> configLines)
+        {
+            int index = 0;
+            while (index < configLines.Count)
+            {
+                if (configLines[index].ToLower().StartsWith("search") == true)
+                {
+                    if (configLines[index].ToLower().StartsWith("cluster") == true)
+                    { return true; }
+                    else { return false; }
+                }
+                else { index++; }
+            }
+            return false;
+        }
+
+        private string getAlignmentFile(List<string> configLines, string folder)
+        {
+            int index = 0;
+            string fileName = "";
+            while (index < configLines.Count)
+            {
+                if (configLines[index].ToLower().StartsWith("alignment") == true)
+                {
+                    fileName = configLines[index].Substring(configLines.LastIndexOf("=") + 1).Trim();
+                    index = int.MaxValue;
+                    fileName = folder + "\\" + fileName;
+                }
+                else { index++; }
+            }
+            return fileName;
+        }
+
+        private string getPartitionFinder2Filename()
+        {
+            if (chkResetPrograms.Checked == false)
+            {
+                string PartitionFinder = Properties.Settings.Default.PartitionFinder;
+                if (System.IO.File.Exists(PartitionFinder) == true)
+                { return PartitionFinder; }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                location = location.Substring(8);
+                location = location.Replace("/", "\\");
+                location = location.Substring(0, location.LastIndexOf('\\'));
+                string program = location + "\\PartitionFinder.py";
+
+                if (System.IO.File.Exists(program) == true)
+                {
+                    Properties.Settings.Default.PartitionFinder = program;
+                    Properties.Settings.Default.Save();
+                    return program;
+                }                
+            }
+
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the PartitionFinder.py executable file", "program (*.py)|*.py");
+            if (System.IO.File.Exists(fileName) == true)
+            {
+                Properties.Settings.Default.PartitionFinder = fileName;
+                Properties.Settings.Default.Save();
+                return fileName;
+            }
+            else
+            {
+                MessageBox.Show("The PartitionFinder2.exe executable is required for this function, see user guide for more information", "No external aligner");
+                return null;
+            }
         }
     }
 }

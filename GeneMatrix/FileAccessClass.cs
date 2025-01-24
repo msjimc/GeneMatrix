@@ -16,27 +16,47 @@ namespace GeneMatrix
         }
 
         public static string FileString(FileJob OpenSave, String Title, String Extension)
-            {
+        {
             if (OpenSave == FileJob.SaveAs)
-                {
-                return SaveAFile(Title, Extension);
-                }
-            else if (OpenSave == FileJob.Open)
-                {
-                return OpenAFile(Title, Extension);
-                }
-            else if (OpenSave == FileJob.Directory)
-                {
-                return SelectAFolder(Title, Extension);
-                }
-            else
-                {
-                return "Cancel";
-                }
+            {
+                return SaveAFile(Title, Extension, "");
             }
+            else if (OpenSave == FileJob.Open)
+            {
+                return OpenAFile(Title, Extension, "");
+            }
+            else if (OpenSave == FileJob.Directory)
+            {
+                return SelectAFolder(Title, Extension, "");
+            }
+            else
+            {
+                return "Cancel";
+            }
+        }
+
+        public static string FileString(FileJob OpenSave, String Title, String Extension,string Suggestion)
+        {
+            if (OpenSave == FileJob.SaveAs)
+            {
+                return SaveAFile(Title, Extension, Suggestion);
+            }
+            else if (OpenSave == FileJob.Open)
+            {
+                return OpenAFile(Title, Extension, Suggestion);
+            }
+            else if (OpenSave == FileJob.Directory)
+            {
+                return SelectAFolder(Title, Extension, Suggestion);
+            }
+            else
+            {
+                return "Cancel";
+            }
+        }
 
         //selects a file to open
-        private static string OpenAFile(String Title, String Extension)
+        private static string OpenAFile(String Title, String Extension,string suggested)
             {
             try
                 {
@@ -47,6 +67,9 @@ namespace GeneMatrix
                 textDialog.Title = Title;
                 textDialog.Filter = Extension;
                 textDialog.CheckFileExists = true;
+
+                if (suggested != "") { textDialog.FileName=suggested; }
+
                 textDialog.ShowDialog();
 
                 if (textDialog.FileName == "")
@@ -60,7 +83,7 @@ namespace GeneMatrix
                 }
             catch (SecurityException ex)
                 {
-                MessageBox.Show("Your OS will not let this program access any files. This may because it is runing from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Your OS will not let this program access any files. This may because it is running from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
                 return "Cancel";
                 }
             catch (Exception ex)
@@ -70,7 +93,7 @@ namespace GeneMatrix
             }//End method
 
         //selects a file to save too
-        private static string SaveAFile(String Title, String Extension)
+        private static string SaveAFile(String Title, String Extension, string suggested)
             {
             try
                 {
@@ -80,6 +103,9 @@ namespace GeneMatrix
                 textDialog.AddExtension = true;
                 textDialog.Title = Title;
                 textDialog.Filter = Extension;
+
+                if (suggested != "") { textDialog.FileName = suggested; }
+
                 textDialog.ShowDialog();
 
                 if (textDialog.FileName == "")
@@ -93,7 +119,7 @@ namespace GeneMatrix
                 }
             catch (SecurityException ex)
                 {
-                MessageBox.Show("Your OS will not let this program access any files. This may because it is runing from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Your OS will not let this program access any files. This may because it is running from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
                 return "Cancel";
                 }
             catch (Exception ex)
@@ -103,7 +129,7 @@ namespace GeneMatrix
             }//End method
 
         //selects a folder to work with
-        private static string SelectAFolder(String Title, String Extension)
+        private static string SelectAFolder(String Title, String Extension, string suggested)
             {
             try
                 {
@@ -114,6 +140,9 @@ namespace GeneMatrix
                     }
                 textDialog.ShowNewFolderButton = false;
                 textDialog.Description = Title;
+
+                if (suggested != "") { textDialog.SelectedPath = suggested; }
+
                 textDialog.ShowDialog();
 
                 if (textDialog.SelectedPath == "")
@@ -131,7 +160,7 @@ namespace GeneMatrix
                 }
             catch (SecurityException ex)
                 {
-                MessageBox.Show("Your OS will not let this program access any files. This may because it is runing from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Your OS will not let this program access any files. This may because it is running from a network drive, copy the program to your desktop and retry.", "Error", MessageBoxButtons.OK);
                 return "Cancel";
                 }
             catch (Exception ex)
