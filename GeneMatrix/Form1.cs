@@ -1888,7 +1888,7 @@ namespace GeneMatrix
         }
 
         private void btnRunPartitionFinder_Click(object sender, EventArgs e)
-        {
+        {            
             string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select the folder containing the alignment and configuration files.", "");
             if (System.IO.Directory.Exists(folder) == false) { return; }
 
@@ -1937,9 +1937,10 @@ namespace GeneMatrix
             }
 
             //offer abort not force
-            throw new Exception("put stuff in about getting test aa or dna and test of models = JC, JC+G, HKY, HKY+G, GTR, GTR+G; vs models = LG, LG+G, LG+G+F, WAG, WAG+G, WAG+G+F; ");
+            //throw new Exception("put stuff in about getting test aa or dna and test of models = JC, JC+G, HKY, HKY+G, GTR, GTR+G; vs models = LG, LG+G, LG+G+F, WAG, WAG+G, WAG+G+F; ");
 
-
+            PartitionFinderCommand PFC = new PartitionFinderCommand(folder, program);
+            PFC.ShowDialog();
 
         }
 
