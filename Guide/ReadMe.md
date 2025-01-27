@@ -26,6 +26,7 @@
     + [Performing the alignment](#performing-the-alignment)
     + [Combining the alignments into a single alignment](#combining-the-alignments-into-a-single-alignment)
     + [Modifying the alignment command](#modifying-the-alignment-command)
+    + [Determining the partitioning schemes and models of evolution for phylogenetic analyses](#determining-the-partitioning-schemes-and-models-of-evolution-for-phylogenetic-analyses)
 - [Third party applications](#third-party-applications)
   * [Muscle](#muscle)
       - [Command](#command)
