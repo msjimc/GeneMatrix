@@ -65,10 +65,10 @@
             this.btnClustalW = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnRunPartitionFinder = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -502,15 +502,24 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "PartitionFinder2";
             // 
-            // btnMakePartitionFinderFiles
+            // btnRunPartitionFinder
             // 
-            this.btnMakePartitionFinderFiles.Location = new System.Drawing.Point(593, 11);
-            this.btnMakePartitionFinderFiles.Name = "btnMakePartitionFinderFiles";
-            this.btnMakePartitionFinderFiles.Size = new System.Drawing.Size(75, 23);
-            this.btnMakePartitionFinderFiles.TabIndex = 0;
-            this.btnMakePartitionFinderFiles.Text = "Make";
-            this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
-            this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
+            this.btnRunPartitionFinder.Location = new System.Drawing.Point(590, 39);
+            this.btnRunPartitionFinder.Name = "btnRunPartitionFinder";
+            this.btnRunPartitionFinder.Size = new System.Drawing.Size(75, 23);
+            this.btnRunPartitionFinder.TabIndex = 3;
+            this.btnRunPartitionFinder.Text = "Run";
+            this.btnRunPartitionFinder.UseVisualStyleBackColor = true;
+            this.btnRunPartitionFinder.Click += new System.EventHandler(this.btnRunPartitionFinder_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(339, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "To run PartitionFinder2 using premade input files press the \'Run\' button";
             // 
             // label5
             // 
@@ -522,24 +531,15 @@
             this.label5.Text = "To create a PartitionFinder2 config file and a phylip alignment file from anignme" +
     "nts in a fatsa file press the \'Make\' button";
             // 
-            // label6
+            // btnMakePartitionFinderFiles
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(339, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "To run PartitionFinder2 using premade input files press the \'Run\' button";
-            // 
-            // btnRunPartitionFinder
-            // 
-            this.btnRunPartitionFinder.Location = new System.Drawing.Point(596, 39);
-            this.btnRunPartitionFinder.Name = "btnRunPartitionFinder";
-            this.btnRunPartitionFinder.Size = new System.Drawing.Size(75, 23);
-            this.btnRunPartitionFinder.TabIndex = 3;
-            this.btnRunPartitionFinder.Text = "Run";
-            this.btnRunPartitionFinder.UseVisualStyleBackColor = true;
-            this.btnRunPartitionFinder.Click += new System.EventHandler(this.btnRunPartitionFinder_Click);
+            this.btnMakePartitionFinderFiles.Location = new System.Drawing.Point(590, 11);
+            this.btnMakePartitionFinderFiles.Name = "btnMakePartitionFinderFiles";
+            this.btnMakePartitionFinderFiles.Size = new System.Drawing.Size(75, 23);
+            this.btnMakePartitionFinderFiles.TabIndex = 0;
+            this.btnMakePartitionFinderFiles.Text = "Make";
+            this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
+            this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
             // 
             // Form1
             // 

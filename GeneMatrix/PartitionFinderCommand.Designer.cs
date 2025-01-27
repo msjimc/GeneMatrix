@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReselect = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.cboOptions = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,6 +55,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnReselect);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnSelect);
             this.groupBox1.Controls.Add(this.cboOptions);
             this.groupBox1.Controls.Add(this.label2);
@@ -67,12 +71,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
+            // btnReselect
+            // 
+            this.btnReselect.Location = new System.Drawing.Point(97, 44);
+            this.btnReselect.Name = "btnReselect";
+            this.btnReselect.Size = new System.Drawing.Size(75, 23);
+            this.btnReselect.TabIndex = 6;
+            this.btnReselect.Text = "Program";
+            this.btnReselect.UseVisualStyleBackColor = true;
+            this.btnReselect.Click += new System.EventHandler(this.btnReselect_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Reselect program";
+            // 
             // btnSelect
             // 
             this.btnSelect.Location = new System.Drawing.Point(294, 44);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
-            this.btnSelect.TabIndex = 4;
+            this.btnSelect.TabIndex = 7;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
@@ -99,16 +122,16 @@
             this.cboOptions.Location = new System.Drawing.Point(381, 46);
             this.cboOptions.Name = "cboOptions";
             this.cboOptions.Size = new System.Drawing.Size(264, 21);
-            this.cboOptions.TabIndex = 3;
+            this.cboOptions.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 49);
+            this.label2.Location = new System.Drawing.Point(178, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Commandline options";
+            this.label2.Text = "Command line options";
             // 
             // panel1
             // 
@@ -142,7 +165,7 @@
             this.rboPython3.Location = new System.Drawing.Point(146, 3);
             this.rboPython3.Name = "rboPython3";
             this.rboPython3.Size = new System.Drawing.Size(64, 17);
-            this.rboPython3.TabIndex = 4;
+            this.rboPython3.TabIndex = 3;
             this.rboPython3.TabStop = true;
             this.rboPython3.Text = "Python3";
             this.rboPython3.UseVisualStyleBackColor = true;
@@ -152,12 +175,11 @@
             // 
             this.cboAnaconda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboAnaconda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAnaconda.FormattingEnabled = true;
             this.cboAnaconda.Location = new System.Drawing.Point(302, 2);
             this.cboAnaconda.Name = "cboAnaconda";
             this.cboAnaconda.Size = new System.Drawing.Size(264, 21);
-            this.cboAnaconda.TabIndex = 3;
+            this.cboAnaconda.TabIndex = 5;
             // 
             // rboAnaconda3
             // 
@@ -165,7 +187,7 @@
             this.rboAnaconda3.Location = new System.Drawing.Point(216, 3);
             this.rboAnaconda3.Name = "rboAnaconda3";
             this.rboAnaconda3.Size = new System.Drawing.Size(80, 17);
-            this.rboAnaconda3.TabIndex = 2;
+            this.rboAnaconda3.TabIndex = 4;
             this.rboAnaconda3.TabStop = true;
             this.rboAnaconda3.Text = "Anaconda3";
             this.rboAnaconda3.UseVisualStyleBackColor = true;
@@ -177,7 +199,7 @@
             this.rboPython27.Location = new System.Drawing.Point(67, 3);
             this.rboPython27.Name = "rboPython27";
             this.rboPython27.Size = new System.Drawing.Size(73, 17);
-            this.rboPython27.TabIndex = 0;
+            this.rboPython27.TabIndex = 2;
             this.rboPython27.TabStop = true;
             this.rboPython27.Text = "Python2.7";
             this.rboPython27.UseVisualStyleBackColor = true;
@@ -202,7 +224,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(650, 264);
+            this.groupBox2.Size = new System.Drawing.Size(650, 122);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Command";
@@ -213,28 +235,30 @@
             this.txtCommand.Location = new System.Drawing.Point(2, 15);
             this.txtCommand.Multiline = true;
             this.txtCommand.Name = "txtCommand";
-            this.txtCommand.Size = new System.Drawing.Size(646, 247);
+            this.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtCommand.Size = new System.Drawing.Size(646, 105);
             this.txtCommand.TabIndex = 0;
             // 
             // btnQuit
             // 
             this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQuit.Location = new System.Drawing.Point(423, 355);
+            this.btnQuit.Location = new System.Drawing.Point(15, 213);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(2);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
-            this.btnQuit.TabIndex = 2;
+            this.btnQuit.TabIndex = 11;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(502, 355);
+            this.btnSave.Location = new System.Drawing.Point(502, 213);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -242,11 +266,11 @@
             // btnRun
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(581, 355);
+            this.btnRun.Location = new System.Drawing.Point(581, 213);
             this.btnRun.Margin = new System.Windows.Forms.Padding(2);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 4;
+            this.btnRun.TabIndex = 10;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -255,13 +279,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 389);
+            this.ClientSize = new System.Drawing.Size(662, 247);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(678, 286);
             this.Name = "PartitionFinderCommand";
             this.Text = "PartitionFinder2 command constructor";
             this.Load += new System.EventHandler(this.PartitionFinderCommand_Load);
@@ -293,5 +318,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ComboBox cboOptions;
+        private System.Windows.Forms.Button btnReselect;
+        private System.Windows.Forms.Label label3;
     }
 }

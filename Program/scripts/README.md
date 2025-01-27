@@ -126,3 +126,59 @@ wget  https://www.biologiaevolutiva.org/jcastresana/Gblocks/Gblocks_Linux64_0.91
 > bash ~/programs/bash_gblocks.sh ~/programs/Gblocks_0.91b/Gblocks /nobackup/workFolder/DNA d;
 
 ***Note***: the final ***d*** to denote DNA sequences
+
+## Installing PartitionFinder2
+
+***Note*** Since PartitionFinder3 requires the creation of a conda environment, not script is give, but you can install it manually with the commands below.
+
+Unlike the other applications, PartitionFinder requires python2.7 which is no longer supported on many systems. Consequently, you'll probably have to install python 2.7 on to your computer. This then may cause issues as it probably already has a version of python 3 installed. The commonest way around this issue is to install python 2.7 in a conda environment, which requires Anaconda to be installed which can be obtained [here](https://www.anaconda.com/download). 
+
+Once Anaconda3 is installed and environment can be created with:
+
+> conda create --name myenv python=2.7
+
+***Note*** __myenv__ is the name of your environment which can be any (supported) name such as __python2.7__. By using different names you can have multiple environments on your computer.
+
+Once created the environment needs to be updated for PartitionFinder with:
+
+> conda activate myenv   
+> conda install numpy pandas pytables pyparsing scipy scikit-learn
+
+Once activated and updated the command:
+
+> python --version
+
+while indicate that python 2.7 is the python version used and not python3.n.
+
+The conda environment can be turned off with:
+
+> conda deactivate
+
+### Installing PartitionFinder3 
+
+PartitionFinder can be downloaded from [https://github.com/brettc/partitionfinder/archive/refs/tags/v2.1.1.tar.gz](https://github.com/brettc/partitionfinder/archive/refs/tags/v2.1.1.tar.gz)
+
+with:
+
+> wget https://github.com/brettc/partitionfinder/archive/refs/tags/v2.1.1.tar.gz
+>  tar xvf partitionfinder-2.1.1.tar.gz
+
+Once extracted, the python script can be found in partitionfinder-2.1.1/PartitionFinder.py
+
+### Running PartitionFinder3 
+
+To run PartitionFinder3, you need to start activate the conda environment with: 
+
+> conda activate myenv 
+
+**Note** you may get an error message stating you have to initiate conda in which case run 
+
+> conda init
+> conda activate myenv 
+
+To run PartitionFinder use a standard command such as:
+
+python PartitionFinder.py \data\analysis
+
+where __PartitionFinder.py__ is the script file with it's path and __\data\analysis__ is the location of the folder with the phylip formatted alignment in it along with the partition_finder.cfg configuration file.
+

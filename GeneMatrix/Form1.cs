@@ -1894,22 +1894,23 @@ namespace GeneMatrix
 
             string options = "";
 
-            string program = getPartitionFinder2Filename();
+            string program = getPartitionFinder2Filename(false);
             if (program == null) { return; }
 
-            string configFile = folder + "\\PartitionFinder.cfg";
+            string configFile = folder + "\\partition_finder.cfg";
             if (System.IO.File.Exists(configFile) == false)
             {
-                MessageBox.Show("There is no configuration called PartitionFinder.cfg in the folder", "No config file");
+                MessageBox.Show("There is no configuration called partition_finder.cfg in the folder", "No config file");
                 return;
             }
 
             System.IO.StreamReader sf = null;
-            List<string> configLines = null;
+            List<string> configLines = new List<string>();
             try 
             {
                 sf = new System.IO.StreamReader(configFile);
-                configLines.AddRange(sf.ReadToEnd().Split('\n'));
+                string configureContents = sf.ReadToEnd();
+                configLines.AddRange(configureContents.Split('\n'));
                 sf.Close();
             }
             catch(Exception ex)
@@ -1920,12 +1921,14 @@ namespace GeneMatrix
             finally
             { if (sf != null) { sf.Close(); } }
 
+            int sequenceType = -1;
             string phyFile = getAlignmentFile(configLines, folder);
             if (System.IO.File.Exists(phyFile) == false)
             {
-                MessageBox.Show("There is no alignment file called " + phyFile.Substring(phyFile.LastIndexOf("\\") + 1) + " in the folder", "No alignment file");
-                return;
+                if (MessageBox.Show("There is no alignment file called " + phyFile.Substring(phyFile.LastIndexOf("\\") + 1) + " in the folder\r\nDo you want to carry on?", "No alignment file") != DialogResult.Yes);
+                { return; }
             }
+            //else { sequenceType = isDNA(phyFile)};
 
             if (UsingCluster(configLines) == true)
             { options += " --raxml"; }
@@ -1937,9 +1940,6 @@ namespace GeneMatrix
                 { return; }
                else { options += " --force-restart"; }                
             }
-
-            //offer abort not force
-            //throw new Exception("put stuff in about getting test aa or dna and test of models = JC, JC+G, HKY, HKY+G, GTR, GTR+G; vs models = LG, LG+G, LG+G+F, WAG, WAG+G, WAG+G+F; ");
 
             PartitionFinderCommand PFC = new PartitionFinderCommand(folder, program, options, folder);
             PFC.ShowDialog();
@@ -2010,18 +2010,18 @@ namespace GeneMatrix
             {
                 if (configLines[index].ToLower().StartsWith("alignment") == true)
                 {
-                    fileName = configLines[index].Substring(configLines.LastIndexOf("=") + 1).Trim();
+                    fileName = configLines[index].Substring(configLines[index].LastIndexOf("=") + 1).Trim();
                     index = int.MaxValue;
-                    fileName = folder + "\\" + fileName;
+                    fileName = folder + "\\" + fileName.Replace(";","");
                 }
                 else { index++; }
             }
             return fileName;
         }
 
-        private string getPartitionFinder2Filename()
+        private string getPartitionFinder2Filename(bool reselect)
         {
-            if (chkResetPrograms.Checked == false)
+            if (reselect == false)
             {
                 string PartitionFinder = Properties.Settings.Default.PartitionFinder;
                 if (System.IO.File.Exists(PartitionFinder) == true)

@@ -26,7 +26,7 @@
     + [Performing the alignment](#performing-the-alignment)
     + [Combining the alignments into a single alignment](#combining-the-alignments-into-a-single-alignment)
     + [Modifying the alignment command](#modifying-the-alignment-command)
-- [Third party alignment applications](#third-party-alignment-applications)
+- [Third party applications](#third-party-applications)
   * [Muscle](#muscle)
       - [Command](#command)
       - [Website](#website)
@@ -43,6 +43,14 @@
       - [Command](#command-3)
       - [Website](#website-3)
       - [References](#references-3)
+  * [GBlocks](#gblocks-alignment-cleaning)
+      - [Command](#command-4)
+      - [Website](#website-4)
+      - [Reference](#references-4)
+  * [PartitionFinder2](#partitionfinder-automated-schemes-selection-for-phylogenetic-analyses)
+      - [Command](#command-5)
+      - [Website](#website-5)
+      - [Reference](#references-5)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -363,7 +371,115 @@ The current options are displayed in the text area to the right of the programs 
 
 ***Important:*** The text displayed in the text area is inserted into the command line as it appears in the text area and undergoes no error checking. Consequently, it is best to test the options on a single, small dataset before attempting to process a larger dataset.
 
-# Third party alignment applications
+## Determining the partitioning schemes and models of evolution for phylogenetic analyses
+
+Once the sequences have been aligned, they may be used in a wide range of workflows, such as phylogenetic analysis. A common step of phylogenetic analysis is the determination of the best models and/or schemes for the analysis. This is typically performed using PartitionFinder2 which is a python application that requires python 2.7 to run. Since python 2.7 is no longer supported by a wide range of operation systems it typically has to be run in a conda environment whose set up is described [here](installinPython2.7.md). 
+
+Due to complexity of running the PartitionFinder analysis, it's implementation is separate from the other programs and done in three steps: 
+
+***Step 1:*** Creating a phylip formatted alignment with linked gene boundary data,  
+***Step 2:*** Creation of the PartitionFinder configuration file,  
+***Step 3:*** Creation of the PartitionFinder2 command and issuing it.
+
+These steps are undertaken by via the two buttons (```Make``` and ```Run```) in the ```PatitionFinder2``` panel (Figure 17)
+
+![Figure 17](images/figure17.jpg)
+
+Figure 17
+
+### Creating a Phylip alignment and boundary data
+
+Pressing the ```Make``` button opens the ```PartitionFinder``` window (Figure 18). 
+
+![Figure 18](images/figure18.jpg)
+
+Figure 18
+
+To create the Phylip alignment, first select the folder of individual alignments created by Muscle, Prank, ClustalW, MAFFT or GBlocks by pressing the ```Folder``` button in the upper ```Create Phylip file``` panel. Next select the required file extension of the alignments using the dropdown list to the right of the ```Folder``` button. If all the alignments have a common suffix such as ***_DNA_MAFFT.fasta.fa*** this can be entered in to the dropdown list (Figure 19) and the number of matching files is shown to the right of the dropdown list control.
+
+![Figure 19](images/figure19.jpg)
+
+Figure 19
+
+If any files meet the filtering step, the ```Create``` button is enabled and pressing it, causes the alignment (Figure 20) and boundary (Figure 21) files to be made and saved to the folder containing the alignments.  
+
+![Figure 20](images/figure20.jpg)
+
+Figure 20
+
+![Figure 21](images/figure21.jpg)
+
+Figure 21 
+
+The boundary files contains the data as a series of lines in the PartitionFinder's blocks format for both non-coding (protein and/or intronic sequences) as well as coding. For example line 1 in Figure 21 represents non-coding sequences while lines 2 to 4 represent the blocks for codon positions 1,2 and 3 of coding sequence.
+
+### Creating a PartitionFinder2 configuration file
+
+The configuration file (partition_finder.cfg) contains the majority of options required by PartitionFinder2. While, ```GeneMatrix``` allows you to create this file, due to the number and scope of parameters ```GeneMatrix``` does not validate all possible combinations, consequently, you need to read the PartitionFinder2 manual to understand which parameters to use.
+
+All options for creating a configuration file are in the lower ```PartitionFinder2 config file creation``` panel. 
+
+#### Adding the alignment file
+
+Pressing the ```Select``` button at the top of the ```PartitionFinder2 config file creation``` panel prompts you to select the Phylip alignment made earlier, its file name will then appear in the text area to the right of the ```Select``` button. Alternatively, you can manually type the name in the text area.
+
+#### Setting the branch lengths
+
+It is possible to set the branch length for the analysis to be fixed or sequence block dependant using the ```Linked``` and ```Unlinked``` radio buttons. ***Note*** Not all phylogenetic programs allow Unlinked branch length.
+
+#### Setting the Model of evolution
+
+The evolution model can be selected from the dropdown list to the right of the ```Model of evolution``` label (Figure 22a). This contains an number of models, with the last entry set to ```List``` (Figures 22b and 22c). If the ```List``` option is selected the ```DNA``` and ```Amino acid sequence``` radio buttons become active. Toggling these radio buttons changes the labels of the radio buttons below them such that the options match the correct type of sequence. Any combination of these sub-models can be selected. 
+
+![Figure 22a](images/figure22a.jpg)
+
+Figure 22
+
+![Figure 22b](images/figure22b.jpg)
+
+Figure 22b 
+
+![Figure 22c](images/figure22c.jpg)
+
+Figure 22c 
+
+#### Setting the Schemes option
+
+The dropdown list to the right of the ```Schemes``` label allow the the analyses Scheme to be selected (Figure 23)
+
+![Figure 23](images/figure23.jpg)
+
+Figure 23
+
+#### Setting the Model of selection
+
+The dropdown list to the right of the ```Model of selection``` label allow the the analysis selection model to be set (Figure 24)
+
+![Figure 24](images/figure24.jpg)
+
+Figure 24
+
+#### Setting the partition blocks 
+
+Pressing the lower ```Select``` button prompts you to select the sequence boundary (*.blocks) made with the Phylip alignment file. The individual genes/sequences are then listed in the check list control (Figure 25a). Selecting an entry in this list indicates that the sequence is coding and so different models for each of the codon positions will be allowed (see figure 25b for entry in the configuration file). 
+
+![Figure 25a](images/figure25a.jpg)
+
+Figure 25a
+
+![Figure 25b](images/figure25b.jpg)
+
+Figure 25b
+
+In Figure 25a, CDS-ATP6 and CDS-COX2 are selected; consequently, these sequences have three entries, one for each codon position in the resultant configuration file (Figure 25b).
+
+#### Creating the configuration file
+
+Pressing the ```create``` button at the bottom panel prompts you to enter the name and location of the configuration file. While any file name can be entered, it has to be set to ***partition_finder.cfg*** for PartitionFinder2 to find it.
+
+
+
+# Third party applications
 
 ## Muscle
 
@@ -496,7 +612,7 @@ where:
 https://www.biologiaevolutiva.org/jcastresana/Gblocks.html   
 (Manual: https://www.biologiaevolutiva.org/jcastresana/Gblocks/Gblocks_documentation.html)
 
-#### Reference
+#### References
 
 First publication
 
@@ -505,3 +621,63 @@ First publication
 Last publication
 
 > Talavera, G., and Castresana, J. (2007). Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Systematic Biology 56, 564-577.
+
+## PartitionFinder: automated schemes selection for phylogenetic analyses 
+
+Running PartitionFinder2 requires python 2.7, since the current version of Python install as standard is python 3.12.8, PartitionFinder requires a non-standard installation of python. Since this can cause issues a standard Python 3.X installation, Python 2.7 is best installed within a conda environment as described [here](installinPython2.7.md).
+
+#### Command
+
+The majority of parameters are set in a configuration file that is in a folder that also contains the alignment file and to which the results ared saved. The program requires an old version of the python and may have to be run in an conda environment. The basic command once the correct python enironment is set up is:
+
+> python PartitionFinder.py <data folder>
+
+where: 
+* python references python 2.7 
+* <data folder> is the folder, with its path, that contains the **partition_finder.cfg** configuration file and the Phylip formatted alignment file.
+
+#### Website
+
+https://www.robertlanfear.com/partitionfinder/  
+(Manual: https://www.robertlanfear.com/partitionfinder/assets/Manual_v2.1.x.pdf,  
+Tutorial: https://www.robertlanfear.com/partitionfinder/tutorial/)
+
+#### References
+
+PartitionFinder3 builds on the work of a number of papers and the authors state:
+
+**"Depending on your analysis, you may need to cite up to three papers. One for 
+PartitionFinder2, one for the algorithm you use (if you use the rcluster, hcluster, or 
+kmeans options), and one for either PhyML or RAxML."**
+
+##### PartitionFinder2 
+If you any of this program in any published work please cite:   
+> Lanfear, R., Frandsen, P. B., Wright, A. M., Senfeld, T., Calcott, B. (2016) 
+PartitionFinder 2: new methods for selecting partitioned models of evolution for 
+molecular and morphological phylogenetic analyses. Molecular biology and evolution. 
+DOI: dx.doi.org/10.1093/molbev/msw260   
+
+##### Using search = ‘rcluster’ or search = ‘hcluster’ 
+These algorithms are described in the following paper, if you use them please cite: 
+> Lanfear, R., Calcott, B., Kainer, D., Mayer, C., & Stamatakis, A. (2014). Selecting 
+optimal partitioning schemes for phylogenomic datasets. BMC evolutionary 
+biology, 14(1), 82.   
+
+##### Using search = ‘kmeans’ 
+This algorithm is described in the following paper, if you use it please cite: 
+> Frandsen, P. B., Calcott, B., Mayer, C., & Lanfear, R. (2015). Automatic selection of 
+partitioning schemes for phylogenetic analyses using iterative k-means clustering of site 
+rates. BMC Evolutionary Biology, 15(1), 13. 
+
+##### PhyML 
+If you use PF2 without the --raxml command line option, PF2 relies heavily on PhyML 
+version 3.0, so please cite:   
+> New Algorithms and Methods to Estimate Maximum-Likelihood Phylogenies: Assessing 
+the Performance of PhyML 3.0. Guindon S., Dufayard J.F., Lefort V., Anisimova M., 
+Hordijk W., Gascuel O. Systematic Biology, 59(3):307-21, 2010. 
+
+##### Using the --raxml command line option 
+If you use the --raxml commandline option, PF2 uses RAxML v8.0 for calculations. If 
+you use it, please cite: 
+> A. Stamatakis, RAxML-VI-HPC: maximum likelihood-based phylogenetic analyses with 
+thousands of taxa and mixed models, Bioinformatics 22, 2688–2690 (2006)
