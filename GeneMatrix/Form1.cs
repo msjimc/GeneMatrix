@@ -1892,6 +1892,8 @@ namespace GeneMatrix
             string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select the folder containing the alignment and configuration files.", "");
             if (System.IO.Directory.Exists(folder) == false) { return; }
 
+            string options = "";
+
             string program = getPartitionFinder2Filename();
             if (program == null) { return; }
 
@@ -1918,8 +1920,6 @@ namespace GeneMatrix
             finally
             { if (sf != null) { sf.Close(); } }
 
-
-
             string phyFile = getAlignmentFile(configLines, folder);
             if (System.IO.File.Exists(phyFile) == false)
             {
@@ -1927,19 +1927,21 @@ namespace GeneMatrix
                 return;
             }
 
-            bool addraxml = UsingCluster(configLines);
-            bool addforceRestart = false;
+            if (UsingCluster(configLines) == true)
+            { options += " --raxml"; }
+
+
             if (System.IO.Directory.Exists(folder + "\\analysis" ) == true)
             {
                 if( MessageBox.Show("Do you want to overwrite previous analysis?", "Delete old analysis",MessageBoxButtons.YesNo) != DialogResult.Yes)
                 { return; }
-               else { addforceRestart = true; }                
+               else { options += " --force-restart"; }                
             }
 
             //offer abort not force
             //throw new Exception("put stuff in about getting test aa or dna and test of models = JC, JC+G, HKY, HKY+G, GTR, GTR+G; vs models = LG, LG+G, LG+G+F, WAG, WAG+G, WAG+G+F; ");
 
-            PartitionFinderCommand PFC = new PartitionFinderCommand(folder, program);
+            PartitionFinderCommand PFC = new PartitionFinderCommand(folder, program, options, folder);
             PFC.ShowDialog();
 
         }

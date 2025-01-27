@@ -33,7 +33,7 @@
             this.cboOptions = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Python = new System.Windows.Forms.RadioButton();
+            this.rboPython = new System.Windows.Forms.RadioButton();
             this.rboPython3 = new System.Windows.Forms.RadioButton();
             this.cboAnaconda = new System.Windows.Forms.ComboBox();
             this.rboAnaconda3 = new System.Windows.Forms.RadioButton();
@@ -44,18 +44,15 @@
             this.btnQuit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.btnSelect);
             this.groupBox1.Controls.Add(this.cboOptions);
             this.groupBox1.Controls.Add(this.label2);
@@ -72,7 +69,7 @@
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(213, 44);
+            this.btnSelect.Location = new System.Drawing.Point(294, 44);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 4;
@@ -99,7 +96,7 @@
             "--rcluster-percent N",
             "--save-phylofiles",
             "--weights “Wrate , Wbase , Wmodel , Walpha ” "});
-            this.cboOptions.Location = new System.Drawing.Point(294, 46);
+            this.cboOptions.Location = new System.Drawing.Point(381, 46);
             this.cboOptions.Name = "cboOptions";
             this.cboOptions.Size = new System.Drawing.Size(264, 21);
             this.cboOptions.TabIndex = 3;
@@ -117,7 +114,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.Python);
+            this.panel1.Controls.Add(this.rboPython);
             this.panel1.Controls.Add(this.rboPython3);
             this.panel1.Controls.Add(this.cboAnaconda);
             this.panel1.Controls.Add(this.rboAnaconda3);
@@ -127,16 +124,17 @@
             this.panel1.Size = new System.Drawing.Size(569, 27);
             this.panel1.TabIndex = 1;
             // 
-            // Python
+            // rboPython
             // 
-            this.Python.AutoSize = true;
-            this.Python.Location = new System.Drawing.Point(3, 3);
-            this.Python.Name = "Python";
-            this.Python.Size = new System.Drawing.Size(58, 17);
-            this.Python.TabIndex = 1;
-            this.Python.TabStop = true;
-            this.Python.Text = "Python";
-            this.Python.UseVisualStyleBackColor = true;
+            this.rboPython.AutoSize = true;
+            this.rboPython.Location = new System.Drawing.Point(3, 3);
+            this.rboPython.Name = "rboPython";
+            this.rboPython.Size = new System.Drawing.Size(58, 17);
+            this.rboPython.TabIndex = 1;
+            this.rboPython.TabStop = true;
+            this.rboPython.Text = "Python";
+            this.rboPython.UseVisualStyleBackColor = true;
+            this.rboPython.CheckedChanged += new System.EventHandler(this.rbo_CheckChanged);
             // 
             // rboPython3
             // 
@@ -148,6 +146,7 @@
             this.rboPython3.TabStop = true;
             this.rboPython3.Text = "Python3";
             this.rboPython3.UseVisualStyleBackColor = true;
+            this.rboPython3.CheckedChanged += new System.EventHandler(this.rbo_CheckChanged);
             // 
             // cboAnaconda
             // 
@@ -170,6 +169,7 @@
             this.rboAnaconda3.TabStop = true;
             this.rboAnaconda3.Text = "Anaconda3";
             this.rboAnaconda3.UseVisualStyleBackColor = true;
+            this.rboAnaconda3.CheckedChanged += new System.EventHandler(this.rbo_CheckChanged);
             // 
             // rboPython27
             // 
@@ -181,6 +181,7 @@
             this.rboPython27.TabStop = true;
             this.rboPython27.Text = "Python2.7";
             this.rboPython27.UseVisualStyleBackColor = true;
+            this.rboPython27.CheckedChanged += new System.EventHandler(this.rbo_CheckChanged);
             // 
             // label1
             // 
@@ -236,6 +237,7 @@
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnRun
             // 
@@ -247,23 +249,7 @@
             this.btnRun.TabIndex = 4;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(564, 47);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // PartitionFinderCommand
             // 
@@ -277,7 +263,7 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PartitionFinderCommand";
-            this.Text = "PartitionFinderCommand";
+            this.Text = "PartitionFinder2 command constructor";
             this.Load += new System.EventHandler(this.PartitionFinderCommand_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -285,7 +271,6 @@
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -301,13 +286,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cboAnaconda;
         private System.Windows.Forms.RadioButton rboAnaconda3;
-        private System.Windows.Forms.RadioButton Python;
+        private System.Windows.Forms.RadioButton rboPython;
         private System.Windows.Forms.RadioButton rboPython27;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rboPython3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ComboBox cboOptions;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
