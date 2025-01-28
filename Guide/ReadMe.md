@@ -478,7 +478,46 @@ In Figure 25a, CDS-ATP6 and CDS-COX2 are selected; consequently, these sequences
 
 Pressing the ```create``` button at the bottom panel prompts you to enter the name and location of the configuration file. While any file name can be entered, it has to be set to ***partition_finder.cfg*** for PartitionFinder2 to find it.
 
+### Running configuring the command line arguments and running PartitionFinder2
 
+Pressing the ```Run``` button will prompting you to select the working folder that contains the aligned sequence file (\*.phy) and the partition_finder.cfg before opening the ```PartitionFinder2 command constructor``` (Figure 26a). It will also check for the presence of the PartitionFinder2.py and prompt you to select it if not found. It will as so check if the partition_finder.cfg directs the use of the a cluster algorithm (R-Cluster, R-Cluster-F or H-Cluster) and if found include the ***--raxml*** option. It will also check for the presence of an old analysis (folder call ***analysis***) and if found d=give the option to abort the analysis or force PartitionFinder to overwrite the analysis with the ***--force-restart*** parameter.
+
+```GeneMatrix``` will scan for conda environments in the default locations as well as locations suggested by the user and global PATH variable. If it finds any environments they will be listed in the dropdown list to the right of the ```Anaconda3``` radio button. If only one environment was found it will be selected in the list, if more than one was present, the appropriate one should be selected. If the environment was not found it can manually be entered in to the list's text area.
+
+If the the ```Anaconda3``` radio button option is checked, the command shown in the lower text area will contain the command line instructions for activating the environment (Figure 26a). If one of the other options is selected the command will display the required command (Figure 26b).
+
+![Figure 26a](images/figure26a.jpg)
+
+Figure 26a
+
+![Figure 26b](images/figure26b.jpg)
+
+Figure 26b
+
+While most of the options are set in the partition_finder.cfg file, there are a number of parameters that can be set on the command line. These can be add by selecting them in the lower dropdown list control and pressing the ```Select``` button(Figures 27a and 27b). To remove them repeat the process. Some of the option require a numeric value to be included (--processors N, --rcluster-max N, --rcluster-percent N and --weights “Wrate , Wbase , Wmodel , Walpha ”). To include the numeric values, select all the command line options and then manually change the text in the lower area (Figure 27c). If you modify the text and then add another parameter all the changes will be lost.
+
+
+![Figure 27a](images/figure27a.jpg)
+
+Figure 27a
+
+![Figure 27b](images/figure27b.jpg)
+
+Figure 27b
+
+![Figure 27c](images/figure27c.jpg)
+
+Figure 27c
+
+#### Saving the script
+
+Pressing the ```Save``` button allows the command text to be save as a text file. 
+
+#### Running PartitionFinder2
+
+Pressing the ```Run``` button will save the command(s) as a batch file (*.bat) in the working folder and then run it in a CMD.exe shell. 
+
+***Note:*** The ```Program``` button allows the PartitionFinder2.py to be reset
 
 # Third party applications
 

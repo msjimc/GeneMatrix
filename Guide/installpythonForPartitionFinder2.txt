@@ -1,4 +1,0 @@
-conda create --name myenv python=2.7   
-conda activate myenv 
-conda install numpy pandas pytables pyparsing scipy scikit-learn
-python E:\geneMatrix\programs\partitionfinder-2.1.1\PartitionFinder.py E:\geneMatrix\analysis\data [--force-restart --raxml]

@@ -78,6 +78,8 @@ namespace GeneMatrix
                 }
             }
 
+            cboAnaconda.Items.AddRange(envsList.ToArray());
+
             if (cboAnaconda.Items.Count == 2)
             {
                 cboAnaconda.SelectedIndex = 1;
@@ -168,7 +170,7 @@ namespace GeneMatrix
 
             string selected = cboOptions.Text;
             if (selected.Contains(" ") == true)
-            { options = options.Substring(0, selected.IndexOf(" ")); }
+            { selected = selected.Substring(0, selected.IndexOf(" ")); }
 
             if (options.Contains(selected) == false)
             { options += " " + cboOptions.Text; }

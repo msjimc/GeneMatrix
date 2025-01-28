@@ -62,20 +62,21 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(650, 77);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1300, 148);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
             // btnReselect
             // 
-            this.btnReselect.Location = new System.Drawing.Point(97, 44);
+            this.btnReselect.Location = new System.Drawing.Point(194, 85);
+            this.btnReselect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnReselect.Name = "btnReselect";
-            this.btnReselect.Size = new System.Drawing.Size(75, 23);
+            this.btnReselect.Size = new System.Drawing.Size(150, 44);
             this.btnReselect.TabIndex = 6;
             this.btnReselect.Text = "Program";
             this.btnReselect.UseVisualStyleBackColor = true;
@@ -84,17 +85,19 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 49);
+            this.label3.Location = new System.Drawing.Point(12, 94);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.Size = new System.Drawing.Size(181, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Reselect program";
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(294, 44);
+            this.btnSelect.Location = new System.Drawing.Point(588, 85);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.Size = new System.Drawing.Size(150, 44);
             this.btnSelect.TabIndex = 7;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -119,17 +122,19 @@
             "--rcluster-percent N",
             "--save-phylofiles",
             "--weights “Wrate , Wbase , Wmodel , Walpha ” "});
-            this.cboOptions.Location = new System.Drawing.Point(381, 46);
+            this.cboOptions.Location = new System.Drawing.Point(762, 88);
+            this.cboOptions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cboOptions.Name = "cboOptions";
-            this.cboOptions.Size = new System.Drawing.Size(264, 21);
+            this.cboOptions.Size = new System.Drawing.Size(524, 33);
             this.cboOptions.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(178, 49);
+            this.label2.Location = new System.Drawing.Point(356, 94);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 13);
+            this.label2.Size = new System.Drawing.Size(225, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "Command line options";
             // 
@@ -142,17 +147,19 @@
             this.panel1.Controls.Add(this.cboAnaconda);
             this.panel1.Controls.Add(this.rboAnaconda3);
             this.panel1.Controls.Add(this.rboPython27);
-            this.panel1.Location = new System.Drawing.Point(78, 15);
+            this.panel1.Location = new System.Drawing.Point(156, 29);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(569, 27);
+            this.panel1.Size = new System.Drawing.Size(1138, 52);
             this.panel1.TabIndex = 1;
             // 
             // rboPython
             // 
             this.rboPython.AutoSize = true;
-            this.rboPython.Location = new System.Drawing.Point(3, 3);
+            this.rboPython.Location = new System.Drawing.Point(6, 6);
+            this.rboPython.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rboPython.Name = "rboPython";
-            this.rboPython.Size = new System.Drawing.Size(58, 17);
+            this.rboPython.Size = new System.Drawing.Size(110, 29);
             this.rboPython.TabIndex = 1;
             this.rboPython.TabStop = true;
             this.rboPython.Text = "Python";
@@ -162,9 +169,10 @@
             // rboPython3
             // 
             this.rboPython3.AutoSize = true;
-            this.rboPython3.Location = new System.Drawing.Point(146, 3);
+            this.rboPython3.Location = new System.Drawing.Point(292, 6);
+            this.rboPython3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rboPython3.Name = "rboPython3";
-            this.rboPython3.Size = new System.Drawing.Size(64, 17);
+            this.rboPython3.Size = new System.Drawing.Size(122, 29);
             this.rboPython3.TabIndex = 3;
             this.rboPython3.TabStop = true;
             this.rboPython3.Text = "Python3";
@@ -176,17 +184,19 @@
             this.cboAnaconda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboAnaconda.FormattingEnabled = true;
-            this.cboAnaconda.Location = new System.Drawing.Point(302, 2);
+            this.cboAnaconda.Location = new System.Drawing.Point(604, 4);
+            this.cboAnaconda.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cboAnaconda.Name = "cboAnaconda";
-            this.cboAnaconda.Size = new System.Drawing.Size(264, 21);
+            this.cboAnaconda.Size = new System.Drawing.Size(524, 33);
             this.cboAnaconda.TabIndex = 5;
             // 
             // rboAnaconda3
             // 
             this.rboAnaconda3.AutoSize = true;
-            this.rboAnaconda3.Location = new System.Drawing.Point(216, 3);
+            this.rboAnaconda3.Location = new System.Drawing.Point(432, 6);
+            this.rboAnaconda3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rboAnaconda3.Name = "rboAnaconda3";
-            this.rboAnaconda3.Size = new System.Drawing.Size(80, 17);
+            this.rboAnaconda3.Size = new System.Drawing.Size(152, 29);
             this.rboAnaconda3.TabIndex = 4;
             this.rboAnaconda3.TabStop = true;
             this.rboAnaconda3.Text = "Anaconda3";
@@ -196,9 +206,10 @@
             // rboPython27
             // 
             this.rboPython27.AutoSize = true;
-            this.rboPython27.Location = new System.Drawing.Point(67, 3);
+            this.rboPython27.Location = new System.Drawing.Point(134, 6);
+            this.rboPython27.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rboPython27.Name = "rboPython27";
-            this.rboPython27.Size = new System.Drawing.Size(73, 17);
+            this.rboPython27.Size = new System.Drawing.Size(140, 29);
             this.rboPython27.TabIndex = 2;
             this.rboPython27.TabStop = true;
             this.rboPython27.Text = "Python2.7";
@@ -208,9 +219,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 20);
+            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(132, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Environment";
             // 
@@ -220,11 +232,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.txtCommand);
-            this.groupBox2.Location = new System.Drawing.Point(6, 87);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(12, 167);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(650, 122);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(1300, 235);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Command";
@@ -232,20 +244,21 @@
             // txtCommand
             // 
             this.txtCommand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCommand.Location = new System.Drawing.Point(2, 15);
+            this.txtCommand.Location = new System.Drawing.Point(4, 28);
+            this.txtCommand.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtCommand.Multiline = true;
             this.txtCommand.Name = "txtCommand";
             this.txtCommand.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCommand.Size = new System.Drawing.Size(646, 105);
+            this.txtCommand.Size = new System.Drawing.Size(1292, 203);
             this.txtCommand.TabIndex = 0;
             // 
             // btnQuit
             // 
-            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQuit.Location = new System.Drawing.Point(15, 213);
-            this.btnQuit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnQuit.Location = new System.Drawing.Point(30, 410);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(75, 23);
+            this.btnQuit.Size = new System.Drawing.Size(150, 44);
             this.btnQuit.TabIndex = 11;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
@@ -254,10 +267,10 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(502, 213);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSave.Location = new System.Drawing.Point(1004, 410);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(150, 44);
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -266,10 +279,10 @@
             // btnRun
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(581, 213);
-            this.btnRun.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRun.Location = new System.Drawing.Point(1162, 410);
+            this.btnRun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.Size = new System.Drawing.Size(150, 44);
             this.btnRun.TabIndex = 10;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -277,16 +290,16 @@
             // 
             // PartitionFinderCommand
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 247);
+            this.ClientSize = new System.Drawing.Size(1324, 475);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(678, 286);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(1330, 484);
             this.Name = "PartitionFinderCommand";
             this.Text = "PartitionFinder2 command constructor";
             this.Load += new System.EventHandler(this.PartitionFinderCommand_Load);
