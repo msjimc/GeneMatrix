@@ -434,7 +434,7 @@ The evolution model can be selected from the dropdown list to the right of the `
 
 ![Figure 22a](images/figure22a.jpg)
 
-Figure 22
+Figure 22a
 
 ![Figure 22b](images/figure22b.jpg)
 
@@ -517,7 +517,7 @@ Pressing the ```Save``` button allows the command text to be save as a text file
 
 Pressing the ```Run``` button will save the command(s) as a batch file (*.bat) in the working folder and then run it in a CMD.exe shell. 
 
-***Note:*** The ```Program``` button allows the PartitionFinder2.py to be reset
+***Note:*** The ```Program``` button allows the PartitionFinder2.py to be reselected.
 
 # Third party applications
 
