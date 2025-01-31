@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Downloaderrors));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnQuit = new System.Windows.Forms.Button();
             this.txterrors = new System.Windows.Forms.TextBox();
@@ -75,6 +76,7 @@
             this.ClientSize = new System.Drawing.Size(423, 245);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Downloaderrors";
             this.Text = "Download Errors";
             this.groupBox1.ResumeLayout(false);

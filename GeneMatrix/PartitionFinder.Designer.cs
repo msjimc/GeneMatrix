@@ -38,6 +38,14 @@ namespace GeneMatrix
             this.btnSelect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboSelectionModel = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rdoProtein = new System.Windows.Forms.RadioButton();
+            this.rdoDNA = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rboLinked = new System.Windows.Forms.RadioButton();
+            this.rboUnlinked = new System.Windows.Forms.RadioButton();
             this.btnCreateConfigFile = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cblCodingSequences = new System.Windows.Forms.CheckedListBox();
@@ -52,26 +60,18 @@ namespace GeneMatrix
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.rdoProtein = new System.Windows.Forms.RadioButton();
-            this.rdoDNA = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.cboModel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.rboUnlinked = new System.Windows.Forms.RadioButton();
-            this.rboLinked = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAlignmentFile = new System.Windows.Forms.TextBox();
             this.btnAlignmentFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.cboSelectionModel = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -187,6 +187,100 @@ namespace GeneMatrix
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "PartitionFinder2 config file creation";
+            // 
+            // cboSelectionModel
+            // 
+            this.cboSelectionModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboSelectionModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSelectionModel.FormattingEnabled = true;
+            this.cboSelectionModel.Items.AddRange(new object[] {
+            "Select",
+            "AIC",
+            "AICc",
+            "BIC "});
+            this.cboSelectionModel.Location = new System.Drawing.Point(236, 182);
+            this.cboSelectionModel.Name = "cboSelectionModel";
+            this.cboSelectionModel.Size = new System.Drawing.Size(327, 21);
+            this.cboSelectionModel.TabIndex = 28;
+            this.cboSelectionModel.SelectedIndexChanged += new System.EventHandler(this.cboSelectionModel_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 185);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Model of selection";
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.rdoProtein);
+            this.panel2.Controls.Add(this.rdoDNA);
+            this.panel2.Location = new System.Drawing.Point(155, 102);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(411, 24);
+            this.panel2.TabIndex = 26;
+            // 
+            // rdoProtein
+            // 
+            this.rdoProtein.AutoSize = true;
+            this.rdoProtein.Enabled = false;
+            this.rdoProtein.Location = new System.Drawing.Point(205, 5);
+            this.rdoProtein.Name = "rdoProtein";
+            this.rdoProtein.Size = new System.Drawing.Size(127, 17);
+            this.rdoProtein.TabIndex = 10;
+            this.rdoProtein.Text = "Amino acid sequence";
+            this.rdoProtein.UseVisualStyleBackColor = true;
+            this.rdoProtein.CheckedChanged += new System.EventHandler(this.rdoDNA_Protein_CheckedChanged);
+            // 
+            // rdoDNA
+            // 
+            this.rdoDNA.AutoSize = true;
+            this.rdoDNA.Enabled = false;
+            this.rdoDNA.Location = new System.Drawing.Point(3, 5);
+            this.rdoDNA.Name = "rdoDNA";
+            this.rdoDNA.Size = new System.Drawing.Size(126, 17);
+            this.rdoDNA.TabIndex = 9;
+            this.rdoDNA.Text = "Nucleotide sequence";
+            this.rdoDNA.UseVisualStyleBackColor = true;
+            this.rdoDNA.CheckedChanged += new System.EventHandler(this.rdoDNA_Protein_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.rboLinked);
+            this.panel1.Controls.Add(this.rboUnlinked);
+            this.panel1.Location = new System.Drawing.Point(155, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(408, 22);
+            this.panel1.TabIndex = 25;
+            // 
+            // rboLinked
+            // 
+            this.rboLinked.AutoSize = true;
+            this.rboLinked.Location = new System.Drawing.Point(3, 1);
+            this.rboLinked.Name = "rboLinked";
+            this.rboLinked.Size = new System.Drawing.Size(154, 17);
+            this.rboLinked.TabIndex = 4;
+            this.rboLinked.Text = "Linked (universal value set)";
+            this.rboLinked.UseVisualStyleBackColor = true;
+            this.rboLinked.CheckedChanged += new System.EventHandler(this.rboLinked_unlinked_CheckedChanged);
+            // 
+            // rboUnlinked
+            // 
+            this.rboUnlinked.AutoSize = true;
+            this.rboUnlinked.Location = new System.Drawing.Point(205, 1);
+            this.rboUnlinked.Name = "rboUnlinked";
+            this.rboUnlinked.Size = new System.Drawing.Size(154, 17);
+            this.rboUnlinked.TabIndex = 5;
+            this.rboUnlinked.Text = "Unlinked (individual values)";
+            this.rboUnlinked.UseVisualStyleBackColor = true;
+            this.rboUnlinked.CheckedChanged += new System.EventHandler(this.rboLinked_unlinked_CheckedChanged);
             // 
             // btnCreateConfigFile
             // 
@@ -347,30 +441,6 @@ namespace GeneMatrix
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
-            // rdoProtein
-            // 
-            this.rdoProtein.AutoSize = true;
-            this.rdoProtein.Enabled = false;
-            this.rdoProtein.Location = new System.Drawing.Point(205, 5);
-            this.rdoProtein.Name = "rdoProtein";
-            this.rdoProtein.Size = new System.Drawing.Size(127, 17);
-            this.rdoProtein.TabIndex = 10;
-            this.rdoProtein.Text = "Amino acid sequence";
-            this.rdoProtein.UseVisualStyleBackColor = true;
-            this.rdoProtein.CheckedChanged += new System.EventHandler(this.rdoDNA_Protein_CheckedChanged);
-            // 
-            // rdoDNA
-            // 
-            this.rdoDNA.AutoSize = true;
-            this.rdoDNA.Enabled = false;
-            this.rdoDNA.Location = new System.Drawing.Point(3, 5);
-            this.rdoDNA.Name = "rdoDNA";
-            this.rdoDNA.Size = new System.Drawing.Size(126, 17);
-            this.rdoDNA.TabIndex = 9;
-            this.rdoDNA.Text = "Nucleotide sequence";
-            this.rdoDNA.UseVisualStyleBackColor = true;
-            this.rdoDNA.CheckedChanged += new System.EventHandler(this.rdoDNA_Protein_CheckedChanged);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -409,28 +479,6 @@ namespace GeneMatrix
             this.label4.Size = new System.Drawing.Size(94, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Model of evolution";
-            // 
-            // rboUnlinked
-            // 
-            this.rboUnlinked.AutoSize = true;
-            this.rboUnlinked.Location = new System.Drawing.Point(205, 1);
-            this.rboUnlinked.Name = "rboUnlinked";
-            this.rboUnlinked.Size = new System.Drawing.Size(154, 17);
-            this.rboUnlinked.TabIndex = 5;
-            this.rboUnlinked.Text = "Unlinked (individual values)";
-            this.rboUnlinked.UseVisualStyleBackColor = true;
-            this.rboUnlinked.CheckedChanged += new System.EventHandler(this.rboLinked_unlinked_CheckedChanged);
-            // 
-            // rboLinked
-            // 
-            this.rboLinked.AutoSize = true;
-            this.rboLinked.Location = new System.Drawing.Point(3, 1);
-            this.rboLinked.Name = "rboLinked";
-            this.rboLinked.Size = new System.Drawing.Size(154, 17);
-            this.rboLinked.TabIndex = 4;
-            this.rboLinked.Text = "Linked (universal value set)";
-            this.rboLinked.UseVisualStyleBackColor = true;
-            this.rboLinked.CheckedChanged += new System.EventHandler(this.rboLinked_unlinked_CheckedChanged);
             // 
             // label3
             // 
@@ -481,54 +529,6 @@ namespace GeneMatrix
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.rboLinked);
-            this.panel1.Controls.Add(this.rboUnlinked);
-            this.panel1.Location = new System.Drawing.Point(155, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(408, 22);
-            this.panel1.TabIndex = 25;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.rdoProtein);
-            this.panel2.Controls.Add(this.rdoDNA);
-            this.panel2.Location = new System.Drawing.Point(155, 102);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(411, 24);
-            this.panel2.TabIndex = 26;
-            // 
-            // cboSelectionModel
-            // 
-            this.cboSelectionModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboSelectionModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSelectionModel.FormattingEnabled = true;
-            this.cboSelectionModel.Items.AddRange(new object[] {
-            "Select",
-            "AIC",
-            "AICc",
-            "BIC "});
-            this.cboSelectionModel.Location = new System.Drawing.Point(236, 182);
-            this.cboSelectionModel.Name = "cboSelectionModel";
-            this.cboSelectionModel.Size = new System.Drawing.Size(327, 21);
-            this.cboSelectionModel.TabIndex = 28;
-            this.cboSelectionModel.SelectedIndexChanged += new System.EventHandler(this.cboSelectionModel_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 185);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 13);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "Model of selection";
-            // 
             // PartitionFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,16 +537,17 @@ namespace GeneMatrix
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PartitionFinder";
             this.Text = "PartitionFinder";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

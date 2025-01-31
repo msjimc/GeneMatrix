@@ -29,7 +29,17 @@ namespace GeneMatrix
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modifyCommand));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnGBlocksPr = new System.Windows.Forms.Button();
+            this.btnGBlocksP = new System.Windows.Forms.Button();
+            this.txtGBlocksP = new System.Windows.Forms.TextBox();
+            this.btnGBlocksDr = new System.Windows.Forms.Button();
+            this.btnGBlocksD = new System.Windows.Forms.Button();
+            this.txtGBlocksD = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.btnClustalWProteinr = new System.Windows.Forms.Button();
             this.btnClustalWDNAr = new System.Windows.Forms.Button();
             this.btnMuscleProteinr = new System.Windows.Forms.Button();
@@ -63,15 +73,6 @@ namespace GeneMatrix
             this.txtMAFFTDNA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnGBlocksDr = new System.Windows.Forms.Button();
-            this.btnGBlocksD = new System.Windows.Forms.Button();
-            this.txtGBlocksD = new System.Windows.Forms.TextBox();
-            this.btnGBlocksPr = new System.Windows.Forms.Button();
-            this.btnGBlocksP = new System.Windows.Forms.Button();
-            this.txtGBlocksP = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +128,97 @@ namespace GeneMatrix
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Command line modification";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 299);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 13);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "GBlocks - Protein";
+            // 
+            // btnGBlocksPr
+            // 
+            this.btnGBlocksPr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGBlocksPr.Location = new System.Drawing.Point(445, 294);
+            this.btnGBlocksPr.Name = "btnGBlocksPr";
+            this.btnGBlocksPr.Size = new System.Drawing.Size(75, 23);
+            this.btnGBlocksPr.TabIndex = 32;
+            this.btnGBlocksPr.Text = "Reset";
+            this.btnGBlocksPr.UseVisualStyleBackColor = true;
+            this.btnGBlocksPr.Click += new System.EventHandler(this.btnGBlocksPr_Click);
+            // 
+            // btnGBlocksP
+            // 
+            this.btnGBlocksP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGBlocksP.Location = new System.Drawing.Point(364, 294);
+            this.btnGBlocksP.Name = "btnGBlocksP";
+            this.btnGBlocksP.Size = new System.Drawing.Size(75, 23);
+            this.btnGBlocksP.TabIndex = 31;
+            this.btnGBlocksP.Text = "Save";
+            this.btnGBlocksP.UseVisualStyleBackColor = true;
+            this.btnGBlocksP.Click += new System.EventHandler(this.btnGBlocksP_Click);
+            // 
+            // txtGBlocksP
+            // 
+            this.txtGBlocksP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGBlocksP.Location = new System.Drawing.Point(103, 296);
+            this.txtGBlocksP.Name = "txtGBlocksP";
+            this.txtGBlocksP.Size = new System.Drawing.Size(255, 20);
+            this.txtGBlocksP.TabIndex = 30;
+            this.txtGBlocksP.TextChanged += new System.EventHandler(this.txtGBlocksP_TextChanged);
+            // 
+            // btnGBlocksDr
+            // 
+            this.btnGBlocksDr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGBlocksDr.Location = new System.Drawing.Point(445, 268);
+            this.btnGBlocksDr.Name = "btnGBlocksDr";
+            this.btnGBlocksDr.Size = new System.Drawing.Size(75, 23);
+            this.btnGBlocksDr.TabIndex = 29;
+            this.btnGBlocksDr.Text = "Reset";
+            this.btnGBlocksDr.UseVisualStyleBackColor = true;
+            this.btnGBlocksDr.Click += new System.EventHandler(this.btnGBlocksDr_Click);
+            // 
+            // btnGBlocksD
+            // 
+            this.btnGBlocksD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGBlocksD.Location = new System.Drawing.Point(364, 268);
+            this.btnGBlocksD.Name = "btnGBlocksD";
+            this.btnGBlocksD.Size = new System.Drawing.Size(75, 23);
+            this.btnGBlocksD.TabIndex = 28;
+            this.btnGBlocksD.Text = "Save";
+            this.btnGBlocksD.UseVisualStyleBackColor = true;
+            this.btnGBlocksD.Click += new System.EventHandler(this.btnGBlocksD_Click);
+            // 
+            // txtGBlocksD
+            // 
+            this.txtGBlocksD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGBlocksD.Location = new System.Drawing.Point(103, 270);
+            this.txtGBlocksD.Name = "txtGBlocksD";
+            this.txtGBlocksD.Size = new System.Drawing.Size(255, 20);
+            this.txtGBlocksD.TabIndex = 27;
+            this.txtGBlocksD.TextChanged += new System.EventHandler(this.txtGBlocksD_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 278);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(79, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "GBlocks - DNA";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 254);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(161, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Alignment cleaning with GBlocks";
             // 
             // btnClustalWProteinr
             // 
@@ -467,97 +559,6 @@ namespace GeneMatrix
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 254);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(161, 13);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Alignment cleaning with GBlocks";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 278);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(79, 13);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "GBlocks - DNA";
-            // 
-            // btnGBlocksDr
-            // 
-            this.btnGBlocksDr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGBlocksDr.Location = new System.Drawing.Point(445, 268);
-            this.btnGBlocksDr.Name = "btnGBlocksDr";
-            this.btnGBlocksDr.Size = new System.Drawing.Size(75, 23);
-            this.btnGBlocksDr.TabIndex = 29;
-            this.btnGBlocksDr.Text = "Reset";
-            this.btnGBlocksDr.UseVisualStyleBackColor = true;
-            this.btnGBlocksDr.Click += new System.EventHandler(this.btnGBlocksDr_Click);
-            // 
-            // btnGBlocksD
-            // 
-            this.btnGBlocksD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGBlocksD.Location = new System.Drawing.Point(364, 268);
-            this.btnGBlocksD.Name = "btnGBlocksD";
-            this.btnGBlocksD.Size = new System.Drawing.Size(75, 23);
-            this.btnGBlocksD.TabIndex = 28;
-            this.btnGBlocksD.Text = "Save";
-            this.btnGBlocksD.UseVisualStyleBackColor = true;
-            this.btnGBlocksD.Click += new System.EventHandler(this.btnGBlocksD_Click);
-            // 
-            // txtGBlocksD
-            // 
-            this.txtGBlocksD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGBlocksD.Location = new System.Drawing.Point(103, 270);
-            this.txtGBlocksD.Name = "txtGBlocksD";
-            this.txtGBlocksD.Size = new System.Drawing.Size(255, 20);
-            this.txtGBlocksD.TabIndex = 27;
-            this.txtGBlocksD.TextChanged += new System.EventHandler(this.txtGBlocksD_TextChanged);
-            // 
-            // btnGBlocksPr
-            // 
-            this.btnGBlocksPr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGBlocksPr.Location = new System.Drawing.Point(445, 294);
-            this.btnGBlocksPr.Name = "btnGBlocksPr";
-            this.btnGBlocksPr.Size = new System.Drawing.Size(75, 23);
-            this.btnGBlocksPr.TabIndex = 32;
-            this.btnGBlocksPr.Text = "Reset";
-            this.btnGBlocksPr.UseVisualStyleBackColor = true;
-            this.btnGBlocksPr.Click += new System.EventHandler(this.btnGBlocksPr_Click);
-            // 
-            // btnGBlocksP
-            // 
-            this.btnGBlocksP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGBlocksP.Location = new System.Drawing.Point(364, 294);
-            this.btnGBlocksP.Name = "btnGBlocksP";
-            this.btnGBlocksP.Size = new System.Drawing.Size(75, 23);
-            this.btnGBlocksP.TabIndex = 31;
-            this.btnGBlocksP.Text = "Save";
-            this.btnGBlocksP.UseVisualStyleBackColor = true;
-            this.btnGBlocksP.Click += new System.EventHandler(this.btnGBlocksP_Click);
-            // 
-            // txtGBlocksP
-            // 
-            this.txtGBlocksP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGBlocksP.Location = new System.Drawing.Point(103, 296);
-            this.txtGBlocksP.Name = "txtGBlocksP";
-            this.txtGBlocksP.Size = new System.Drawing.Size(255, 20);
-            this.txtGBlocksP.TabIndex = 30;
-            this.txtGBlocksP.TextChanged += new System.EventHandler(this.txtGBlocksP_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 299);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 13);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "GBlocks - Protein";
-            // 
             // modifyCommand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -565,6 +566,7 @@ namespace GeneMatrix
             this.ClientSize = new System.Drawing.Size(556, 378);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(2000, 646);
             this.MinimumSize = new System.Drawing.Size(572, 346);
