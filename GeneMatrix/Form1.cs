@@ -5,13 +5,16 @@ using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GeneMatrix
 {
@@ -116,15 +119,17 @@ namespace GeneMatrix
             }
             else
             {
-                string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb;*.genbank)|*.gb;*.genbank");
+                string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the genbank file", "GenBank file (*.gb;*.genbank)|*.gb;*.genbank|List of NCBI accession IDs (*.txt)|*.txt");
                 if (System.IO.File.Exists(fileName) == false) { return; }
 
                 resetState();
 
                 lblDataSource.Text = fileName.Substring(fileName.LastIndexOf("\\") + 1);
                 Application.DoEvents();
-
-                empty = readFile(fileName, empty);
+                if (fileName.Substring(fileName.LastIndexOf('.')).ToLower() == ".txt")
+                { empty = listOfAccessionID(fileName, empty); }
+                else                    
+                { empty = readFile(fileName, empty);}
             }
 
             List<string> empltyList = new List<string>();
@@ -150,7 +155,7 @@ namespace GeneMatrix
 
             if (string.IsNullOrEmpty(empty) == true)
             { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences", "Data"); }
-            else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retianed for:" + empty, "Data"); }
+            else { MessageBox.Show("Retained data on " + data.Count.ToString() + " accession sequences, However no data was retained for:" + empty, "Data"); }
 
         }
 
@@ -167,6 +172,86 @@ namespace GeneMatrix
             tv2.Nodes.Clear();
         }
 
+       private string  listOfAccessionID(string fileName,string empty)
+        {
+            string errorList = "";
+            string titleText = Text;
+            System.IO.StreamReader fs = null;
+            try
+            {
+                DateTime startTime= DateTime.Now;
+                btnImport.Enabled = false;
+                
+                fs =new System.IO.StreamReader(fileName);
+                string accession = null;
+                WebClient client = new WebClient();
+
+                while (fs.Peek() >0)
+                {
+                    accession = fs.ReadLine().Trim();
+                    try
+                    {
+                        Text = "Importing: " + accession;
+                        Application.DoEvents();
+                        string url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=" + accession + "&rettype=gb&retmode=text\r\n";
+                        
+                        string content = client.DownloadString(url);
+                        
+                        List<string> lines = new List<string>();
+                        List<string> fileData = new List<string>();
+                        
+                        fileData.AddRange(content.Split('\n'));
+
+                        int startOfSequence = 0;
+
+                        if (fileData.Count > 2)
+                        {
+                            for (int index = 0; index < fileData.Count; index++)
+                            {
+                                string line = fileData[index];
+                                if (line.StartsWith("//") == true)
+                                {
+                                    processData(lines, startOfSequence);
+                                    lines = new List<string>();
+                                    if (quitAnalysis == true)
+                                    {
+                                        resetState();
+                                        break;
+                                    }
+                                }
+                                else if (line.StartsWith("ORIGIN") == true)
+                                {
+                                    lines.Add(line);
+                                    startOfSequence = lines.Count;
+                                }
+                                else 
+                                { lines.Add(line); }
+                            }                           
+                        }
+                        DateTime endTime = DateTime.Now;
+                        TimeSpan elapsedTime = endTime - startTime;
+                        if (elapsedTime.TotalMilliseconds < 350)
+                        { Thread.Sleep(360 - (int)elapsedTime.TotalMilliseconds); }
+                    }
+                    catch (Exception ex)
+                    { errorList+= accession + ": " + ex.Message + "\r\n"; }
+                }                                                 
+            }
+            finally
+            {
+                Text = titleText;
+                btnImport.Enabled = true;
+                if (fs != null) { fs.Close(); }
+            }           
+
+            if (errorList != "")
+            { 
+                Downloaderrors de = new Downloaderrors(errorList); 
+                de.ShowDialog();
+            }
+
+            return empty;
+        }
         private string readFile(string fileName, string empty)
         {
 

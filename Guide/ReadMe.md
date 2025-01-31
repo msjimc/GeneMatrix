@@ -74,7 +74,9 @@ Figure 1
 
 ## Importing sequence data
 
-The  ***Import data*** section consists of just two controls that allow the selection of the data files. To import data, press the ```Import``` button in the lower right of the panel (blue box, Figure 2a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb or *.genbank file extension, while if checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb, *.genbank *.fa or *.fasta file extension. When processing a GenBank file it may contain data on one or more GenBank entries (i.e., mitochondrial or viral genomes); a FASTA file should only contain sequences from a single species/genome.  
+The  ***Import data*** section consists of just two controls that allow the selection of the data files. To import data, press the ```Import``` button in the lower right of the panel (blue box, Figure 2a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb or *.genbank file extension or the *.txt extension for files containing a list of accession IDs. If checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb, *.genbank *.fa or *.fasta file extension. When processing a GenBank file it may contain data on one or more GenBank entries (i.e., mitochondrial or viral genomes); a FASTA file should only contain sequences from a single species/genome.  
+
+If a text file of GenBank accession IDs is imported, ```Genematrix``` expects one ID per line and will download the file from the NCBI site. Due to the NCBI's fair usage policy, you cannot request more than 3 sequences per second; consequently, ```GeneMatrix``` takes at least 350 milliseconds to process each sequence. When downloading each sequence, ```Genematrix``` will displace its accession ID in the title bar.
 
 <hr />
 
