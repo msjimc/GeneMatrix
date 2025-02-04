@@ -90,6 +90,8 @@ namespace GeneMatrix
                 else
                 { answer = items[1]; }
             }
+            if (answer.Contains("/") == true)
+            { answer = answer.Substring(0, answer.IndexOf("/")).Trim(); }
             return answer.Trim();
         }
 
