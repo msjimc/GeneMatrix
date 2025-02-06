@@ -256,7 +256,7 @@ Figure 10
 
 <hr />
 
-The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (red box in Figure 9). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another feature. For instance, in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the ND1 file, which is called ***CDS-ND1_DNA.fasta***. 
+The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (blue box in Figure 9). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another feature. For instance, in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the ND1 file, which is called ***CDS-ND1_DNA.fasta***. 
 
 ***Note:*** Not all names can be used in file names as they may contain characters that are not allowed, such as '\\', '?' or ":". Consequently, characters that are not letters, numbers, '-', '_', '.' or ' ' are replaced by a '\_' character.
 
@@ -598,7 +598,7 @@ where:
 * [results file (Linux)] is the name of the file to save the alignment to.  The file name uses the Linux '/' rather than the Windows '\\' separators.
 
 
-***Note***: while for the other programs it is possible to hidden the ___CMD___ window, for MAFFT to work with the GBlocks program, the window needs to be visible.
+***Note***: while for the other programs it is possible to hide the ___CMD___ window, for MAFFT to work with the GBlocks program, the window needs to be visible.
 
 #### Website
 
@@ -633,7 +633,7 @@ https://ariloytynoja.github.io/prank-msa/
 
 #### References
 
-> Löytynoja, A. (2014). Phylogeny-aware alignment with PRANK. In: Russell, D. (eds) Multiple Sequence Alignment Methods. Methods in Molecular Biology, vol 1079. Humana Press, Totowa, NJ. https://doi.org/10.1007/978-1-62703-646-7_10
+> Löytynoja, A. (2014). Phylogeny-aware alignment with PRANK. In: Russell, D. (eds) Multiple Sequence Alignment Methods. Methods in Molecular Biology, 1079:155-70.
 
 ## GBlocks alignment cleaning
 
@@ -697,7 +697,7 @@ If you any of this program in any published work please cite:
 > Lanfear, R., Frandsen, P. B., Wright, A. M., Senfeld, T., Calcott, B. (2016) 
 PartitionFinder 2: new methods for selecting partitioned models of evolution for 
 molecular and morphological phylogenetic analyses. Molecular biology and evolution. 
-DOI: dx.doi.org/10.1093/molbev/msw260   
+2017 Mar 1;34(3):772-773   
 
 ##### Using search = ‘rcluster’ or search = ‘hcluster’ 
 These algorithms are described in the following paper, if you use them please cite: 
