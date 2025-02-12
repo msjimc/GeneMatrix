@@ -806,8 +806,7 @@ namespace GeneMatrix
             }
 
             char padding = ' ';
-            //if (false) { padding = '-'; }
-
+            
             foreach (TreeNode fN in tv2.Nodes[0].Nodes)
             {
                 string featureType = fN.Text;
@@ -2138,6 +2137,49 @@ namespace GeneMatrix
                 MessageBox.Show("The PartitionFinder2.exe executable is required for this function, see user guide for more information", "No external aligner");
                 return null;
             }
+        }
+
+        private void btnCompare_Click(object sender, EventArgs e)
+        {
+            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.SaveAs, "Select the name of the output file", "Tab-delimited text file (*.txt)|*.txt");
+            if (fileName== "Cancel") { return; }
+
+            List<string[]> names = new List<string[]>();
+
+            foreach (TreeNode n in tv1.Nodes[0].Nodes)
+            {
+                foreach (TreeNode nN in n.Nodes)
+                {
+                    if (nN.ImageIndex == 1)
+                    {
+                        string[] value = { n.Text, nN.Text };
+                        names.Add(value  ); 
+                    }
+                }
+            }
+
+            Dictionary<string, string> sequences = new Dictionary<string, string>();
+            foreach (string accession in sequenceName)
+            {
+                if (data.ContainsKey(accession) == true)
+                {
+                    foreach (string[] value in names)
+                    {
+                        if (data[accession].ContainsKey(value[0]) == true)
+                        { 
+                            if (data[accession][value[0]].ContainsKey(value[1]) == true)
+                            {
+                                feature f = data[accession][value[0]][value[1]];
+                                sequences.Add(f.WorkingName + ": " + f.getOrganism + ", " + accession, f.getDNASequence);
+                            }
+                        }
+                    }
+                }
+            }
+
+            comparison c = new comparison(sequences, fileName);
+            Thread newthread = new Thread(new ThreadStart(c.Analysis));
+            newthread.Start();
         }
     }
 }

@@ -69,6 +69,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
+            this.btnCompare = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -154,6 +155,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnCompare);
             this.groupBox2.Controls.Add(this.btnImportSteps);
             this.groupBox2.Controls.Add(this.btnSaveSteps);
             this.groupBox2.Controls.Add(this.btnReset);
@@ -541,6 +543,16 @@
             this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
             this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
             // 
+            // btnCompare
+            // 
+            this.btnCompare.Location = new System.Drawing.Point(329, 224);
+            this.btnCompare.Name = "btnCompare";
+            this.btnCompare.Size = new System.Drawing.Size(75, 23);
+            this.btnCompare.TabIndex = 8;
+            this.btnCompare.Text = "Compare";
+            this.btnCompare.UseVisualStyleBackColor = true;
+            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -617,6 +629,7 @@
         private System.Windows.Forms.Button btnRunPartitionFinder;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnCompare;
     }
 }
 

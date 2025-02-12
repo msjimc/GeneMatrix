@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="comparison.cs" />
     <Compile Include="Downloaderrors.cs">
       <SubType>Form</SubType>
     </Compile>
