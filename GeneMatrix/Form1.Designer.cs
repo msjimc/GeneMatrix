@@ -170,7 +170,7 @@
             // btnImportSteps
             // 
             this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImportSteps.Location = new System.Drawing.Point(87, 224);
+            this.btnImportSteps.Location = new System.Drawing.Point(410, 224);
             this.btnImportSteps.Name = "btnImportSteps";
             this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
             this.btnImportSteps.TabIndex = 7;
@@ -181,7 +181,7 @@
             // btnSaveSteps
             // 
             this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveSteps.Location = new System.Drawing.Point(6, 224);
+            this.btnSaveSteps.Location = new System.Drawing.Point(329, 224);
             this.btnSaveSteps.Name = "btnSaveSteps";
             this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
             this.btnSaveSteps.TabIndex = 6;
@@ -545,7 +545,7 @@
             // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(329, 224);
+            this.btnCompare.Location = new System.Drawing.Point(6, 224);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 8;

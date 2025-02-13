@@ -739,11 +739,11 @@ namespace GeneMatrix
                     foreach (string name in sequenceName)
                     {
                         string featureName = "NoIn";
-                        foreach (string testNname in names)
+                        foreach (string testName in names)
                         {
-                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testNname) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testName) == true)
                             {
-                                featureName = testNname;
+                                featureName = testName;
                                 break;
                             }
                         }
@@ -832,11 +832,11 @@ namespace GeneMatrix
                         string DNA = "";
                         string protein = "";
                         string featureName = "NoIn";
-                        foreach (string testNname in names)
+                        foreach (string testName in names)
                         {
-                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testNname) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testName) == true)
                             {
-                                featureName = testNname;
+                                featureName = testName;
                                 break;
                             }
                         }
