@@ -738,43 +738,52 @@ namespace GeneMatrix
 
                     foreach (string name in sequenceName)
                     {
-                        foreach (string featureName in names)
+                        string featureName = "NoIn";
+                        foreach (string testNname in names)
                         {
-                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testNname) == true)
                             {
-                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                featureName = testNname;
+                                break;
+                            }
+                        }
+
+                        if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
+                        {
+                            if (rboBoth.Checked == true || rboDNA.Checked == true)
+                            {
+                                int length = data[name][featureType][featureName].getDNASequence.Length;
+                                string key = featureType + "|" + names[0] + "|" + "D";
+                                if (lengths.ContainsKey(key) == true)
                                 {
-                                    int length = data[name][featureType][featureName].getDNASequence.Length;
-                                    string key = featureType + "|" + names[0] + "|" + "D";
-                                    if (lengths.ContainsKey(key) == true)
-                                    {
-                                        if (lengths[key] < length)
-                                        { lengths[key] = length; }
-                                    }
-                                    else
-                                    {
-                                        lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
-                                        { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")); }
-                                    }
+                                    if (lengths[key] < length)
+                                    { lengths[key] = length; }
                                 }
-                                if (rboBoth.Checked == true || rboProtein.Checked == true)
+                                else
                                 {
-                                    int length = data[name][featureType][featureName].getProteinSequence.Length;
-                                    string key = featureType + "|" + names[0] + "|" + "P";
-                                    if (lengths.ContainsKey(key) == true)
-                                    {
-                                        if (lengths[key] < length)
-                                        { lengths[key] = length; }
-                                    }
-                                    else
-                                    {
-                                        lengths.Add(key, length);
-                                        if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")) == false)
-                                        { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")); }
-                                    }
+                                    lengths.Add(key, length);
+                                    if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")) == false)
+                                    { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_DNA.fasta")); }
                                 }
                             }
+                            if (rboBoth.Checked == true || rboProtein.Checked == true)
+                            {
+                                int length = data[name][featureType][featureName].getProteinSequence.Length;
+                                string key = featureType + "|" + names[0] + "|" + "P";
+                                if (lengths.ContainsKey(key) == true)
+                                {
+                                    if (lengths[key] < length)
+                                    { lengths[key] = length; }
+                                }
+                                else
+                                {
+                                    lengths.Add(key, length);
+                                    if (listOfFilesToDelete.Contains(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")) == false)
+                                    { listOfFilesToDelete.Add(cleanFileNames(folder, featureType + "-" + names[0] + "_protein.fasta")); }
+                                }
+                            }
+
+
                             if (data[name].ContainsKey("Unknown") == true && data[name]["Unknown"].ContainsKey(featureName) == true)
                             {
                                 if (rboBoth.Checked == true || rboDNA.Checked == true)
@@ -822,41 +831,50 @@ namespace GeneMatrix
                         string species = "";
                         string DNA = "";
                         string protein = "";
-                        foreach (string featureName in names)
+                        string featureName = "NoIn";
+                        foreach (string testNname in names)
                         {
-                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
+                            if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(testNname) == true)
                             {
-                                species = data[name][featureType][featureName].getOrganism.Replace(" ", "_");
-                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                featureName = testNname;
+                                break;
+                            }
+                        }
+
+                        if (data[name].ContainsKey(featureType) == true && data[name][featureType].ContainsKey(featureName) == true)
+                        {
+                            species = data[name][featureType][featureName].getOrganism.Replace(" ", "_");
+                            if (rboBoth.Checked == true || rboDNA.Checked == true)
+                            {
+                                if (string.IsNullOrEmpty(DNA) == true)
                                 {
-                                    if (string.IsNullOrEmpty(DNA) == true)
-                                    {
-                                        DNA = data[name][featureType][featureName].getDNASequence;
-                                        DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
-                                    }
-                                }
-                                if (rboBoth.Checked == true || rboProtein.Checked == true)
-                                {
-                                    if (string.IsNullOrEmpty(protein) == true)
-                                    {
-                                        protein = data[name][featureType][featureName].getProteinSequence;
-                                        protein = protein + new string(padding, lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
-                                    }
+                                    DNA = data[name][featureType][featureName].getDNASequence;
+                                    DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
                                 }
                             }
-                            else if (data[name].ContainsKey("Unknown") == true && data[name]["Unknown"].ContainsKey(featureName) == true)
+                            if (rboBoth.Checked == true || rboProtein.Checked == true)
                             {
-                                species = data[name]["Unknown"][featureName].getOrganism.Replace(" ", "_");
-                                if (rboBoth.Checked == true || rboDNA.Checked == true)
+                                if (string.IsNullOrEmpty(protein) == true)
                                 {
-                                    if (string.IsNullOrEmpty(DNA) == true)
-                                    {
-                                        DNA = data[name]["Unknown"][featureName].getDNASequence;
-                                        DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
-                                    }
+                                    protein = data[name][featureType][featureName].getProteinSequence;
+                                    protein = protein + new string(padding, lengths[featureType + "|" + names[0] + "|" + "P"] - protein.Length);
                                 }
                             }
                         }
+                        else if (data[name].ContainsKey("Unknown") == true && data[name]["Unknown"].ContainsKey(featureName) == true)
+                        {
+                            species = data[name]["Unknown"][featureName].getOrganism.Replace(" ", "_");
+                            if (rboBoth.Checked == true || rboDNA.Checked == true)
+                            {
+                                if (string.IsNullOrEmpty(DNA) == true)
+                                {
+                                    DNA = data[name]["Unknown"][featureName].getDNASequence;
+                                    DNA = DNA + new string(padding, lengths[featureType + "|" + names[0] + "|" + "D"] - DNA.Length);
+                                }
+                            }
+                        }
+                    
+                        
 
                         if ((rboBoth.Checked == true || rboDNA.Checked == true) && lengths.ContainsKey(featureType + "|" + names[0] + "|" + "D") == true)
                         {
