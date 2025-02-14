@@ -79,15 +79,85 @@ namespace GeneMatrix
                 }                
             }
             finally { if (sw != null) { sw.Close(); } }
+            Dictionary<string, List<string>> duplicates =new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> minimumSetDuplicates = compareResults(results, ref duplicates);
+            makeMinimumComparisonSet(minimumSetDuplicates, scores, fileName, duplicates);
+        }
 
-            Dictionary<string, List<string>> minimumSetDuplicates = compareResults(results);
+        private void makeMinimumComparisonSet(Dictionary<string, List<string>> minimumSetDuplicates, int[,] scores, string fileName, Dictionary<string, List<string>> duplicates)
+        {
+            Dictionary<string,int> nameIindex = new Dictionary<string,int>();
+            int index = 0;
+            foreach (string key in sequences.Keys)
+            {
+                nameIindex.Add(key, index);
+                index++;
+            }          
 
+
+            foreach (List<string> name in minimumSetDuplicates.Values)
+            {
+                foreach(string key in name)
+                {
+                    int bracket = key.IndexOf("(");
+                    string thiskey = key.Substring(0, bracket - 1);
+                    if (nameIindex.ContainsKey(thiskey)==true)
+                    { nameIindex.Remove(thiskey); }
+                }
+            }           
+
+            System.IO.StreamWriter sw = null;
+            
+            try
+            {
+                sw = new System.IO.StreamWriter(fileName, true);
+                sw.Write("\n\nMinimum sequence set\n");
+                
+                foreach (string key in nameIindex.Keys)
+                { sw.Write("\t" + key); }
+                sw.Write("\n");
+
+                Dictionary<string, List<string>> duplicasteCleankeys = new Dictionary<string, List<string>>();
+                foreach (string key in duplicates.Keys)
+                {
+                    int bracket = key.IndexOf("(");
+                    string thiskey = key.Substring(0, bracket - 1);
+                    duplicasteCleankeys.Add(thiskey, duplicates[key]);
+                }
+
+                foreach (string outerKey in nameIindex.Keys)
+                {
+                    sw.Write(outerKey);
+                    foreach (string innerkey in nameIindex.Keys)
+                    {
+                        sw.Write("\t" + scores[nameIindex[outerKey], nameIindex[innerkey]].ToString("N0"));
+                        if (outerKey==innerkey)
+                        { sw.Write("*"); }
+                    }
+                    if (duplicasteCleankeys.ContainsKey(outerKey) == true)
+                   {
+                        if (duplicasteCleankeys[outerKey].Count > 1)
+                        {
+                            sw.Write("\t");
+                            for (int place = 1; place < duplicasteCleankeys[outerKey].Count; place++)
+                            { sw.Write(duplicasteCleankeys[outerKey][place] + " "); }
+                            sw.Write("\n");
+                        }
+                        else
+                        { sw.Write("\tUnique\n"); }
+                    }
+                    else
+                    { sw.Write("\tUnique\n"); }
+                }
+            }
+            finally
+            { if (sw != null) { sw.Close(); } }
 
         }
 
-        private Dictionary<string, List<string>> compareResults(List<string> results)
+        private Dictionary<string, List<string>> compareResults(List<string> results, ref Dictionary<string, List<string>> duplicates)
         {
-            Dictionary<string, List<string>> duplicates = new Dictionary<string, List<string>>();
+            //Dictionary<string, List<string>> duplicates = new Dictionary<string, List<string>>();
             Dictionary<string, List<string>> minimumSetDuplicates = new Dictionary<string, List<string>>();
 
             for (int index = 0; index < results.Count; index++)
@@ -152,9 +222,7 @@ namespace GeneMatrix
 
             return minimumSetDuplicates;
         }
-
-        
-
+               
         private int[,] setScoreArray(int dimension)
         {
             int[,] scores = new int[dimension, dimension];
