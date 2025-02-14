@@ -26,7 +26,13 @@ namespace GeneMatrix
         }
 
         public void Analysis()
-        { 
+        {
+            try { DoAnalysis(); }
+            catch { }
+        }
+
+        private void DoAnalysis()
+        {
             List<string> results = new List<string>();
             int[,] scores = setScoreArray(sequences.Count);
             System.IO.StreamWriter sw = null;
@@ -107,22 +113,22 @@ namespace GeneMatrix
             }           
 
             System.IO.StreamWriter sw = null;
-            
+
             try
             {
                 sw = new System.IO.StreamWriter(fileName, true);
                 sw.Write("\n\nMinimum sequence set\n");
-                
+
                 foreach (string key in nameIindex.Keys)
                 { sw.Write("\t" + key); }
                 sw.Write("\n");
 
-                Dictionary<string, List<string>> duplicasteCleankeys = new Dictionary<string, List<string>>();
+                Dictionary<string, List<string>> duplicateCleanKeys = new Dictionary<string, List<string>>();
                 foreach (string key in duplicates.Keys)
                 {
                     int bracket = key.IndexOf("(");
                     string thiskey = key.Substring(0, bracket - 1);
-                    duplicasteCleankeys.Add(thiskey, duplicates[key]);
+                    duplicateCleanKeys.Add(thiskey, duplicates[key]);
                 }
 
                 foreach (string outerKey in nameIindex.Keys)
@@ -131,16 +137,16 @@ namespace GeneMatrix
                     foreach (string innerkey in nameIindex.Keys)
                     {
                         sw.Write("\t" + scores[nameIindex[outerKey], nameIindex[innerkey]].ToString("N0"));
-                        if (outerKey==innerkey)
+                        if (outerKey == innerkey)
                         { sw.Write("*"); }
                     }
-                    if (duplicasteCleankeys.ContainsKey(outerKey) == true)
-                   {
-                        if (duplicasteCleankeys[outerKey].Count > 1)
+                    if (duplicateCleanKeys.ContainsKey(outerKey) == true)
+                    {
+                        if (duplicateCleanKeys[outerKey].Count > 1)
                         {
                             sw.Write("\t");
-                            for (int place = 1; place < duplicasteCleankeys[outerKey].Count; place++)
-                            { sw.Write(duplicasteCleankeys[outerKey][place] + " "); }
+                            for (int place = 1; place < duplicateCleanKeys[outerKey].Count; place++)
+                            { sw.Write(duplicateCleanKeys[outerKey][place] + " "); }
                             sw.Write("\n");
                         }
                         else
@@ -149,10 +155,99 @@ namespace GeneMatrix
                     else
                     { sw.Write("\tUnique\n"); }
                 }
+
+                sw.Write("\n\nDuplicated sequence sets\n");
+                string lists = "";
+                foreach (string key in duplicateCleanKeys.Keys)
+                {
+                    if (duplicateCleanKeys[key].Count > 1)
+                    {
+                        if (lists.Contains(key) == false)
+                        {
+                            foreach (string value in duplicateCleanKeys[key])
+                            {
+                                int bracket = value.IndexOf("(");
+                                string thisKey = value.Substring(0, bracket - 1);
+                                lists += thisKey + "\t";
+                            }
+                            lists += "\n";
+                        }
+                    }
+                }
+                sw.Write(lists);
+
+
+                int[] sizes = new int[sequences.Count];
+                int counter = 0;
+                foreach (string sequence in sequences.Values)
+                {
+                    sizes[counter] = (int)sequence.Length;
+                    counter++;
+                }
+                Array.Sort(sizes);
+                int median = GetMedian(sizes);            
+                
+
+                sw.Write("\n\nSize range\nMedian length\t" + median.ToString("N1") +
+                   "Size range\t" + sizes[0].ToString() + "\t" + sizes[sizes.GetUpperBound(0)] + "\n");
+
+                sw.Write("Sequence\tLength\tDifference from median length\tPercent of median length\n");
+                foreach(string key in sequences.Keys)
+                {                   
+                    sw.Write(key +"\t" + sequences[key].Length.ToString() +
+                        "\t" + (sequences[key].Length - median).ToString("N0") +
+                        "\t" + ((double)(sequences[key].Length * 100) / median).ToString("N2") + "\n");
+                }
+                sw.Flush();
             }
             finally
             { if (sw != null) { sw.Close(); } }
 
+        }
+
+        private int GetMedian(int[] sizes)
+        {
+            Array.Sort(sizes);
+            int count = sizes.Length;
+            if (count % 2 == 0)
+            {
+                // Even number of elements
+                return (int)((sizes[count / 2 - 1] + sizes[count / 2]) / 2.0);
+            }
+            else
+            {
+                // Odd number of elements
+                return sizes[count / 2];
+            }
+        }
+
+        private double GetMedian(double[] sizes)
+        {
+            Array.Sort(sizes);
+            int count = sizes.Length;
+            if (count % 2 == 0)
+            {
+                // Even number of elements
+                return (int)((sizes[count / 2 - 1] + sizes[count / 2]) / 2.0);
+            }
+            else
+            {
+                // Odd number of elements
+                return sizes[count / 2];
+            }
+        }
+
+        private double getMAD(int[] sizes, int median)
+        {
+            double[] dSizes = new double[sizes.Length];
+            for (int i = 0; i < sizes.Length;i++)
+            {
+                dSizes[i] = (double)sizes[i];
+            }
+
+            double[] absoluteDeviations = dSizes.Select(x => Math.Abs(x - median)).ToArray();
+
+            return GetMedian(absoluteDeviations);
         }
 
         private Dictionary<string, List<string>> compareResults(List<string> results, ref Dictionary<string, List<string>> duplicates)

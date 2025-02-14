@@ -2157,47 +2157,151 @@ namespace GeneMatrix
             }
         }
 
-        private void btnCompare_Click(object sender, EventArgs e)
-        {
-            string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.SaveAs, "Select the name of the output file", "Tab-delimited text file (*.txt)|*.txt");
-            if (fileName== "Cancel") { return; }
-
+        private void btnBasicData_Click(object sender, EventArgs e)
+        {        
             List<string[]> names = new List<string[]>();
-
-            foreach (TreeNode n in tv1.Nodes[0].Nodes)
+            try
             {
-                foreach (TreeNode nN in n.Nodes)
+                foreach (TreeNode n in tv1.Nodes[0].Nodes)
                 {
-                    if (nN.ImageIndex == 1)
+                    foreach (TreeNode nN in n.Nodes)
                     {
-                        string[] value = { n.Text, nN.Text };
-                        names.Add(value  ); 
+                        if (nN.ImageIndex == 1)
+                        {
+                            string[] value = { n.Text, nN.Text };
+                            names.Add(value);
+                        }
                     }
                 }
-            }
 
-            Dictionary<string, string> sequences = new Dictionary<string, string>();
-            foreach (string accession in sequenceName)
-            {
-                if (data.ContainsKey(accession) == true)
+                if (names.Count == 0) { throw new Exception(); }
+
+                int longestName = 36;
+                int longestLength = 6;
+                int diff1 = 31;
+                int percent = 26;
+
+                Dictionary<string, string> sequences = new Dictionary<string, string>();
+                foreach (string accession in sequenceName)
                 {
-                    foreach (string[] value in names)
+                    if (data.ContainsKey(accession) == true)
                     {
-                        if (data[accession].ContainsKey(value[0]) == true)
-                        { 
-                            if (data[accession][value[0]].ContainsKey(value[1]) == true)
+                        foreach (string[] value in names)
+                        {
+                            if (data[accession].ContainsKey(value[0]) == true)
                             {
-                                feature f = data[accession][value[0]][value[1]];
-                                sequences.Add(f.WorkingName + ": " + f.getOrganism + ", " + accession, f.getDNASequence);
+                                if (data[accession][value[0]].ContainsKey(value[1]) == true)
+                                {
+                                    feature f = data[accession][value[0]][value[1]];
+                                    string key = accession + ", " + f.getOrganism + ", " + f.WorkingName;
+                                    sequences.Add(key , f.getDNASequence);
+
+                                    if (key.Length > longestName)
+                                    { longestName = key.Length; }
+                                    if (f.getDNASequence.Length.ToString().Length > longestLength)
+                                    { longestLength = f.getDNASequence.Length.ToString().Length; }
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            comparison c = new comparison(sequences, fileName);
-            Thread newthread = new Thread(new ThreadStart(c.Analysis));
-            newthread.Start();
+                StringBuilder sb = new StringBuilder();
+                int[] sizes = new int[sequences.Count];
+                int counter = 0;
+                foreach (string sequence in sequences.Values)
+                {
+                    sizes[counter] = (int)sequence.Length;
+                    counter++;
+                }
+                Array.Sort(sizes);
+                int median = GetMedian(sizes);
+
+
+                sb.Append("Median length\t" + median.ToString("N1") +"\r\n" +
+                   "Size range:  " + sizes[0].ToString() + " to " + sizes[sizes.GetUpperBound(0)] + "\r\n");
+
+                sb.Append("Accession ID, Species, Sequence name".PadRight(longestName + 2) + "Length".PadLeft(longestLength + 2) + "  Difference from median length  Percent of median length\r\n");
+                foreach (string key in sequences.Keys)
+                {
+                    sb.Append(key.PadRight(longestName+ 2) + sequences[key].Length.ToString("N0").PadLeft(longestLength + 2) +
+                        (sequences[key].Length - median).ToString("N0").PadLeft(diff1) +
+                        ((double)(sequences[key].Length * 100) / median).ToString("N2").PadLeft(percent) + "\r\n");
+                }
+
+                DataTextView dtv = new DataTextView(sb.ToString());
+                dtv.ShowDialog();
+
+            }
+            catch
+            { MessageBox.Show("An error occurred collecting the data, have you selected any sequences?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+        private int GetMedian(int[] sizes)
+        {
+            Array.Sort(sizes);
+            int count = sizes.Length;
+            if (count % 2 == 0)
+            {
+                // Even number of elements
+                return (int)((sizes[count / 2 - 1] + sizes[count / 2]) / 2.0);
+            }
+            else
+            {
+                // Odd number of elements
+                return sizes[count / 2];
+            }
+        }
+
+        private void btnCompare_Click(object sender, EventArgs e)
+        {
+           
+            List<string[]> names = new List<string[]>();
+            try
+            {
+                foreach (TreeNode n in tv1.Nodes[0].Nodes)
+                {
+                    foreach (TreeNode nN in n.Nodes)
+                    {
+                        if (nN.ImageIndex == 1)
+                        {
+                            string[] value = { n.Text, nN.Text };
+                            names.Add(value);
+                        }
+                    }
+                }
+
+                if (names.Count == 0) { throw new Exception(); }
+
+                string fileName = FileAccessClass.FileString(FileAccessClass.FileJob.SaveAs, "Select the name of the output file", "Tab-delimited text file (*.txt)|*.txt");
+                if (fileName == "Cancel") { return; }
+
+                Dictionary<string, string> sequences = new Dictionary<string, string>();
+                foreach (string accession in sequenceName)
+                {
+                    if (data.ContainsKey(accession) == true)
+                    {
+                        foreach (string[] value in names)
+                        {
+                            if (data[accession].ContainsKey(value[0]) == true)
+                            {
+                                if (data[accession][value[0]].ContainsKey(value[1]) == true)
+                                {
+                                    feature f = data[accession][value[0]][value[1]];
+                                    sequences.Add(f.WorkingName + ": " + f.getOrganism + ", " + accession, f.getDNASequence);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                comparison c = new comparison(sequences, fileName);
+                Thread newthread = new Thread(new ThreadStart(c.Analysis));
+                newthread.Start();
+            }
+            catch
+            { MessageBox.Show("An error occurred collecting the data, have you selected any sequences?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
     }
 }
