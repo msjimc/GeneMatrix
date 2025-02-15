@@ -2206,7 +2206,9 @@ namespace GeneMatrix
                     }
                 }
 
-                StringBuilder sb = new StringBuilder();
+                Dictionary<string, string> sets = makeSets(sequences);
+
+                 StringBuilder sb = new StringBuilder();
                 int[] sizes = new int[sequences.Count];
                 int counter = 0;
                 foreach (string sequence in sequences.Values)
@@ -2221,12 +2223,15 @@ namespace GeneMatrix
                 sb.Append("Median length\t" + median.ToString("N1") +"\r\n" +
                    "Size range:  " + sizes[0].ToString() + " to " + sizes[sizes.GetUpperBound(0)] + "\r\n");
 
-                sb.Append("Accession ID, Species, Sequence name".PadRight(longestName + 2) + "Length".PadLeft(longestLength + 2) + "  Difference from median length  Percent of median length\r\n");
+                sb.Append("Accession ID, Species, Sequence name".PadRight(longestName + 2) + "Length".PadLeft(longestLength + 2) + "  Difference from median length  Percent of median length    Groups\r\n");
                 foreach (string key in sequences.Keys)
                 {
-                    sb.Append(key.PadRight(longestName+ 2) + sequences[key].Length.ToString("N0").PadLeft(longestLength + 2) +
+                    sb.Append(key.PadRight(longestName + 2) + sequences[key].Length.ToString("N0").PadLeft(longestLength + 2) + 
                         (sequences[key].Length - median).ToString("N0").PadLeft(diff1) +
-                        ((double)(sequences[key].Length * 100) / median).ToString("N2").PadLeft(percent) + "\r\n");
+                        ((double)(sequences[key].Length * 100) / median).ToString("N2").PadLeft(percent));
+                    if (sets.ContainsKey(key) == true)
+                    { sb.Append(sets[key].PadLeft(10) + "\r\n"); }
+                    else { sb.Append("Unique".PadLeft(10) + "\r\n"); }
                 }
 
                 DataTextView dtv = new DataTextView(sb.ToString());
@@ -2253,6 +2258,37 @@ namespace GeneMatrix
             }
         }
 
+        public static Dictionary<string, string> makeSets(Dictionary<string, string> sequences)
+        {
+            Dictionary<string,string> sets = new Dictionary<string,string>();
+            List<string> keys = sequences.Keys.ToList();
+            int setCounter = 0;
+            string found = "";
+
+            for (int outer = 0; outer < keys.Count; outer++)
+            {
+                if (found.Contains("|" + keys[outer] + "|") == false)
+                {
+                    if (sets.ContainsKey(keys[outer]) == false)
+                    {
+                        setCounter++;
+                        sets.Add(keys[outer], "set: " + setCounter.ToString());
+                    }
+                    for (int inner = outer + 1; inner < keys.Count; inner++)
+                    {
+
+                        if (sequences[keys[inner]] == sequences[keys[outer]])
+                        {
+                            sets.Add(keys[inner], "set: " + setCounter.ToString());
+                            found += "|" + keys[inner] + "|";
+                        }
+                    }
+                }
+            }
+
+            return sets;
+
+        }
         private void btnCompare_Click(object sender, EventArgs e)
         {
            

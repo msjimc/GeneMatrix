@@ -38,9 +38,8 @@ namespace GeneMatrix
             System.IO.StreamWriter sw = null;
             try
             {
-                sw = new System.IO.StreamWriter(fileName);                
+                sw = new System.IO.StreamWriter(fileName);
 
-               
                 string line = "";
                 foreach (string key in sequences.Keys)
                 { line += "\t" + key; }
@@ -49,40 +48,53 @@ namespace GeneMatrix
                 int one = 0;
                 int two = 0;
 
-
+                Dictionary<string, string> sets = Form1.makeSets(sequences);
+                Dictionary<string, string> setAlignment = new Dictionary<string, string>();
                 foreach (string keyFirst in sequences.Keys)
                 {
                     int maximum = sequences[keyFirst].Length;
                     line = keyFirst + " (" + maximum.ToString("N0") + "bp)";
+                    string set = sets[keyFirst];
 
-                    foreach (string keySecond in sequences.Keys)
+                    if (setAlignment.ContainsKey(set) == false)
                     {
-                        //if (done.Contains(keySecond) == true)
-                        //{ line += "\t-"; }
-                        //else 
+                        foreach (string keySecond in sequences.Keys)
+                        {
                         if (scores[two, one] != int.MinValue)
                         { line += "\t" + scores[two, one].ToString("N0"); }
                         else if (keyFirst == keySecond)
                         {
-                            line += "\t" + maximum.ToString("N0") + "*";
-                            //done.Add(keyFirst);
+                            line += "\t" + maximum.ToString("N0");
                             scores[one, two] = maximum;
                         }
                         else
                         {
                             int score = fillMatrixNW(sequences[keyFirst], sequences[keySecond]);
-                            scores[two, one] = score / 3;
-                            line += "\t" + scores[two, one].ToString("N0");
-                            scores[one, two] = scores[two, one];
-                        }
-                        two++;
+                                scores[two, one] = score / 3;
+                                line += "\t" + scores[two, one].ToString("N0");
+                                scores[one, two] = scores[two, one];
                     }
-                    results.Add(line);
+                    two++;
+                        }
+                    setAlignment.Add(set, line.Substring(line.IndexOf("\t") + 1));
+                }
+                    else
+                {
+                    line += "\t" + setAlignment[set];
+                    string[] values = setAlignment[set].Split('\t');
+                    for (int second = 0; second < scores.GetUpperBound(0) + 1; second++)
+                    {
+                        int value = int.Parse(values[second].Replace(",", ""));
+                        scores[one, second] = value;
+                        scores[second, one] = value;
+                    }
+                }
+                results.Add(line);
                     sw.Write(line + "\n");
                     sw.Flush();
                     one++;
                     two = 0;
-                }                
+                }
             }
             finally { if (sw != null) { sw.Close(); } }
             Dictionary<string, List<string>> duplicates =new Dictionary<string, List<string>>();
