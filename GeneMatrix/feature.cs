@@ -48,10 +48,9 @@ namespace GeneMatrix
         public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count)
         {
             organism = Organism;
-            featureType = FeatureType;
-           
+            featureType = FeatureType;           
             
-            setcoordinates(lines, index, sequence);
+            setCoordinates(lines, index, sequence);
 
             for (int lineIndex = index + 1; lineIndex < endIndex; lineIndex++)
             {
@@ -114,7 +113,7 @@ namespace GeneMatrix
 
         }
 
-        private void setcoordinates(List<string> lines, int startIndex, string sequence)
+        private void setCoordinates(List<string> lines, int startIndex, string sequence)
         {
             string line = lines[startIndex];
             int index = startIndex;
@@ -127,7 +126,6 @@ namespace GeneMatrix
                 }
                 else { break; }
             }
-
 
             int bracket = line.LastIndexOf("(");
             string data = "";
@@ -144,18 +142,22 @@ namespace GeneMatrix
             try
             {
                 string[] items = data.Split(',');
-
+                int startPoint = 0;
+                int endPoint = 0;
                 foreach (string item in items) 
                 {
                     string[] bite = item.Split('.');
                     int from = Convert.ToInt32(bite[0]) -1;
                     int too = Convert.ToInt32(bite[2]);
+                    endPoint = too;
+                    if (startPoint == 0) { startPoint = from; }
                     string bitOfOrf = sequence.Substring(from, too - from);
-                    DNA += bitOfOrf;
+                    DNA += bitOfOrf.ToLower();
                 }
 
                 if (lines[startIndex].ToLower().Contains("complement") == true)
                 { DNA = reverseComplement(DNA); }
+                
                
             }
             catch { throw new Exception("Coordinate error for " + name + " feature"); }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
+using System.Diagnostics.PerformanceData;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -2207,12 +2208,14 @@ namespace GeneMatrix
                 }
 
                 Dictionary<string, string> sets = makeSets(sequences);
+                List<string> fragments = FragmentOf(sequences, sets);
 
                  StringBuilder sb = new StringBuilder();
                 int[] sizes = new int[sequences.Count];
                 int counter = 0;
-                foreach (string sequence in sequences.Values)
+                foreach (string key in sequences.Keys)
                 {
+                    string sequence = sequences[key];
                     sizes[counter] = (int)sequence.Length;
                     counter++;
                 }
@@ -2223,15 +2226,33 @@ namespace GeneMatrix
                 sb.Append("Median length\t" + median.ToString("N1") +"\r\n" +
                    "Size range:  " + sizes[0].ToString() + " to " + sizes[sizes.GetUpperBound(0)] + "\r\n");
 
-                sb.Append("Accession ID, Species, Sequence name".PadRight(longestName + 2) + "Length".PadLeft(longestLength + 2) + "  Difference from median length  Percent of median length    Groups\r\n");
+                sb.Append("Accession ID, Species, Sequence name".PadRight(longestName + 2) + "Length".PadLeft(longestLength + 2) + "  Difference from median length  Percent of median length    Groups  Fragment of\r\n");
                 foreach (string key in sequences.Keys)
                 {
                     sb.Append(key.PadRight(longestName + 2) + sequences[key].Length.ToString("N0").PadLeft(longestLength + 2) + 
                         (sequences[key].Length - median).ToString("N0").PadLeft(diff1) +
                         ((double)(sequences[key].Length * 100) / median).ToString("N2").PadLeft(percent));
+                    
                     if (sets.ContainsKey(key) == true)
-                    { sb.Append(sets[key].PadLeft(10) + "\r\n"); }
-                    else { sb.Append("Unique".PadLeft(10) + "\r\n"); }
+                    {
+                        string set = sets[key];
+                        sb.Append(set.PadLeft(10) + "  ");
+                        string bitsOf = "";
+                        foreach (string pair in fragments)
+                        {
+                            if (pair.StartsWith(set + "|") == true)
+                            {
+                                bitsOf += ", " + pair.Substring(pair.IndexOf("|") + 1);
+                            }
+                        }
+                        if (bitsOf.Length >0)
+                        { sb.Append(bitsOf.Substring(2) + "\r\n"); }
+                        else { sb.Append("\r\n"); }
+                    }
+                    else { sb.Append("Unique".PadLeft(10) + "             \r\n"); }
+
+
+
                 }
 
                 DataTextView dtv = new DataTextView(sb.ToString());
@@ -2285,10 +2306,39 @@ namespace GeneMatrix
                     }
                 }
             }
-
             return sets;
-
         }
+
+        private List<string> FragmentOf(Dictionary<string, string> sequences, Dictionary<string,string> sets)
+        {
+            List<string> fragments = new List<string>();
+            foreach (string keyOuter in sequences.Keys)
+            {
+                foreach(string keyInner in sequences.Keys)
+                {
+                    string innerSet = sets[keyInner];
+                    string outerSet = sets[keyOuter];
+                    if (fragments.Contains(innerSet + "|" + outerSet) == false)
+                    { if (keyInner != keyOuter)
+                    {
+                            if (sequences[keyOuter] != sequences[keyInner])
+                            {
+                                if (sequences[keyOuter].Length > sequences[keyInner].Length)
+                                {
+                                    if (sequences[keyOuter].Contains(sequences[keyInner]))
+                                    {
+                                        string answer = innerSet + "|" + outerSet;
+                                        fragments.Add(answer);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return fragments;
+        }
+
         private void btnCompare_Click(object sender, EventArgs e)
         {
            
