@@ -178,7 +178,7 @@
             this.btnGroup.Name = "btnGroup";
             this.btnGroup.Size = new System.Drawing.Size(75, 23);
             this.btnGroup.TabIndex = 10;
-            this.btnGroup.Text = "Group";
+            this.btnGroup.Text = "Groupings";
             this.btnGroup.UseVisualStyleBackColor = true;
             this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
             // 
@@ -189,7 +189,7 @@
             this.btnBasicData.Name = "btnBasicData";
             this.btnBasicData.Size = new System.Drawing.Size(75, 23);
             this.btnBasicData.TabIndex = 9;
-            this.btnBasicData.Text = "Data";
+            this.btnBasicData.Text = "Sets";
             this.btnBasicData.UseVisualStyleBackColor = true;
             this.btnBasicData.Click += new System.EventHandler(this.btnBasicData_Click);
             // 
@@ -200,7 +200,7 @@
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 8;
-            this.btnCompare.Text = "Analyses";
+            this.btnCompare.Text = "Homology";
             this.btnCompare.UseVisualStyleBackColor = true;
             this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
