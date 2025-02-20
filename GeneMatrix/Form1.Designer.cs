@@ -72,6 +72,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -157,12 +158,6 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btnGroup);
-            this.groupBox2.Controls.Add(this.btnBasicData);
-            this.groupBox2.Controls.Add(this.btnCompare);
-            this.groupBox2.Controls.Add(this.btnImportSteps);
-            this.groupBox2.Controls.Add(this.btnSaveSteps);
-            this.groupBox2.Controls.Add(this.btnReset);
             this.groupBox2.Controls.Add(this.splitContainer1);
             this.groupBox2.Location = new System.Drawing.Point(12, 110);
             this.groupBox2.Name = "groupBox2";
@@ -174,7 +169,7 @@
             // btnGroup
             // 
             this.btnGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGroup.Location = new System.Drawing.Point(90, 224);
+            this.btnGroup.Location = new System.Drawing.Point(81, 208);
             this.btnGroup.Name = "btnGroup";
             this.btnGroup.Size = new System.Drawing.Size(75, 23);
             this.btnGroup.TabIndex = 10;
@@ -185,7 +180,7 @@
             // btnBasicData
             // 
             this.btnBasicData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBasicData.Location = new System.Drawing.Point(9, 224);
+            this.btnBasicData.Location = new System.Drawing.Point(0, 208);
             this.btnBasicData.Name = "btnBasicData";
             this.btnBasicData.Size = new System.Drawing.Size(75, 23);
             this.btnBasicData.TabIndex = 9;
@@ -196,7 +191,7 @@
             // btnCompare
             // 
             this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCompare.Location = new System.Drawing.Point(171, 224);
+            this.btnCompare.Location = new System.Drawing.Point(162, 208);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 8;
@@ -207,7 +202,8 @@
             // btnImportSteps
             // 
             this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImportSteps.Location = new System.Drawing.Point(410, 224);
+            this.btnImportSteps.Enabled = false;
+            this.btnImportSteps.Location = new System.Drawing.Point(84, 208);
             this.btnImportSteps.Name = "btnImportSteps";
             this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
             this.btnImportSteps.TabIndex = 7;
@@ -218,7 +214,8 @@
             // btnSaveSteps
             // 
             this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveSteps.Location = new System.Drawing.Point(329, 224);
+            this.btnSaveSteps.Enabled = false;
+            this.btnSaveSteps.Location = new System.Drawing.Point(3, 208);
             this.btnSaveSteps.Name = "btnSaveSteps";
             this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
             this.btnSaveSteps.TabIndex = 6;
@@ -230,7 +227,7 @@
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(593, 224);
+            this.btnReset.Location = new System.Drawing.Point(263, 208);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 5;
@@ -248,18 +245,27 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnRemove);
+            this.splitContainer1.Panel1.Controls.Add(this.btnCompare);
+            this.splitContainer1.Panel1.Controls.Add(this.btnGroup);
             this.splitContainer1.Panel1.Controls.Add(this.tv1);
+            this.splitContainer1.Panel1.Controls.Add(this.btnBasicData);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnReset);
+            this.splitContainer1.Panel2.Controls.Add(this.btnImportSteps);
             this.splitContainer1.Panel2.Controls.Add(this.tv2);
-            this.splitContainer1.Size = new System.Drawing.Size(668, 202);
-            this.splitContainer1.SplitterDistance = 322;
+            this.splitContainer1.Panel2.Controls.Add(this.btnSaveSteps);
+            this.splitContainer1.Size = new System.Drawing.Size(668, 234);
+            this.splitContainer1.SplitterDistance = 323;
             this.splitContainer1.TabIndex = 0;
             // 
             // tv1
             // 
-            this.tv1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tv1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tv1.Location = new System.Drawing.Point(0, 0);
             this.tv1.Name = "tv1";
             this.tv1.Size = new System.Drawing.Size(322, 202);
@@ -268,7 +274,9 @@
             // 
             // tv2
             // 
-            this.tv2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tv2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tv2.Location = new System.Drawing.Point(0, 0);
             this.tv2.Name = "tv2";
             this.tv2.Size = new System.Drawing.Size(342, 202);
@@ -338,7 +346,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(593, 43);
             this.btnSave.Name = "btnSave";
@@ -416,7 +424,7 @@
             // 
             // btnAll
             // 
-            this.btnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAll.Location = new System.Drawing.Point(270, 86);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(75, 23);
@@ -427,7 +435,7 @@
             // 
             // btnMAFFT
             // 
-            this.btnMAFFT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMAFFT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMAFFT.Location = new System.Drawing.Point(351, 86);
             this.btnMAFFT.Name = "btnMAFFT";
             this.btnMAFFT.Size = new System.Drawing.Size(75, 23);
@@ -438,7 +446,7 @@
             // 
             // btnPrank
             // 
-            this.btnPrank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPrank.Location = new System.Drawing.Point(432, 86);
             this.btnPrank.Name = "btnPrank";
             this.btnPrank.Size = new System.Drawing.Size(75, 23);
@@ -470,7 +478,7 @@
             // 
             // btnMuscle
             // 
-            this.btnMuscle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMuscle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMuscle.Location = new System.Drawing.Point(513, 86);
             this.btnMuscle.Name = "btnMuscle";
             this.btnMuscle.Size = new System.Drawing.Size(75, 23);
@@ -508,7 +516,7 @@
             // 
             // btnClustalW
             // 
-            this.btnClustalW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClustalW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClustalW.Location = new System.Drawing.Point(593, 86);
             this.btnClustalW.Name = "btnClustalW";
             this.btnClustalW.Size = new System.Drawing.Size(75, 23);
@@ -579,6 +587,17 @@
             this.btnMakePartitionFinderFiles.Text = "Make";
             this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
             this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.Location = new System.Drawing.Point(243, 208);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 11;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // Form1
             // 
@@ -659,6 +678,7 @@
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.Button btnBasicData;
         private System.Windows.Forms.Button btnGroup;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
 

@@ -104,11 +104,11 @@ namespace GeneMatrix
 
         private void makeMinimumComparisonSet(Dictionary<string, List<string>> minimumSetDuplicates, int[,] scores, string fileName, Dictionary<string, List<string>> duplicates)
         {
-            Dictionary<string,int> nameIindex = new Dictionary<string,int>();
+            Dictionary<string,int> nameIndex = new Dictionary<string,int>();
             int index = 0;
             foreach (string key in sequences.Keys)
             {
-                nameIindex.Add(key, index);
+                nameIndex.Add(key, index);
                 index++;
             }          
 
@@ -118,9 +118,9 @@ namespace GeneMatrix
                 foreach(string key in name)
                 {
                     int bracket = key.IndexOf("(");
-                    string thiskey = key.Substring(0, bracket - 1);
-                    if (nameIindex.ContainsKey(thiskey)==true)
-                    { nameIindex.Remove(thiskey); }
+                    string thisKey = key.Substring(0, bracket - 1);
+                    if (nameIndex.ContainsKey(thisKey)==true)
+                    { nameIndex.Remove(thisKey); }
                 }
             }           
 
@@ -131,7 +131,7 @@ namespace GeneMatrix
                 sw = new System.IO.StreamWriter(fileName, true);
                 sw.Write("\n\nMinimum sequence set\n");
 
-                foreach (string key in nameIindex.Keys)
+                foreach (string key in nameIndex.Keys)
                 { sw.Write("\t" + key); }
                 sw.Write("\n");
 
@@ -139,17 +139,17 @@ namespace GeneMatrix
                 foreach (string key in duplicates.Keys)
                 {
                     int bracket = key.IndexOf("(");
-                    string thiskey = key.Substring(0, bracket - 1);
-                    duplicateCleanKeys.Add(thiskey, duplicates[key]);
+                    string thisKey = key.Substring(0, bracket - 1);
+                    duplicateCleanKeys.Add(thisKey, duplicates[key]);
                 }
 
-                foreach (string outerKey in nameIindex.Keys)
+                foreach (string outerKey in nameIndex.Keys)
                 {
                     sw.Write(outerKey);
-                    foreach (string innerkey in nameIindex.Keys)
+                    foreach (string innerKey in nameIndex.Keys)
                     {
-                        sw.Write("\t" + scores[nameIindex[outerKey], nameIindex[innerkey]].ToString("N0"));
-                        if (outerKey == innerkey)
+                        sw.Write("\t" + scores[nameIndex[outerKey], nameIndex[innerKey]].ToString("N0"));
+                        if (outerKey == innerKey)
                         { sw.Write("*"); }
                     }
                     if (duplicateCleanKeys.ContainsKey(outerKey) == true)
@@ -201,7 +201,7 @@ namespace GeneMatrix
                 
 
                 sw.Write("\n\nSize range\nMedian length\t" + median.ToString("N1") +
-                   "Size range\t" + sizes[0].ToString() + "\t" + sizes[sizes.GetUpperBound(0)] + "\n");
+                   "\tSize range\t" + sizes[0].ToString() + "\t" + sizes[sizes.GetUpperBound(0)] + "\n");
 
                 sw.Write("Sequence\tLength\tDifference from median length\tPercent of median length\n");
                 foreach(string key in sequences.Keys)

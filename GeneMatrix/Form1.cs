@@ -76,6 +76,9 @@ namespace GeneMatrix
         private void btnImport_Click(object sender, EventArgs e)
         {
             btnReset.Enabled = false;
+            btnSaveSteps.Enabled = false;
+            btnImportSteps.Enabled = false;
+
             string empty = "";
 
             if (chkFolder.Checked == true)
@@ -152,6 +155,8 @@ namespace GeneMatrix
             {
                 populateLists();
                 btnReset.Enabled = true;
+                btnImportSteps.Enabled = true;
+                btnSaveSteps.Enabled = true;
             }
 
             if (string.IsNullOrEmpty(empty) == true)
@@ -1836,6 +1841,7 @@ namespace GeneMatrix
 
         private void btnSaveSteps_Click(object sender, EventArgs e)
         {
+            if (btnReset.Enabled == false) { return; }
             List<string> steps = new List<string>();
 
             foreach (TreeNode pn in tv2.Nodes[0].Nodes)
@@ -1880,6 +1886,8 @@ namespace GeneMatrix
 
         private void btnImportSteps_Click(object sender, EventArgs e)
         {
+            if (btnReset.Enabled == false) { return; }
+
             string file = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select the file containing the amalgamations steps", "Text file (*.txt)|*.txt");
             if (System.IO.File.Exists(file)== false) { return; }
 
@@ -2521,5 +2529,30 @@ namespace GeneMatrix
             return groups;
         }
 
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            string file = FileAccessClass.FileString(FileAccessClass.FileJob.Open, "Select file of accession IDs to remove", "Text file (*.txt)|*.txt");
+            if (System.IO.File.Exists(file) == false) { return; }
+
+            System.IO.StreamReader sf = null;
+
+            try 
+            { 
+            sf =new System.IO.StreamReader(file);
+                string line = "";
+                while(sf.Peek() > 0)
+                {
+                    line = sf.ReadLine().Replace(",","").Trim();
+                    if (data.ContainsKey(line) == true)
+                    {
+                        data.Remove(line);
+                    }
+                }
+                populateLists();
+            }
+            catch(Exception ex) { MessageBox.Show("Could not process file: " + ex.Message, "Error"); }
+            finally { if (sf != null) { sf.Close(); }; }
+
+        }
     }
 }
