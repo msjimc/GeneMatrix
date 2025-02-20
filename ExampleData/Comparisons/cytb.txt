@@ -1,0 +1,73 @@
+Median length	1,144.0
+Size range:  200 to 1144
+Accession ID, Species, Sequence name           Length  Difference from median length  Percent of median length    Groups  Fragment of
+LT599487.1, Centrochelys sulcata, cytb            200                           -944                     17.48    set: 1  
+MT017690.1, Chelonoidis abingdonii, CYTB        1,144                              0                    100.00    set: 2  
+NC_051472.1, Chelonoidis abingdonii, CYTB       1,144                              0                    100.00    set: 2  
+OM719673.1, Chelonoidis abingdonii, CYTB        1,144                              0                    100.00    set: 2  
+OM719698.1, Chelonoidis abingdonii, CYTB        1,144                              0                    100.00    set: 2  
+LT599482.1, Chelonoidis alburyorum, cytb        1,144                              0                    100.00    set: 3  
+MT017693.1, Chelonoidis becki, CYTB             1,144                              0                    100.00    set: 4  
+NC_051473.1, Chelonoidis becki, CYTB            1,144                              0                    100.00    set: 4  
+OM719692.1, Chelonoidis becki, CYTB             1,144                              0                    100.00    set: 4  
+OM719693.1, Chelonoidis becki, CYTB             1,144                              0                    100.00    set: 5  
+LT599483.1, Chelonoidis carbonarius, cytb       1,144                              0                    100.00    set: 6  
+MT017704.1, Chelonoidis carbonarius, CYTB         655                           -489                     57.26    set: 7  set: 8
+OQ789392.1, Chelonoidis carbonarius, CYTB       1,144                              0                    100.00    set: 8  
+NC_080265.1, Chelonoidis carbonarius, CYTB      1,144                              0                    100.00    set: 8  
+MT017692.1, Chelonoidis chathamensis, CYTB      1,144                              0                    100.00    set: 9  
+OM719702.1, Chelonoidis chathamensis, CYTB      1,144                              0                    100.00    set: 9  
+OM719703.1, Chelonoidis chathamensis, CYTB      1,144                              0                    100.00    set: 9  
+OM719704.1, Chelonoidis chathamensis, CYTB      1,144                              0                    100.00    set: 9  
+LT599484.1, Chelonoidis chilensis, cytb         1,074                            -70                     93.88   set: 10  
+MT017694.1, Chelonoidis darwini, CYTB           1,144                              0                    100.00    set: 4  
+NC_051474.1, Chelonoidis darwini, CYTB          1,144                              0                    100.00    set: 4  
+OM719670.1, Chelonoidis darwini, CYTB           1,144                              0                    100.00    set: 4  
+OM719671.1, Chelonoidis darwini, CYTB           1,144                              0                    100.00    set: 4  
+OM719672.1, Chelonoidis darwini, CYTB           1,144                              0                    100.00    set: 4  
+LT599485.1, Chelonoidis denticulatus, cytb      1,144                              0                    100.00   set: 11  
+MT017703.1, Chelonoidis denticulatus, CYTB        497                           -647                     43.44   set: 12  
+MT017695.1, Chelonoidis donfaustoi, CYTB        1,144                              0                    100.00   set: 13  
+NC_051475.1, Chelonoidis donfaustoi, CYTB       1,144                              0                    100.00   set: 13  
+MG912791.1, Chelonoidis duncanensis, CYTB       1,144                              0                    100.00   set: 14  
+MG912792.1, Chelonoidis duncanensis, CYTB       1,144                              0                    100.00   set: 14  
+MG912820.1, Chelonoidis duncanensis, CYTB       1,144                              0                    100.00   set: 14  
+MG912828.1, Chelonoidis duncanensis, CYTB       1,144                              0                    100.00   set: 14  
+MT017697.1, Chelonoidis duncanensis, CYTB       1,144                              0                    100.00   set: 14  
+NC_051477.1, Chelonoidis duncanensis, CYTB      1,144                              0                    100.00   set: 14  
+MT017700.1, Chelonoidis guntheri, CYTB          1,144                              0                    100.00   set: 15  
+NC_051480.1, Chelonoidis guntheri, CYTB         1,144                              0                    100.00   set: 15  
+OM719674.1, Chelonoidis guntheri, CYTB          1,144                              0                    100.00   set: 16  
+OM719675.1, Chelonoidis guntheri, CYTB          1,144                              0                    100.00   set: 16  
+OM719676.1, Chelonoidis guntheri, CYTB          1,144                              0                    100.00   set: 17  
+MT017696.1, Chelonoidis hoodensis, CYTB         1,144                              0                    100.00   set: 18  
+NC_051476.1, Chelonoidis hoodensis, CYTB        1,144                              0                    100.00   set: 18  
+OM719683.1, Chelonoidis hoodensis, CYTB         1,144                              0                    100.00   set: 18  
+OM719684.1, Chelonoidis hoodensis, CYTB         1,144                              0                    100.00   set: 18  
+OM719685.1, Chelonoidis hoodensis, CYTB         1,144                              0                    100.00   set: 18  
+MT017702.1, Chelonoidis microphyes, CYTB        1,144                              0                    100.00   set: 16  
+NC_051482.1, Chelonoidis microphyes, CYTB       1,144                              0                    100.00   set: 16  
+OM719708.1, Chelonoidis microphyes, CYTB        1,144                              0                    100.00   set: 16  
+OM719709.1, Chelonoidis microphyes, CYTB        1,144                              0                    100.00   set: 16  
+JN999704.2, Chelonoidis niger, CYTB             1,134                            -10                     99.13   set: 19  
+MT017691.1, Chelonoidis niger, CYTB               496                           -648                     43.36   set: 20  set: 21
+OM719687.1, Chelonoidis niger, CYTB             1,144                              0                    100.00   set: 21  
+OM719686.1, Chelonoidis phantasticus, CYTB      1,144                              0                    100.00   set: 21  
+OM719688.1, Chelonoidis phantasticus, CYTB      1,144                              0                    100.00   set: 22  
+MT017698.1, Chelonoidis porteri, CYTB           1,144                              0                    100.00   set: 23  
+NC_051478.1, Chelonoidis porteri, CYTB          1,144                              0                    100.00   set: 23  
+OM719680.1, Chelonoidis porteri, CYTB           1,144                              0                    100.00   set: 24  
+OM719681.1, Chelonoidis porteri, CYTB           1,144                              0                    100.00   set: 25  
+OM719682.1, Chelonoidis porteri, CYTB           1,144                              0                    100.00   set: 23  
+MT017701.1, Chelonoidis vandenburghi, CYTB      1,144                              0                    100.00   set: 16  
+NC_051481.1, Chelonoidis vandenburghi, CYTB     1,144                              0                    100.00   set: 16  
+OM719705.1, Chelonoidis vandenburghi, CYTB      1,144                              0                    100.00   set: 16  
+OM719706.1, Chelonoidis vandenburghi, CYTB      1,144                              0                    100.00   set: 16  
+LT599486.1, Chelonoidis vicina, cytb            1,074                            -70                     93.88   set: 26  set: 17
+MT017699.1, Chelonoidis vicina, CYTB            1,144                              0                    100.00   set: 27  
+NC_051479.1, Chelonoidis vicina, CYTB           1,144                              0                    100.00   set: 27  
+OM719689.1, Chelonoidis vicina, CYTB            1,144                              0                    100.00   set: 28  
+OM719690.1, Chelonoidis vicina, CYTB            1,144                              0                    100.00   set: 29  
+OM719691.1, Chelonoidis vicina, CYTB            1,144                              0                    100.00   set: 29  
+OQ581203.1, Chelonoidis vicina, CYTB            1,144                              0                    100.00   set: 29  
+NC_007694.1, Stigmochelys pardalis, CYTB        1,144                              0                    100.00   set: 30  

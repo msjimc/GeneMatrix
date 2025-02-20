@@ -2389,5 +2389,137 @@ namespace GeneMatrix
             { MessageBox.Show("An error occurred collecting the data, have you selected any sequences?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        private void btnGroup_Click(object sender, EventArgs e)
+        {
+            string folder = FileAccessClass.FileString(FileAccessClass.FileJob.Directory, "Select folder of data set files", "");
+            if (System.IO.Directory.Exists(folder) == false) { return; }
+
+            string[] files = System.IO.Directory.GetFiles(folder, "*.txt");
+            
+            List<string> titles = new List<string>();
+            List<int> nameLengths = new List<int>();
+            foreach (string file in files)
+            {
+                string name = file.Substring(file.LastIndexOf("\\") + 1);
+                name= name.Substring(0, name.LastIndexOf("."));
+                titles.Add(name);
+                nameLengths.Add(name.Length);
+            }
+
+            Dictionary<string, List<string>> groups = makeGroups(files);
+            Dictionary<string, List<string>> FinalSets = makeGroupings(groups, titles);
+            List<string> orderedKeys= FinalSets.Keys.ToList();
+            orderedKeys.Sort();
+
+            StringBuilder sb = new StringBuilder();
+            int longestKey = "Accession ID, Species ".Length;
+            foreach (string key in groups.Keys)
+            { if (key.Length + 2 > longestKey) { longestKey = key.Length + 2; } }
+
+            sb.Append("Accession ID, Species ".PadRight(longestKey));
+            for (int index = 0; titles.Count > index; index++)
+            { sb.Append(titles[index].PadRight(nameLengths[index] + 3)); }
+            sb.Append("\r\n");
+
+            int groupID = 1;
+            foreach (string key in orderedKeys)
+            {
+                foreach (string name in FinalSets[key])
+                { sb.Append(name.PadRight(longestKey) + key + "groupID: " + groupID.ToString().PadLeft(4) + "\r\n"); }
+                groupID++;
+            }
+            
+            DataTextView dtv = new DataTextView(sb.ToString());
+            dtv.Text = "Aggregated  data";
+            dtv.ShowDialog();
+
+        }
+
+        private Dictionary<string, List<string>> makeGroupings(Dictionary<string, List<string>> groups, List<string> titles)
+        {
+            Dictionary<string, List<string>> FinalSets = new Dictionary<string, List<string>>();
+            foreach (string key in groups.Keys)
+            {
+                List<string> group = groups[key];
+
+                string groupings = "";
+                for(int index = 0; titles.Count > index; index++)
+                {
+                    groupings += group[index].PadRight(titles[index].Length + 3);
+                }
+
+                if (FinalSets.ContainsKey(groupings) == true)
+                { FinalSets[groupings].Add(key); }
+                else
+                {
+                    List<string> lists = new List<string>();
+                    lists.Add(key);
+                    FinalSets.Add(groupings, lists);
+                }
+            }
+            return FinalSets;
+        }
+
+        private Dictionary<string, List<string>> makeGroups(string[] files)
+        {
+
+            System.IO.StreamReader sf = null;
+            Dictionary<string, List<string>> groups = new Dictionary<string, List<string>>();
+            try 
+            {
+                int counter= 0;
+                foreach (string file in files)
+                {
+                    sf = new System.IO.StreamReader(file);
+                    string line = "";
+                    string name = "";
+                    string set = "";
+                    
+                    while (sf.Peek() > 0)
+                    {
+                        line = sf.ReadLine();
+                        if (line.Contains("  set: ") == true)
+                        {
+                            int index = line.IndexOf(", ");
+                            index = line.IndexOf(", ", index + 1);
+                            if (index > 0)
+                            {
+                                name = line.Substring(0, index);
+                                index = line.IndexOf("  set: ") + 7;
+                                int indexEnd = line.IndexOf("  ", index);
+                                if (index > 0 && indexEnd > index)
+                                {
+                                    set = line.Substring(index, indexEnd - index);
+                                    if (index != line.LastIndexOf("  set: ") + 7)
+                                    { set += "*"; }
+                                    if (groups.ContainsKey(name) == true)
+                                    { groups[name].Add(set); }
+                                    else
+                                    {
+                                        List<string> list = new List<string>();
+                                        for (int count = 0; count < counter; count++)
+                                        { list.Add("-"); }
+                                        list.Add(set);
+                                        groups.Add(name, list);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    sf.Close();
+                    counter++;
+                    foreach (List<string> list in groups.Values)
+                    {
+                        if (list.Count < counter) 
+                        { list.Add("-"); }
+                    }
+                }
+            }
+            catch(Exception ex) { }
+            finally { if (sf != null) { sf.Close(); } }
+
+            return groups;
+        }
+
     }
 }

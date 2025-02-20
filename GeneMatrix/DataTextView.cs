@@ -29,7 +29,7 @@ namespace GeneMatrix
 
             try
             {
-                sw = new System.IO.StreamWriter(fileName);
+                sw = new System.IO.StreamWriter(fileName,false);
                 sw.Write(basicData);           
             }
             catch (Exception ex) { MessageBox.Show("An error occurred creating the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }

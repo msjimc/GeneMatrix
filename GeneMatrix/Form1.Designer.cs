@@ -36,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnGroup = new System.Windows.Forms.Button();
+            this.btnBasicData = new System.Windows.Forms.Button();
             this.btnCompare = new System.Windows.Forms.Button();
             this.btnImportSteps = new System.Windows.Forms.Button();
             this.btnSaveSteps = new System.Windows.Forms.Button();
@@ -70,7 +72,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
-            this.btnBasicData = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -156,6 +157,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btnGroup);
             this.groupBox2.Controls.Add(this.btnBasicData);
             this.groupBox2.Controls.Add(this.btnCompare);
             this.groupBox2.Controls.Add(this.btnImportSteps);
@@ -169,14 +171,36 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
             // 
+            // btnGroup
+            // 
+            this.btnGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGroup.Location = new System.Drawing.Point(90, 224);
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnGroup.TabIndex = 10;
+            this.btnGroup.Text = "Group";
+            this.btnGroup.UseVisualStyleBackColor = true;
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
+            // btnBasicData
+            // 
+            this.btnBasicData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBasicData.Location = new System.Drawing.Point(9, 224);
+            this.btnBasicData.Name = "btnBasicData";
+            this.btnBasicData.Size = new System.Drawing.Size(75, 23);
+            this.btnBasicData.TabIndex = 9;
+            this.btnBasicData.Text = "Data";
+            this.btnBasicData.UseVisualStyleBackColor = true;
+            this.btnBasicData.Click += new System.EventHandler(this.btnBasicData_Click);
+            // 
             // btnCompare
             // 
             this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCompare.Location = new System.Drawing.Point(90, 224);
+            this.btnCompare.Location = new System.Drawing.Point(171, 224);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 8;
-            this.btnCompare.Text = "Compare";
+            this.btnCompare.Text = "Analyses";
             this.btnCompare.UseVisualStyleBackColor = true;
             this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
@@ -556,17 +580,6 @@
             this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
             this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
             // 
-            // btnBasicData
-            // 
-            this.btnBasicData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBasicData.Location = new System.Drawing.Point(9, 224);
-            this.btnBasicData.Name = "btnBasicData";
-            this.btnBasicData.Size = new System.Drawing.Size(75, 23);
-            this.btnBasicData.TabIndex = 9;
-            this.btnBasicData.Text = "Data";
-            this.btnBasicData.UseVisualStyleBackColor = true;
-            this.btnBasicData.Click += new System.EventHandler(this.btnBasicData_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -645,6 +658,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.Button btnBasicData;
+        private System.Windows.Forms.Button btnGroup;
     }
 }
 
