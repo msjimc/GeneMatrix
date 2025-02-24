@@ -169,39 +169,126 @@ Figure 4 Sequence data imported from a folder containing one fasta file and a si
 
 <hr />
 
-```GeneMatrix``` is designed for the collation of ortholog sequences, which is achieved  with user interaction by selecting features with respect to their names rather than similar sequences. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situations where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames that give rise to a number of different proteins through different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features represent is typically obvious from the feature's name but may not be that obvious from the sequence, for example:  
+```GeneMatrix``` is designed for the collation of orthologous sequences, which is achieved  with user interaction by selecting features with respect to their names rather than similar sequences. This decision was made as it is hoped that the sequences would be correctly annotated, and while this may not be the case, there are many situations where the use of sequence homology can be equally troublesome. For instance, many viruses contain open reading frames that give rise to a number of different proteins through different mechanisms such as RNA editing, ribosome stalling or protein cleavage. What these features represent is typically obvious from the feature's name but may not be that obvious from the sequence, for example:  
 * The CDV virus genome contains a PVC or PCV open reading frame that generates the P, V and C proteins; which have overlapping sequences. Some CDV genomes in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file contains a PVC/PCV feature, while other have one or more of the P, V, and C sequences. Trying to group these features based on sequence homology could result in situations where some species have the whole PVC/PCV sequence included while others have the overlapping P, V and C sequences with or without the PVC/PCV sequence, which could ultimately result in erroneous results.  
   
-## Selecting sequences for export based on their names
+## Identifying duplicate or  miss annotated sequences
 
-Ideally, ```GeneMatrix``` would automate the selection of the features based on their name; however, because features are not named in a consistent, systematic manner, this step requires user interaction. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, there are eight different names for the Haemagglutinin protein H ___CDS___ feature. 
+The annotation of GenBank sequences is the responsibility of the person that uploads them. As a result, it is not uncommon for sequences to be incorrectly annotated for a variety of reasons; consequently, it is recommended that the imported sequences be scanned in an attempt to identify sequence duplicates and obvious cases of miss-annotation. ```Genematrix``` allows this to be done by either identifying the pairwise homology between sequences of a specific gene or by detecting sequences that are identical or are a fragment of a larger sequence.
 
-<hr >
+Once duplicated or miss-annotated sequences have been identified, they can be filtered to remove unwanted sequences.
 
-![Figure 5](images/figure5.jpg)
+***Note***: This analysis is restricted to DNA sequences.
+
+### Identification of identical sequences
+
+ ```GeneMatrix``` is able to detect duplicated sequences that are either identical or the shorter sequence is identical to a section of the longer sequence. If this analysis is performed for a number of genes, the data can be aggregated and used to identify instances where, for instance, two mitochondrial genomes are identical across all genes of interest or just a subset of them.
+
+ To screen gene-specific sequences, click on the required node in the left-hand panel such that the icon turns green. Where a gene is referenced by 2 or more names, select all the relevant nodes (Figure 5).
+
+ <hr >
+
+![Figure 5](images/figure128.jpg)
 
 Figure 5: 
 
 <hr />
 
-Multiple features can be selected at once as long as they all are the same type (i.e., they are all ___CDS___ features). To select an ortholog for inclusion in the exported data set, click on the feature's name in the left-hand panel using the left mouse button. This should change the feature's icon from a light grey to a green. Clicking on the node a second time will deselect it as indicated by the now light grey icon. If an ortholog has multiple names, initially select the node that has the preferred name and then include the other sequences as child sequences as outlined in the next section. Once you have selected all the features, click on the relevant node in the right-hand panel using the mouse's left-hand button. This will move the features from the left-hand tree to the right-hand tree (Figure 6).  
+To perform the analyses, press the ```Sets``` button below the left-hand panel; this will open the ```Basic Sequence Data``` window that displays the results of the analysis. Each sequence is compared to the other sequences and grouped into sets of identical sequences. The first two lines show the median length and size range of the selected sequences, followed by the tabulated results (Figure 6). 
+
+Each sequence is identified by the accession ID of the GenBank file it was extracted from, its species and gene names. This is followed by the sequence's length and its divergence from the median length in absolute and percentage terms. This is followed by the **set** the sequence belongs to. If a sequence is a fragment of another sequence, this is noted in the final column; for instance, the sequence in the MT017704.1 GenBank file is a fragment of sequences in Set 8. A sequence could be a fragment of multiple sets.   
+Pressing the ```Save``` button allows you to save the data to a file.
+
+<hr >
+
+![Figure 6](images/figure129.jpg)
+
+Figure 6:
+
+### Grouping accession files based on the groupings of a number of genes
+
+If each of the GenBank files contains a number of different genes, it's possible to group the GenBank files into sets based on the groupings of the individual genes. To do this, first analyse each gene and save the results to a series of text files in an empty folder. Then press the ```Groupings``` button below the left-hand panel. This will prompt you to select the folder of the results files before opening the ```Aggregated data``` window (Figure 7). Each GenBank file is displayed across one line, with the groupings for each gene present in one column, whose name is taken from the results file's name.   Values preceded by an asterisk (*) indicate that the sequence is a smaller fragment of those in another set. Finally, the data for each selected gene in a GenBank file is used to group the GenBank files based on the gene sequences identity (Figure 7). Once grouped together, it's possible to identify the minimum GenBank file data set required for subsequent analysis. It is also possible to identify instances where sequences have been erroneously allocated to the wrong species or when two species are so closely related that it is debatable if they both need to be included as separate entries.
+
+<hr >
+
+![Figure 7](images/figure130.jpg)
+
+Figure 7:
+
+## Determining the pairwise global homology of a set of sequences
+
+The preceding analysis detects sequences with the same primary sequences: if one base is different, they are classified as different. However, in biological terms, a sequence with a very small number of sequence changes could be considered the same, with the differences being due to sequencing errors or variation within a population.  
+
+To determine the degree of similarity between the sequences linked to selected genes ```GeneMatrix``` can create a table of similarity scores for each pair of sequences in the dataset. ```GeneMatrix``` uses the [Needleman–Wunsch algorithm](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm) to create an alignment table and then identifies the global alignment score as the value in the bottom right corner of the grid. If the value equals the length of the sequences, they are identical, while a negative value indicates they are more different than alike. Since the indels and mismatches are scored differently, different alignment scores are not directly comparable. Consequently, values cannot be used to directly compare different alignments but may be informative in indicating a trend.
+
+To perform a pairwise analysis, select the required node(s) as shown in Figure 5 above, and then press the ```Homology``` button under the left-hand panel. This will prompt you to enter the name of the file you wish to save the data to. Once, the file has been selected, the analysis is run in the background and may take a number of minutes to complete. Progress can be seen by opening the file in a text editor such as Notepad++ or Notepad. While the data is not saved until the analysis is complete, the results are 'flushed' to the file as it progresses (Figure 8). Values derived from comparing the sequence to itself are marked with an asterisk. 
+
+<hr >
+
+![Figure 8](images/figure131.jpg)
+
+Figure 8:
+
+Once all the pairwise analyses have been completed, a second table is created that contains the minimum dataset: if two sequences are identical, only one is shown (Figure 9).
+
+<hr >
+
+![Figure 9](images/figure132.jpg)
+
+Figure 9:
+
+<hr >
+
+After the minimum sequence set grid, the sequences found to be identical are listed in the Duplicated Sequence Set table (Figure 10).
+
+![Figure 10](images/figure134.jpg)
+
+Figure 10:
+
+Finally, the sequences are listed along with their length, with its divergence from the median length is noted.
+
+<hr >
+
+![Figure 11](images/figure133.jpg)
+
+Figure 11:
+
+### Considerations for performing multiple concurrent pairwise analyses
+
+In the described analysis, 70 CYTB sequences with a median length of 1,144 bp were compared; this represented approximately 2,500 pairwise comparisons, which is further reduced by noting which sequences are identical. Consequently, each analysis took about 130 milliseconds, totalling about 5 minutes of analysis. To allow you to perform other tasks, the analysis is run on a background thread: once running, the task is detached from the general operation of  ```GeneMatrix's``` user interface and runs until it completes or ```GeneMatrix``` is closed. 
+
+If you have a number of pairwise analyses to complete, you can run them concurrently, but the number of running tasks should not be excessive, as it will degrade the responsiveness of ```GeneMatrix```. Each task requires its own memory allocation; if the tasks use 1 Gb of RAM and you have 4 Gb of RAM, then you should only run ~4 tasks. Finally, if all the data is being saved to a network drive or USB stick, you may need to limit your analysis so access to the storage media is not blocked by other tasks.
+
+## Selecting sequences for export based on their names
+
+Ideally, ```GeneMatrix``` would automate the selection of the features based on their name; however, because features are not named in a consistent, systematic manner, this step requires user interaction. For example, in the [CDV_genomes.gb](../ExampleData/CDV_genomes.gb) file, there are eight different names for the Haemagglutinin protein H ___CDS___ feature (Figure 12). 
+
+<hr >
+
+![Figure 12](images/figure5.jpg)
+
+Figure 12: 
 
 <hr />
 
-![Figure 6](images/figure6.jpg)
+Multiple features can be selected at once as long as they all are the same type (i.e., they are all ___CDS___ features). To select an ortholog for inclusion in the exported data set, click on the feature's name in the left-hand panel using the left mouse button. This should change the feature's icon from a light grey to a green. Clicking on the node a second time will deselect it as indicated by the now light grey icon. If an ortholog has multiple names, initially select the node that has the preferred name and then include the other sequences as child sequences as outlined in the next section. Once you have selected all the features, click on the relevant node in the right-hand panel using the mouse's left-hand button. This will move the features from the left-hand tree to the right-hand tree (Figure 13).  
 
-Figure 6: In Figure 6a, all the features in the ___CDS___ set except ***cytb***, ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** have been selected. Figure 6b shows the movement of the selected nodes to the right-hand tree after left mouse clicking on the CDS node in the right-hand panel.
+<hr />
+
+![Figure 13](images/figure6.jpg)
+
+Figure 13: In Figure 13a, all the features in the ___CDS___ set except ***cytb***, ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** have been selected. Figure 13b shows the movement of the selected nodes to the right-hand tree after left mouse clicking on the CDS node in the right-hand panel.
 
 ### Amalgamating sequences with different names
 
-In Figure 7a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes, respectively. As a result, features called ***NADH dehydrogenase subunit 1*** will be combined with those called ***ND1*** into a data file called ***ND1***_DNA.fasta or ***ND1***_Protein.fasta. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
-To combine the unselected ***cytb*** features with the selected  ***CYTB*** features, left mouse click the ***cytb*** feature in the left-hand panel and then click the ***CYTB*** text using the left mouse button (Figure 7 b). 
+In Figure 13a it can be seen that the ***NADH dehydrogenase subunit 1*** and ***NADH dehydrogenase subunit 5*** nodes are now child nodes of the ***ND1*** and ***ND5*** nodes, respectively. As a result, features called ***NADH dehydrogenase subunit 1*** will be combined with those called ***ND1*** into a data file called ***ND1***_DNA.fasta or ***ND1***_Protein.fasta. Similarly, ***NADH dehydrogenase subunit 5*** features will be exported with the ***ND5*** features.
+To combine the unselected ***cytb*** features with the selected  ***CYTB*** features, left mouse click the ***cytb*** feature in the left-hand panel and then click the ***CYTB*** text using the left mouse button (Figure 14 b). 
 
 <hr />
 
-![Figure 7](images/figure7.jpg)
+![Figure 14](images/figure7.jpg)
 
-Figure 7
+Figure 14
 
 <hr />
 
@@ -211,13 +298,13 @@ Features with a known type, i.e., they are in one of the  ___CDS___, ___rRNA___ 
 
 ### Deselecting a sequence for export
 
-Deselecting a feature for export is achieved by clicking on the node using the right-hand mouse button. This removes the node from the right-hand tree, returning it to the left-hand tree. If a node contains child nodes, these are removed from the node and also placed in the left-hand tree (Figure 8). If a node was originally from a fasta file, it is returned to the ___Unknown___ node.
+Deselecting a feature for export is achieved by clicking on the node using the right-hand mouse button. This removes the node from the right-hand tree, returning it to the left-hand tree. If a node contains child nodes, these are removed from the node and also placed in the left-hand tree (Figure 15). If a node was originally from a fasta file, it is returned to the ___Unknown___ node.
 
 <hr />
 
-![Figure 8](images/figure8.jpg)
+![Figure 15](images/figure8.jpg)
 
-Figure 8: Right mouse clicking on the ***CYTB*** node in the right-hand panel (Figure 8a), returns both the ***CYTB*** node and its child ***cytb*** to the ***CDS*** node on the left-hand panel.
+Figure 15: Right mouse clicking on the ***CYTB*** node in the right-hand panel (Figure 15a), returns both the ***CYTB*** node and its child ***cytb*** to the ***CDS*** node on the left-hand panel.
 
 <hr />
 
@@ -240,23 +327,23 @@ The ```Reset``` button in the lower right-hand corner of the ```Combine features
 
 ## Saving the selected gene sequences
 
-When at least one feature has been selected for export the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 9). Pressing this button will prompt you to select a folder to save the data to. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 10).
+When at least one feature has been selected for export the ```Save``` button in the ```Save sequences``` section becomes active (blue box in Figure 16). Pressing this button will prompt you to select a folder to save the data to. If it contains a file with the same name as a file that its exported, the old file will be overwritten (Figure 17).
 
 <hr />
 
-![Figure 9](images/figure9.jpg)
+![Figure 16](images/figure9.jpg)
 
-Figure 9
-
-<hr />
-
-![Figure 10](images/figure10.jpg)
-
-Figure 10
+Figure 16
 
 <hr />
 
-The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (blue box in Figure 9). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another feature. For instance, in Figure 8a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the ND1 file, which is called ***CDS-ND1_DNA.fasta***. 
+![Figure 17](images/figure10.jpg)
+
+Figure 17
+
+<hr />
+
+The ```Save sequences``` section also contains three options: ***Just DNA sequences***, ***Just protein sequences*** and ***Both types of sequence*** (blue box in Figure 16). These options determine whether DNA, protein or both types of sequence data are exported when the ***Save*** button is pressed. Files containing DNA sequences are named \<feature type>-\<feature name>_DNA.fasta, while protein sequence files are called \<feature type>-\<feature name>_Protein.fasta. The \<feature name> is replaced by the sequence's feature name unless it was added as a child to another feature. For instance, in Figure 15a, all DNA sequences represented by the ***ATP6*** name will be stored in a file called ***CDS-ATP6_DNA.fasta***. However, all the sequences linked to ***NADH dehydrogenase subunit 1*** will be saved in the ND1 file, which is called ***CDS-ND1_DNA.fasta***. 
 
 ***Note:*** Not all names can be used in file names as they may contain characters that are not allowed, such as '\\', '?' or ":". Consequently, characters that are not letters, numbers, '-', '_', '.' or ' ' are replaced by a '\_' character.
 
@@ -268,11 +355,11 @@ To make the names compatible with various multiple alignment programs, any space
 
 #### Absent data
 
-Sequences that are shorter than the longest sequence are padded with space characters to make all sequence lines in a file the same length. If an entry doesn't contain any sequence data for a particular feature and the ___Ignore empty sequences___ is unchecked (red box in Figure 9), the sequence in the exported file will be a series of 'n' (DNA) or 'x' (protein) characters that is the same length as the longest sequence in that set. Whereas, if the sequence is blank and the ___Ignore empty sequences___ is checked, the sequences will not be added to the file. However, if no entries have data (i.e., no tRNA or rRNA feature will have a protein sequence), no file will be produced.
+Sequences that are shorter than the longest sequence are padded with space characters to make all sequence lines in a file the same length. If an entry doesn't contain any sequence data for a particular feature and the ___Ignore empty sequences___ is unchecked (red box in Figure 16), the sequence in the exported file will be a series of 'n' (DNA) or 'x' (protein) characters that is the same length as the longest sequence in that set. Whereas, if the sequence is blank and the ___Ignore empty sequences___ is checked, the sequences will not be added to the file. However, if no entries have data (i.e., no tRNA or rRNA feature will have a protein sequence), no file will be produced.
 
 ## Creating multiple sequence alignments
 
-The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independently of ```GeneMatrix``` or via the controls in the ```Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages or desktop applications, they can also be run as console applications using the Windows ***cmd*** shell program (Command Prompt: Figure 15). 
+The overall aim of extracting the sequences is to create a multi-sequence alignment. This can be done independently of ```GeneMatrix``` or via the controls in the ```Align individual features``` section. These controls allow ```GeneMatrix``` to automate ***Muscle***, ***ClustalW***, ***MAFFT*** and/or ***PRANK*** (if present on your computer) to align all the exported sequence files in a folder. While some of these programs can be run as interactive webpages or desktop applications, they can also be run as console applications using the Windows ***cmd*** shell program (Command Prompt: Figure 22). 
 
 ### Very important note
 
@@ -280,15 +367,15 @@ Due to the security concerns, your computer will not allow ```GeneMatrix``` to a
 
 ### Automation of the alignment process
 
-Aligning the sequences in the files is performed by pressing one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue box, Figure 11). If the ```All``` button is pressed ```GeneMatrix``` will process the files with each of the programs in turn.   
+Aligning the sequences in the files is performed by pressing one of the ```Muscle```, ```PRANK```, ```ClustalW``` or ```MAFFT``` buttons (blue box, Figure 18). If the ```All``` button is pressed ```GeneMatrix``` will process the files with each of the programs in turn.   
 ***Note:*** To use the programs, the executable(s) must be present on your computer.   
 ***Note:*** These programs do not require installing and so you don't need admin rights.
 
 <hr />
 
-![Figure 11](images/figure11.jpg)
+![Figure 18](images/figure11.jpg)
 
-Figure 11
+Figure 18
 
 <hr />
 
@@ -299,20 +386,20 @@ The third-party alignment applications used by ```GeneMatrix``` do not require t
 ### Selecting the executable file
 To align the sequences, ```GeneMatrix``` first checks if the required program has been used before and whether the executable file still exists. If not, ```GeneMatrix``` looks for the executable file in the same folder as the ```GeneMatrix``` program. If it still hasn't found the program, it will ask you to select the program using a file selection dialogue box. Muscle (muscle5.1.win64.exe) and ClustalW (clustalw2.exe) each consist of a single program file that you need to select. However, ***PRANK*** and ***MAFFT*** require a number of other files to run and so you must download a zip file containing these files (see the [Program](../Program/) folder), unzip them and then select the ___mafft.bat___ file or the ___PRANK.exe___ file. 
 
-If you wish to change the selected program, either simply delete, rename or move the original file or check the ```Reselect programs``` option (black box, Figure 12) and GeneMatrix will prompt you for the location of the file when you start another alignment. See the [third-party alignment applications](#third-party-alignment-applications) for more details regarding each program.
+If you wish to change the selected program, either simply delete, rename or move the original file or check the ```Reselect programs``` option (black box, Figure 19) and GeneMatrix will prompt you for the location of the file when you start another alignment. See the [third-party alignment applications](#third-party-alignment-applications) for more details regarding each program.
 
 <hr />
 
-![Figure 12](images/figure12.jpg)
+![Figure 19](images/figure12.jpg)
 
-Figure 12
+Figure 19
 
 <hr />
 
 ### Performing the alignment
-Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through these files looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file that contains the command(s) needed to run the program. This file is then sent to a ```cmd shell``` to process. After each alignment, the batch file is deleted, but if you wish to retain the batch files, checking the ```Retain batch files``` option (blue box, Figure 12) will rename the batch file after the sequence file it processed. If you try to open these files by clicking on them, they will open a ```cmd shell``` window and attempt to rerun the alignment; consequently, to view/edit their contents, drag and drop the file icon onto a text editor, ideally [Notepad++](https://notepad-plus-plus.org/).
+Once the executable has been found, ```GeneMatrix``` prompts the user to select a folder of saved files and then iterates through these files looking for file names ending in  "_DNA.fasta" or "_protein.fasta". For each file, it creates a batch file that contains the command(s) needed to run the program. This file is then sent to a ```cmd shell``` to process. After each alignment, the batch file is deleted, but if you wish to retain the batch files, checking the ```Retain batch files``` option (blue box, Figure 19) will rename the batch file after the sequence file it processed. If you try to open these files by clicking on them, they will open a ```cmd shell``` window and attempt to rerun the alignment; consequently, to view/edit their contents, drag and drop the file icon onto a text editor, ideally [Notepad++](https://notepad-plus-plus.org/).
 
-By default the ```cmd shell``` window is hidden, meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 13) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 14). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it (right-click on the program's name and select ```End task```). If you are producing a number of alignments, you may need to rename the folder of files; otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another alignment will fail, as ```GeneMatrix``` will not know where to find the files.
+By default the ```cmd shell``` window is hidden, meaning the alignment will run in the background with the status shown by ```GeneMatrix``` (blue box, FIgure 20) and the only indication that the alignment is running will be to look for the program in ```Task Manager``` (Figure 21). If you decide to terminate the alignment, you'll have to select the process in the ```Task Manager``` and then kill it (right-click on the program's name and select ```End task```). If you are producing a number of alignments, you may need to rename the folder of files; otherwise ```GeneMatrix``` will just start the next alignment: changing the folder name will mean any attempts to start another alignment will fail, as ```GeneMatrix``` will not know where to find the files.
 
 ### Cleaning the alignment with GBlocks
 
@@ -320,25 +407,25 @@ Once the alignment has been created, it is possible to 'clean' the alignment usi
 
 <hr />
 
-![Figure 13](images/figure13.jpg)
+![Figure 20](images/figure13.jpg)
 
-Figure 13
-
-<hr />
-
-![Figure 14](images/figure13a.jpg)
-
-Figure 14: The ```Task Manger``` window showing Muscle (muscle5.1.win64.exe) running. 
+Figure 20
 
 <hr />
 
-If the ```Show command window``` option is checked (red box, Figure 12), the ```cmd shell``` window will be shown and the output from the alignment program will be visible (Figure 15). Manually closing the window will kill the alignment. Once the alignment is complete, the ```cmd shell``` window will close, and another one will opend if required.
+![Figure 21](images/figure13a.jpg)
+
+Figure 21: The ```Task Manger``` window showing Muscle (muscle5.1.win64.exe) running. 
 
 <hr />
 
-![Figure 15](images/figure15.jpg)
+If the ```Show command window``` option is checked (red box, Figure 19), the ```cmd shell``` window will be shown and the output from the alignment program will be visible (Figure 22). Manually closing the window will kill the alignment. Once the alignment is complete, the ```cmd shell``` window will close, and another one will opend if required.
 
-Figure 15: cmd shell window showing the feedback from a Muscle alignment.
+<hr />
+
+![Figure 22](images/figure15.jpg)
+
+Figure 22: cmd shell window showing the feedback from a Muscle alignment.
 
 <hr />
 
@@ -348,29 +435,29 @@ When identifying the relationship between a number of species it is often perfor
 
 ### Modifying the alignment command
 
-The ([Third-party alignment applications](#third-party-alignment-applications) and [GBlocks alignment cleaning](gblocks-alignment-cleaning)) sections below give a very short description of the alignment and cleaning programs, links to their websites, useful citations, as well as the command used by ```GeneMatrix``` to make the alignment. These commands are very generic and you may wish to modify them. This can be achieved using the ```Command line options``` window that is accessed by pressing the ```Modify button``` (blue box, Figure 16a)
+The ([Third-party alignment applications](#third-party-alignment-applications) and [GBlocks alignment cleaning](gblocks-alignment-cleaning)) sections below give a very short description of the alignment and cleaning programs, links to their websites, useful citations, as well as the command used by ```GeneMatrix``` to make the alignment. These commands are very generic and you may wish to modify them. This can be achieved using the ```Command line options``` window that is accessed by pressing the ```Modify button``` (blue box, Figure 23a)
 
 <hr />
 
-![Figure 16a](images/figure16a.jpg)
+![Figure 23a](images/figure16a.jpg)
 
-Figure 16a
-
-<hr />
-
-![Figure 16b](images/figure16b.jpg)
-
-Figure 16b
+Figure 23a
 
 <hr />
 
-![Figure 16c](images/figure16c.jpg)
+![Figure 23b](images/figure16b.jpg)
 
-Figure 16c: Compared to Figure 16b, the Muscle commands have been extended to include the option to specify the sequence type. The edit for Muscle-DNA has not been saved (```Save``` button text is red), while the Muscle-Protein edit as has (```Save``` button text is black)
+Figure 23b
 
 <hr />
 
-The current options are displayed in the text area to the right of the program's name and target sequence type. If the text is changed, the font on the ```Save``` button becomes red. Pressing the ```Save``` button will save the new command options, while pressing the ```Reset``` button will set the options to those shown in Figure 16b. 
+![Figure 23c](images/figure16c.jpg)
+
+Figure 23c: Compared to Figure 23b, the Muscle commands have been extended to include the option to specify the sequence type. The edit for Muscle-DNA has not been saved (```Save``` button text is red), while the Muscle-Protein edit as has (```Save``` button text is black)
+
+<hr />
+
+The current options are displayed in the text area to the right of the program's name and target sequence type. If the text is changed, the font on the ```Save``` button becomes red. Pressing the ```Save``` button will save the new command options, while pressing the ```Reset``` button will set the options to those shown in Figure 23b. 
 
 ***Important:*** The text displayed in the text area is inserted into the command line as it appears in the text area and undergoes no error checking. Consequently, it is best to test the options on a single, small dataset before attempting to process a larger dataset.
 
@@ -384,37 +471,37 @@ Due to the complexity of running the PartitionFinder analysis, its implementatio
 ***Step 2:*** Creation of the PartitionFinder configuration file,  
 ***Step 3:*** Creation of the PartitionFinder2 command and issuing it.
 
-These steps are undertaken via the two buttons (```Make``` and ```Run```) in the ```PatitionFinder2``` panel (Figure 17).
+These steps are undertaken via the two buttons (```Make``` and ```Run```) in the ```PatitionFinder2``` panel (Figure 24).
 
-![Figure 17](images/figure17.jpg)
+![Figure 24](images/figure17.jpg)
 
-Figure 17
+Figure 24
 
 ### Creating Phylip alignment and boundary data files
 
-Pressing the ```Make``` button opens the ```PartitionFinder``` window (Figure 18). 
+Pressing the ```Make``` button opens the ```PartitionFinder``` window (Figure 25). 
 
-![Figure 18](images/figure18.jpg)
+![Figure 25](images/figure18.jpg)
 
-Figure 18
+Figure 25
 
-To create the Phylip alignment, first select the folder of individual alignments created by Muscle, Prank, ClustalW, MAFFT or GBlocks by pressing the ```Folder``` button in the upper ```Create Phylip file``` panel. Next, select the required file extension of the alignments using the dropdown list to the right of the ```Folder``` button. If all the alignments have a common suffix, such as ***_DNA_MAFFT.fasta.fa*** this can be entered into the dropdown list (Figure 19), and the number of matching files is shown to the right of the dropdown list control.
+To create the Phylip alignment, first select the folder of individual alignments created by Muscle, Prank, ClustalW, MAFFT or GBlocks by pressing the ```Folder``` button in the upper ```Create Phylip file``` panel. Next, select the required file extension of the alignments using the dropdown list to the right of the ```Folder``` button. If all the alignments have a common suffix, such as ***_DNA_MAFFT.fasta.fa*** this can be entered into the dropdown list (Figure 26), and the number of matching files is shown to the right of the dropdown list control.
 
-![Figure 19](images/figure19.jpg)
+![Figure 26](images/figure19.jpg)
 
-Figure 19
+Figure 26
 
-If any files meet the filtering step, the ```Create``` button is enabled, and pressing it causes the alignment (Figure 20) and boundary (Figure 21) files to be made and saved to the folder containing the alignments.  
+If any files meet the filtering step, the ```Create``` button is enabled, and pressing it causes the alignment (Figure 27) and boundary (Figure 28) files to be made and saved to the folder containing the alignments.  
 
-![Figure 20](images/figure20.jpg)
+![Figure 27](images/figure20.jpg)
 
-Figure 20
+Figure 27
 
-![Figure 21](images/figure21.jpg)
+![Figure 28](images/figure21.jpg)
 
-Figure 21 
+Figure 28 
 
-The boundary files contain the data as a series of lines in the PartitionFinder's blocks format for both non-coding (protein and/or intronic sequences) as well as coding. For example, line 1 in Figure 21 represents non-coding sequences, while lines 2 to 4 represent the blocks for codon positions 1, 2 and 3 of the coding sequence.
+The boundary files contain the data as a series of lines in the PartitionFinder's blocks format for both non-coding (protein and/or intronic sequences) as well as coding. For example, line 1 in Figure 28 represents non-coding sequences, while lines 2 to 4 represent the blocks for codon positions 1, 2 and 3 of the coding sequence.
 
 ### Creating a PartitionFinder2 configuration file
 
@@ -432,49 +519,49 @@ It is possible to set the branch lengths for the analysis to be fixed or sequenc
 
 #### Setting the Model of Evolution
 
-The evolution model can be selected from the dropdown list to the right of the ```Model of evolution``` label (Figure 22a). This contains an number of models, with the last entry set to ```List``` (Figures 22b and 22c). If the ```List``` option is selected, the ```DNA``` and ```Amino acid sequence``` radio buttons become active. Toggling these radio buttons changes the labels of the radio buttons below them such that the options match the correct type of sequence. Any combination of these sub-models can be selected. 
+The evolution model can be selected from the dropdown list to the right of the ```Model of evolution``` label (Figure 29a). This contains an number of models, with the last entry set to ```List``` (Figures 29b and 22c). If the ```List``` option is selected, the ```DNA``` and ```Amino acid sequence``` radio buttons become active. Toggling these radio buttons changes the labels of the radio buttons below them such that the options match the correct type of sequence. Any combination of these sub-models can be selected. 
 
-![Figure 22a](images/figure22a.jpg)
+![Figure 29a](images/figure22a.jpg)
 
-Figure 22a
+Figure 29a
 
-![Figure 22b](images/figure22b.jpg)
+![Figure 29b](images/figure22b.jpg)
 
-Figure 22b 
+Figure 29b 
 
-![Figure 22c](images/figure22c.jpg)
+![Figure 29c](images/figure22c.jpg)
 
-Figure 22c 
+Figure 29c 
 
 #### Setting the Schemes option
 
-The dropdown list to the right of the ```Schemes``` label allows the analyses Scheme to be selected (Figure 23).
+The dropdown list to the right of the ```Schemes``` label allows the analyses Scheme to be selected (Figure 30).
 
-![Figure 23](images/figure23.jpg)
+![Figure 30](images/figure23.jpg)
 
-Figure 23
+Figure 30
 
 #### Setting the Model of selection
 
-The dropdown list to the right of the ```Model of selection``` label allows the analysis selection model to be set (Figure 24).
+The dropdown list to the right of the ```Model of selection``` label allows the analysis selection model to be set (Figure 31).
 
-![Figure 24](images/figure24.jpg)
+![Figure 31](images/figure24.jpg)
 
-Figure 24
+Figure 31
 
 #### Setting the partition blocks 
 
-Pressing the lower ```Select``` button prompts you to select the sequence boundary (*.blocks) made with the Phylip alignment file. The individual genes/sequences are then listed in the checklist control (Figure 25a). Selecting an entry in this list indicates that the sequence is coding and so different models for each of the codon positions will be allowed (see figure 25b for entry in the configuration file). 
+Pressing the lower ```Select``` button prompts you to select the sequence boundary (*.blocks) made with the Phylip alignment file. The individual genes/sequences are then listed in the checklist control (Figure 32). Selecting an entry in this list indicates that the sequence is coding and so different models for each of the codon positions will be allowed (see figure 32 for entry in the configuration file). 
 
-![Figure 25a](images/figure25a.jpg)
+![Figure 32](images/figure25a.jpg)
 
-Figure 25a
+Figure 32
 
-![Figure 25b](images/figure25b.jpg)
+![Figure 32](images/figure25b.jpg)
 
-Figure 25b
+Figure 32
 
-In Figure 25a, the CDS-ATP6 and CDS-COX2 entries are selected. As a result, these sequences have three entries, one for each codon position in the resultant configuration file (Figure 25b).
+In Figure 32, the CDS-ATP6 and CDS-COX2 entries are selected. As a result, these sequences have three entries, one for each codon position in the resultant configuration file (Figure 32).
 
 #### Creating the configuration file
 
@@ -482,34 +569,34 @@ Pressing the ```create``` button at the bottom panel prompts you to enter the na
 
 ### Configuring the command line arguments and running PartitionFinder2
 
-Pressing the ```Run``` button will prompt you to select the working folder that contains the aligned sequence file (\*.phy) and the partition_finder.cfg before opening the ```PartitionFinder2 command constructor``` (Figure 26a). It will also check for the presence of the PartitionFinder2.py and prompt you to select it if not found. It will also check if the partition_finder.cfg directs the use of a cluster algorithm (R-Cluster, R-Cluster-F or H-Cluster) and, if found, include the ***--raxml*** option. It will also check for the presence of an old analysis (folder call ***analysis***), and if found give the option to abort the analysis or force PartitionFinder to overwrite the analysis with the ***--force-restart*** parameter.
+Pressing the ```Run``` button will prompt you to select the working folder that contains the aligned sequence file (\*.phy) and the partition_finder.cfg before opening the ```PartitionFinder2 command constructor``` (Figure 33). It will also check for the presence of the PartitionFinder2.py and prompt you to select it if not found. It will also check if the partition_finder.cfg directs the use of a cluster algorithm (R-Cluster, R-Cluster-F or H-Cluster) and, if found, include the ***--raxml*** option. It will also check for the presence of an old analysis (folder call ***analysis***), and if found give the option to abort the analysis or force PartitionFinder to overwrite the analysis with the ***--force-restart*** parameter.
 
 ```GeneMatrix``` will scan for conda environments in the default locations as well as locations suggested by the user and global PATH variable. If it finds any environments, they will be listed in the dropdown list to the right of the ```Anaconda3``` radio button. If only one environment was found, it will be selected in the list. If more than one was present, the appropriate one should be selected. If the environment was not found, it can manually be entered into the list's text area.
 
-If the ```Anaconda3``` radio button option is checked, the command shown in the lower text area will contain the command line instructions for activating the environment (Figure 26a). If one of the other options is selected, the command will display the required command (Figure 26b).
+If the ```Anaconda3``` radio button option is checked, the command shown in the lower text area will contain the command line instructions for activating the environment (Figure 33a). If one of the other options is selected, the command will display the required command (Figure 33b).
 
-![Figure 26a](images/figure26a.jpg)
+![Figure 33a](images/figure26a.jpg)
 
-Figure 26a
+Figure 33a
 
-![Figure 26b](images/figure26b.jpg)
+![Figure 33b](images/figure26b.jpg)
 
-Figure 26b
+Figure 33b
 
-While most of the options are set in the partition_finder.cfg file, there are a number of parameters that can be set on the command line. These can be added by selecting them in the lower dropdown list control and pressing the ```Select``` button (Figures 27a and 27b). To remove them, repeat the process. Some of the options require a numeric value to be included (--processors N, --rcluster-max N, --rcluster-percent N and --weights “Wrate, Wbase, Wmodel, Walpha”). To include the numeric values, select all the command line options and then manually change the 'N' character in text in the lower area to the desired value (Figure 27c). Similarly, for the --weights “Wrate, Wbase, Wmodel, Walpha ” option, change the Wrate, Wbase, Wmodel, and Walpha text, but retain the speech marks. If you modify the text and then add another parameter, all the changes will be lost.
+While most of the options are set in the partition_finder.cfg file, there are a number of parameters that can be set on the command line. These can be added by selecting them in the lower dropdown list control and pressing the ```Select``` button (Figures 34a and 34b). To remove them, repeat the process. Some of the options require a numeric value to be included (--processors N, --rcluster-max N, --rcluster-percent N and --weights “Wrate, Wbase, Wmodel, Walpha”). To include the numeric values, select all the command line options and then manually change the 'N' character in text in the lower area to the desired value (Figure 34c). Similarly, for the --weights “Wrate, Wbase, Wmodel, Walpha ” option, change the Wrate, Wbase, Wmodel, and Walpha text, but retain the speech marks. If you modify the text and then add another parameter, all the changes will be lost.
 
 
-![Figure 27a](images/figure27a.jpg)
+![Figure 34a](images/figure27a.jpg)
 
-Figure 27a
+Figure 34a
 
-![Figure 27b](images/figure27b.jpg)
+![Figure 34b](images/figure27b.jpg)
 
-Figure 27b
+Figure 34b
 
-![Figure 27c](images/figure27c.jpg)
+![Figure 34c](images/figure27c.jpg)
 
-Figure 27c
+Figure 347c
 
 #### Saving the script
 
