@@ -409,7 +409,7 @@ namespace GeneMatrix
                         int count = data[accession][featureType].Count;
                         try
                         {
-                            feature f = new feature(lines, featureStart, index, featureType, organism, sequence, count);
+                            feature f = new feature(lines, featureStart, index, featureType, organism, sequence, count, chkExtend.Checked);
                             if (data[accession][featureType].ContainsKey(f.WorkingName) == false)
                             { data[accession][featureType].Add(f.WorkingName, f); }
                         }

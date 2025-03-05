@@ -36,15 +36,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnGroup = new System.Windows.Forms.Button();
-            this.btnBasicData = new System.Windows.Forms.Button();
-            this.btnCompare = new System.Windows.Forms.Button();
-            this.btnImportSteps = new System.Windows.Forms.Button();
-            this.btnSaveSteps = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnCompare = new System.Windows.Forms.Button();
+            this.btnGroup = new System.Windows.Forms.Button();
             this.tv1 = new System.Windows.Forms.TreeView();
+            this.btnBasicData = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnImportSteps = new System.Windows.Forms.Button();
             this.tv2 = new System.Windows.Forms.TreeView();
+            this.btnSaveSteps = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkIgnoreEmptySequence = new System.Windows.Forms.CheckBox();
             this.rboBoth = new System.Windows.Forms.RadioButton();
@@ -72,7 +73,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnMakePartitionFinderFiles = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.chkExtend = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -88,6 +89,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.chkExtend);
             this.groupBox1.Controls.Add(this.lblDataSource);
             this.groupBox1.Controls.Add(this.chkFolder);
             this.groupBox1.Controls.Add(this.btnImport);
@@ -105,7 +107,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDataSource.Location = new System.Drawing.Point(6, 64);
             this.lblDataSource.Name = "lblDataSource";
-            this.lblDataSource.Size = new System.Drawing.Size(529, 18);
+            this.lblDataSource.Size = new System.Drawing.Size(431, 18);
             this.lblDataSource.TabIndex = 3;
             this.lblDataSource.Text = "Not set";
             // 
@@ -166,75 +168,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Combine features with different names";
             // 
-            // btnGroup
-            // 
-            this.btnGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGroup.Location = new System.Drawing.Point(81, 208);
-            this.btnGroup.Name = "btnGroup";
-            this.btnGroup.Size = new System.Drawing.Size(75, 23);
-            this.btnGroup.TabIndex = 10;
-            this.btnGroup.Text = "Groupings";
-            this.btnGroup.UseVisualStyleBackColor = true;
-            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
-            // 
-            // btnBasicData
-            // 
-            this.btnBasicData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBasicData.Location = new System.Drawing.Point(0, 208);
-            this.btnBasicData.Name = "btnBasicData";
-            this.btnBasicData.Size = new System.Drawing.Size(75, 23);
-            this.btnBasicData.TabIndex = 9;
-            this.btnBasicData.Text = "Sets";
-            this.btnBasicData.UseVisualStyleBackColor = true;
-            this.btnBasicData.Click += new System.EventHandler(this.btnBasicData_Click);
-            // 
-            // btnCompare
-            // 
-            this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCompare.Location = new System.Drawing.Point(162, 208);
-            this.btnCompare.Name = "btnCompare";
-            this.btnCompare.Size = new System.Drawing.Size(75, 23);
-            this.btnCompare.TabIndex = 8;
-            this.btnCompare.Text = "Homology";
-            this.btnCompare.UseVisualStyleBackColor = true;
-            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
-            // 
-            // btnImportSteps
-            // 
-            this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImportSteps.Enabled = false;
-            this.btnImportSteps.Location = new System.Drawing.Point(84, 208);
-            this.btnImportSteps.Name = "btnImportSteps";
-            this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
-            this.btnImportSteps.TabIndex = 7;
-            this.btnImportSteps.Text = "Import steps";
-            this.btnImportSteps.UseVisualStyleBackColor = true;
-            this.btnImportSteps.Click += new System.EventHandler(this.btnImportSteps_Click);
-            // 
-            // btnSaveSteps
-            // 
-            this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveSteps.Enabled = false;
-            this.btnSaveSteps.Location = new System.Drawing.Point(3, 208);
-            this.btnSaveSteps.Name = "btnSaveSteps";
-            this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveSteps.TabIndex = 6;
-            this.btnSaveSteps.Text = "Save steps";
-            this.btnSaveSteps.UseVisualStyleBackColor = true;
-            this.btnSaveSteps.Click += new System.EventHandler(this.btnSaveSteps_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(263, 208);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
-            this.btnReset.TabIndex = 5;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -261,6 +194,39 @@
             this.splitContainer1.SplitterDistance = 323;
             this.splitContainer1.TabIndex = 0;
             // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.Location = new System.Drawing.Point(243, 208);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 11;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnCompare
+            // 
+            this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCompare.Location = new System.Drawing.Point(162, 208);
+            this.btnCompare.Name = "btnCompare";
+            this.btnCompare.Size = new System.Drawing.Size(75, 23);
+            this.btnCompare.TabIndex = 8;
+            this.btnCompare.Text = "Homology";
+            this.btnCompare.UseVisualStyleBackColor = true;
+            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
+            // 
+            // btnGroup
+            // 
+            this.btnGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGroup.Location = new System.Drawing.Point(81, 208);
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnGroup.TabIndex = 10;
+            this.btnGroup.Text = "Groupings";
+            this.btnGroup.UseVisualStyleBackColor = true;
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
             // tv1
             // 
             this.tv1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -271,6 +237,41 @@
             this.tv1.Size = new System.Drawing.Size(322, 202);
             this.tv1.TabIndex = 3;
             this.tv1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv1_NodeMouseClick);
+            // 
+            // btnBasicData
+            // 
+            this.btnBasicData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBasicData.Location = new System.Drawing.Point(0, 208);
+            this.btnBasicData.Name = "btnBasicData";
+            this.btnBasicData.Size = new System.Drawing.Size(75, 23);
+            this.btnBasicData.TabIndex = 9;
+            this.btnBasicData.Text = "Sets";
+            this.btnBasicData.UseVisualStyleBackColor = true;
+            this.btnBasicData.Click += new System.EventHandler(this.btnBasicData_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReset.Enabled = false;
+            this.btnReset.Location = new System.Drawing.Point(263, 208);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 5;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnImportSteps
+            // 
+            this.btnImportSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnImportSteps.Enabled = false;
+            this.btnImportSteps.Location = new System.Drawing.Point(84, 208);
+            this.btnImportSteps.Name = "btnImportSteps";
+            this.btnImportSteps.Size = new System.Drawing.Size(75, 23);
+            this.btnImportSteps.TabIndex = 7;
+            this.btnImportSteps.Text = "Import steps";
+            this.btnImportSteps.UseVisualStyleBackColor = true;
+            this.btnImportSteps.Click += new System.EventHandler(this.btnImportSteps_Click);
             // 
             // tv2
             // 
@@ -284,6 +285,18 @@
             this.tv2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv2_AfterSelect);
             this.tv2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tv2_NodeMouseClick);
             this.tv2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tv2_MouseDown);
+            // 
+            // btnSaveSteps
+            // 
+            this.btnSaveSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSaveSteps.Enabled = false;
+            this.btnSaveSteps.Location = new System.Drawing.Point(3, 208);
+            this.btnSaveSteps.Name = "btnSaveSteps";
+            this.btnSaveSteps.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveSteps.TabIndex = 6;
+            this.btnSaveSteps.Text = "Save steps";
+            this.btnSaveSteps.UseVisualStyleBackColor = true;
+            this.btnSaveSteps.Click += new System.EventHandler(this.btnSaveSteps_Click);
             // 
             // groupBox3
             // 
@@ -588,16 +601,18 @@
             this.btnMakePartitionFinderFiles.UseVisualStyleBackColor = true;
             this.btnMakePartitionFinderFiles.Click += new System.EventHandler(this.btnMakePartitionFinderFiles_Click);
             // 
-            // btnRemove
+            // chkExtend
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.Location = new System.Drawing.Point(243, 208);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 11;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.chkExtend.AutoSize = true;
+            this.chkExtend.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkExtend.Checked = true;
+            this.chkExtend.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkExtend.Location = new System.Drawing.Point(443, 63);
+            this.chkExtend.Name = "chkExtend";
+            this.chkExtend.Size = new System.Drawing.Size(84, 17);
+            this.chkExtend.TabIndex = 4;
+            this.chkExtend.Text = "Extend CDS";
+            this.chkExtend.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -679,6 +694,7 @@
         private System.Windows.Forms.Button btnBasicData;
         private System.Windows.Forms.Button btnGroup;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.CheckBox chkExtend;
     }
 }
 

@@ -81,7 +81,7 @@ Figure 1
 
 The  ***Import data*** section consists of just two controls that allow the selection of the data files. To import data, press the ```Import``` button in the lower right of the panel (blue box, Figure 2a). If the ```Folder``` tick box is unchecked, pressing the ```Import``` button will display a file selection dialogue box that will accept files with the *.gb or *.genbank file extension or the *.txt extension for files containing a list of accession IDs. If checked, a folder selection dialogue box will be shown. When importing data from a folder, ```GeneMatrix``` will process any file in the folder with *.gb, *.genbank *.fa or *.fasta file extension. When processing a GenBank file it may contain data on one or more GenBank entries (i.e., mitochondrial or viral genomes); a FASTA file should only contain sequences from a single species/genome.  
 
-If a text file of GenBank accession IDs is imported, ```Genematrix``` expects one ID per line and will download the file from the NCBI site. Due to the NCBI's fair usage policy, you cannot request more than 3 sequences per second; consequently, ```GeneMatrix``` takes at least 350 milliseconds to process each sequence. When downloading each sequence, ```Genematrix``` will displace its accession ID in the title bar.
+If a text file of GenBank accession IDs is imported, ```GeneMatrix``` expects one ID per line and will download the file from the NCBI site. Due to the NCBI's fair usage policy, you cannot request more than 3 sequences per second; consequently, ```GeneMatrix``` takes at least 350 milliseconds to process each sequence. When downloading each sequence, ```GeneMatrix``` will displace its accession ID in the title bar.
 
 <hr />
 
@@ -90,6 +90,10 @@ If a text file of GenBank accession IDs is imported, ```Genematrix``` expects on
 Figure 2: Data is imported by pressing the ```Import``` button.
 
 <hr />
+
+### Extending CDS sequences to include start and stop codons
+
+While the GenBank file format suggests the coordinates start at the first and last base of a ___CDS___ sequence, some entries refer to the first position of the start and stop codons, so they lack the last two nucleotides. If the ```Extend CDS``` option is checked (red box, Figure 2), ```GeneMatrix``` will check that the ___CDS___ sequences begin with a start codon (ATG, GTG or TTG) and end with a stop codon (TAG, TAA, TGA, AGA or AGG). If either is missing, ```GeneMatrix``` will extend the sequences by 1, 2 or 3 nucleotides if it creates the appropriate codon. 
 
 ***Note:*** When importing a single file, it is expected that the file contains multiple entries, while when importing a folder of files, each file can contain one or more sequences. If the same accession number is present twice, ```GeneMatrix``` will warn you and give you the option to abort the process, allowing you to remove the duplicated sequences or to continue and ignore the second entry.
 

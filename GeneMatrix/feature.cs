@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,12 +46,10 @@ namespace GeneMatrix
             }
         }
 
-        public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count)
+        public feature(List<string> lines, int index, int endIndex, string FeatureType, string Organism, string sequence, int count, bool extend)
         {
             organism = Organism;
-            featureType = FeatureType;           
-            
-            setCoordinates(lines, index, sequence);
+            featureType = FeatureType;                               
 
             for (int lineIndex = index + 1; lineIndex < endIndex; lineIndex++)
             {
@@ -76,6 +75,7 @@ namespace GeneMatrix
             { workingName = protein_id; }
             else { workingName = count.ToString(); }
 
+            setCoordinates(lines, index, sequence, extend);
         }
 
         private string getName(string line)
@@ -113,7 +113,7 @@ namespace GeneMatrix
 
         }
 
-        private void setCoordinates(List<string> lines, int startIndex, string sequence)
+        private void setCoordinates(List<string> lines, int startIndex, string sequence, bool extend)
         {
             string line = lines[startIndex];
             int index = startIndex;
@@ -144,23 +144,86 @@ namespace GeneMatrix
                 string[] items = data.Split(',');
                 int startPoint = 0;
                 int endPoint = 0;
-                foreach (string item in items) 
+                foreach (string item in items)
                 {
                     string[] bite = item.Split('.');
-                    int from = Convert.ToInt32(bite[0]) -1;
+                    int from = Convert.ToInt32(bite[0]) - 1;
                     int too = Convert.ToInt32(bite[2]);
                     endPoint = too;
                     if (startPoint == 0) { startPoint = from; }
                     string bitOfOrf = sequence.Substring(from, too - from);
                     DNA += bitOfOrf.ToLower();
                 }
+                string five = "  ";
+                try
+                {
+                    if (startPoint - 2 > 0)
+                    { five = sequence.Substring(startPoint - 2, 2); }
+                }
+                catch { }
+                string three = "  ";
+                try 
+                { 
+                if (endPoint + 3 < sequence.Length)
+                { three = sequence.Substring(endPoint, 2); }
+                }
+                catch { }
 
                 if (lines[startIndex].ToLower().Contains("complement") == true)
-                { DNA = reverseComplement(DNA); }
-                
+                { 
+                    DNA = reverseComplement(DNA);
+                    if (featureType == "CDS")
+                    {
+                        string t = reverseComplement(five);
+                        five = reverseComplement(three);
+                        three = t;
+                    }
+                }
+
+                if (featureType == "CDS" && extend == true)
+                { extended(five, three); }               
                
             }
             catch { throw new Exception("Coordinate error for " + name + " feature"); }
+        }
+
+        private void extended(string five, string three)
+        {
+            
+            five.PadLeft(2, ' ');
+            if (DNA.StartsWith("atg") == false && DNA.StartsWith("gtg") == false && DNA.StartsWith("ttg") == false)
+            {
+                string test = five[1] + DNA;
+                if (test.StartsWith("atg") == true || test.StartsWith("gtg") == true || test.StartsWith("ttg") == true)
+                { DNA = test; }
+                else
+                {
+                    test = five[0] + test;
+                    if (test.StartsWith("atg") == true || test.StartsWith("gtg") == true || test.StartsWith("ttg") == true)
+                    { DNA = test;  }
+                }
+            }
+            
+            three = three.PadRight(2, ' ');
+            string end = DNA.Substring(DNA.Length - 3, 3);
+            if (end.StartsWith("tag") == false && end.StartsWith("taa") == false && end.StartsWith("tga") == false && end.StartsWith("aga") == false && end.StartsWith("agg") == false)
+            {
+                if (three == "tag" || three == "taa" || three == "tga" || three == "aga" || three == "agg")
+                { DNA += three;  }
+                else
+                {
+                    end = end.Substring(1, 2) + three[0];
+                    if (end.StartsWith("tag") == true || end.StartsWith("taa") == true || end.StartsWith("tga") == true || end.StartsWith("aga") == true || end.StartsWith("agg") == true)
+                    { DNA += three[0]; }
+                    else
+                    {
+                        end = end.Substring(1, 2) + three[1];
+                        if (end.StartsWith("tag") == true || end.StartsWith("taa") == true || end.StartsWith("tga") == true || end.StartsWith("aga") == true || end.StartsWith("agg") == true)
+                        { DNA += three; }
+                    }
+                }
+            }
+          
         }
 
         private string reverseComplement(string sequence)
