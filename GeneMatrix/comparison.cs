@@ -60,36 +60,36 @@ namespace GeneMatrix
                     {
                         foreach (string keySecond in sequences.Keys)
                         {
-                        if (scores[two, one] != int.MinValue)
-                        { line += "\t" + scores[two, one].ToString("N0"); }
-                        else if (keyFirst == keySecond)
-                        {
-                            line += "\t" + maximum.ToString("N0");
-                            scores[one, two] = maximum;
-                        }
-                        else
-                        {
-                            int score = fillMatrixNW(sequences[keyFirst], sequences[keySecond]);
+                            if (scores[two, one] != int.MinValue)
+                            { line += "\t" + scores[two, one].ToString("N0"); }
+                            else if (keyFirst == keySecond)
+                            {
+                                line += "\t" + maximum.ToString("N0");
+                                scores[one, two] = maximum;
+                            }
+                            else
+                            {
+                                int score = fillMatrixNW(sequences[keyFirst], sequences[keySecond]);
                                 scores[two, one] = score / 3;
                                 line += "\t" + scores[two, one].ToString("N0");
                                 scores[one, two] = scores[two, one];
-                    }
-                    two++;
+                            }
+                            two++;
                         }
-                    setAlignment.Add(set, line.Substring(line.IndexOf("\t") + 1));
-                }
-                    else
-                {
-                    line += "\t" + setAlignment[set];
-                    string[] values = setAlignment[set].Split('\t');
-                    for (int second = 0; second < scores.GetUpperBound(0) + 1; second++)
-                    {
-                        int value = int.Parse(values[second].Replace(",", ""));
-                        scores[one, second] = value;
-                        scores[second, one] = value;
+                        setAlignment.Add(set, line.Substring(line.IndexOf("\t") + 1));
                     }
-                }
-                results.Add(line);
+                    else
+                    {
+                        line += "\t" + setAlignment[set];
+                        string[] values = setAlignment[set].Split('\t');
+                        for (int second = 0; second < scores.GetUpperBound(0) + 1; second++)
+                        {
+                            int value = int.Parse(values[second].Replace(",", ""));
+                            scores[one, second] = value;
+                            scores[second, one] = value;
+                        }
+                    }
+                    results.Add(line);
                     sw.Write(line + "\n");
                     sw.Flush();
                     one++;
@@ -97,32 +97,35 @@ namespace GeneMatrix
                 }
             }
             finally { if (sw != null) { sw.Close(); } }
-            Dictionary<string, List<string>> duplicates =new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> duplicates = new Dictionary<string, List<string>>();
             Dictionary<string, List<string>> minimumSetDuplicates = compareResults(results, ref duplicates);
             makeMinimumComparisonSet(minimumSetDuplicates, scores, fileName, duplicates);
+
+
+            AlikeResult(scores, results, fileName);
         }
 
         private void makeMinimumComparisonSet(Dictionary<string, List<string>> minimumSetDuplicates, int[,] scores, string fileName, Dictionary<string, List<string>> duplicates)
         {
-            Dictionary<string,int> nameIndex = new Dictionary<string,int>();
+            Dictionary<string, int> nameIndex = new Dictionary<string, int>();
             int index = 0;
             foreach (string key in sequences.Keys)
             {
                 nameIndex.Add(key, index);
                 index++;
-            }          
+            }
 
 
             foreach (List<string> name in minimumSetDuplicates.Values)
             {
-                foreach(string key in name)
+                foreach (string key in name)
                 {
                     int bracket = key.IndexOf("(");
                     string thisKey = key.Substring(0, bracket - 1);
-                    if (nameIndex.ContainsKey(thisKey)==true)
+                    if (nameIndex.ContainsKey(thisKey) == true)
                     { nameIndex.Remove(thisKey); }
                 }
-            }           
+            }
 
             System.IO.StreamWriter sw = null;
 
@@ -197,16 +200,16 @@ namespace GeneMatrix
                     counter++;
                 }
                 Array.Sort(sizes);
-                int median = GetMedian(sizes);            
-                
+                int median = GetMedian(sizes);
+
 
                 sw.Write("\n\nSize range\nMedian length\t" + median.ToString("N1") +
                    "\tSize range\t" + sizes[0].ToString() + "\t" + sizes[sizes.GetUpperBound(0)] + "\n");
 
                 sw.Write("Sequence\tLength\tDifference from median length\tPercent of median length\n");
-                foreach(string key in sequences.Keys)
-                {                   
-                    sw.Write(key +"\t" + sequences[key].Length.ToString() +
+                foreach (string key in sequences.Keys)
+                {
+                    sw.Write(key + "\t" + sequences[key].Length.ToString() +
                         "\t" + (sequences[key].Length - median).ToString("N0") +
                         "\t" + ((double)(sequences[key].Length * 100) / median).ToString("N2") + "\n");
                 }
@@ -252,7 +255,7 @@ namespace GeneMatrix
         private double getMAD(int[] sizes, int median)
         {
             double[] dSizes = new double[sizes.Length];
-            for (int i = 0; i < sizes.Length;i++)
+            for (int i = 0; i < sizes.Length; i++)
             {
                 dSizes[i] = (double)sizes[i];
             }
@@ -319,8 +322,8 @@ namespace GeneMatrix
                     {
                         string name = line.Substring(0, firstTab);
                         sw.Write(line + "\t");
-                        if (duplicates.ContainsKey(name) == true && duplicates[name].Count >1)
-                        { sw.Write(string.Join(", ",duplicates[name]) + "\n"); }
+                        if (duplicates.ContainsKey(name) == true && duplicates[name].Count > 1)
+                        { sw.Write(string.Join(", ", duplicates[name]) + "\n"); }
                         else { sw.Write("Unique\n"); }
                     }
                 }
@@ -329,7 +332,7 @@ namespace GeneMatrix
 
             return minimumSetDuplicates;
         }
-               
+
         private int[,] setScoreArray(int dimension)
         {
             int[,] scores = new int[dimension, dimension];
@@ -367,8 +370,8 @@ namespace GeneMatrix
 
         private int fillMatrixNW(string seq1, string seq2)
         {
-            int[,] matrix = makeMatrixNW(seq2,seq1);
-            
+            int[,] matrix = makeMatrixNW(seq2, seq1);
+
             int thisScore = 0;
             for (int seq1I = 1; seq1I < matrix.GetUpperBound(0) + 1; seq1I++)
             {
@@ -397,11 +400,107 @@ namespace GeneMatrix
                     matrix[seq1I, seq2I] = thisScore;
                 }
             }
-           
+
             return matrix[matrix.GetUpperBound(0), matrix.GetUpperBound(1)];
         }
 
+        private void AlikeResult(int[,] matrix, List<String> results, string filename)
+        {
+            int bestIndex = indexOfMostALike(matrix);
+            string name = results[bestIndex].Substring(0, results[bestIndex].IndexOf(" ("));
 
+            int medianBestIndexScore = medianValueFromMostALikeSequence(matrix, bestIndex);
+            double std = getSTDFromMedian(matrix, medianBestIndexScore);
 
+            int nameLength = 0;
+            foreach (string data in results)
+            {
+                int length = data.Substring(0, data.IndexOf(" (")).Length;
+                if (nameLength < length) { nameLength = length; }
+            }
+            nameLength += 2;
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(new string(' ', nameLength) + name + "\n");
+
+            for (int index = 0; index < matrix.GetUpperBound(0) + 1; index++)
+            {
+                int value = matrix[index, bestIndex];
+                int difference = (value - medianBestIndexScore);
+                double diffSTDMedian = difference / std;
+                sb.Append(results[index].Substring(0, results[index].IndexOf(" (")).PadRight(nameLength) + diffSTDMedian.ToString("N2") + "\n");
+            }
+
+            System.IO.StreamWriter sw = null;
+            try
+            {
+                sw = new System.IO.StreamWriter(filename, true);
+                sw.Write("\n\n\nSimilarity to typical sequence: " + name + "\n");
+                sw.Write("Median alignment score of typical sequence:\t" + medianBestIndexScore.ToString() + "\n");
+                sw.Write("Deviation from median score of typical sequence:\t" + std.ToString("N2") + "\n");
+                sw.Write(sb.ToString());
+            }
+            finally { if (sw != null) sw.Close(); }
+
+        }
+
+        private int indexOfMostALike(int[,] matrix)
+        {
+            int best = int.MinValue;
+            int bestIndex = -1;
+
+            for (int outer = 0; outer <= matrix.GetUpperBound(0); outer++)
+            {
+                int runningCount = 0;
+                for (int inner = 0; inner <= matrix.GetUpperBound(1); inner++)
+                {
+                    if (inner != outer)
+                    { runningCount += matrix[outer, inner]; }
+                }
+                if (best < runningCount)
+                {
+                    best = runningCount;
+                    bestIndex = outer;
+                }
+            }
+            return bestIndex;
+        }
+
+        private int medianValueFromMostALikeSequence(int[,] matrix, int best)
+        {
+            int[] values = new int[matrix.GetUpperBound(0) + 1];
+            int counter = 0;
+            for (int inner = 0; inner <= matrix.GetUpperBound(0); inner++)
+            {
+                if (inner != best)
+                {
+                    values[counter++] = matrix[best, inner];
+                }
+            }
+
+            Array.Sort(values);
+            int count = values.Length;
+            if (count % 2 == 0)
+            { return (int)((values[count / 2 - 1] + values[count / 2]) / 2.0); }
+            else
+            { return values[count / 2]; }
+
+        }
+
+        private double getSTDFromMedian(int[,] matrix, int median)
+        {
+            int counter = 0;
+            double sumOfSquares = 0;
+            for (int outer = 0; outer <= matrix.GetUpperBound(0); outer++)
+            {                
+                for (int inner = outer + 1; inner <= matrix.GetUpperBound(1); inner++)
+                {
+                    sumOfSquares += Math.Pow(matrix[outer,inner] - median, 2);
+                    counter++;
+                }
+            }
+            double standardDeviation = Math.Sqrt(sumOfSquares / counter);
+            return standardDeviation; 
+        }
     }
 }
