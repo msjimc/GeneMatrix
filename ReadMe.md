@@ -27,4 +27,5 @@ The prebuilt program can be downloaded [here](Program/README.md).
 
 ## Running on a Linux computer
 
-GeneMatrix can run on Linux with the help of Wine as described [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
+GeneMatrix can run on Linux with the help of Wine as described [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux).   
+<b>Note:</b> These descriptions are limited to computers with an Intel/AMD CPU. While Wine can be installed on a PC with a ARM CPU, there are currently difficulties running a program that also requires the .NET installed. 
