@@ -1,6 +1,6 @@
 # GeneMatrix tutorial
 
-This tutorial is a streamed down version of the [user guide](ReadMe.md), which is complete description of GeneMatrix and so is not necessarily easy to follow. The tutorial, therefore omits certain details and is write for ease of use rather than completeness. If you run in to issues when analysing your data you may want to check the guide for help.
+This tutorial is a slimmed down version of the [user guide](ReadMe.md), which is complete description of GeneMatrix and so is not necessarily easy to follow. The tutorial, therefore omits certain details and is write for ease of use rather than completeness. If you run in to issues when analysing your data you may want to check the guide for help.
 
 ## Starting point
 Download the program (GeneMatrix64.exe) from the [Program folder](../Program/) and the Chelonoidis_mtgenomes.gb genbank data file from the [Exampledata](../ExampleData/) folder.   
@@ -75,7 +75,7 @@ Figure 5d: Click on the _CYTB_ node in the right-hand tree view to move the _cyt
 
 ## Checking for duplicated sequences or sequence fragments
 
-Once you have selected some sequences, you can 
+Once you have selected some sequences, you can check for duplicated sequences by pressing the __Groupings__ button below the left-hand tree view. This will prompt you to select a folder to save the results to. Once a folder has been selected, GeneMatrix will compare the sequences in each node (i.e., the _ATP6_, _ATP8_, _COX1_, _COX2_, COX3 and _CYTB_) checking for exact matches or sequence fragments and saves the results to a series of text files named after each node's name. A set of results files can be found in the [ExampleData > Comparisons](../ExampleData/Comparisons/) folder.
 
 
 
