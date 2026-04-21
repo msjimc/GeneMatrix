@@ -742,8 +742,9 @@ namespace GeneMatrix
                     foreach (TreeNode nnN in nN.Nodes)
                     { names.Add(nnN.Text); }
 
-                    foreach (string name in sequenceName)
+                    foreach (string name in data.Keys)
                     {
+                        
                         string featureName = "NoIn";
                         foreach (string testName in names)
                         {
@@ -832,7 +833,7 @@ namespace GeneMatrix
                     foreach (TreeNode nnN in nN.Nodes)
                     { names.Add(nnN.Text); }
 
-                    foreach (string name in sequenceName)
+                    foreach (string name in data.Keys)
                     {
                         string species = "";
                         string DNA = "";
@@ -2536,13 +2537,13 @@ namespace GeneMatrix
 
             System.IO.StreamReader sf = null;
 
-            try 
-            { 
-            sf =new System.IO.StreamReader(file);
+            try
+            {
+                sf = new System.IO.StreamReader(file);
                 string line = "";
-                while(sf.Peek() > 0)
+                while (sf.Peek() > 0)
                 {
-                    line = sf.ReadLine().Replace(",","").Trim();
+                    line = sf.ReadLine().Replace(",", "").Trim();
                     if (data.ContainsKey(line) == true)
                     {
                         data.Remove(line);
@@ -2550,7 +2551,7 @@ namespace GeneMatrix
                 }
                 populateLists();
             }
-            catch(Exception ex) { MessageBox.Show("Could not process file: " + ex.Message, "Error"); }
+            catch (Exception ex) { MessageBox.Show("Could not process file: " + ex.Message, "Error"); }
             finally { if (sf != null) { sf.Close(); }; }
 
         }

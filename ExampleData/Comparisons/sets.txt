@@ -1,71 +1,71 @@
-Accession ID, Species                  atp6   atp8   cox1   cox2   cox3   cytb   nd1   nd2   nd3   nd4   nd5   nd6   
-LT599487.1, Centrochelys sulcata       1      1      1      1      1      1      1     1     1     1     1     1     groupID:    1
-LT599485.1, Chelonoidis denticulatus   10     8      10     10     11     11     11    13    9     10    12    12    groupID:    2
-MT017703.1, Chelonoidis denticulatus   11     8      11     11     11     12     12    13    10    11    13    12    groupID:    3
-MG912791.1, Chelonoidis duncanensis    12     4      13     13     13     14     14    15    4     13    15*   14    groupID:    4
-MG912792.1, Chelonoidis duncanensis    12     4      13     13     13     14     14    15    4     13    15*   14    groupID:    4
-MT017697.1, Chelonoidis duncanensis    12     4      13     13     14     14     14    16    4     15    16    14    groupID:    5
-NC_051477.1, Chelonoidis duncanensis   12     4      13     13     14     14     14    16    4     15    16    14    groupID:    5
-MG912820.1, Chelonoidis duncanensis    13     4      13     13     14     14     14    15    4     14    15*   15    groupID:    6
-MG912828.1, Chelonoidis duncanensis    13     4      13     13     14     14     15    15    4     14    15*   15    groupID:    7
-MT017699.1, Chelonoidis vicina         14     11     14     23     23     27     16    29    2     28    32    21    groupID:    8
-NC_051479.1, Chelonoidis vicina        14     11     14     23     23     27     16    29    2     28    32    21    groupID:    8
-MT017700.1, Chelonoidis guntheri       14     4      14     14     15*    15     16    17    2     16    17    16    groupID:    9
-NC_051480.1, Chelonoidis guntheri      14     4      14     14     15*    15     16    17    2     16    17    16    groupID:    9
-OM719690.1, Chelonoidis vicina         14     4      14     14     15*    29     16    30    2     29    17    22    groupID:   10
-OM719691.1, Chelonoidis vicina         14     4      14     14     15*    29     16    30    2     29    17    22    groupID:   10
-OQ581203.1, Chelonoidis vicina         14     4      14     14     24     29     16    30    2     29    17    22    groupID:   11
-OM719674.1, Chelonoidis guntheri       14     4      14     15     16     16     17    18    2     17    18    16    groupID:   12
-OM719675.1, Chelonoidis guntheri       14     4      14     15     16     16     17    18    2     17    18    16    groupID:   12
-MT017702.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    groupID:   13
-NC_051482.1, Chelonoidis microphyes    14     4      14     15     16     16     17    18    2     19    18    16    groupID:   13
-OM719708.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    groupID:   13
-OM719709.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    groupID:   13
-OM719689.1, Chelonoidis vicina         14     4      14     23     15*    28     24    30    2     28    33    16    groupID:   14
-OM719705.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    18    2     26    30    16    groupID:   15
-OM719706.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    18    2     26    30    16    groupID:   15
-MT017701.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    28    2     26    29    16    groupID:   16
-NC_051481.1, Chelonoidis vandenburghi  14     4      21     16     16     16     17    28    2     26    29    16    groupID:   16
-OM719676.1, Chelonoidis guntheri       14     9      14     16     17     17     16    19    2     17    19    16    groupID:   17
-JN999704.2, Chelonoidis niger          15*    4      16     18     18     19     19    21    13    20    21    18    groupID:   18
-MT017691.1, Chelonoidis niger          16     4      17     19     19     20*    20    22    14    21    22    16    groupID:   19
-OM719687.1, Chelonoidis niger          17     4      17     20     20     21     21    23    15    22    23    19    groupID:   20
-OM719686.1, Chelonoidis phantasticus   18     4      17     19     19     21     21    24    14    21    24    16    groupID:   21
-OM719688.1, Chelonoidis phantasticus   19     4      18     21     21     22     22    25    16    23    25    16    groupID:   22
-MT017696.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    groupID:   23
-NC_051476.1, Chelonoidis hoodensis     2      2      15     17     9      18     18    20    12    18    20    17    groupID:   23
-OM719683.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    groupID:   23
-OM719684.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    groupID:   23
-OM719685.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    groupID:   23
-MT017690.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     groupID:   24
-NC_051472.1, Chelonoidis abingdonii    2      2      2      2      2      2      2     2     2     2     2     2     groupID:   24
-OM719673.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     groupID:   24
-OM719698.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     groupID:   24
-MT017698.1, Chelonoidis porteri        20     10     19     22     22     23     23    26    17    24    26    20    groupID:   25
-NC_051478.1, Chelonoidis porteri       20     10     19     22     22     23     23    26    17    24    26    20    groupID:   25
-OM719682.1, Chelonoidis porteri        20     10     19     22     22     23     23    27    17    24    28    16    groupID:   26
-OM719681.1, Chelonoidis porteri        20     10     20     22     22     25     23    27    2     24    28    16    groupID:   27
-OM719680.1, Chelonoidis porteri        21     4      19     18     18     24     19    21    18    25    27    18    groupID:   28
-LT599486.1, Chelonoidis vicina         22     4      14     16     16     26*    16    18    2     27    31    16    groupID:   29
-NC_007694.1, Stigmochelys pardalis     23     12     22     24     25     30     25    31    19    30    34    23    groupID:   30
-LT599482.1, Chelonoidis alburyorum     3      3      3      3      3      3      3     3     3     3     3     3     groupID:   31
-MT017693.1, Chelonoidis becki          4      4      4      4      4      4      4     4     4     4     4     4     groupID:   32
-NC_051473.1, Chelonoidis becki         4      4      4      4      4      4      4     4     4     4     4     4     groupID:   32
-OM719692.1, Chelonoidis becki          4      4      4      4      4      4      4     5     4     4     5     5     groupID:   33
-MT017694.1, Chelonoidis darwini        4      4      4      5      4      4      10    5     4     4     5     5     groupID:   34
-NC_051474.1, Chelonoidis darwini       4      4      4      5      4      4      10    5     4     4     5     5     groupID:   34
-OM719672.1, Chelonoidis darwini        4      4      4      5      4      4      10    5     4     4     5     5     groupID:   34
-OM719670.1, Chelonoidis darwini        4      4      4      5      4      4      4     12    4     4     5     5     groupID:   35
-OM719671.1, Chelonoidis darwini        4      4      4      5      4      4      4     12    4     4     5     5     groupID:   35
-OM719693.1, Chelonoidis becki          4      4      5      5      5      5      4     5     4     5     5     5     groupID:   36
-LT599483.1, Chelonoidis carbonarius    5      5      6      6      6      6      5     6     5     6     6     6     groupID:   37
-MT017704.1, Chelonoidis carbonarius    6      6      7      7      7*     7*     6     7     6*    7     7     7     groupID:   38
-OQ789392.1, Chelonoidis carbonarius    7      6      7      7      8      8      7     8     7     7     8     8     groupID:   39
-NC_080265.1, Chelonoidis carbonarius   7      6      7      7      8      8      7     8     7     7     8     8     groupID:   39
-MT017695.1, Chelonoidis donfaustoi     8      4      12     12     12     13     13    14    11    12    14    13    groupID:   40
-NC_051475.1, Chelonoidis donfaustoi    8      4      12     12     12     13     13    14    11    12    14    13    groupID:   40
-OM719702.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    groupID:   41
-OM719703.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    groupID:   41
-OM719704.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    groupID:   41
-MT017692.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     9     2     8     9     9     groupID:   42
-LT599484.1, Chelonoidis chilensis      9      7      9      9      10     10     9     11    8     9     11    11    groupID:   43
+Accession ID, Species                  atp6   atp8   cox1   cox2   cox3   cytb   nd1   nd2   nd3   nd4   nd5   nd6   sets   
+LT599487.1, Centrochelys sulcata       1      1      1      1      1      1      1     1     1     1     1     1     -      groupID:    1
+LT599485.1, Chelonoidis denticulatus   10     8      10     10     11     11     11    13    9     10    12    12    -      groupID:    2
+MT017703.1, Chelonoidis denticulatus   11     8      11     11     11     12     12    13    10    11    13    12    -      groupID:    3
+MG912791.1, Chelonoidis duncanensis    12     4      13     13     13     14     14    15    4     13    15*   14    -      groupID:    4
+MG912792.1, Chelonoidis duncanensis    12     4      13     13     13     14     14    15    4     13    15*   14    -      groupID:    4
+MT017697.1, Chelonoidis duncanensis    12     4      13     13     14     14     14    16    4     15    16    14    -      groupID:    5
+NC_051477.1, Chelonoidis duncanensis   12     4      13     13     14     14     14    16    4     15    16    14    -      groupID:    5
+MG912820.1, Chelonoidis duncanensis    13     4      13     13     14     14     14    15    4     14    15*   15    -      groupID:    6
+MG912828.1, Chelonoidis duncanensis    13     4      13     13     14     14     15    15    4     14    15*   15    -      groupID:    7
+MT017699.1, Chelonoidis vicina         14     11     14     23     23     27     16    29    2     28    32    21    -      groupID:    8
+NC_051479.1, Chelonoidis vicina        14     11     14     23     23     27     16    29    2     28    32    21    -      groupID:    8
+MT017700.1, Chelonoidis guntheri       14     4      14     14     15*    15     16    17    2     16    17    16    -      groupID:    9
+NC_051480.1, Chelonoidis guntheri      14     4      14     14     15*    15     16    17    2     16    17    16    -      groupID:    9
+OM719690.1, Chelonoidis vicina         14     4      14     14     15*    29     16    30    2     29    17    22    -      groupID:   10
+OM719691.1, Chelonoidis vicina         14     4      14     14     15*    29     16    30    2     29    17    22    -      groupID:   10
+OQ581203.1, Chelonoidis vicina         14     4      14     14     24     29     16    30    2     29    17    22    -      groupID:   11
+OM719674.1, Chelonoidis guntheri       14     4      14     15     16     16     17    18    2     17    18    16    -      groupID:   12
+OM719675.1, Chelonoidis guntheri       14     4      14     15     16     16     17    18    2     17    18    16    -      groupID:   12
+MT017702.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    -      groupID:   13
+NC_051482.1, Chelonoidis microphyes    14     4      14     15     16     16     17    18    2     19    18    16    -      groupID:   13
+OM719708.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    -      groupID:   13
+OM719709.1, Chelonoidis microphyes     14     4      14     15     16     16     17    18    2     19    18    16    -      groupID:   13
+OM719689.1, Chelonoidis vicina         14     4      14     23     15*    28     24    30    2     28    33    16    -      groupID:   14
+OM719705.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    18    2     26    30    16    -      groupID:   15
+OM719706.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    18    2     26    30    16    -      groupID:   15
+MT017701.1, Chelonoidis vandenburghi   14     4      21     16     16     16     17    28    2     26    29    16    -      groupID:   16
+NC_051481.1, Chelonoidis vandenburghi  14     4      21     16     16     16     17    28    2     26    29    16    -      groupID:   16
+OM719676.1, Chelonoidis guntheri       14     9      14     16     17     17     16    19    2     17    19    16    -      groupID:   17
+JN999704.2, Chelonoidis niger          15*    4      16     18     18     19     19    21    13    20    21    18    -      groupID:   18
+MT017691.1, Chelonoidis niger          16     4      17     19     19     20*    20    22    14    21    22    16    -      groupID:   19
+OM719687.1, Chelonoidis niger          17     4      17     20     20     21     21    23    15    22    23    19    -      groupID:   20
+OM719686.1, Chelonoidis phantasticus   18     4      17     19     19     21     21    24    14    21    24    16    -      groupID:   21
+OM719688.1, Chelonoidis phantasticus   19     4      18     21     21     22     22    25    16    23    25    16    -      groupID:   22
+MT017696.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    -      groupID:   23
+NC_051476.1, Chelonoidis hoodensis     2      2      15     17     9      18     18    20    12    18    20    17    -      groupID:   23
+OM719683.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    -      groupID:   23
+OM719684.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    -      groupID:   23
+OM719685.1, Chelonoidis hoodensis      2      2      15     17     9      18     18    20    12    18    20    17    -      groupID:   23
+MT017690.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     -      groupID:   24
+NC_051472.1, Chelonoidis abingdonii    2      2      2      2      2      2      2     2     2     2     2     2     -      groupID:   24
+OM719673.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     -      groupID:   24
+OM719698.1, Chelonoidis abingdonii     2      2      2      2      2      2      2     2     2     2     2     2     -      groupID:   24
+MT017698.1, Chelonoidis porteri        20     10     19     22     22     23     23    26    17    24    26    20    -      groupID:   25
+NC_051478.1, Chelonoidis porteri       20     10     19     22     22     23     23    26    17    24    26    20    -      groupID:   25
+OM719682.1, Chelonoidis porteri        20     10     19     22     22     23     23    27    17    24    28    16    -      groupID:   26
+OM719681.1, Chelonoidis porteri        20     10     20     22     22     25     23    27    2     24    28    16    -      groupID:   27
+OM719680.1, Chelonoidis porteri        21     4      19     18     18     24     19    21    18    25    27    18    -      groupID:   28
+LT599486.1, Chelonoidis vicina         22     4      14     16     16     26*    16    18    2     27    31    16    -      groupID:   29
+NC_007694.1, Stigmochelys pardalis     23     12     22     24     25     30     25    31    19    30    34    23    -      groupID:   30
+LT599482.1, Chelonoidis alburyorum     3      3      3      3      3      3      3     3     3     3     3     3     -      groupID:   31
+MT017693.1, Chelonoidis becki          4      4      4      4      4      4      4     4     4     4     4     4     -      groupID:   32
+NC_051473.1, Chelonoidis becki         4      4      4      4      4      4      4     4     4     4     4     4     -      groupID:   32
+OM719692.1, Chelonoidis becki          4      4      4      4      4      4      4     5     4     4     5     5     -      groupID:   33
+MT017694.1, Chelonoidis darwini        4      4      4      5      4      4      10    5     4     4     5     5     -      groupID:   34
+NC_051474.1, Chelonoidis darwini       4      4      4      5      4      4      10    5     4     4     5     5     -      groupID:   34
+OM719672.1, Chelonoidis darwini        4      4      4      5      4      4      10    5     4     4     5     5     -      groupID:   34
+OM719670.1, Chelonoidis darwini        4      4      4      5      4      4      4     12    4     4     5     5     -      groupID:   35
+OM719671.1, Chelonoidis darwini        4      4      4      5      4      4      4     12    4     4     5     5     -      groupID:   35
+OM719693.1, Chelonoidis becki          4      4      5      5      5      5      4     5     4     5     5     5     -      groupID:   36
+LT599483.1, Chelonoidis carbonarius    5      5      6      6      6      6      5     6     5     6     6     6     -      groupID:   37
+MT017704.1, Chelonoidis carbonarius    6      6      7      7      7*     7*     6     7     6*    7     7     7     -      groupID:   38
+OQ789392.1, Chelonoidis carbonarius    7      6      7      7      8      8      7     8     7     7     8     8     -      groupID:   39
+NC_080265.1, Chelonoidis carbonarius   7      6      7      7      8      8      7     8     7     7     8     8     -      groupID:   39
+MT017695.1, Chelonoidis donfaustoi     8      4      12     12     12     13     13    14    11    12    14    13    -      groupID:   40
+NC_051475.1, Chelonoidis donfaustoi    8      4      12     12     12     13     13    14    11    12    14    13    -      groupID:   40
+OM719702.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    -      groupID:   41
+OM719703.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    -      groupID:   41
+OM719704.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     10    2     8     10    10    -      groupID:   41
+MT017692.1, Chelonoidis chathamensis   8      4      8      8      9      9      8     9     2     8     9     9     -      groupID:   42
+LT599484.1, Chelonoidis chilensis      9      7      9      9      10     10     9     11    8     9     11    11    -      groupID:   43
