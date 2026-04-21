@@ -77,6 +77,8 @@ Figure 5d: Click on the _CYTB_ node in the right-hand tree view to move the _cyt
 
 Once you have selected some sequences, you can check for duplicated sequences by pressing the __Groupings__ button below the left-hand tree view. This will prompt you to select a folder to save the results to. Once a folder has been selected, GeneMatrix will compare the sequences in each node (i.e., the _ATP6_, _ATP8_, _COX1_, _COX2_, COX3 and _CYTB_) checking for exact matches or sequence fragments and saves the results to a series of text files named after each node's name. A set of results files can be found in the [ExampleData > Comparisons](../ExampleData/Comparisons/) folder.
 
+These files
+
 
 
 
