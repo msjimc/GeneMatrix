@@ -1,0 +1,1236 @@
+
+
+IMPORTANT WARNING: Sequences NC_051472.1-Chelonoidis_abingdonii and OM719673.1-Chelonoidis_abingdonii are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051472.1-Chelonoidis_abingdonii and OM719698.1-Chelonoidis_abingdonii are exactly identical
+
+
+IMPORTANT WARNING: Sequences OM719703.1-Chelonoidis_chathamensis and OM719704.1-Chelonoidis_chathamensis are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051474.1-Chelonoidis_darwini and OM719672.1-Chelonoidis_darwini are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051476.1-Chelonoidis_hoodensis and OM719683.1-Chelonoidis_hoodensis are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051476.1-Chelonoidis_hoodensis and OM719684.1-Chelonoidis_hoodensis are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051476.1-Chelonoidis_hoodensis and OM719685.1-Chelonoidis_hoodensis are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051482.1-Chelonoidis_microphyes and OM719708.1-Chelonoidis_microphyes are exactly identical
+
+
+IMPORTANT WARNING: Sequences NC_051482.1-Chelonoidis_microphyes and OM719709.1-Chelonoidis_microphyes are exactly identical
+
+IMPORTANT WARNING
+Found 9 sequences that are exactly identical to other sequences in the alignment.
+Normally they should be excluded from the analysis.
+
+
+A mixed model file with model assignments for undetermined
+columns removed has already been printed to  file .\analysis\start_tree\partitions.txt.reduced
+Just in case you might need it, an alignment file with 
+sequence duplicates removed is printed to file .\analysis\start_tree\filtered_source.phy.reduced
+
+
+This is RAxML version 8.2.7 released by Alexandros Stamatakis on March 10 2016.
+
+With greatly appreciated code contributions by:
+Andre Aberer      (HITS)
+Simon Berger      (HITS)
+Alexey Kozlov     (HITS)
+Kassian Kobert    (HITS)
+David Dao         (KIT and HITS)
+Nick Pattengale   (Sandia)
+Wayne Pfeiffer    (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+Alignment has 607 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 0.01%
+
+RAxML Model Optimization up to an accuracy of 1.000000 log likelihood units
+
+Using 39 distinct models/data partitions with joint branch length optimization
+
+
+All free model parameters will be estimated by RAxML
+GAMMA model of rate heteorgeneity, ML estimate of alpha-parameter
+
+GAMMA Model parameters will be estimated up to an accuracy of 1.0000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 9
+Name: Subset1
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 1
+Alignment Patterns: 8
+Name: Subset2
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 2
+Alignment Patterns: 22
+Name: Subset3
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 3
+Alignment Patterns: 9
+Name: Subset4
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 4
+Alignment Patterns: 7
+Name: Subset5
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 5
+Alignment Patterns: 9
+Name: Subset6
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 6
+Alignment Patterns: 11
+Name: Subset7
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 7
+Alignment Patterns: 7
+Name: Subset8
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 8
+Alignment Patterns: 34
+Name: Subset9
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 9
+Alignment Patterns: 9
+Name: Subset10
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 10
+Alignment Patterns: 8
+Name: Subset11
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 11
+Alignment Patterns: 25
+Name: Subset12
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 12
+Alignment Patterns: 9
+Name: Subset13
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 13
+Alignment Patterns: 8
+Name: Subset14
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 14
+Alignment Patterns: 22
+Name: Subset15
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 15
+Alignment Patterns: 15
+Name: Subset16
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 16
+Alignment Patterns: 8
+Name: Subset17
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 17
+Alignment Patterns: 37
+Name: Subset18
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 18
+Alignment Patterns: 12
+Name: Subset19
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 19
+Alignment Patterns: 8
+Name: Subset20
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 20
+Alignment Patterns: 30
+Name: Subset21
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 21
+Alignment Patterns: 18
+Name: Subset22
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 22
+Alignment Patterns: 14
+Name: Subset23
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 23
+Alignment Patterns: 34
+Name: Subset24
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 24
+Alignment Patterns: 11
+Name: Subset25
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 25
+Alignment Patterns: 7
+Name: Subset26
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 26
+Alignment Patterns: 11
+Name: Subset27
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 27
+Alignment Patterns: 6
+Name: Subset28
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 28
+Alignment Patterns: 6
+Name: Subset29
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 29
+Alignment Patterns: 15
+Name: Subset30
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 30
+Alignment Patterns: 20
+Name: Subset31
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 31
+Alignment Patterns: 11
+Name: Subset32
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 32
+Alignment Patterns: 31
+Name: Subset33
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 33
+Alignment Patterns: 21
+Name: Subset34
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 34
+Alignment Patterns: 15
+Name: Subset35
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 35
+Alignment Patterns: 44
+Name: Subset36
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 36
+Alignment Patterns: 12
+Name: Subset37
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 37
+Alignment Patterns: 9
+Name: Subset38
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+Partition: 38
+Alignment Patterns: 15
+Name: Subset39
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+
+RAxML was called as follows:
+
+C:\Users\ianca\source\repos\msjimc\GeneMatrix\Program\partitionfinder-2.1.1\partitionfinder-2.1.1\programs\raxml_pthreads.exe -f e -s .\analysis\start_tree\filtered_source.phy -t .\analysis\start_tree\RAxML_fastTree.fastTREE -m GTRGAMMA -O -n BLTREE -p 123456789 -q .\analysis\start_tree\partitions.txt -w C:\Users\ianca\source\repos\msjimc\GeneMatrix\ExampleData\MAFFT_GBlocks\analysis\start_tree -e 1 -T 12 
+
+
+
+WARNING the alpha parameter with a value of 10.963217 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 10.165938 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 10.983072 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 14.162923 estimated by RAxML for partition number 2 with the name "Subset3"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 19.939386 estimated by RAxML for partition number 11 with the name "Subset12"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 19.385118 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 23.903736 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 21.825533 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 24.435616 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 26.401065 estimated by RAxML for partition number 11 with the name "Subset12"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 40.683811 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 52.672621 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 47.397279 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 55.079945 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 10.112943 estimated by RAxML for partition number 11 with the name "Subset12"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 86.286391 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 117.632552 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 104.594622 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 125.515320 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 175.813509 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 256.710772 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 225.105697 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 278.719422 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 374.240093 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 576.523336 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 501.905326 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 632.375989 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 821.877631 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 999.866316 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 999.828314 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 999.821186 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 17 with the name "Subset18"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 23 with the name "Subset24"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 32 with the name "Subset33"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+WARNING the alpha parameter with a value of 1000.000000 estimated by RAxML for partition number 35 with the name "Subset36"
+is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate heterogeneity!
+You can run inferences with a plain substitution model (without rate heterogeneity) by specifyng the CAT model and the "-V" option!
+
+
+Model parameters (binary file format) written to: C:\Users\ianca\source\repos\msjimc\GeneMatrix\ExampleData\MAFFT_GBlocks\analysis\start_tree\RAxML_binaryModelParameters.BLTREE
+
+
+Overall Time for Tree Evaluation 126.056765
+Final GAMMA  likelihood: -19656.478545
+
+Number of free parameters for AIC-TEST(BR-LEN): 400
+Number of free parameters for AIC-TEST(NO-BR-LEN): 351
+
+
+Model Parameters of Partition 0, Name: Subset1, Type of Data: DNA
+alpha: 0.090963
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 9.566329
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 175.443495
+rate G <-> T: 1.000000
+
+freq pi(A): 0.367240
+freq pi(C): 0.324561
+freq pi(G): 0.145918
+freq pi(T): 0.162281
+
+Model Parameters of Partition 1, Name: Subset2, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 0.000100
+rate C <-> G: 6.651294
+rate C <-> T: 154.466571
+rate G <-> T: 1.000000
+
+freq pi(A): 0.157895
+freq pi(C): 0.288799
+freq pi(G): 0.092274
+freq pi(T): 0.461032
+
+Model Parameters of Partition 2, Name: Subset3, Type of Data: DNA
+alpha: 4.724727
+Tree-Length: 0.546852
+rate A <-> C: 0.037859
+rate A <-> G: 3.922312
+rate A <-> T: 0.008358
+rate C <-> G: 0.000100
+rate C <-> T: 1.756204
+rate G <-> T: 1.000000
+
+freq pi(A): 0.529690
+freq pi(C): 0.278846
+freq pi(G): 0.022942
+freq pi(T): 0.168522
+
+Model Parameters of Partition 3, Name: Subset4, Type of Data: DNA
+alpha: 0.629401
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 6.668258
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 0.084273
+rate G <-> T: 1.000000
+
+freq pi(A): 0.398601
+freq pi(C): 0.272028
+freq pi(G): 0.054545
+freq pi(T): 0.274825
+
+Model Parameters of Partition 4, Name: Subset5, Type of Data: DNA
+alpha: 0.081372
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 26.937927
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 161.478312
+rate G <-> T: 1.000000
+
+freq pi(A): 0.290210
+freq pi(C): 0.327273
+freq pi(G): 0.091608
+freq pi(T): 0.290909
+
+Model Parameters of Partition 5, Name: Subset6, Type of Data: DNA
+alpha: 0.556658
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 60068.939471
+rate G <-> T: 1.000000
+
+freq pi(A): 0.490909
+freq pi(C): 0.381818
+freq pi(G): 0.018182
+freq pi(T): 0.109091
+
+Model Parameters of Partition 6, Name: Subset7, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.281252
+rate A <-> G: 3.758199
+rate A <-> T: 5.666721
+rate C <-> G: 0.000100
+rate C <-> T: 1802.284065
+rate G <-> T: 1.000000
+
+freq pi(A): 0.263566
+freq pi(C): 0.206843
+freq pi(G): 0.296437
+freq pi(T): 0.233154
+
+Model Parameters of Partition 7, Name: Subset8, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 2551.861759
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 5.100842
+rate G <-> T: 1.000000
+
+freq pi(A): 0.186196
+freq pi(C): 0.263790
+freq pi(G): 0.151014
+freq pi(T): 0.399001
+
+Model Parameters of Partition 8, Name: Subset9, Type of Data: DNA
+alpha: 1.679123
+Tree-Length: 0.546852
+rate A <-> C: 0.045427
+rate A <-> G: 4.036665
+rate A <-> T: 0.028709
+rate C <-> G: 0.220045
+rate C <-> T: 2.428554
+rate G <-> T: 1.000000
+
+freq pi(A): 0.433512
+freq pi(C): 0.331843
+freq pi(G): 0.035704
+freq pi(T): 0.198942
+
+Model Parameters of Partition 9, Name: Subset10, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 249.698964
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 23.977226
+rate G <-> T: 1.000000
+
+freq pi(A): 0.293416
+freq pi(C): 0.253947
+freq pi(G): 0.248069
+freq pi(T): 0.204568
+
+Model Parameters of Partition 10, Name: Subset11, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 12.552678
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 517.609889
+rate G <-> T: 1.000000
+
+freq pi(A): 0.276117
+freq pi(C): 0.236816
+freq pi(G): 0.103796
+freq pi(T): 0.383272
+
+Model Parameters of Partition 11, Name: Subset12, Type of Data: DNA
+alpha: 5.442328
+Tree-Length: 0.546852
+rate A <-> C: 0.000258
+rate A <-> G: 3.798813
+rate A <-> T: 0.016455
+rate C <-> G: 0.000100
+rate C <-> T: 2.117840
+rate G <-> T: 1.000000
+
+freq pi(A): 0.482365
+freq pi(C): 0.269567
+freq pi(G): 0.041653
+freq pi(T): 0.206416
+
+Model Parameters of Partition 12, Name: Subset13, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 337.571705
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 40.849738
+rate G <-> T: 1.000000
+
+freq pi(A): 0.229888
+freq pi(C): 0.248238
+freq pi(G): 0.262478
+freq pi(T): 0.259395
+
+Model Parameters of Partition 13, Name: Subset14, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 10.230268
+rate C <-> G: 0.000100
+rate C <-> T: 943.437940
+rate G <-> T: 1.000000
+
+freq pi(A): 0.206749
+freq pi(C): 0.262157
+freq pi(G): 0.164751
+freq pi(T): 0.366342
+
+Model Parameters of Partition 14, Name: Subset15, Type of Data: DNA
+alpha: 2.647792
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 4.203982
+rate A <-> T: 0.021832
+rate C <-> G: 0.014179
+rate C <-> T: 1.897845
+rate G <-> T: 1.000000
+
+freq pi(A): 0.488800
+freq pi(C): 0.345564
+freq pi(G): 0.024757
+freq pi(T): 0.140878
+
+Model Parameters of Partition 15, Name: Subset16, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 3.326080
+rate A <-> G: 227.384975
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 54.836292
+rate G <-> T: 1.000000
+
+freq pi(A): 0.297624
+freq pi(C): 0.275876
+freq pi(G): 0.197443
+freq pi(T): 0.229058
+
+Model Parameters of Partition 16, Name: Subset17, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 3.452351
+rate A <-> T: 0.000100
+rate C <-> G: 2.502465
+rate C <-> T: 183.740988
+rate G <-> T: 1.000000
+
+freq pi(A): 0.210075
+freq pi(C): 0.254391
+freq pi(G): 0.125984
+freq pi(T): 0.409550
+
+Model Parameters of Partition 17, Name: Subset18, Type of Data: DNA
+alpha: 1000.000000
+Tree-Length: 0.546852
+rate A <-> C: 0.038228
+rate A <-> G: 6.771686
+rate A <-> T: 0.003215
+rate C <-> G: 0.000100
+rate C <-> T: 3.032712
+rate G <-> T: 1.000000
+
+freq pi(A): 0.424793
+freq pi(C): 0.423885
+freq pi(G): 0.022310
+freq pi(T): 0.129013
+
+Model Parameters of Partition 18, Name: Subset19, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 2.480113
+rate A <-> G: 222.878952
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 22.286985
+rate G <-> T: 1.000000
+
+freq pi(A): 0.269943
+freq pi(C): 0.269231
+freq pi(G): 0.205366
+freq pi(T): 0.255461
+
+Model Parameters of Partition 19, Name: Subset20, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 178462.385761
+rate G <-> T: 1.000000
+
+freq pi(A): 0.185185
+freq pi(C): 0.285019
+freq pi(G): 0.101852
+freq pi(T): 0.427944
+
+Model Parameters of Partition 20, Name: Subset21, Type of Data: DNA
+alpha: 0.896806
+Tree-Length: 0.546852
+rate A <-> C: 0.060843
+rate A <-> G: 2.492891
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 3.832047
+rate G <-> T: 1.000000
+
+freq pi(A): 0.525760
+freq pi(C): 0.373813
+freq pi(G): 0.031220
+freq pi(T): 0.069207
+
+Model Parameters of Partition 21, Name: Subset22, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.345915
+rate A <-> G: 48.978220
+rate A <-> T: 0.000100
+rate C <-> G: 0.265423
+rate C <-> T: 4.131968
+rate G <-> T: 1.000000
+
+freq pi(A): 0.419340
+freq pi(C): 0.287045
+freq pi(G): 0.125580
+freq pi(T): 0.168035
+
+Model Parameters of Partition 22, Name: Subset23, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 2.160779
+rate A <-> G: 34.694572
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 161.401048
+rate G <-> T: 1.000000
+
+freq pi(A): 0.183524
+freq pi(C): 0.326309
+freq pi(G): 0.098974
+freq pi(T): 0.391193
+
+Model Parameters of Partition 23, Name: Subset24, Type of Data: DNA
+alpha: 1000.000000
+Tree-Length: 0.546852
+rate A <-> C: 0.056201
+rate A <-> G: 5.669423
+rate A <-> T: 0.117784
+rate C <-> G: 0.000100
+rate C <-> T: 5.562919
+rate G <-> T: 1.000000
+
+freq pi(A): 0.513975
+freq pi(C): 0.344388
+freq pi(G): 0.025067
+freq pi(T): 0.116571
+
+Model Parameters of Partition 24, Name: Subset25, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 19.957781
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 216.733548
+rate G <-> T: 1.000000
+
+freq pi(A): 0.256082
+freq pi(C): 0.313609
+freq pi(G): 0.188363
+freq pi(T): 0.241946
+
+Model Parameters of Partition 25, Name: Subset26, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 211909.606301
+rate G <-> T: 1.000000
+
+freq pi(A): 0.196581
+freq pi(C): 0.256739
+freq pi(G): 0.102564
+freq pi(T): 0.444116
+
+Model Parameters of Partition 26, Name: Subset27, Type of Data: DNA
+alpha: 2.273026
+Tree-Length: 0.546852
+rate A <-> C: 0.298169
+rate A <-> G: 19.539795
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 8.860629
+rate G <-> T: 1.000000
+
+freq pi(A): 0.510519
+freq pi(C): 0.291913
+freq pi(G): 0.061801
+freq pi(T): 0.135766
+
+Model Parameters of Partition 27, Name: Subset28, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 0.000100
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 161354.398400
+rate G <-> T: 1.000000
+
+freq pi(A): 0.262626
+freq pi(C): 0.283605
+freq pi(G): 0.141414
+freq pi(T): 0.312354
+
+Model Parameters of Partition 28, Name: Subset29, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 93.365895
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 0.000100
+rate G <-> T: 1.000000
+
+freq pi(A): 0.160451
+freq pi(C): 0.282828
+freq pi(G): 0.142191
+freq pi(T): 0.414530
+
+Model Parameters of Partition 29, Name: Subset30, Type of Data: DNA
+alpha: 1.946917
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 6.124505
+rate A <-> T: 0.348707
+rate C <-> G: 0.000100
+rate C <-> T: 3.836756
+rate G <-> T: 1.000000
+
+freq pi(A): 0.491453
+freq pi(C): 0.283994
+freq pi(G): 0.033800
+freq pi(T): 0.190754
+
+Model Parameters of Partition 30, Name: Subset31, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.425861
+rate A <-> G: 23.994806
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 191.838772
+rate G <-> T: 1.000000
+
+freq pi(A): 0.354097
+freq pi(C): 0.285284
+freq pi(G): 0.159030
+freq pi(T): 0.201589
+
+Model Parameters of Partition 31, Name: Subset32, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 14.768973
+rate A <-> T: 2.604340
+rate C <-> G: 0.000100
+rate C <-> T: 333.278830
+rate G <-> T: 1.000000
+
+freq pi(A): 0.174208
+freq pi(C): 0.304592
+freq pi(G): 0.126362
+freq pi(T): 0.394838
+
+Model Parameters of Partition 32, Name: Subset33, Type of Data: DNA
+alpha: 1000.000000
+Tree-Length: 0.546852
+rate A <-> C: 0.043625
+rate A <-> G: 6.542385
+rate A <-> T: 0.064337
+rate C <-> G: 0.000100
+rate C <-> T: 6.685303
+rate G <-> T: 1.000000
+
+freq pi(A): 0.538210
+freq pi(C): 0.279705
+freq pi(G): 0.021535
+freq pi(T): 0.160550
+
+Model Parameters of Partition 33, Name: Subset34, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.433588
+rate A <-> G: 35.421799
+rate A <-> T: 0.293988
+rate C <-> G: 0.000100
+rate C <-> T: 11.514714
+rate G <-> T: 1.000000
+
+freq pi(A): 0.387957
+freq pi(C): 0.243827
+freq pi(G): 0.171707
+freq pi(T): 0.196509
+
+Model Parameters of Partition 34, Name: Subset35, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 4.597038
+rate A <-> T: 0.433654
+rate C <-> G: 0.000100
+rate C <-> T: 78.946964
+rate G <-> T: 1.000000
+
+freq pi(A): 0.201810
+freq pi(C): 0.304913
+freq pi(G): 0.103361
+freq pi(T): 0.389916
+
+Model Parameters of Partition 35, Name: Subset36, Type of Data: DNA
+alpha: 1000.000000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 9.443428
+rate A <-> T: 0.000100
+rate C <-> G: 0.948409
+rate C <-> T: 4.383414
+rate G <-> T: 1.000000
+
+freq pi(A): 0.454363
+freq pi(C): 0.393148
+freq pi(G): 0.025081
+freq pi(T): 0.127408
+
+Model Parameters of Partition 36, Name: Subset37, Type of Data: DNA
+alpha: 0.086351
+Tree-Length: 0.546852
+rate A <-> C: 31.893662
+rate A <-> G: 176.769639
+rate A <-> T: 4.713693
+rate C <-> G: 0.000100
+rate C <-> T: 1851.457354
+rate G <-> T: 1.000000
+
+freq pi(A): 0.136484
+freq pi(C): 0.059560
+freq pi(G): 0.383297
+freq pi(T): 0.420659
+
+Model Parameters of Partition 37, Name: Subset38, Type of Data: DNA
+alpha: 0.020000
+Tree-Length: 0.546852
+rate A <-> C: 0.000100
+rate A <-> G: 3080.040276
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 15.660829
+rate G <-> T: 1.000000
+
+freq pi(A): 0.122418
+freq pi(C): 0.154066
+freq pi(G): 0.260440
+freq pi(T): 0.463077
+
+Model Parameters of Partition 38, Name: Subset39, Type of Data: DNA
+alpha: 1.399684
+Tree-Length: 0.546852
+rate A <-> C: 86.057241
+rate A <-> G: 328.651959
+rate A <-> T: 0.000100
+rate C <-> G: 0.000100
+rate C <-> T: 464.208080
+rate G <-> T: 1.000000
+
+freq pi(A): 0.127536
+freq pi(C): 0.023516
+freq pi(G): 0.312464
+freq pi(T): 0.536484
+
+Final tree written to:                 C:\Users\ianca\source\repos\msjimc\GeneMatrix\ExampleData\MAFFT_GBlocks\analysis\start_tree\RAxML_result.BLTREE
+Execution Log File written to:         C:\Users\ianca\source\repos\msjimc\GeneMatrix\ExampleData\MAFFT_GBlocks\analysis\start_tree\RAxML_log.BLTREE

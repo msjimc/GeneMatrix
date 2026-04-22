@@ -773,7 +773,7 @@ where:
 * -e=.fa directs GBlocks to name the cleaned alignment to a file with the same name as the input file to which '.fa' has been appended.
 #### Website
 
-https://www.biologiaevolutiva.org/jcastresana/Gblocks.html   
+https://molevol-ibe.csic.es/Gblocks.html   
 (Manual: https://www.biologiaevolutiva.org/jcastresana/Gblocks/Gblocks_documentation.html)
 
 #### References

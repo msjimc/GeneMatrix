@@ -1,0 +1,156 @@
+Scheme Name       : step_21
+Scheme lnL        : -19465.092430114746
+Scheme AICc       : 39267.1378708
+Number of params  : 166
+Number of sites   : 11361
+Number of subsets : 18
+
+Subset | Best Model | # sites    | subset id                        | Partition names                                                                                     
+1      | GTR+X      | 1170       | 15a4520dcc97368de5182ee36877e9a1 | CDS-ATP6_DNA_MAFFT_1stPos, CDS-ND2_DNA_MAFFT_1stPos, CDS-ND5_DNA_MAFFT_1stPos                       
+2      | TRN+I+X    | 2070       | 78d4e7088e8edae577f971776fe66f6c | CDS-ATP6_DNA_MAFFT_2stPos, CDS-ND3_DNA_MAFFT_2stPos, CDS-ND1_DNA_MAFFT_2stPos, CDS-ND2_DNA_MAFFT_2stPos, CDS-ND4_DNA_MAFFT_2stPos, CDS-ND5_DNA_MAFFT_2stPos
+3      | GTR+I+X    | 1072       | d1ce5579d8bf85885a8b4f64727ba2ad | CDS-COX1_DNA_MAFFT_3stPos, CDS-COX2_DNA_MAFFT_3stPos, CDS-ND4L_DNA_MAFFT_3stPos, CDS-ATP6_DNA_MAFFT_3stPos
+4      | TRN+X      | 55         | 233182a7cb51f187384b5bab6a116a71 | CDS-ATP8_DNA_MAFFT_1stPos                                                                           
+5      | TRN+X      | 154        | a60902573c67c4e004a7d6ae3bc9b3d8 | CDS-ATP8_DNA_MAFFT_2stPos, CDS-ND4L_DNA_MAFFT_1stPos                                                
+6      | TRN+I+X    | 663        | f8c87c99dbff82eb8ac8357070424e81 | CDS-ATP8_DNA_MAFFT_3stPos, CDS-ND2_DNA_MAFFT_3stPos, CDS-COX3_DNA_MAFFT_3stPos                      
+7      | TRN+I+X    | 516        | 07987d84014ba01bbd18a0cd99190f16 | CDS-COX1_DNA_MAFFT_1stPos                                                                           
+8      | HKY+I+X    | 876        | d261718dad0539c47c8aa2274fbf4348 | CDS-ND4L_DNA_MAFFT_2stPos, CDS-COX1_DNA_MAFFT_2stPos, CDS-COX3_DNA_MAFFT_2stPos                     
+9      | K80+I      | 491        | 5cc985c4b5158d8d3365d2759c7d1c39 | CDS-COX2_DNA_MAFFT_1stPos, CDS-COX3_DNA_MAFFT_1stPos                                                
+10     | HKY+X      | 610        | 975aeabdc2b9362418044641c3d511d5 | CDS-CYTB_DNA_MAFFT_2stPos, CDS-COX2_DNA_MAFFT_2stPos                                                
+11     | HKY+I+X    | 1283       | 650aed2b65642ef58e4cf000d681e602 | CDS-ND4_DNA_MAFFT_1stPos, CDS-ND3_DNA_MAFFT_1stPos, CDS-CYTB_DNA_MAFFT_1stPos, CDS-ND1_DNA_MAFFT_1stPos
+12     | GTR+I+X    | 976        | 8b7cb06af978e310995ef039c7cff42d | CDS-ND5_DNA_MAFFT_3stPos, CDS-CYTB_DNA_MAFFT_3stPos                                                 
+13     | HKY+I+X    | 324        | 870b1e70a500d3063a2ef86392048532 | CDS-ND1_DNA_MAFFT_3stPos                                                                            
+14     | HKY+X      | 117        | e5eaf9ed042be02b628766f42efd8de6 | CDS-ND3_DNA_MAFFT_3stPos                                                                            
+15     | HKY+X      | 459        | f82e01af42711cfa3eb8da14bc29fbda | CDS-ND4_DNA_MAFFT_3stPos                                                                            
+16     | TRN+I+X    | 175        | 23d2ad670c343514ef987f8111411f0d | CDS-ND6_DNA_MAFFT_1stPos                                                                            
+17     | TRN+I+X    | 175        | 5f5bf31aec26aa433827de23fd5d4003 | CDS-ND6_DNA_MAFFT_2stPos                                                                            
+18     | HKY+G+X    | 175        | dbd25f3ea42d8a4baebc39142889cf61 | CDS-ND6_DNA_MAFFT_3stPos                                                                            
+
+
+Scheme Description in PartitionFinder format
+Scheme_step_21 = (CDS-ATP6_DNA_MAFFT_1stPos, CDS-ND2_DNA_MAFFT_1stPos, CDS-ND5_DNA_MAFFT_1stPos) (CDS-ATP6_DNA_MAFFT_2stPos, CDS-ND3_DNA_MAFFT_2stPos, CDS-ND1_DNA_MAFFT_2stPos, CDS-ND2_DNA_MAFFT_2stPos, CDS-ND4_DNA_MAFFT_2stPos, CDS-ND5_DNA_MAFFT_2stPos) (CDS-COX1_DNA_MAFFT_3stPos, CDS-COX2_DNA_MAFFT_3stPos, CDS-ND4L_DNA_MAFFT_3stPos, CDS-ATP6_DNA_MAFFT_3stPos) (CDS-ATP8_DNA_MAFFT_1stPos) (CDS-ATP8_DNA_MAFFT_2stPos, CDS-ND4L_DNA_MAFFT_1stPos) (CDS-ATP8_DNA_MAFFT_3stPos, CDS-ND2_DNA_MAFFT_3stPos, CDS-COX3_DNA_MAFFT_3stPos) (CDS-COX1_DNA_MAFFT_1stPos) (CDS-ND4L_DNA_MAFFT_2stPos, CDS-COX1_DNA_MAFFT_2stPos, CDS-COX3_DNA_MAFFT_2stPos) (CDS-COX2_DNA_MAFFT_1stPos, CDS-COX3_DNA_MAFFT_1stPos) (CDS-CYTB_DNA_MAFFT_2stPos, CDS-COX2_DNA_MAFFT_2stPos) (CDS-ND4_DNA_MAFFT_1stPos, CDS-ND3_DNA_MAFFT_1stPos, CDS-CYTB_DNA_MAFFT_1stPos, CDS-ND1_DNA_MAFFT_1stPos) (CDS-ND5_DNA_MAFFT_3stPos, CDS-CYTB_DNA_MAFFT_3stPos) (CDS-ND1_DNA_MAFFT_3stPos) (CDS-ND3_DNA_MAFFT_3stPos) (CDS-ND4_DNA_MAFFT_3stPos) (CDS-ND6_DNA_MAFFT_1stPos) (CDS-ND6_DNA_MAFFT_2stPos) (CDS-ND6_DNA_MAFFT_3stPos);
+
+Nexus formatted character sets
+begin sets;
+	charset Subset1 = 1-684\3 5985-7025\3 9052-10836\3;
+	charset Subset2 = 2-684\3 7027-7376\3 5014-5984\3 5986-7025\3 7675-9051\3 9053-10836\3;
+	charset Subset3 = 852-2397\3 2400-3084\3 7379-7673\3 3-684\3;
+	charset Subset4 = 685-849\3;
+	charset Subset5 = 686-849\3 7377-7673\3;
+	charset Subset6 = 687-849\3 5987-7025\3 3087-3868\3;
+	charset Subset7 = 850-2397\3;
+	charset Subset8 = 7378-7673\3 851-2397\3 3086-3868\3;
+	charset Subset9 = 2398-3084\3 3085-3868\3;
+	charset Subset10 = 3870-5012\3 2399-3084\3;
+	charset Subset11 = 7674-9051\3 7026-7376\3 3869-5012\3 5013-5984\3;
+	charset Subset12 = 9054-10836\3 3871-5012\3;
+	charset Subset13 = 5015-5984\3;
+	charset Subset14 = 7028-7376\3;
+	charset Subset15 = 7676-9051\3;
+	charset Subset16 = 10837-11361\3;
+	charset Subset17 = 10838-11361\3;
+	charset Subset18 = 10839-11361\3;
+	charpartition PartitionFinder = Group1:Subset1, Group2:Subset2, Group3:Subset3, Group4:Subset4, Group5:Subset5, Group6:Subset6, Group7:Subset7, Group8:Subset8, Group9:Subset9, Group10:Subset10, Group11:Subset11, Group12:Subset12, Group13:Subset13, Group14:Subset14, Group15:Subset15, Group16:Subset16, Group17:Subset17, Group18:Subset18;
+end;
+
+
+Nexus formatted character sets for IQtree
+Warning: the models written in the charpartition are just the best model found in this analysis. Not all models are available in IQtree, so you may need to set up specific model lists for your analysis
+
+#nexus
+begin sets;
+	charset Subset1 = 1-684\3 5985-7025\3 9052-10836\3;
+	charset Subset2 = 2-684\3 7027-7376\3 5014-5984\3 5986-7025\3 7675-9051\3 9053-10836\3;
+	charset Subset3 = 852-2397\3 2400-3084\3 7379-7673\3 3-684\3;
+	charset Subset4 = 685-849\3;
+	charset Subset5 = 686-849\3 7377-7673\3;
+	charset Subset6 = 687-849\3 5987-7025\3 3087-3868\3;
+	charset Subset7 = 850-2397\3;
+	charset Subset8 = 7378-7673\3 851-2397\3 3086-3868\3;
+	charset Subset9 = 2398-3084\3 3085-3868\3;
+	charset Subset10 = 3870-5012\3 2399-3084\3;
+	charset Subset11 = 7674-9051\3 7026-7376\3 3869-5012\3 5013-5984\3;
+	charset Subset12 = 9054-10836\3 3871-5012\3;
+	charset Subset13 = 5015-5984\3;
+	charset Subset14 = 7028-7376\3;
+	charset Subset15 = 7676-9051\3;
+	charset Subset16 = 10837-11361\3;
+	charset Subset17 = 10838-11361\3;
+	charset Subset18 = 10839-11361\3;
+	charpartition PartitionFinder = GTR+X:Subset1, TRN+I+X:Subset2, GTR+I+X:Subset3, TRN+X:Subset4, TRN+X:Subset5, TRN+I+X:Subset6, TRN+I+X:Subset7, HKY+I+X:Subset8, K80+I:Subset9, HKY+X:Subset10, HKY+I+X:Subset11, GTR+I+X:Subset12, HKY+I+X:Subset13, HKY+X:Subset14, HKY+X:Subset15, TRN+I+X:Subset16, TRN+I+X:Subset17, HKY+G+X:Subset18;
+end;
+
+
+RaxML-style partition definitions
+Warning: RAxML allows for only a single model of rate heterogeneity in partitioned analyses. I.e. all partitions must be assigned one of three types of model: No heterogeneity (e.g. GTR); +G (e.g. GTR+G); or +I+G (e.g. GTR+I+G). If the best models for your datasetcontain different types of model for different subsets you will need to decide on the best rate heterogeneity model before you run RAxML. If you prefer to do things more rigorously, you can run separate PartitionFinder analyses for each type of rate heterogenetity Then choose the scheme with the lowest AIC/AICc/BIC score. Note that these re-runs will be quick!
+
+DNA, Subset1 = 1-684\3, 5985-7025\3, 9052-10836\3
+DNA, Subset2 = 2-684\3, 7027-7376\3, 5014-5984\3, 5986-7025\3, 7675-9051\3, 9053-10836\3
+DNA, Subset3 = 852-2397\3, 2400-3084\3, 7379-7673\3, 3-684\3
+DNA, Subset4 = 685-849\3
+DNA, Subset5 = 686-849\3, 7377-7673\3
+DNA, Subset6 = 687-849\3, 5987-7025\3, 3087-3868\3
+DNA, Subset7 = 850-2397\3
+DNA, Subset8 = 7378-7673\3, 851-2397\3, 3086-3868\3
+DNA, Subset9 = 2398-3084\3, 3085-3868\3
+DNA, Subset10 = 3870-5012\3, 2399-3084\3
+DNA, Subset11 = 7674-9051\3, 7026-7376\3, 3869-5012\3, 5013-5984\3
+DNA, Subset12 = 9054-10836\3, 3871-5012\3
+DNA, Subset13 = 5015-5984\3
+DNA, Subset14 = 7028-7376\3
+DNA, Subset15 = 7676-9051\3
+DNA, Subset16 = 10837-11361\3
+DNA, Subset17 = 10838-11361\3
+DNA, Subset18 = 10839-11361\3
+
+
+MrBayes block for partition definitions
+Warning: MrBayes only allows a relatively small collection of models. If any model in your analysis is not one that is included in MrBayes (e.g. by setting nst = 1, 2, or 6 for DNA sequences; or is not in the available list of protein models for MrBayes)then this MrBayes block will just set that model to nst = 6 for DNA, or 'wag' for Protein. Similarly, the only additional parameters that this MrBayes block will include are +I and +G. Other  parameters, such as +F and +X, are ignored. If you want to use this MrBayes block for your analysis, please make sure to check it carefully before you use it we've done our best to make it accurate, but there may be errors that remain!
+
+begin mrbayes;
+
+	charset Subset1 = 1-684\3 5985-7025\3 9052-10836\3;
+	charset Subset2 = 2-684\3 7027-7376\3 5014-5984\3 5986-7025\3 7675-9051\3 9053-10836\3;
+	charset Subset3 = 852-2397\3 2400-3084\3 7379-7673\3 3-684\3;
+	charset Subset4 = 685-849\3;
+	charset Subset5 = 686-849\3 7377-7673\3;
+	charset Subset6 = 687-849\3 5987-7025\3 3087-3868\3;
+	charset Subset7 = 850-2397\3;
+	charset Subset8 = 7378-7673\3 851-2397\3 3086-3868\3;
+	charset Subset9 = 2398-3084\3 3085-3868\3;
+	charset Subset10 = 3870-5012\3 2399-3084\3;
+	charset Subset11 = 7674-9051\3 7026-7376\3 3869-5012\3 5013-5984\3;
+	charset Subset12 = 9054-10836\3 3871-5012\3;
+	charset Subset13 = 5015-5984\3;
+	charset Subset14 = 7028-7376\3;
+	charset Subset15 = 7676-9051\3;
+	charset Subset16 = 10837-11361\3;
+	charset Subset17 = 10838-11361\3;
+	charset Subset18 = 10839-11361\3;
+
+	partition PartitionFinder = 18:Subset1, Subset2, Subset3, Subset4, Subset5, Subset6, Subset7, Subset8, Subset9, Subset10, Subset11, Subset12, Subset13, Subset14, Subset15, Subset16, Subset17, Subset18;
+	set partition=PartitionFinder;
+
+	lset applyto=(1) nst=6;
+	lset applyto=(2) nst=6 rates=propinv;
+	lset applyto=(3) nst=6 rates=propinv;
+	lset applyto=(4) nst=6;
+	lset applyto=(5) nst=6;
+	lset applyto=(6) nst=6 rates=propinv;
+	lset applyto=(7) nst=6 rates=propinv;
+	lset applyto=(8) nst=2 rates=propinv;
+	lset applyto=(9) nst=2 rates=propinv;
+prset applyto=(9) statefreqpr=fixed(equal);
+	lset applyto=(10) nst=2;
+	lset applyto=(11) nst=2 rates=propinv;
+	lset applyto=(12) nst=6 rates=propinv;
+	lset applyto=(13) nst=2 rates=propinv;
+	lset applyto=(14) nst=2;
+	lset applyto=(15) nst=2;
+	lset applyto=(16) nst=6 rates=propinv;
+	lset applyto=(17) nst=6 rates=propinv;
+	lset applyto=(18) nst=2 rates=gamma;
+
+	prset applyto=(all) ratepr=variable;
+	unlink statefreq=(all) revmat=(all) shape=(all) pinvar=(all) tratio=(all);
+
+end;

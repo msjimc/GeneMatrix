@@ -115,11 +115,15 @@ namespace GeneMatrix
                         {
                             if (sequenceIndex == 0)
                             {
-                                System.Diagnostics.Debug.WriteLine(name_file[key].Length);
-                                blocks += fastaFiles[fileIndex].Substring(fastaFiles[fileIndex].LastIndexOf("\\") + 1).Replace(extension,"") + "\t" + (lastLength + 1).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\n";
-                                blocks += fastaFiles[fileIndex].Substring(fastaFiles[fileIndex].LastIndexOf("\\") + 1).Replace(extension, "") + "_1stPos\t" + (lastLength + 1).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
-                                blocks += fastaFiles[fileIndex].Substring(fastaFiles[fileIndex].LastIndexOf("\\") + 1).Replace(extension, "") + "_2stPos\t" + (lastLength + 2).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
-                                blocks += fastaFiles[fileIndex].Substring(fastaFiles[fileIndex].LastIndexOf("\\") + 1).Replace(extension, "") + "_3stPos\t" + (lastLength + 3).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
+
+                                string name = fastaFiles[fileIndex].Substring(fastaFiles[fileIndex].LastIndexOf("\\") + 1);
+                                int index = name.IndexOf(".");
+                                if (index > -1)
+                                { name = name.Substring(0, index); }
+                                blocks += name + "\t" + (lastLength + 1).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\n";
+                                blocks += name + "_1stPos\t" + (lastLength + 1).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
+                                blocks += name + "_2stPos\t" + (lastLength + 2).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
+                                blocks += name + "_3stPos\t" + (lastLength + 3).ToString() + "-" + (lastLength + name_file[key].Length).ToString() + "\\3\n";
                                 lastLength += name_file[key].Length;
                             }
                             sw.Write(name_file[key]);
